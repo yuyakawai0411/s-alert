@@ -1,0 +1,59 @@
+<h2>Sign up</h2>
+
+<%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(半角英数混合<%= @minimum_password_length %> 文字以上)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_area :last_name,  placeholder:"例) 山田" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_area :first_name,  placeholder:"例) 陸太郎" %>
+  </div>
+
+    <div class="field">
+    <%= f.label :last_name_kana %><br />
+    <%= f.text_area :last_name_kana,  placeholder:"例) ヤマダ" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :first_name_kana %><br />
+    <%= f.text_area :first_name_kana,  placeholder:"例) リクタロウ" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :company %><br />
+    <%= f.text_area :company, placeholder:"例) YR株式会社" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :department %><br />
+    <%= f.text_area :department, placeholder:"例) 営業部" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

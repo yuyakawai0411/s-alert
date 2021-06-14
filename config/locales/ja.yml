@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        last_name: 名字
+        first_name: 名前
+        last_name_kana: 名字(カナ)
+        first_name_kana: 名前(カナ)
+        company: 会社名
+        department: 部署名
+      tweet:
+        text: テキスト
+        image: 画像
