@@ -12,8 +12,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.datetime :reset_password_sent_at
 
       #追加したカラム
-      t.string :name, null: false
-      t.string :name_kana, null: false
+      t.string :last_name, null: false
+      t.string :first_name, null: false
+      t.string :last_name_kana, null: false
+      t.string :first_name_kana, null: false
       t.string :company, null: false
       t.string :department, null: false
 

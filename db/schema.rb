@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 2021_06_13_052718) do
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.string "name", null: false
-    t.string "name_kana", null: false
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
     t.string "company", null: false
     t.string "department", null: false
     t.datetime "remember_created_at"
