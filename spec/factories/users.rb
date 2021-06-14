@@ -9,6 +9,7 @@ FactoryBot.define do
     last_name_kana        { japanese_user.last.katakana }
     first_name_kana       { japanese_user.first.katakana }
     company               { Faker::Company.name }
+    company_form_id       { Faker::Number.between(from: 1, to: 5) }
     department            { Faker::Company.profession }
   end
 end

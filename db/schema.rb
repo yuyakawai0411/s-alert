@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_06_14_064309) do
     t.string "s_last_name_kana", null: false
     t.string "s_first_name_kana", null: false
     t.string "s_company", null: false
+    t.string "s_company_form_id", null: false
     t.string "s_department", null: false
     t.string "s_phone_number", null: false
     t.date "s_birth_day", null: false
@@ -58,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_06_14_064309) do
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false
     t.string "company", null: false
+    t.string "company_form_id", null: false
     t.string "department", null: false
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false

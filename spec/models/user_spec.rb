@@ -129,12 +129,18 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include "会社名を入力してください"
       end
 
+      it '会社携帯が未選択では出品できない' do
+        @user.company_form_id = 0
+        @user.valid?
+        expect(@user.errors.full_messages).to include '会社形態は0以外の値にしてください'
+      end
+      
       it 'departmentが空では登録できない' do
         @user.department = ''
         @user.valid?
         expect(@user.errors.full_messages).to include "部署名を入力してください"
       end
-      
+
     end
   end
 

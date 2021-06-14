@@ -6,6 +6,7 @@ class CreateCards < ActiveRecord::Migration[6.0]
       t.string :s_last_name_kana, null: false
       t.string :s_first_name_kana, null: false
       t.string :s_company, null: false
+      t.string :s_company_form_id, null: false
       t.string :s_department, null: false
       t.string :s_phone_number, null: false
       t.date :s_birth_day, null: false

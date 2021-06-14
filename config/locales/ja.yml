@@ -7,6 +7,7 @@ ja:
         last_name_kana: 名字(カナ)
         first_name_kana: 名前(カナ)
         company: 会社名
+        company_form_id: 会社形態
         department: 部署名
       tweet:
         text: テキスト
