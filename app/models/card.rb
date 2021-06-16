@@ -14,7 +14,7 @@ class Card < ApplicationRecord
     validates :s_company
     validates :s_department
     validates :s_birth_day
-    validates :s_phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. except hyphen(-)' }
+    validates :s_phone_number, format: { with: /\A\d{10,11}\z/, message: 'は有効な番号ではありません' }
   end
 
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角文字を使用してください' } do
