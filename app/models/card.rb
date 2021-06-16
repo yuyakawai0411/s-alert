@@ -26,4 +26,7 @@ class Card < ApplicationRecord
     validates :s_last_name_kana
     validates :s_first_name_kana
   end
+
+  private
+
 end
