@@ -1,0 +1,25 @@
+
+<div calss="card-ditail">
+  <%# 上司写真_レフト表示 %>
+  <div calss="card-ditail-left">
+    <% if @card.image.attached? %>
+      <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
+    <% else %>
+      <%= image_tag "sample_image.png", class: "card-ditail-image" %>
+    <% end %>
+  </div>
+  <%# 上司情報_ライト表示 %>
+  <div class="card-ditail-right">
+    <p><%= @card.s_company %></p>
+    <p><%= @card.s_company_form_id%></p>
+    <p><%= @card.s_department %></p>
+    <p><%= @card.s_first_name %></p>
+    <p><%= @card.s_last_name %></p>
+  </div>
+  <%# ユーザー別表示分岐 %>
+  <% if @card.user_id == current_user.id %>
+    <div class="card-ditail-edit">
+      <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %>
+      <%= link_to "削除", card_path(@card.id), class: "btn btn-primary" %>
+    </div>
+  <% end %>
