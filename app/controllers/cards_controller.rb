@@ -3,6 +3,7 @@ class CardsController < ApplicationController
   before_action :move_to_root, only: [:edit, :update, :destroy]
 
   def index
+    @cards = Card.order('created_at DESC')
   end
 
   def new
@@ -39,5 +40,5 @@ class CardsController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
 end
