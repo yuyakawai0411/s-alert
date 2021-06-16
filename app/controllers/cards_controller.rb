@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
-  
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :move_to_root, only: [:edit, :update, :destroy]
 
   def index
   end
@@ -33,4 +34,10 @@ class CardsController < ApplicationController
     @card[:s_first_name_kana] = @card[:s_first_name_kana].gsub(/[[:space:]]/, '')
   end
 
+  def move_to_root
+    if @card.user.id != current_user.id
+      redirect_to root_path
+    end
+  end
+  
 end
