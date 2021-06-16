@@ -1,7 +1,9 @@
+<%# ユーザー条件分岐 %>
 <% if user_signed_in? %>
   <h2> ログインしています </h2>
 <% end %>
 
+<%# ログイン機能 %>
 <div class="user mb-5">
 ユーザー系
 <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %>
@@ -9,8 +11,22 @@
 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
 </div>
 
-<div class="user">
+<%# カード投稿機能 %>
+<div class="card_create mb-5">
 カード系
 <%= link_to "カードを作成", new_card_path, class:"btn btn-primary" %>
 </div>
 
+カード一覧表示
+<div class="cards">
+カード一覧
+  <% @cards.each do |card| %>
+    <div class="card-background-image">
+      <p><%= card.s_company %></p>
+      <p><%= card.s_company_form_id%></p>
+      <p><%= card.s_department %></p>
+      <p><%= card.s_first_name %></p>
+      <p><%= card.s_last_name %></p>
+    </div>
+  <% end %>
+</div>
