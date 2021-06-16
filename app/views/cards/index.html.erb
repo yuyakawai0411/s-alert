@@ -22,11 +22,13 @@
 カード一覧
   <% @cards.each do |card| %>
     <div class="card-background-image">
+      <%= link_to card_path(card.id) do %>
       <p><%= card.s_company %></p>
       <p><%= card.s_company_form_id%></p>
       <p><%= card.s_department %></p>
       <p><%= card.s_first_name %></p>
       <p><%= card.s_last_name %></p>
     </div>
+    <% end %>
   <% end %>
 </div>
