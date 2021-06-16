@@ -1,13 +1,23 @@
 class User < ApplicationRecord
   
+  #アソシエーション
+  has_many :cards
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :company_form
+
+  
+  #バリデーション
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :company_form_id, numericality: { other_than: 0 }
+  
   with_options presence: true do
     validates :company
     validates :department
   end
-  
+
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角文字を使用してください' } do
     validates :last_name
     validates :first_name

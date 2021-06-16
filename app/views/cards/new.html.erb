@@ -1,0 +1,115 @@
+<div class="card-registration">
+  <%# タイトル %> 
+  <h2 class="card-registration-title">上司情報を入力</h2>
+  <%# 登録者情報記入欄 %>
+  <div class="card-registration-info">
+    <%= form_with model:@card, local: true do |f| %>
+      <%= render 'shared/error_messages', model: f.object %>
+     
+      <%# 登録者_写真 %>
+      <div class="card-image">
+          写真
+          <span class="indispensable">必須</span>
+        <div class="click-upload">
+          <p>
+          クリックしてファイルをアップロード
+          </p>
+          <%= f.file_field :image, id:"card_image" %>
+          <div id="image-list"></div>
+        </div>
+      </div>
+
+      <%# 登録者_名前 %>
+      <div class="card-name">
+        
+        <div class="name-kanji">
+          <div class="last-name-kanji">
+            姓
+            <span class="indispensable">必須</span>
+            <%= f.text_area :s_last_name, class:"items-text", id:"item-name", placeholder:"例) 田中" %>
+          </div>
+      
+          <div class="first_name-kanji">
+            名前
+            <span class="indispensable">必須</span>
+            <%= f.text_area :s_first_name, class:"items-text", id:"item-info", placeholder:"例) 万次郎"  %>
+          </div>
+        </div>
+
+        <div class="name-kana">
+          <div class="last_name_kana">
+            名字(カナ)
+            <span class="indispensable">必須</span>
+            <%= f.text_area :s_last_name_kana, class:"items-text", id:"item-info", placeholder:"例) タナカ"  %>
+          </div>
+
+          <div class="first_name_kana">
+            名前(カナ)
+            <span class="indispensable">必須</span>
+            <%= f.text_area :s_first_name_kana, class:"items-text", id:"item-info", placeholder:"例) マンジロウ"  %>
+          </div>
+        </div>
+
+      </div>
+
+      <%# 登録者_会社 %>
+      <div class="card-company">
+        
+        <div class="company-info">
+          <div class="company-name">
+            会社名
+            <span class="indispensable">必須</span>
+            <%= f.text_area :s_company, class:"items-text", id:"item-info", placeholder:"例) TM株式会社"  %>
+          </div>
+
+          <div class="comapny_form">
+            会社形態
+            <span class="indispensable">必須</span>
+            <%= f.collection_select(:s_company_form_id, CompanyForm.all, :id, :form, {}, {class:"select-box", id:"item-category"})%>  
+          </div>
+        </div>
+
+        <div class="company-department">
+          部署名
+          <span class="indispensable">必須</span>
+          <%= f.text_area :s_department, class:"items-text", id:"item-info", placeholder:"例) 営業所"  %>
+        </div>
+
+      </div>   
+
+      <%# 登録者_電話  %>
+      <div class="card-telphone">
+        電話番号
+        <span class="indispensable">必須</span>
+        <%= f.text_area :s_phone_number, class:"items-text", id:"item-info", placeholder:"例) 060-1256-3434"  %>
+      </div>
+
+      <%# 登録者_誕生日 %>
+      <div class="card-birthday">
+        <div class='birthday-title'>
+          <label class="birthday-day">生年月日</label>
+          <span class="indispensable">必須</span>
+        </div>
+
+        <div class='birthday-input'>
+          <%= raw sprintf(
+                  f.date_select(
+                    :s_birth_day,
+                    use_month_numbers: true,
+                    prompt:'--',
+                    start_year: 1930,
+                    end_year: (Time.now.year - 5),
+                    date_separator: '%s'),
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+          </div>
+      </div>
+
+      <%# 登録ボタン %>
+      <div class="sell-btn-contents">
+        <%= f.submit "登録する" ,class:"sell-btn" %>
+        <%=link_to 'もどる', root_path, class:"back-btn" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

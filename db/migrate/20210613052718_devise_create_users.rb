@@ -17,6 +17,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :last_name_kana, null: false
       t.string :first_name_kana, null: false
       t.string :company, null: false
+      t.string :company_form_id, null: false
       t.string :department, null: false
 
       ## Rememberable

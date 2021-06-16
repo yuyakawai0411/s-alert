@@ -2,12 +2,22 @@ ja:
   activerecord:
     attributes:
       user:
-        last_name: 名字
-        first_name: 名前
-        last_name_kana: 名字(カナ)
-        first_name_kana: 名前(カナ)
+        last_name: 姓
+        first_name: 名
+        last_name_kana: セイ
+        first_name_kana: メイ
         company: 会社名
+        company_form_id: 会社形態
         department: 部署名
-      tweet:
-        text: テキスト
-        image: 画像
+      card:
+        s_last_name: テキスト
+        s_first_name: 画像
+        s_last_name: 姓
+        s_first_name: 名
+        s_last_name_kana: セイ
+        s_first_name_kana: メイ
+        s_company: 会社名
+        s_company_form_id: 会社形態
+        s_department: 部署名
+        s_phone_number: 携帯電話番号
+        s_birth_day: 誕生日
