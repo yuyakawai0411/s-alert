@@ -17,9 +17,11 @@
     <p><%= @card.s_last_name %></p>
   </div>
   <%# ユーザー別表示分岐 %>
-  <% if @card.user_id == current_user.id %>
-    <div class="card-ditail-edit">
-      <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %>
-      <%= link_to "削除", card_path(@card.id), class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  <% if user_signed_in? %>
+    <% if @card.user_id == current_user.id %>
+      <div class="card-ditail-edit">
+        <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %>
+        <%= link_to "削除", card_path(@card.id), method: :delete, class: "btn btn-primary" %>
+      </div>
+     <% end %>
+    <% end %>
