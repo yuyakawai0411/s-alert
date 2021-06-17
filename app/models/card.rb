@@ -3,6 +3,7 @@ class Card < ApplicationRecord
   #アソシエーション
   belongs_to :user
   has_one_attached :image
+  has_many :records
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form
@@ -26,7 +27,5 @@ class Card < ApplicationRecord
     validates :s_last_name_kana
     validates :s_first_name_kana
   end
-
-  private
 
 end

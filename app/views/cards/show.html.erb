@@ -23,5 +23,8 @@
         <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %>
         <%= link_to "削除", card_path(@card.id), method: :delete, class: "btn btn-primary" %>
       </div>
-     <% end %>
     <% end %>
+  <% end %>
+  <%# 着信履歴登録 %>
+  <%= link_to "着信履歴追加", new_card_record_path(@card.id), class: "btn btn-primary" %>
+  <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
