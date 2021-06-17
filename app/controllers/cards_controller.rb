@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_card, only: [:show, :edit, :update, :destroy]
   before_action :move_to_root, only: [:edit, :update, :destroy]
 
   def index
@@ -21,7 +22,25 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = Card.find(params[:id])
+  
+  end
+
+  def edit
+
+  end
+
+  def update
+    remove_card_blank
+    if @card.update(card_params)  #card_paramsの中身が保存されるため、空白除去が効かない
+      redirect_to card_path(@card.id)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @card.destroy
+    redirect_to root_path
   end
 
   private
@@ -42,6 +61,10 @@ class CardsController < ApplicationController
     unless @card.user.id == current_user.id
       redirect_to root_path
     end
+  end
+
+  def set_card
+    @card = Card.find(params[:id])
   end
 
 end
