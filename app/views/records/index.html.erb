@@ -19,7 +19,7 @@
 <div class="phone-record-list">
   <% @records.each do |record| %>
     <p><%= record.phone_day %><p>
-    <p><%= record.time_id.phone_day.time %></p>
-    <p><%= record.expression_id.expression.status %></p>
+    <p><%= record.phone_time_id %></p> 
+    <p><%= record.expression_id %></p>
   <% end %>
 </div>

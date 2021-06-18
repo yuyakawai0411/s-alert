@@ -7,7 +7,15 @@ class RecordsController < ApplicationController
   end
 
   def create
+    @card = Card.find(params[:card_id])
     @record = Record.new(record_params)
+    if @record.save
+      redirect_to action: "index" #card_record_path(@card)
+    else
+      render :index
+    end
+      
+    
   end
 
   def edit
