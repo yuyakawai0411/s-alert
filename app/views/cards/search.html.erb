@@ -1,4 +1,6 @@
 <%# ユーザー条件分岐 %>
+<%= link_to "ホームに戻る", root_path %>
+
 <% if user_signed_in? %>
   <h2> ログインしています </h2>
 <% end %>
@@ -20,7 +22,7 @@
 <%# 検索機能 %>
 <div class="search mb-5">
 <%= form_with(url: search_cards_path, local: true, method: :get, class: "search-form") do |form| %>
-  <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "btn-search" %>
+  <%= form.text_field :keyword, placeholder: "会社名,名前", class: "btn-search" %>
   <%= form.submit "検索", class: "btn btn-primary" %>
 <% end %>
 </div>
