@@ -9,6 +9,8 @@
 <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %>
 <%= link_to "ログイン", new_user_session_path, class:"btn btn-primary" %>
 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
+<%= link_to "ユーザー詳細", user_path(current_user.id), class:"btn btn-primary" %> 
+<%# <%= link_to "お気に入り", destroy_user_session_path, class:"btn btn-primary" %> 
 </div>
 
 <%# カード投稿機能 %>

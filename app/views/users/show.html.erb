@@ -1,0 +1,41 @@
+<%# プロフィール詳細 %>
+<h2 class="page-heading">
+  <%= "#{@user.first_name}さんの情報"%>
+</h2>
+<table class="table">
+  <tbody>
+
+  <tr>
+    <th class="table__col1">名前</th>
+    <td class="table__col2"><%= @user.first_name %></td>
+  </tr>
+  <tr>
+    <th class="table__col1">会社名</th>
+    <td class="table__col2"><%= @user.company %></td>
+  </tr>
+  <tr>
+    <th class="table__col1">部署</th>
+    <td class="table__col2"><%= @user.department %></td>
+  </tr>
+
+  </tbody>
+</table>
+
+<%# 投稿カード一覧 %>
+<h2 class="page-heading">
+  <%= "#{@user.first_name}さんのプロトタイプ"%>
+</h2>
+<div class="cards">
+カード一覧
+  <% @cards.each do |card| %>
+    <div class="card-background-image">
+      <%= link_to card_path(card.id) do %>
+      <p><%= card.s_company %></p>
+      <p><%= card.s_company_form_id%></p>
+      <p><%= card.s_department %></p>
+      <p><%= card.s_first_name %></p>
+      <p><%= card.s_last_name %></p>
+    </div>
+    <% end %>
+  <% end %>
+</div>
