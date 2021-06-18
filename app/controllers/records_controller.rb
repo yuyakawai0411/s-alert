@@ -4,17 +4,14 @@ class RecordsController < ApplicationController
   def index
     @card = Card.find(params[:card_id])
     @record = Record.new()
-    @records = Record.all
+    @records = Record.order(phone_day: :DESC)
   end
 
   def create
     @card = Card.find(params[:card_id])
     @record = Record.new(record_params)
-    if @record.save
-      redirect_to action: "index" 
-    else
-      render :index
-    end 
+    @record.save
+    redirect_to action: "index" 
   end
 
 
