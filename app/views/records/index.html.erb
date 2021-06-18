@@ -21,5 +21,6 @@
     <p><%= record.phone_day %><p>
     <p><%= record.phone_time_id %></p> 
     <p><%= record.expression_id %></p>
+    <%= link_to "削除", card_record_path(@card.id, record.id), method: :delete %>
   <% end %>
 </div>

@@ -3,7 +3,7 @@ class Card < ApplicationRecord
   #アソシエーション
   belongs_to :user
   has_one_attached :image
-  has_many :records
+  has_many :records, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form
