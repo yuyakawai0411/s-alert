@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_104013) do
   end
 
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "day", null: false
-    t.integer "time_id", null: false
+    t.date "phone_day", null: false
+    t.integer "phone_time_id", null: false
     t.integer "expression_id", null: false
     t.bigint "card_id"
     t.datetime "created_at", precision: 6, null: false
