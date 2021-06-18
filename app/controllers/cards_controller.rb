@@ -43,6 +43,10 @@ class CardsController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    @cards = Card.search(params[:keyword])
+  end
+
   private
   
   def card_params

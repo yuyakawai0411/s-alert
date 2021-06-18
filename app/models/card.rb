@@ -28,4 +28,13 @@ class Card < ApplicationRecord
     validates :s_first_name_kana
   end
 
+
+  def self.search(search)
+    if search != ""
+      Card.where("s_last_name LIKE(?) OR s_first_name LIKE(?) OR s_company LIKE(?) OR s_department LIKE(?)","%#{search}%","%#{search}%","%#{search}%","%#{search}%")
+    else
+      Card.order('created_at DESC')
+    end
+  end
+
 end

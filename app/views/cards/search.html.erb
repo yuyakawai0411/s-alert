@@ -1,0 +1,44 @@
+<%# ユーザー条件分岐 %>
+<%= link_to "ホームに戻る", root_path %>
+
+<% if user_signed_in? %>
+  <h2> ログインしています </h2>
+<% end %>
+
+<%# ログイン機能 %>
+<div class="user mb-5">
+ユーザー系
+<%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %>
+<%= link_to "ログイン", new_user_session_path, class:"btn btn-primary" %>
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
+</div>
+
+<%# カード投稿機能 %>
+<div class="card_create mb-5">
+カード系
+<%= link_to "カードを作成", new_card_path, class:"btn btn-primary" %>
+</div>
+
+<%# 検索機能 %>
+<div class="search mb-5">
+<%= form_with(url: search_cards_path, local: true, method: :get, class: "search-form") do |form| %>
+  <%= form.text_field :keyword, placeholder: "会社名,名前", class: "btn-search" %>
+  <%= form.submit "検索", class: "btn btn-primary" %>
+<% end %>
+</div>
+
+<%# カード一覧表示 %>
+<div class="cards">
+カード一覧
+  <% @cards.each do |card| %>
+    <div class="card-background-image">
+      <%= link_to card_path(card.id) do %>
+      <p><%= card.s_company %></p>
+      <p><%= card.s_company_form_id%></p>
+      <p><%= card.s_department %></p>
+      <p><%= card.s_first_name %></p>
+      <p><%= card.s_last_name %></p>
+    </div>
+    <% end %>
+  <% end %>
+</div>
