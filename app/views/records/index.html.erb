@@ -1,0 +1,26 @@
+<%# タイトル %>
+<h2>着信履歴登録</h2>
+<div>
+  <p><%= @card.s_company %></p>
+  <p><%= @card.s_department %></p>
+  <p><%= @card.s_last_name %></p>
+  <p><%= @card.s_first_name %></p>
+</div>
+
+<%# 入力フォーム %>
+<%= form_with model: [@card, @record], local: true do |f| %> 
+  <%= f.date_field :phone_day %> 
+  <%= f.collection_select(:phone_time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"item-category"})%>  
+  <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
+  <%= f.submit "追加する", class:"sell-btn" %>
+<% end %>
+
+<%# 着信履歴一覧表示 %>
+<div class="phone-record-list">
+  <% @records.each do |record| %>
+    <p><%= record.phone_day %><p>
+    <p><%= record.phone_time_id %></p> 
+    <p><%= record.expression_id %></p>
+    <%= link_to "削除", card_record_path(@card.id, record.id), method: :delete %>
+  <% end %>
+</div>

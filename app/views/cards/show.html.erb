@@ -26,5 +26,5 @@
     <% end %>
   <% end %>
   <%# 着信履歴登録 %>
-  <%= link_to "着信履歴追加", new_card_record_path(@card.id), class: "btn btn-primary" %>
-  <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
+  <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %>
+  <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %> 

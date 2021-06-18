@@ -21,3 +21,7 @@ ja:
         s_department: 部署名
         s_phone_number: 携帯電話番号
         s_birth_day: 誕生日
+      record:
+        phone_day: 日付
+        phone_time_id: 時間
+        expression_id: 感情

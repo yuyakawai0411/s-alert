@@ -46,8 +46,8 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| day           | date       | null: false                    |
-| time_id       | integer    | null: false                    |
+| phone_day     | date       | null: false                    |
+| phone_time_id | integer    | null: false                    |
 | expression_id | integer    | null: false                    |
 | card          | references | null: false, foreign_key: true |
 
