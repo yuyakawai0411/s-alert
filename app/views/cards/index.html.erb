@@ -8,9 +8,11 @@
 ユーザー系
 <%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %>
 <%= link_to "ログイン", new_user_session_path, class:"btn btn-primary" %>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
-<%= link_to "ユーザー詳細", user_path(current_user.id), class:"btn btn-primary" %> 
-<%# <%= link_to "お気に入り", destroy_user_session_path, class:"btn btn-primary" %> 
+<% if user_signed_in? %>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
+  <%= link_to "ユーザー詳細", user_path(current_user.id), class:"btn btn-primary" %> 
+  <%# <%= link_to "お気に入り", card_favorites_path(current_user.id), class:"btn btn-primary" %> 
+<% end %>
 </div>
 
 <%# カード投稿機能 %>
@@ -38,6 +40,11 @@
       <p><%= card.s_department %></p>
       <p><%= card.s_first_name %></p>
       <p><%= card.s_last_name %></p>
+      <% if user_signed_in? && card.favorited_by?(current_user) %>
+        <p><%=link_to "お気に入り解除", card_favorites_path(card.id), method: :delete %></p>
+      <% else %>
+        <p><%=link_to "お気に入り登録", card_favorites_path(card.id), method: :post %></p>
+      <% end %>
     </div>
     <% end %>
   <% end %>

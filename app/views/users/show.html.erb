@@ -35,7 +35,25 @@
       <p><%= card.s_department %></p>
       <p><%= card.s_first_name %></p>
       <p><%= card.s_last_name %></p>
+      <% end %>
     </div>
-    <% end %>
   <% end %>
+</div>
+
+<%# お気に入り一覧 %>
+<h2 class="page-heading">
+  <%= "#{@user.first_name}さんのお気に入り"%>
+</h2>
+<div class="favorite-cards-list">
+  <div class="favorite-card">
+    <% @favorites.each do |favorite| %>
+      <%= link_to card_path(favorite.id) do %> 
+        <p><%= favorite.s_last_name %></p>
+        <p><%= favorite.s_first_name %></p>
+        <p><%= favorite.s_company %></p>
+        <p><%= favorite.s_department %></p>
+      <% end %>
+      <%=link_to "お気に入り解除", card_favorites_path(favorite.id), method: :delete %>
+    <% end %>
+  </div>
 </div>
