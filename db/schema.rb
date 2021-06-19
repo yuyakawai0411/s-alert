@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_104013) do
+ActiveRecord::Schema.define(version: 2021_06_18_230959) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,15 @@ ActiveRecord::Schema.define(version: 2021_06_17_104013) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "card_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_favorites_on_card_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "phone_day", null: false
     t.integer "phone_time_id", null: false
@@ -80,5 +89,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_104013) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cards", "users"
+  add_foreign_key "favorites", "cards"
+  add_foreign_key "favorites", "users"
   add_foreign_key "records", "cards"
 end

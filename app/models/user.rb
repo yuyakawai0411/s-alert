@@ -2,6 +2,8 @@ class User < ApplicationRecord
   
   #アソシエーション
   has_many :cards
+  has_many :favorites
+  has_many :fav_cards, through: :favorites, source: :card
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form

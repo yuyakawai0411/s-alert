@@ -39,7 +39,7 @@
 
 - belongs_to :user
 - has_many :records
-- has_one :favorite
+- has_many :favorite
 
 
 ## records テーブル

@@ -4,6 +4,8 @@ class Card < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   has_many :records, dependent: :destroy
+  has_many :favorites
+  has_many :users, through: :favorites
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form
@@ -35,6 +37,10 @@ class Card < ApplicationRecord
     else
       Card.order('created_at DESC')
     end
+  end
+
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
   end
 
 end
