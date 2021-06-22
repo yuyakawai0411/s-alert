@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
   def index
     @card = Card.find(params[:card_id])
     @record = Record.new()
-    @records = Record.order(phone_day: :DESC)
+    @records = Record.order(date: :DESC)
   end
 
   def create
@@ -24,6 +24,6 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record).permit(:phone_day, :phone_time_id, :expression_id).merge(card_id: params[:card_id])
+    params.require(:record).permit(:date, :time_id, :expression_id, :call_id).merge(card_id: params[:card_id])
   end
 end

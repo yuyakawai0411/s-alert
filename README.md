@@ -33,6 +33,7 @@
 | s_department      | string     | null: false                    |
 | s_phone_number    | string     | null: false                    |
 | s_birth_day       | date       | null: false                    |
+| s_hobby           | string     |                                |
 | user              | references | null: false, foreign_key: true |
 
 ### Association
@@ -46,9 +47,10 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| phone_day     | date       | null: false                    |
-| phone_time_id | integer    | null: false                    |
+| date          | date       | null: false                    |
+| time_id       | integer    | null: false                    |
 | expression_id | integer    | null: false                    |
+| call_id       | integer    | null: false                    |
 | card          | references | null: false, foreign_key: true |
 
 ### Association

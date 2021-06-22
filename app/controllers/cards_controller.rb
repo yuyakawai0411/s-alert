@@ -51,7 +51,7 @@ class CardsController < ApplicationController
   
   def card_params
     params.require(:card).permit(:image, :s_last_name, :s_first_name, :s_last_name_kana, :s_first_name_kana, 
-      :s_company, :s_company_form_id, :s_department, :s_phone_number, :s_birth_day).merge(user_id: current_user.id)
+      :s_company, :s_company_form_id, :s_department, :s_phone_number, :s_birth_day, :s_hobby).merge(user_id: current_user.id)
   end
 
   def remove_card_blank

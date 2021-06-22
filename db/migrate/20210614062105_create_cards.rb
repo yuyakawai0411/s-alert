@@ -10,6 +10,7 @@ class CreateCards < ActiveRecord::Migration[6.0]
       t.string :s_department, null: false
       t.string :s_phone_number, null: false
       t.date :s_birth_day, null: false
+      t.string :s_hobby
       t.references :user, foreign_key: true
       t.timestamps
     end
