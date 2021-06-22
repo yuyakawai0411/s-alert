@@ -22,10 +22,20 @@ class CardsController < ApplicationController
   end
 
   def show
-    @records = @card.records.where(call_id: 1)
-    @phone_time = @records.group(:time_id).count
-    @phone_date = @records.group(:date).count
-    binding.pry
+    today = Date.today
+    @bio_reism = bio_risum_data
+    records = @card.records.where(call_id: 1)
+    @phone_time = records.group(:time_id).count
+    @phone_date = records.where(
+      date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
+      today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
+      today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
+      today.prev_day(0),today.next_day(1),today.next_day(2),today.next_day(3),today.next_day(4),today.next_day(5),
+      today.next_day(6),today.next_day(7),today.next_day(8),today.next_day(9),today.next_day(10),today.next_day(11),
+      today.next_day(12),today.next_day(13),today.next_day(14),today.next_day(15)]
+    ).group(:date).count
+    @expression = records.group(:date).sum(:expression_id)
+  
   end
 
   def edit
@@ -72,6 +82,30 @@ class CardsController < ApplicationController
 
   def set_card
     @card = Card.find(params[:id])
+  end
+
+  def bio_risum_data
+    pi = Math::PI
+    birth_day = @card.s_birth_day
+    today = Date.today  
+    delta = today - birth_day
+    bio_reism = {}
+    i = -15
+
+    30.times do 
+      key = today.next_day(i)
+      value = Math.sin(2 * pi * (delta + i) / 28)
+      bio_reism.store( "#{key}", value )
+      i = i + 1
+    end
+    # 30.times do 
+    #   bio_date = {}
+    #   bio_date[:date] = today.next_day(i)
+    #   bio_date[:value] = Math.sin(2 * pi * (delta + i) / 28)
+    #   bio_reism << bio_date
+    #   i = i + 1
+    # end
+    return bio_reism
   end
 
 end

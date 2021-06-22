@@ -27,4 +27,9 @@
   <% end %>
   <%# 着信履歴登録 %>
   <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %>
-  <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %> 
+  <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
+
+  <%= line_chart @bio_reism, width: "500px", height: "200px" %>
+  <%= line_chart @expression, width: "500px", height: "200px" %>
+  <%= column_chart @phone_time, width: "500px", height: "200px" %>
+  <%= column_chart @phone_date, width: "500px", height: "200px" %>
