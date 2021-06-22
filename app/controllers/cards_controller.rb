@@ -22,7 +22,10 @@ class CardsController < ApplicationController
   end
 
   def show
-  
+    @records = @card.records.where(call_id: 1)
+    @phone_time = @records.group(:time_id).count
+    @phone_date = @records.group(:date).count
+    binding.pry
   end
 
   def edit
