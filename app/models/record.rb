@@ -6,13 +6,15 @@ class Record < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :phone_time
   belongs_to :expression
+  belongs_to :phone_call
 
   #バリデーション
-  validates :phone_day,  presence: true
+  validates :date,  presence: true
 
   with_options numericality: { other_than: 0 } do
-    validates :phone_time_id
+    validates :time_id
     validates :expression_id
+    validates :call_id
   end
 
 end

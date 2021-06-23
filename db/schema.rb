@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
     t.string "s_department", null: false
     t.string "s_phone_number", null: false
     t.date "s_birth_day", null: false
+    t.string "s_hobby"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -59,9 +60,10 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
   end
 
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "phone_day", null: false
-    t.integer "phone_time_id", null: false
+    t.date "date", null: false
+    t.integer "time_id", null: false
     t.integer "expression_id", null: false
+    t.integer "call_id", null: false
     t.bigint "card_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -1,7 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+today = Date.today
+
+Record.create(date: today, time_id: 9, expression_id: 3, call_id: 1, card_id: 1)
+Record.create(date: today.next_day(4), time_id: 10, expression_id: 1, call_id: 2, card_id: 1 )
+Record.create(date: today.next_day(14), time_id: 18, expression_id: -1, call_id: 1, card_id: 1 )
+Record.create(date: today.next_day(14), time_id: 17, expression_id: -2, call_id: 1, card_id: 1 ) 
+Record.create(date: today.next_day(10), time_id: 19, expression_id: 3, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(6), time_id: 15, expression_id: 0, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(26), time_id: 15, expression_id: 2, call_id: 2, card_id:1 )
+Record.create(date: today.next_day(2), time_id: 14, expression_id: 1, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(10), time_id: 18, expression_id: 3, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(6), time_id: 18, expression_id: 1, call_id: 2, card_id:1 )
+Record.create(date: today.next_day(16), time_id: 15, expression_id: -1, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(24), time_id: 12, expression_id: -2, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(26), time_id: 11, expression_id: 3, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(10), time_id: 9, expression_id: 0, call_id: 2, card_id:1 )
+Record.create(date: today.next_day(14), time_id: 17, expression_id: 2, call_id: 1, card_id:1 )
+Record.create(date: today.next_day(28), time_id: 19, expression_id: 1, call_id: 1, card_id:1 )

@@ -27,4 +27,19 @@
   <% end %>
   <%# 着信履歴登録 %>
   <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %>
-  <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %> 
+  <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
+  <div class="bio-resim-baddate">
+    バイオリズム不調日
+    <p><%= @bad_date[1][0] %></p>
+    <p><%= @bad_date[0][0] %></p>
+  </div>
+  <div class="phone-time-mode">
+    電話最頻値
+    <p><%= @phone_time_mode[0][0] %></p>
+    <p><%= @phone_time_mode[1][0] %></p>
+  </div>
+
+  <%= line_chart @bio_reism, width: "500px", height: "200px" %>
+  <%= line_chart @expression, width: "500px", height: "200px" %>
+  <%= column_chart @phone_time, width: "500px", height: "200px" %>
+  <%= column_chart @phone_date, width: "500px", height: "200px" %>

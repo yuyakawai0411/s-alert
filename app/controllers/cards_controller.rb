@@ -22,7 +22,26 @@ class CardsController < ApplicationController
   end
 
   def show
-  
+    today = Date.today
+    @bio_reism = bio_risum_data
+    @bad_date = @bio_reism.min_by(2){|x,v| (v - 0).abs}
+
+    records = @card.records.where(call_id: 1)
+    @phone_time = records.group(:time_id).count
+    @phone_time_mode = @phone_time.max_by(2){|x,v| (v - 0).abs}
+
+    @phone_date = records.where(
+      date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
+      today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
+      today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
+      today.prev_day(0),today.next_day(1),today.next_day(2),today.next_day(3),today.next_day(4),today.next_day(5),
+      today.next_day(6),today.next_day(7),today.next_day(8),today.next_day(9),today.next_day(10),today.next_day(11),
+      today.next_day(12),today.next_day(13),today.next_day(14),today.next_day(15)]
+    ).group(:date).count
+    @expression = records.group(:date).sum(:expression_id)
+    
+
+    binding.pry
   end
 
   def edit
@@ -51,7 +70,7 @@ class CardsController < ApplicationController
   
   def card_params
     params.require(:card).permit(:image, :s_last_name, :s_first_name, :s_last_name_kana, :s_first_name_kana, 
-      :s_company, :s_company_form_id, :s_department, :s_phone_number, :s_birth_day).merge(user_id: current_user.id)
+      :s_company, :s_company_form_id, :s_department, :s_phone_number, :s_birth_day, :s_hobby).merge(user_id: current_user.id)
   end
 
   def remove_card_blank
@@ -69,6 +88,23 @@ class CardsController < ApplicationController
 
   def set_card
     @card = Card.find(params[:id])
+  end
+
+  def bio_risum_data
+    pi = Math::PI
+    birth_day = @card.s_birth_day
+    today = Date.today  
+    delta = today - birth_day
+    bio_reism = {}
+    i = -15
+
+    30.times do 
+      key = today.next_day(i)
+      value = Math.sin(2 * pi * (delta + i) / 28)
+      bio_reism.store( "#{key}", value )
+      i = i + 1
+    end
+    return bio_reism
   end
 
 end
