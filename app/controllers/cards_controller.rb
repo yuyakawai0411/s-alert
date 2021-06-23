@@ -24,8 +24,12 @@ class CardsController < ApplicationController
   def show
     today = Date.today
     @bio_reism = bio_risum_data
+    @bad_date = @bio_reism.min_by(2){|x,v| (v - 0).abs}
+
     records = @card.records.where(call_id: 1)
     @phone_time = records.group(:time_id).count
+    @phone_time_mode = @phone_time.max_by(2){|x,v| (v - 0).abs}
+
     @phone_date = records.where(
       date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
       today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
@@ -35,7 +39,9 @@ class CardsController < ApplicationController
       today.next_day(12),today.next_day(13),today.next_day(14),today.next_day(15)]
     ).group(:date).count
     @expression = records.group(:date).sum(:expression_id)
-  
+    
+
+    binding.pry
   end
 
   def edit
@@ -98,13 +104,6 @@ class CardsController < ApplicationController
       bio_reism.store( "#{key}", value )
       i = i + 1
     end
-    # 30.times do 
-    #   bio_date = {}
-    #   bio_date[:date] = today.next_day(i)
-    #   bio_date[:value] = Math.sin(2 * pi * (delta + i) / 28)
-    #   bio_reism << bio_date
-    #   i = i + 1
-    # end
     return bio_reism
   end
 
