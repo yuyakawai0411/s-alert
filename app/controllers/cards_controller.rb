@@ -40,8 +40,6 @@ class CardsController < ApplicationController
     ).group(:date).count
     @expression = records.group(:date).sum(:expression_id)
     
-
-    binding.pry
   end
 
   def edit
