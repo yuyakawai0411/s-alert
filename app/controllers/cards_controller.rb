@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_card, only: [:show, :edit, :update, :destroy]
   before_action :move_to_root, only: [:edit, :update, :destroy]
 
@@ -22,14 +22,21 @@ class CardsController < ApplicationController
   end
 
   def show
-    today = Date.today
+    # バイオリズムグラフ及び不調日の表示
     @bio_reism = bio_risum_data
     @bad_date = @bio_reism.min_by(2){|x,v| (v - 0).abs}
-
+    
+    today = Date.today
     records = @card.records.where(call_id: 1)
+    
+    # 着信時間グラフ及び最頻値の表示
     @phone_time = records.group(:time_id).count
     @phone_time_mode = @phone_time.max_by(2){|x,v| (v - 0).abs}
-
+    if @phone_time.length < 2
+      @phone_time = { 7=>0, 18 => 0 }
+      @phone_time_mode = [["データが足りません",0],["データが足りません",0]]
+    end
+    # 着信日グラフの表示
     @phone_date = records.where(
       date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
       today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
@@ -38,10 +45,14 @@ class CardsController < ApplicationController
       today.next_day(6),today.next_day(7),today.next_day(8),today.next_day(9),today.next_day(10),today.next_day(11),
       today.next_day(12),today.next_day(13),today.next_day(14),today.next_day(15)]
     ).group(:date).count
+    if @phone_date.length < 2
+      @phone_date = { today=>0, today.next_day(7)=> 0 }
+    end
+    #感情グラフの表示
     @expression = records.group(:date).sum(:expression_id)
-    
-
-    binding.pry
+    if @expression.length < 2
+      @expression = { today=>0, today.next_day(7)=> 0 }
+    end
   end
 
   def edit
