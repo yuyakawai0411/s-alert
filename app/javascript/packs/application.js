@@ -8,6 +8,8 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 require('../preview')
+require('../header')
+require('../card_record')
 
 // require("bootstrap")
 import "chartkick/chart.js"
