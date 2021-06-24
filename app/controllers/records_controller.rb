@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :move_to_root, only: [:create, :destroy]
 
   def index
     @card = Card.find(params[:card_id])
@@ -26,4 +27,11 @@ class RecordsController < ApplicationController
   def record_params
     params.require(:record).permit(:date, :time_id, :expression_id, :call_id).merge(card_id: params[:card_id])
   end
+
+  def move_to_root
+    unless @card.user.id == current_user.id
+      redirect_to root_path
+    end
+  end
+
 end
