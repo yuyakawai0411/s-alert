@@ -32,12 +32,15 @@
     <%= link_to "新規作成", new_card_path %>
   </div>
 
-  <div class="card-edit">
-    <p id="card-edit-list">編集</p>
-    <ul>
-    <%= link_to "近藤さん", class:"btn btn-primary" %>
-    <%= link_to "斉藤さん", class:"btn btn-primary" %>
-    </ul>
+  <div class="card-edit", id="card-edit">
+    <p id="card-edit-menu">編集</p>
+      <% if user_signed_in? || @user_cards != nil %>
+        <ul class="hidden", id="card-pull-down">
+          <% @user_cards.each do |user_card| %>
+            <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}", edit_card_path(user_card.id) %></li>
+          <% end %>
+        </ul>
+      <% end %>
   </div>
 
 </div>
@@ -45,12 +48,17 @@
 <%# レコード投稿機能 %>
 <div class="record_create mb-5">
 <h4>レコード</h4>
-  <div class="record-edit">
-    <p id="record-edit-list">作成&編集</p>
-    <%= link_to "坂倉さん", class:"btn btn-primary" %>
-    <%= link_to "飯島さん", class:"btn btn-primary" %>
-  </div>
   
+<div class="record-edit">
+  <p id="record-edit-menu">作成&編集</p>
+    <% if user_signed_in? || @user_cards != nil %>
+      <ul class="hidden", id="record-pull-down">
+        <% @user_cards.each do |user_card| %>
+          <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id) %></li>
+        <% end %>
+        </ul>
+    <% end %>
+</div>
 </div>
 
 <%# カード一覧表示 %>

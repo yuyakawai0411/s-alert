@@ -5,6 +5,10 @@ class CardsController < ApplicationController
 
   def index
     @cards = Card.order('created_at DESC')
+    if user_signed_in?
+      @user = User.find(current_user.id)
+      @user_cards = @user.cards
+    end
   end
 
   def new
