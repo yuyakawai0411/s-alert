@@ -1,12 +1,12 @@
 today = Date.today
 
-User.create!(email: 'yuya.scuba0411@gmail.com', password: '1994zero411',last_name: "近藤", first_name: "雅美", last_name_kana: "コンドウ", first_name_kana: "マサミ", company: "里丸印刷", company_form_id: 1, department: "営業部")
-User.create!(email: 'yasuo.hoklo.kappa@gmail.com', password: '1994zero411',last_name: "道中", first_name: "健", last_name_kana: "ミチナカ", first_name_kana: "タケル", company: "マセキ自動車", company_form_id: 1, department: "営業部")
+User.create!(id: 1, email: 'yuya.scuba0411@gmail.com', password: '1994zero411',last_name: "近藤", first_name: "雅美", last_name_kana: "コンドウ", first_name_kana: "マサミ", company: "里丸印刷", company_form_id: 1, department: "営業部")
+User.create!(id: 2, email: 'yasuo.hoklo.kappa@gmail.com', password: '1994zero411',last_name: "道中", first_name: "健", last_name_kana: "ミチナカ", first_name_kana: "タケル", company: "マセキ自動車", company_form_id: 1, department: "営業部")
 
-Card.create!(s_last_name: "田中", s_first_name: "万次郎", s_last_name_kana: "タナカ", s_first_name_kana: "マンジロウ", s_company: "YHM", s_company_form_id: 1, s_department: "営業部", s_phone_number: 07065432134, s_birth_day: "1980-10-24", s_hobby: "ゴルフ", user_id: 1)
-Card.create!(s_last_name: "斉藤", s_first_name: "千重郎", s_last_name_kana: "サイトウ", s_first_name_kana: "センジュウロウ", s_company: "毎日電気", s_company_form_id: 2, s_department: "企画部", s_phone_number: 0706543213, s_birth_day: "1975-11-20", s_hobby: "映画", user_id: 1)
-Card.create!(s_last_name: "美羽", s_first_name: "栄三郎", s_last_name_kana: "ミワ", s_first_name_kana: "エイサブロウ", s_company: "大正工業", s_company_form_id: 3, s_department: "開発部", s_phone_number: 07065431234, s_birth_day: "1972-12-15", s_hobby: "ビール", user_id: 2)
-Card.create!(s_last_name: "金衣", s_first_name: "金八郎", s_last_name_kana: "カネイ", s_first_name_kana: "キンパチロウ", s_company: "大正工業", s_company_form_id: 3, s_department: "営業部", s_phone_number: 07065431234, s_birth_day: "1972-10-12", s_hobby: "サッカー", user_id: 2)
+Card.create!(id: 1, s_last_name: "田中", s_first_name: "万次郎", s_last_name_kana: "タナカ", s_first_name_kana: "マンジロウ", s_company: "YHM", s_company_form_id: 1, s_department: "営業部", s_phone_number: 07065432134, s_birth_day: "1980-10-24", s_hobby: "ゴルフ", user_id: 1)
+Card.create!(id: 2, s_last_name: "斉藤", s_first_name: "千重郎", s_last_name_kana: "サイトウ", s_first_name_kana: "センジュウロウ", s_company: "毎日電気", s_company_form_id: 2, s_department: "企画部", s_phone_number: 0706543213, s_birth_day: "1975-11-20", s_hobby: "映画", user_id: 1)
+Card.create!(id: 3, s_last_name: "美羽", s_first_name: "栄三郎", s_last_name_kana: "ミワ", s_first_name_kana: "エイサブロウ", s_company: "大正工業", s_company_form_id: 3, s_department: "開発部", s_phone_number: 07065431234, s_birth_day: "1972-12-15", s_hobby: "ビール", user_id: 2)
+Card.create!(id: 4, s_last_name: "金衣", s_first_name: "金八郎", s_last_name_kana: "カネイ", s_first_name_kana: "キンパチロウ", s_company: "大正工業", s_company_form_id: 3, s_department: "営業部", s_phone_number: 07065431234, s_birth_day: "1972-10-12", s_hobby: "サッカー", user_id: 2)
 
 Record.create!(date: today, time_id: 9, expression_id: 3, call_id: 1, card_id: 1)
 Record.create!(date: today.next_day(-15), time_id: 10, expression_id: 1, call_id:1, card_id: 1 )
