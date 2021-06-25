@@ -1,29 +1,4 @@
-<%# ユーザー条件分岐 %>
-<% if user_signed_in? %>
-  <h2> ログインしています </h2>
-<% end %>
-
-<%# ログイン機能 %>
-<div class="user mb-5", id="user" >
-<h4 id="user-menu">ユーザー</h4>
-<ul class="hidden", id="pull-down"> 
-  <% if user_signed_in? %>
-    <li class="pull-down-list"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-primary" %></li>
-    <li class="pull-down-list"><%= link_to "ユーザー詳細", user_path(current_user.id), class:"btn btn-primary" %> </li>
-  <% else %>
-    <li class="pull-down-list"><%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %></li>
-    <li class="pull-down-list"><%= link_to "ログイン", new_user_session_path, class:"btn btn-primary" %></li>
-  <% end %>
-</ul>
-</div>
-
-<%# 検索機能 %>
-<div class="search mb-5">
-<%= form_with(url: search_cards_path, local: true, method: :get, class: "search-form") do |form| %>
-  <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "btn-search" %>
-  <%= form.submit "検索", class: "btn btn-primary" %>
-<% end %>
-</div>
+<%= render "shared/header"%>
 
 <%# カード投稿機能 %>
 <div class="card_create mb-5">
@@ -42,7 +17,6 @@
         </ul>
       <% end %>
   </div>
-
 </div>
 
 <%# レコード投稿機能 %>
@@ -81,3 +55,5 @@
     <% end %>
   <% end %>
 </div>
+
+<%= render "shared/footer" %>
