@@ -2,6 +2,7 @@
 
 <div calss="card-ditail">
   <%# 上司写真_レフト表示 %>
+
   <div calss="card-ditail-left">
     <% if @card.image.attached? %>
       <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>

@@ -2,7 +2,7 @@
 
 <div class="card-registration">
   <%# タイトル %> 
-  <h2 class="card-registration-title">上司情報を入力</h2>
+  <h3 class="card-registration-title">カード新規作成</h3>
   <%# 登録者情報記入欄 %>
   <div class="card-registration-info">
     <%= form_with model:@card, local: true do |f| %>
@@ -106,9 +106,14 @@
           </div>
       </div>
 
+      <%# 趣味 %>
+      <div class="sell-btn-contents">趣味
+        <%= f.text_area :s_hobby ,class:"sell-btn" %>
+      </div>
+
       <%# 登録ボタン %>
       <div class="sell-btn-contents">
-        <%= f.submit "登録する" ,class:"sell-btn" %>
+        <%= f.submit "作成" ,class:"sell-btn" %>
         <%=link_to 'もどる', root_path, class:"back-btn" %>
       </div>
 

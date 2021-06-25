@@ -79,6 +79,10 @@ class CardsController < ApplicationController
 
   def search
     @cards = Card.search(params[:keyword])
+    if user_signed_in?
+      @user = User.find(current_user.id)
+      @user_cards = @user.cards
+    end
   end
 
   private

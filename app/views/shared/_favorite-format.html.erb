@@ -1,0 +1,44 @@
+<div class="favorite-format" >
+  <% favorites.each do |favorite| %>
+    <%= link_to card_path(favorite.id) do %> 
+  <%# 人物画像 %>
+    <div calss="card-person-image">
+    <% if favorite.image.attached? %>
+      <%= image_tag favorite.image.variant(resize: '20x20'), class: "card-ditail-image" %>
+    <% else %>
+      <%= image_tag "sample_image.png", class: "card-ditail-image" %>
+    <% end %>
+    </div>
+  <%# 氏名 %>
+    <div class="card-name">氏名
+      <p class="first-name"><%= favorite.s_first_name %></p>
+      <p class="last-name"><%= favorite.s_last_name %></p>
+      <p class="first-name-kana"><%= favorite.s_first_name_kana %></p>
+      <p class="last-name-kana"><%= favorite.s_last_name_kana %></p>
+    </div>
+  <%# 会社・部署 %>
+    <div class="card-company-info">会社/部署
+      <p class="company"><%= favorite.s_company %></p>
+      <p class="company-form"><%= favorite.s_company_form_id%></p>
+      <p class="department"><%= favorite.s_department %></p>
+    </div>
+  <%# 電話番号 %>
+    <div class="card-phone">電話番号
+      <p class="phone-number"><%= favorite.s_phone_number%></p>
+    </div>
+  <%# 誕生日 %>
+    <div class="card-birtday">誕生日
+      <p class="birthday"><%= favorite.s_birth_day %></p>
+    </div>
+  <%# 趣味 %>
+    <div class="card-hobby">趣味
+      <p class="hobbyy"><%= favorite.s_hobby%></p>
+    </div>
+    
+    <% end %>
+    <div class="card-favorites">
+      <%=link_to "お気に入り解除", card_favorites_path(favorite.id), method: :delete %>
+    </div>
+  <% end %>
+
+</div>

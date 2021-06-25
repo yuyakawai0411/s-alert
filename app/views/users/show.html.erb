@@ -29,17 +29,8 @@
 </h2>
 <div class="cards">
 カード一覧
-  <% @cards.each do |card| %>
-    <div class="card-background-image">
-      <%= link_to card_path(card.id) do %>
-      <p><%= card.s_company %></p>
-      <p><%= card.s_company_form_id%></p>
-      <p><%= card.s_department %></p>
-      <p><%= card.s_first_name %></p>
-      <p><%= card.s_last_name %></p>
-      <% end %>
-    </div>
-  <% end %>
+   <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+
 </div>
 
 <%# お気に入り一覧 %>
@@ -48,15 +39,7 @@
 </h2>
 <div class="favorite-cards-list">
   <div class="favorite-card">
-    <% @favorites.each do |favorite| %>
-      <%= link_to card_path(favorite.id) do %> 
-        <p><%= favorite.s_last_name %></p>
-        <p><%= favorite.s_first_name %></p>
-        <p><%= favorite.s_company %></p>
-        <p><%= favorite.s_department %></p>
-      <% end %>
-      <%=link_to "お気に入り解除", card_favorites_path(favorite.id), method: :delete %>
-    <% end %>
+     <%= render partial: "shared/favorite-format" , locals: { favorites: @favorites }%>
   </div>
 </div>
 
