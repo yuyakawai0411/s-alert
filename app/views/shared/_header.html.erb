@@ -1,12 +1,12 @@
-<header>
+<header class="container">
+<div class="header row d-flex align-items-center ">
   <%# ロゴ %>
-  <div class="header-title">
-    <h2><%= link_to "WARNNING", root_path %></h2>
-  </div>
+<div class="header-title col-4">
+  <h2><%= link_to "WARNNING", root_path %></h2>
+</div>
 
-<nav>
   <%# 検索機能 %>
-  <div class="search">
+<div class="search col-5">
     <% if user_signed_in? %>
       <%= form_with(url: search_cards_path, local: true, method: :get, class: "search-form") do |form| %>
         <%= form.text_field :keyword, placeholder: "カードを検索", class: "btn-search" %>
@@ -15,8 +15,9 @@
     <% else %>
       <div>SERACH</div>
     <% end %>
-  </div>
+</div>
   
+<nav class="col-3 d-flex justify-content-between" >
   <div class="about">ABOUT
   </div>
 
@@ -36,5 +37,7 @@
     </ul>
   </div>
 </nav>
+
+</div>
 
 </header>
