@@ -1,44 +1,14 @@
+<%# ヘッダー %>
 <%= render "shared/header"%>
 
-<%# カード投稿機能 %>
-<div class="card_create mb-5">
-<h4>■カード</h4>
-  <div class="card-new-create">
-    <p><%= link_to "新規作成", new_card_path %></p>
-  </div>
-
-  <div class="card-edit", id="card-edit">
-    <p id="card-edit-menu">編集</p>
-      <% if user_signed_in? || @user_cards != nil %>
-        <ul class="hidden", id="card-pull-down">
-          <% @user_cards.each do |user_card| %>
-            <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}", edit_card_path(user_card.id) %></li>
-          <% end %>
-        </ul>
-      <% end %>
-  </div>
-</div>
-
-<%# レコード投稿機能 %>
-<div class="record_create mb-5">
-<h4>■レコード</h4>
-  
-<div class="record-edit">
-  <p id="record-edit-menu">作成&編集</p>
-    <% if user_signed_in? || @user_cards != nil %>
-      <ul class="hidden", id="record-pull-down">
-        <% @user_cards.each do |user_card| %>
-          <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id) %></li>
-        <% end %>
-        </ul>
-    <% end %>
-</div>
-</div>
+<%# サイドメニュー %>
+<%= render "shared/side-menu" %>
 
 <%# カード一覧表示 %>
 <div class="cards">
-  <h3>カード一覧</h3>
- <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+  <h1>共有カード一覧</h1>
+    <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
 </div>
 
+<%# フッター %>
 <%= render "shared/footer" %>

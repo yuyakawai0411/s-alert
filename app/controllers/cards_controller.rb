@@ -2,13 +2,11 @@ class CardsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_card, only: [:show, :edit, :update, :destroy]
   before_action :move_to_root, only: [:edit, :update, :destroy]
+  before_action :side_menu, only: [:index, :new, :edit, :show, :search]
+  before_action :bio_risum_data, only: [:show]
 
   def index
     @cards = Card.order('created_at DESC')
-    if user_signed_in?
-      @user = User.find(current_user.id)
-      @user_cards = @user.cards
-    end
   end
 
   def new
@@ -26,10 +24,6 @@ class CardsController < ApplicationController
   end
 
   def show
-    # バイオリズムグラフ及び不調日の表示
-    @bio_reism = bio_risum_data
-    @bad_date = @bio_reism.min_by(2){|x,v| (v - 0).abs}
-    
     today = Date.today
     records = @card.records.where(call_id: 1)
     
@@ -79,10 +73,6 @@ class CardsController < ApplicationController
 
   def search
     @cards = Card.search(params[:keyword])
-    if user_signed_in?
-      @user = User.find(current_user.id)
-      @user_cards = @user.cards
-    end
   end
 
   private
@@ -109,6 +99,13 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
   end
 
+  def side_menu
+    if user_signed_in?
+      @user = User.find(current_user.id)
+      @user_cards = @user.cards
+    end
+  end
+
   def bio_risum_data
     pi = Math::PI
     birth_day = @card.s_birth_day
@@ -123,7 +120,8 @@ class CardsController < ApplicationController
       bio_reism.store( "#{key}", value )
       i = i + 1
     end
-    return bio_reism
+    @bio_reism = bio_reism
+    @bad_date = @bio_reism.min_by(2){|x,v| (v - 0).abs}
   end
 
 end

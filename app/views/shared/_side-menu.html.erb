@@ -1,0 +1,45 @@
+<aside>
+
+<%# カード投稿機能 %>
+  <div class="card_create">
+    <h2>CRAD</h4>
+    <ul class="card-new-create">
+      <li><%= link_to "新規作成", new_card_path %></li>
+      
+      <div class="card-edit", id="card-edit">
+      <li id="card-edit-menu">編集</li>
+        <% if user_signed_in? || @user_cards != nil %>
+          <ul class="hidden", id="card-pull-down">
+            <% @user_cards.each do |user_card| %>
+              <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}", edit_card_path(user_card.id) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </ul>
+  </div>
+
+<%# レコード投稿機能 %>
+  <div class="record_create">
+    <h2>RECORD</h2>
+    <ul class="record-edit">
+      <li id="record-edit-menu">作成&編集</p>
+        <% if user_signed_in? || @user_cards != nil %>
+          <ul class="hidden", id="record-pull-down">
+            <% @user_cards.each do |user_card| %>
+              <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id) %></li>
+            <% end %>
+          </ul>
+        <% end %>
+    </ul>
+  </div>
+
+<%# ユーザー詳細機能 %>
+  <div class="user-details">
+    <h2>USER</h2>
+    <% if user_signed_in? %>
+      <%= link_to "ユーザー詳細", user_path(current_user.id) %> </p>
+    <% end %>
+  </div>
+
+  </aside>

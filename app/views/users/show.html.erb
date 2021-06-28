@@ -1,46 +1,76 @@
-<%= render "shared/second-header"%>
+<%= render "shared/header"%>
+
+<%= render "shared/side-menu" %>
 
 <%# プロフィール詳細 %>
-<h2 class="page-heading">
-  <%= "#{@user.first_name}さんの情報"%>
-</h2>
-<table class="table">
-  <tbody>
+<div class="profile">
+<h1 class="profile-tile"><%= "#{@user.first_name}さんのプロフィール"%></h1>
+  
+  <div class="card">
+    <ul class="card-list">
+      <div class="card-right">
+      <%# 氏名 %>
+      <li class="card-name">氏名
+        <ul class="name-list">
+          <li class="first-name"><%= @user.first_name %></li>
+          <li class="last-name"><%= @user.last_name %></li>
+          <li class="first-name-kana"><%= @user.first_name_kana %></li>
+          <li class="last-name-kana"><%= @user.last_name_kana %></li>
+        </ul>
+      </li>
+      
+      <%# 会社・部署 %>
+      <li class="card-company">会社/部署
+        <ul class="company-list">
+          <li class="company-name"><%= @user.company %></li>
+          <li class="company-form"><%= @user.company_form_id%></li>
+          <li class="department"><%= @user.department %></li>
+        </ul>
+      </li>
+      
+      <%# 電話番号 %>
+      <li class="card-phone">電話番号
+        <%= @user.phone_number%>
+      </li>
+        
+      <%# 誕生日 %>
+      <li class="card-birtday">誕生日
+        <%= @user.birth_day %>
+      </li>
+      
+      </div>
 
-  <tr>
-    <th class="table__col1">名前</th>
-    <td class="table__col2"><%= @user.first_name %></td>
-  </tr>
-  <tr>
-    <th class="table__col1">会社名</th>
-    <td class="table__col2"><%= @user.company %></td>
-  </tr>
-  <tr>
-    <th class="table__col1">部署</th>
-    <td class="table__col2"><%= @user.department %></td>
-  </tr>
+      <div class="card-left">
+      <%# 人物画像 %>
+      <li calss="card-image">
+        <%= image_tag "sample_image.png", class: "card-ditail-image" %>
+      </li>
+      </div>
+    </ul>
+  </div>
 
-  </tbody>
-</table>
+  <div class="bio-resim-baddate">
+    バイオリズム不調日
+    <p><%= @bad_date[1][0] %></p>
+    <p><%= @bad_date[0][0] %></p>
+  </div>
+
+</div>
 
 <%# 投稿カード一覧 %>
-<h2 class="page-heading">
-  <%= "#{@user.first_name}さんのプロトタイプ"%>
-</h2>
-<div class="cards">
-カード一覧
-   <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
-
-</div>
+<section class="user-cards">
+  <div class="cards">
+    <h2 class="page-heading"><%= "#{@user.first_name}さんのプロトタイプ"%></h2>
+    <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+  </div>
+</section>
 
 <%# お気に入り一覧 %>
-<h2 class="page-heading">
-  <%= "#{@user.first_name}さんのお気に入り"%>
-</h2>
-<div class="favorite-cards-list">
-  <div class="favorite-card">
-     <%= render partial: "shared/favorite-format" , locals: { favorites: @favorites }%>
+<section class="user-favorites">
+  <div class="favorites">
+    <h2 class="page-heading"><%= "#{@user.first_name}さんのお気に入り"%></h2>
+    <%= render partial: "shared/favorite-format" , locals: { favorites: @favorites }%>
   </div>
-</div>
+</section>
 
 <%= render "shared/footer" %>

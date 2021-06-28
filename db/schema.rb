@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
     t.string "company", null: false
     t.string "company_form_id", null: false
     t.string "department", null: false
+    t.string "phone_number", null: false
+    t.date "birth_day", null: false
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

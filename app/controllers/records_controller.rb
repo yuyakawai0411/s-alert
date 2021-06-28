@@ -1,6 +1,7 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :move_to_root, only: [:create, :destroy]
+  before_action :side_menu, only: [:index]
 
   def index
     @card = Card.find(params[:card_id])
@@ -34,4 +35,11 @@ class RecordsController < ApplicationController
     end
   end
 
+  def side_menu
+    if user_signed_in?
+      @user = User.find(current_user.id)
+      @user_cards = @user.cards
+    end
+  end
+  
 end

@@ -19,6 +19,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :company, null: false
       t.string :company_form_id, null: false
       t.string :department, null: false
+      t.string :phone_number, null: false
+      t.date :birth_day, null: false
 
       ## Rememberable
       t.datetime :remember_created_at

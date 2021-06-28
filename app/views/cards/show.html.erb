@@ -1,23 +1,85 @@
-<%= render "shared/second-header"%>
+<%= render "shared/header"%>
 
-<div calss="card-ditail">
-  <%# 上司写真_レフト表示 %>
+<%= render "shared/side-menu" %>
+<%# プロフィール詳細 %>
+<div class="profile">
+<h1 class="profile-tile"><%= "#{@card.s_first_name}さんのプロフィール"%></h1>
+  
+  <div class="card">
+    <ul class="card-list">
+      <div class="card-right">
+      <%# 氏名 %>
+      <li class="card-name">氏名
+        <ul class="name-list">
+          <li class="first-name"><%= @card.s_first_name %></li>
+          <li class="last-name"><%= @card.s_last_name %></li>
+          <li class="first-name-kana"><%= @card.s_first_name_kana %></li>
+          <li class="last-name-kana"><%= @card.s_last_name_kana %></li>
+        </ul>
+      </li>
+      
+      <%# 会社・部署 %>
+      <li class="card-company">会社/部署
+        <ul class="company-list">
+          <li class="company-name"><%= @card.s_company %></li>
+          <li class="company-form"><%= @card.s_company_form_id%></li>
+          <li class="department"><%= @card.s_department %></li>
+        </ul>
+      </li>
+      
+      <%# 電話番号 %>
+      <li class="card-phone">電話番号
+        <%= @card.s_phone_number%>
+      </li>
+        
+      <%# 誕生日 %>
+      <li class="card-birtday">誕生日
+        <%= @card.s_birth_day %>
+      </li>
+      </div>
 
-  <div calss="card-ditail-left">
-    <% if @card.image.attached? %>
-      <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
-    <% else %>
-      <%= image_tag "sample_image.png", class: "card-ditail-image" %>
-    <% end %>
+      <div class="card-left">
+      <%# 人物画像 %>
+      <li calss="card-image">
+        <% if @card.image.attached? %>
+          <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
+        <% else %>
+          <%= image_tag "sample_image.png", class: "card-ditail-image" %>
+        <% end %>
+      </li>
+      </div>
+
+    </ul>
   </div>
-  <%# 上司情報_ライト表示 %>
-  <div class="card-ditail-right">
-    <p><%= @card.s_company %></p>
-    <p><%= @card.s_company_form_id%></p>
-    <p><%= @card.s_department %></p>
-    <p><%= @card.s_first_name %></p>
-    <p><%= @card.s_last_name %></p>
+
+  <div class="bio-resim-baddate">
+    バイオリズム不調日
+    <p><%= @bad_date[1][0] %></p>
+    <p><%= @bad_date[0][0] %></p>
   </div>
+
+  <div class="phone-time-mode">
+    電話最頻値
+    <p><%= @phone_time_mode[0][0] %></p>
+    <p><%= @phone_time_mode[1][0] %></p>
+  </div>
+
+</div>
+
+<section class="s-bio-risum">
+  <h2><%= "#{@card.s_first_name}さんのバイオリズム"%></h2>
+  <%= line_chart @bio_reism, width: "500px", height: "200px" %>
+  <%= line_chart @expression, width: "500px", height: "200px" %>
+</section>
+
+<section class="s-phone-most">
+  <h2><%= "#{@card.s_first_name}さんの着信履歴"%></h2>
+  <%= column_chart @phone_time, width: "500px", height: "200px" %>
+  <%= column_chart @phone_date, width: "500px", height: "200px" %>
+</section>
+
+
+<div>
   <%# ユーザー別表示分岐 %>
   <% if user_signed_in? %>
     <% if @card.user_id == current_user.id %>
@@ -30,20 +92,7 @@
   <%# 着信履歴登録 %>
   <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %>
   <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
-  <div class="bio-resim-baddate">
-    バイオリズム不調日
-    <p><%= @bad_date[1][0] %></p>
-    <p><%= @bad_date[0][0] %></p>
-  </div>
-  <div class="phone-time-mode">
-    電話最頻値
-    <p><%= @phone_time_mode[0][0] %></p>
-    <p><%= @phone_time_mode[1][0] %></p>
-  </div>
 
-  <%= line_chart @bio_reism, width: "500px", height: "200px" %>
-  <%= line_chart @expression, width: "500px", height: "200px" %>
-  <%= column_chart @phone_time, width: "500px", height: "200px" %>
-  <%= column_chart @phone_date, width: "500px", height: "200px" %>
+</div>
 
   <%= render "shared/footer" %>
