@@ -1,13 +1,17 @@
 <%= render "shared/header"%>
 
-<%# カード投稿機能 %>
-<%= render "shared/side-menu" %>
-
-<%# カード一覧表示 %>
-<div class="cards">
-  <h1>共有カード一覧</h1>
- <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+<div class="container">
+  <div class="main row">
+    <%# サイドメニュー %>
+    <div class="side-menu col-2">
+      <%= render "shared/side-menu" %>
+    </div>
+    <%# カード一覧表示 %>
+    <div class="share-cards col-10">
+      <h1>共有カード一覧</h1>
+      <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+    </div>
+  </div>
 </div>
-
 <%= render "shared/footer" %>
 
