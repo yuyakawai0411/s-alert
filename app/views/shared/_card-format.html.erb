@@ -1,0 +1,53 @@
+<div class="cards d-flex justify-content-between flex-wrap w-100">
+  <% cards.each do |card| %>
+  <ul> 
+  <%= link_to card_path(card.id) do %>
+  <div class="card-list d-flex justify-content-between">
+      
+    <div class="card-right">
+        <%# 氏名 %>
+        <li class="card-name">
+          <ul class="name-list">
+            <li class="name"><%= "#{card.s_first_name} #{card.s_last_name}" %></li>
+            <li class="kana"><%= "#{card.s_first_name_kana} #{card.s_last_name_kana}" %></li>
+          </ul>
+        </li>
+      
+        <%# 会社・部署 %>
+        <li class="card-company">
+          <ul class="company-list">
+            <li class="company-name"><%= "#{card.s_company}#{card.s_company_form_id}" %></li>
+            <li class="department"><%= card.s_department %></li>
+          </ul>
+        </li>
+      
+        <%# 電話番号 %>
+        <li class="card-phone">
+          <%= card.s_phone_number%>
+        </li>
+        
+    </div>
+
+    <div class="card-left">
+        <%# 人物画像 %>
+        <li calss="card-image">
+          <% if card.image.attached? %>
+            <%= image_tag card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
+          <% else %>
+            <%= image_tag "boss.png", size: '100x100', class: "card-ditail-image" %>
+          <% end %>
+        </li>
+        <%# お気に入り %>
+        <li class="card-favorites">
+          <% if user_signed_in? && card.favorited_by?(current_user) %>
+            <%=link_to "お気に入り解除", card_favorites_path(card.id), method: :delete %>
+          <% else %>
+            <%=link_to "お気に入り登録", card_favorites_path(card.id), method: :post %>
+          <% end %>
+        </li>
+    </div>
+  </div>
+  <% end %>
+  </ul>
+  <% end %>
+</div>

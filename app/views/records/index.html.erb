@@ -1,28 +1,81 @@
-<%# タイトル %>
-<h2>着信履歴登録</h2>
-<div>
-  <p><%= @card.s_company %></p>
-  <p><%= @card.s_department %></p>
-  <p><%= @card.s_last_name %></p>
-  <p><%= @card.s_first_name %></p>
-</div>
+<%= render "shared/header"%>
 
-<%# 入力フォーム %>
-<%= form_with model: [@card, @record], local: true do |f| %> 
-  <%= f.date_field :date %> 
-  <%= f.collection_select(:time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"item-category"})%>  
-  <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
-  <%= f.collection_select(:call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>
-  <%= f.submit "追加する", class:"sell-btn" %>
-<% end %>
+<div class="container">
+  <div class="main row">
 
-<%# 着信履歴一覧表示 %>
-<div class="phone-record-list">
-  <% @records.each do |record| %>
-    <p><%= record.date %><p>
-    <p><%= record.time_id %></p> 
-    <p><%= record.expression_id %></p>
-    <p><%= record.call_id %></p>
-    <%= link_to "削除", card_record_path(@card.id, record.id), method: :delete %>
-  <% end %>
+    <%# サイドメニュー %>
+    <div class="side-menu col-2">
+      <%= render "shared/side-menu" %>
+    </div>
+   
+   <div class="record col-10">
+      <article class="record-add">
+        <h1><%= "#{@card.s_first_name}さん着信履歴登録"%></h1>
+        <%# 入力フォーム %>
+        <%= form_with model: [@card, @record], local: true do |f| %> 
+          
+          <table>
+            <tr class="record-date d-flex align-items-start">
+              <td class="date-tag tag">日付</td>
+              <td class="indispensable">必須</td>
+              <td class="date-filed text-filed">
+                <%= f.date_field :date %> 
+              </td>
+            </tr>
+
+            <tr class="record-time d-flex align-items-start">
+              <td class="time-tag tag">時間</td>
+              <td class="indispensable">必須</td>
+              <td class="time-filed text-filed">
+                <%= f.collection_select(:time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"item-category"})%>  
+              </td>
+            </tr>
+
+            <tr class="record-expression d-flex align-items-start">
+              <td class="expression-tag tag">感情</td>
+              <td class="indispensable">必須</td>
+              <td class="expression-filed text-filed">
+                 <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
+              </td>
+            </tr>
+
+            <tr class="record-call d-flex align-items-start">
+              <td class="call-tag tag">着信有無</td>
+              <td class="indispensable">必須</td>
+              <td class="call-filed text-filed">
+                 <%= f.collection_select(:call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>
+              </td>
+            </tr>
+          <table>
+
+          <%= f.submit "作成", class:"sell-btn" %>
+        <% end %>
+      </article>
+
+      <article class="record-list">
+        <h1><%= "#{@card.s_first_name}さん着信履歴登録"%></h1>
+        <%# 着信履歴一覧表示 %>
+        <table>
+          <tr>
+            <td class="record-list-date record-column">日付</td>
+            <td class="record-list-time record-column">時間</td>
+            <td class="record-list-expression record-column">感情</td>
+            <td class="record-list-call record-column">着信有無</td>
+            <td class="record-list-delete record-column">削除</td>
+          </tr>
+          <% @records.each do |record| %>
+            <tr>
+              <td class="record-list-date record-column"><%= record.date %></td>
+              <td class="record-list-time record-column"><%= record.time_id %></td> 
+              <td class="record-list-expression record-column"><%= record.expression_id %></td>
+              <td class="record-list-call record-column"><%= record.call_id %></td>
+              <td class="record-list-delete record-column"><%= link_to "削除", card_record_path(@card.id, record.id), method: :delete %></td>
+            </tr>
+          <% end %>
+        </table>
+      </article>
+    </div>
+  </div>
 </div>
+  <%= render "shared/footer" %>
+

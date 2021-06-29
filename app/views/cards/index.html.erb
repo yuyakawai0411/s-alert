@@ -1,83 +1,18 @@
-<%# ユーザー条件分岐 %>
-<% if user_signed_in? %>
-  <h2> ログインしています </h2>
-<% end %>
+<%# ヘッダー %>
+<%= render "shared/header"%>
 
-<%# ログイン機能 %>
-<div class="user mb-5", id="user" >
-<h4 id="user-menu">ユーザー</h4>
-<ul class="hidden", id="pull-down"> 
-  <% if user_signed_in? %>
-    <li class="pull-down-list"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-primary" %></li>
-    <li class="pull-down-list"><%= link_to "ユーザー詳細", user_path(current_user.id), class:"btn btn-primary" %> </li>
-  <% else %>
-    <li class="pull-down-list"><%= link_to "新規登録", new_user_registration_path, class:"btn btn-primary" %></li>
-    <li class="pull-down-list"><%= link_to "ログイン", new_user_session_path, class:"btn btn-primary" %></li>
-  <% end %>
-</ul>
-</div>
-
-<%# 検索機能 %>
-<div class="search mb-5">
-<%= form_with(url: search_cards_path, local: true, method: :get, class: "search-form") do |form| %>
-  <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "btn-search" %>
-  <%= form.submit "検索", class: "btn btn-primary" %>
-<% end %>
-</div>
-
-<%# カード投稿機能 %>
-<div class="card_create mb-5">
-<h4>カード</h4>
-  <div class="card-new-create">
-    <%= link_to "新規作成", new_card_path %>
-  </div>
-
-  <div class="card-edit", id="card-edit">
-    <p id="card-edit-menu">編集</p>
-      <% if user_signed_in? || @user_cards != nil %>
-        <ul class="hidden", id="card-pull-down">
-          <% @user_cards.each do |user_card| %>
-            <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}", edit_card_path(user_card.id) %></li>
-          <% end %>
-        </ul>
-      <% end %>
-  </div>
-
-</div>
-
-<%# レコード投稿機能 %>
-<div class="record_create mb-5">
-<h4>レコード</h4>
-  
-<div class="record-edit">
-  <p id="record-edit-menu">作成&編集</p>
-    <% if user_signed_in? || @user_cards != nil %>
-      <ul class="hidden", id="record-pull-down">
-        <% @user_cards.each do |user_card| %>
-          <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id) %></li>
-        <% end %>
-        </ul>
-    <% end %>
-</div>
-</div>
-
-<%# カード一覧表示 %>
-<div class="cards">
-<h4>カード一覧</h4>
-  <% @cards.each do |card| %>
-    <div class="card-background-image">
-      <%= link_to card_path(card.id) do %>
-      <p><%= card.s_company %></p>
-      <p><%= card.s_company_form_id%></p>
-      <p><%= card.s_department %></p>
-      <p><%= card.s_first_name %></p>
-      <p><%= card.s_last_name %></p>
-      <% if user_signed_in? && card.favorited_by?(current_user) %>
-        <p><%=link_to "お気に入り解除", card_favorites_path(card.id), method: :delete %></p>
-      <% else %>
-        <p><%=link_to "お気に入り登録", card_favorites_path(card.id), method: :post %></p>
-      <% end %>
+<div class="container">
+  <div class="main row">
+    <%# サイドメニュー %>
+    <div class="side-menu col-2">
+      <%= render "shared/side-menu" %>
     </div>
-    <% end %>
-  <% end %>
+    <%# カード一覧表示 %>
+    <div class="share-cards col-10">
+      <h1>共有カード一覧</h1>
+      <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+    </div>
+  </div>
 </div>
+<%# フッター %>
+<%= render "shared/footer" %>
