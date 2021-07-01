@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_18_230959) do
+ActiveRecord::Schema.define(version: 2021_07_01_062716) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "notice_date"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notices_on_user_id"
+  end
+
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date", null: false
     t.integer "time_id", null: false
@@ -95,5 +104,6 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
   add_foreign_key "cards", "users"
   add_foreign_key "favorites", "cards"
   add_foreign_key "favorites", "users"
+  add_foreign_key "notices", "users"
   add_foreign_key "records", "cards"
 end

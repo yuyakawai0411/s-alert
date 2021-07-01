@@ -38,7 +38,10 @@
   <div class="user-details">
     <h2>USER</h2>
     <% if user_signed_in? %>
-      <%= link_to "ユーザー詳細", user_path(current_user.id) %> </p>
+     <ul class="user-info">
+        <li><%= link_to "ユーザー詳細", user_path(current_user.id) %></li> 
+        <li><%= link_to "タイマー", user_notices_path(current_user.id) %></li>
+      </ul>
     <% end %>
   </div>
 
