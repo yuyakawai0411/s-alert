@@ -5,6 +5,7 @@ class FavoritesController < ApplicationController
     @favorite = current_user.favorites.build(card_id: params[:card_id])
     @favorite.save
     redirect_to root_path
+    
   end
 
   def destroy
