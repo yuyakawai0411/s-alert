@@ -1,10 +1,11 @@
 class NoticesController < ApplicationController
 before_action :authenticate_user!, only: [:create, :destroy]
 before_action :side_menu, only: [:index]
+before_action :past_date, only: [:index]
 
 def index
   @notice = Notice.new()
-  @notices = @user.notices
+  @notices = @user.notices.order('notice_date ASC')
 end
 
 def create
@@ -31,5 +32,8 @@ def side_menu
   end
 end
 
+def past_date
+  Notice.where("notice_date < ?" , Date.today).delete_all
+end
 
 end

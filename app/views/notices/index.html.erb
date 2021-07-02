@@ -13,7 +13,7 @@
         <h1><%= "#{@user.first_name}さんタイマー"%></h1>
         <%# 入力フォーム %>
         <%= form_with model: [@user, @notice], local: true do |f| %> 
-          
+          <%= render 'shared/error_messages', model: f.object %>
           <table>
             <tr class="notice-date d-flex align-items-start">
               <td class="date-tag tag">日付</td>
