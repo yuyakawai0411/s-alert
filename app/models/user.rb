@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :fav_cards, through: :favorites, source: :card
   has_many :notices
+  has_many :comments
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form

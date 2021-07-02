@@ -6,6 +6,7 @@ class Card < ApplicationRecord
   has_many :records, dependent: :destroy
   has_many :favorites
   has_many :users, through: :favorites
+  has_many :comments
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form
