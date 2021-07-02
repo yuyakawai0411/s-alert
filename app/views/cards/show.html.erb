@@ -80,6 +80,52 @@
           </div>
         </section>
 
+        <section>
+          <h2><%= "#{@card.s_first_name}さんの趣味"%></h2>
+            <div class="interest row">
+              <div class="top-list col-5">
+                <h4>趣味ランキング</h4>
+                <ol>
+                  <% if @card.s_hobby_top.nil? %>
+                    <li>1.登録されていません</li>
+                  <% else %>
+                    <li><%= "1.#{@card.s_hobby_top}" %></li>
+                  <% end %>
+                  <% if @card.s_hobby_medium.nil? %>
+                    <li>2.登録されていません</li>
+                  <% else %>
+                    <li><%= "2.#{@card.s_hobby_medium}" %></li>
+                  <% end %>
+                  <% if @card.s_hobby_row.nil? %>
+                    <li>3.登録されていません</li>
+                  <% else %>
+                    <li><%= "3.#{@card.s_hobby_row}" %></li>
+                  <% end %>
+                </ol>
+                <% if user_signed_in? %>
+                  <%= form_with(model: [@card, @comment], local: true) do |f| %>
+                  <div class="comment-form d-flex align-items-center">
+                    <div><%= f.text_area :text, placeholder: "コメントする", rows: "2" %></div>
+                    <div><%= f.submit "送信" %></div>
+                  </div>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="comment-list col-7">
+                <h4>コメント一覧</h4>
+                <% @comments.each do |comment| %>
+                  <table>
+                    <tr>
+                      <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
+                      <td><%= comment.text %></td>
+                      <td><%= comment.created_at %></td>
+                    </tr>
+                  </table>
+                <% end %>
+              </div>
+            </div>
+        </section>
+
         <div>
           <%# ユーザー別表示分岐 %>
           <% if user_signed_in? %>

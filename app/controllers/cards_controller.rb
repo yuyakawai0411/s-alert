@@ -4,6 +4,8 @@ class CardsController < ApplicationController
   before_action :move_to_root, only: [:edit, :update, :destroy]
   before_action :side_menu, only: [:index, :new, :edit, :show, :search]
   before_action :bio_risum_data, only: [:show]
+  before_action :set_comments, only: [:show]
+
 
   def index
     @cards = Card.order('created_at DESC')
@@ -79,7 +81,7 @@ class CardsController < ApplicationController
   
   def card_params
     params.require(:card).permit(:image, :s_last_name, :s_first_name, :s_last_name_kana, :s_first_name_kana, 
-      :s_company, :s_company_form_id, :s_department, :s_phone_number, :s_birth_day, :s_hobby).merge(user_id: current_user.id)
+      :s_company, :s_company_form_id, :s_department, :s_phone_number, :s_birth_day, :s_hobby_top, :s_hobby_medium, :s_hobby_row).merge(user_id: current_user.id)
   end
 
   def remove_card_blank
@@ -122,6 +124,12 @@ class CardsController < ApplicationController
     end
     @bio_reism = bio_reism
     @bad_date = @bio_reism.min_by(2){|x,v| (v - 0).abs}
+  end
+
+  def set_comments
+    Comment.where("created_at < ?" , (Date.today-30)).delete_all
+    @comment = Comment.new
+    @comments = @card.comments.includes(:user)
   end
 
 end

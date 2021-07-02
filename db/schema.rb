@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_18_230959) do
+ActiveRecord::Schema.define(version: 2021_07_02_045451) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -43,11 +43,23 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
     t.string "s_department", null: false
     t.string "s_phone_number", null: false
     t.date "s_birth_day", null: false
-    t.string "s_hobby"
+    t.string "s_hobby_top"
+    t.string "s_hobby_medium"
+    t.string "s_hobby_row"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "text", null: false
+    t.bigint "card_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_comments_on_card_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -57,6 +69,15 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["card_id"], name: "index_favorites_on_card_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "notice_date"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -93,7 +114,10 @@ ActiveRecord::Schema.define(version: 2021_06_18_230959) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cards", "users"
+  add_foreign_key "comments", "cards"
+  add_foreign_key "comments", "users"
   add_foreign_key "favorites", "cards"
   add_foreign_key "favorites", "users"
+  add_foreign_key "notices", "users"
   add_foreign_key "records", "cards"
 end

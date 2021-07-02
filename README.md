@@ -18,6 +18,7 @@
 
 - has_many :cards
 - has_many :favorites
+- has_many :notices
 
 
 ## cards テーブル
@@ -70,3 +71,15 @@
 
 - belongs_to :user
 - belongs_to :card
+
+
+## Notices テーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| notice_date   | date       | null: false                    |
+| user          | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user

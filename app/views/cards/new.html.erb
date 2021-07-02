@@ -106,9 +106,24 @@
 
             <%# 趣味 %>
             <tr class="card-hobby d-flex align-items-start">
-              <td class="hobby-tag tag">趣味</div>
+              <td class="hobby-tag tag">趣味TOP3</td>
               <td class="indispensable"></td>
-              <td class="hobby-filed text-filed"><%= f.text_area :s_hobby ,class:"sell-btn" %></div>
+              <td class="hobby-filed text-filed">
+                <div class="d-flex">
+                  <div class="company-department text-filed">
+                    <%= f.text_area :s_hobby_top ,class:"sell-btn" %>
+                    <div>第一位</div>
+                  </div>
+                  <div class="company-department text-filed">
+                    <%= f.text_area :s_hobby_medium ,class:"sell-btn" %>
+                    <div>第二位</div>
+                  </div>
+                </div>
+                  <div class="company-department text-filed">
+                    <%= f.text_area :s_hobby_row ,class:"sell-btn" %>
+                    <div>第三位</div>
+                  </div>
+              </td>
             </tr>
         </table>
 
