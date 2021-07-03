@@ -1,7 +1,37 @@
+header.background-image {
+  color: white;
+  background-image: url("header.jpg");
+}
+
+
+#header-title {
+  color: white;
+}
+
+/* #search-button {
+  background-image: url("search.png");
+} */
+
 .header {
-  height: 100px;
+  height: 120px;
 }
 
 .hidden {
   display: none;
+}
+
+#user-menu {
+  position: relative;
+  width: 70px;
+  height: 25px;
+}
+#pull-down {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+}
+a.pull-down-list {
+  color: white;
+}
+span:hover {
+  opacity: 0.7;
 }
