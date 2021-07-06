@@ -1,0 +1,14 @@
+
+h3.aside-menu {
+  background: black;
+  color: white;
+}
+.main-background {
+  background-color: white;
+}
+.side-menu a {
+  color: black;
+}
+.aside-menu-detail:hover {
+  opacity: 0.7;
+}

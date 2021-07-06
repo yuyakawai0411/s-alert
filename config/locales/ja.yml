@@ -23,6 +23,6 @@ ja:
         s_birth_day: 誕生日
       record:
         date: 日付
-        time_id: 時間
+        phone_time_id: 時間
         expression_id: 感情
-        call_id: 着信有無
+        phone_call_id: 着信有無

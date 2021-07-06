@@ -12,9 +12,9 @@ class Record < ApplicationRecord
   validates :date,  presence: true
 
   with_options numericality: { other_than: 0 } do
-    validates :time_id
+    validates :phone_time_id
     validates :expression_id
-    validates :call_id
+    validates :phone_call_id
   end
 
 end

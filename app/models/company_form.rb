@@ -10,5 +10,4 @@ class CompanyForm < ActiveHash::Base
 
   include ActiveHash::Associations
   has_many :users
-  has_many :cards
 end

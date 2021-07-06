@@ -4,15 +4,6 @@ window.addEventListener('load', function(){
     const pullDownParentsCard = document.getElementById("card-pull-down")
     const pullDownButtonRecord = document.getElementById("record-edit-menu")
     const pullDownParentsRecord = document.getElementById("record-pull-down")
-
-
-    pullDownButtonCard.addEventListener('mouseover', function(){
-      this.setAttribute("style", "background-color:#FFBEDA;")
-    });
-  
-    pullDownButtonCard.addEventListener('mouseout', function(){
-      this.removeAttribute("style", "background-color:#FFBEDA;")
-    });
   
     pullDownButtonCard.addEventListener('click', function(){
       if (pullDownParentsCard.getAttribute("style") == "display:block;") {
@@ -20,14 +11,6 @@ window.addEventListener('load', function(){
       } else {
         pullDownParentsCard.setAttribute("style", "display:block;")
       }
-    });
-
-    pullDownButtonRecord.addEventListener('mouseover', function(){
-      this.setAttribute("style", "background-color:#FFBEDA;")
-    });
-  
-    pullDownButtonRecord.addEventListener('mouseout', function(){
-      this.removeAttribute("style", "background-color:#FFBEDA;")
     });
   
     pullDownButtonRecord.addEventListener('click', function(){

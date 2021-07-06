@@ -11,3 +11,17 @@ td.indispensable{
 td.text-filed{
   width: 300px;
 }
+
+.sell-btn-contents {
+  margin-left: 200px;
+} 
+
+
+
+span.indispensable-tag {
+  background-color: red;
+  color: white;
+  border: solid 1px black;
+  padding-left: 3px;
+  padding-right: 3px;
+}

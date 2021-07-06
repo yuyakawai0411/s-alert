@@ -3,3 +3,14 @@
   overflow-x: hidden;
   overflow-y: visible;
 }
+h4.graph-title {
+  text-align: center;
+}
+
+.bio-resim-baddate {
+  margin-left: 40px;
+}
+
+.phone-time-mode {
+  margin-left: 40px;
+}

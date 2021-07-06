@@ -1,6 +1,6 @@
 <div class="cards d-flex justify-content-between flex-wrap w-100">
   <% cards.each do |card| %>
-  <ul> 
+  <ul class="card-item"> 
   <%= link_to card_path(card.id) do %>
   <div class="card-list d-flex justify-content-between">
       
@@ -8,15 +8,15 @@
         <%# 氏名 %>
         <li class="card-name">
           <ul class="name-list">
-            <li class="name"><%= "#{card.s_first_name} #{card.s_last_name}" %></li>
-            <li class="kana"><%= "#{card.s_first_name_kana} #{card.s_last_name_kana}" %></li>
+            <li class="name"><%= "#{card.s_last_name} #{card.s_first_name}" %></li>
+            <li class="kana"><%= "#{card.s_last_name_kana} #{card.s_first_name_kana}" %></li>
           </ul>
         </li>
       
         <%# 会社・部署 %>
         <li class="card-company">
           <ul class="company-list">
-            <li class="company-name"><%= "#{card.s_company}#{card.s_company_form_id}" %></li>
+            <li class="company-name"><%= "#{card.s_company} #{card.s_company_form.form}" %></li>
             <li class="department"><%= card.s_department %></li>
           </ul>
         </li>

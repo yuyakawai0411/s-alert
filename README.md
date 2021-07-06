@@ -49,9 +49,9 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | date          | date       | null: false                    |
-| time_id       | integer    | null: false                    |
+| phone_time_id | integer    | null: false                    |
 | expression_id | integer    | null: false                    |
-| call_id       | integer    | null: false                    |
+| phone_call_id | integer    | null: false                    |
 | card          | references | null: false, foreign_key: true |
 
 ### Association

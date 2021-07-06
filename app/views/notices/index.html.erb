@@ -1,56 +1,68 @@
 <%= render "shared/header"%>
+<div class="main-background"> 
+  <div class="container">
+    <div class="main row">
 
-<div class="container">
-  <div class="main row">
-
-    <%# サイドメニュー %>
-    <div class="side-menu col-2">
-      <%= render "shared/side-menu" %>
-    </div>
-   
-   <div class="record col-10">
-      <article class="record-add">
-        <h1><%= "#{@user.first_name}さんタイマー"%></h1>
-        <%# 入力フォーム %>
-        <%= form_with model: [@user, @notice], local: true do |f| %> 
-          <%= render 'shared/error_messages', model: f.object %>
-          <table>
-            <tr class="notice-date d-flex align-items-start">
-              <td class="date-tag tag">日付</td>
-              <td class="indispensable">必須</td>
-              <td class="date-filed text-filed">
-                <%= f.date_field :notice_date %> 
-              </td>
-            </tr>
-            <tr class="notice-description d-flex align-items-start">
-              <td class="date-tag tag">内容</td>
-              <td class="indispensable"></td>
-              <td class="date-filed text-filed">
-                <%= f.text_area :description %> 
-              </td>
-            </tr>
-          <table>
-          <%= f.submit "作成", class:"sell-btn" %>
-        <% end %>
-      </article>
-
-      <article class="record-list">
-        <h1><%= "#{@user.first_name}さんタイマー登録"%></h1>
-        <%# 着信履歴一覧表示 %>
-        <table>
-          <tr>
-            <td class="record-list-date record-column">日付</td>
-            <td class="record-list-date record-column">内容</td>
-          </tr>
-          <% @notices.each do |notice| %>
-            <tr>
-              <td class="record-list-date record-column"><%= notice.notice_date %></td>
-              <td class="record-list-date record-column"><%= notice.description %></td>
-              <td class="record-list-delete record-column"><%= link_to "削除", user_notice_path(@user.id, notice.id), method: :delete %></td>
-            </tr>
+      <%# サイドメニュー %>
+      <div class="side-menu col-2">
+        <%= render "shared/side-menu" %>
+      </div>
+    
+    <div class="record col-10">
+        <article class="record-add">
+          <h1 class="share-cards-title"><%= "#{@user.last_name}さん通知登録"%></h1>
+          <%# 入力フォーム %>
+          <%= form_with model: [@user, @notice], local: true do |f| %> 
+            <%= render 'shared/error_messages', model: f.object %>
+            <table>
+              <tr class="notice-date d-flex align-items-start">
+                <td class="date-tag tag">日付</td>
+                <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+                <td class="date-filed text-filed">
+                  <%= f.date_field :notice_date %> 
+                </td>
+              </tr>
+              <tr class="notice-description d-flex align-items-start">
+                <td class="date-tag tag">内容</td>
+                <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+                <td class="date-filed text-filed">
+                  <%= f.text_area :description %> 
+                </td>
+              </tr>
+              <tr class="notice-description d-flex align-items-start">
+                <td class="date-tag tag">会話ネタ</td>
+                <td class="indispensable"></td>
+                <td class="date-filed text-filed">
+                  <%= f.text_area :topic %> 
+                </td>
+              </tr>
+            <table>
+            <div class="sell-btn-contents">
+              <%= f.submit "作成", class:"btn btn-dark" %>
+            </div>
           <% end %>
-        </table>
-      </article>
+        </article>
+
+        <article class="record-list">
+          <h1 class="share-cards-title"><%= "#{@user.last_name}さん通知一覧"%></h1>
+          <%# 着信履歴一覧表示 %>
+          <table>
+            <tr class="record-description">
+                <td class="record-list-date record-column">日付</td>
+                <td class="record-list-date record-column">内容</td>
+                <td class="record-list-date record-column">会話ネタ</td>
+            </tr>
+            <% @notices.each do |notice| %>
+              <tr>
+                <td class="record-list-date record-column"><%= notice.notice_date %></td>
+                <td class="record-list-date record-column"><%= notice.description %></td>
+                <td class="record-list-date record-column"><%= notice.topic %></td>
+                <td class="record-list-delete record-column"><%= link_to "削除", user_notice_path(@user.id, notice.id), method: :delete %></td>
+              </tr>
+            <% end %>
+          </table>
+        </article>
+      </div>
     </div>
   </div>
 </div>

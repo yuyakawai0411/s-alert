@@ -1,13 +1,14 @@
 <aside>
 
-<%# カード投稿機能 %>
+  <%# カード投稿機能 %>
   <div class="card_create">
-    <h2>CRAD</h4>
+    <h1 class="aside-title">MENU</h1>
+    <h3 class="aside-menu">名刺</h3>
     <ul class="card-new-create">
-      <li><%= link_to "新規作成", new_card_path %></li>
+      <li ><%= link_to "新規作成", new_card_path, class: "aside-menu-detail" %></li>
       
       <div class="card-edit", id="card-edit">
-      <li id="card-edit-menu">編集</li>
+      <li id="card-edit-menu", class="aside-menu-detail">編集</li>
         <% if user_signed_in? || @user_cards != nil %>
           <ul class="hidden", id="card-pull-down">
             <% @user_cards.each do |user_card| %>
@@ -19,30 +20,30 @@
     </ul>
   </div>
 
-<%# レコード投稿機能 %>
+  <%# レコード投稿機能 %>
   <div class="record_create">
-    <h2>RECORD</h2>
+    <h3 class="aside-menu">通話履歴</h3>
     <ul class="record-edit">
-      <li id="record-edit-menu">作成&編集</p>
+      <li id="record-edit-menu", class="aside-menu-detail">作成&編集</li>
         <% if user_signed_in? || @user_cards != nil %>
           <ul class="hidden", id="record-pull-down">
             <% @user_cards.each do |user_card| %>
-              <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id) %></li>
+              <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id), class: "aside-menu-detail" %></li>
             <% end %>
           </ul>
         <% end %>
     </ul>
   </div>
 
-<%# ユーザー詳細機能 %>
+  <%# ユーザー詳細機能 %>
   <div class="user-details">
-    <h2>USER</h2>
+    <h3 class="aside-menu">ユーザー</h3>
     <% if user_signed_in? %>
      <ul class="user-info">
-        <li><%= link_to "ユーザー詳細", user_path(current_user.id) %></li> 
-        <li><%= link_to "タイマー", user_notices_path(current_user.id) %></li>
+        <li><%= link_to "詳細", user_path(current_user.id), class: "aside-menu-detail" %></li> 
+        <li><%= link_to "メール通知", user_notices_path(current_user.id), class:"aside-menu-detail" %></li>
       </ul>
     <% end %>
   </div>
 
-  </aside>
+</aside>

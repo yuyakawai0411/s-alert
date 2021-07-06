@@ -22,7 +22,7 @@ end
 
 private
 def notice_params
-  params.require(:notice).permit(:notice_date, :description).merge(user_id: current_user.id)
+  params.require(:notice).permit(:notice_date, :description, :topic).merge(user_id: current_user.id)
 end
 
 def side_menu
