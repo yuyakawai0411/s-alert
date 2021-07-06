@@ -22,6 +22,24 @@
 
 ul {
   list-style: none;
+  margin-left: 0;
+  padding-left: 0;
 }
+
+header.background-image {
+  color: white;
+  background-image: image-url("header.jpg");
+  width: 100vw;
+}
+
+footer {
+  background-image: image-url("footer.jpg");
+  width: 100vw;
+  color: white;
+  height: 50px;
+  bottom: 0; 
+  margin-top: 5px;
+}
+
 
 
