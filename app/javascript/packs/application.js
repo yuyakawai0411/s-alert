@@ -10,6 +10,7 @@ require("channels")
 require('../preview')
 require('../header')
 require('../card_record')
+// require('../side_menu')
 
 // require("bootstrap")
 import "chartkick/chart.js"

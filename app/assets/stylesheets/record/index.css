@@ -1,3 +1,20 @@
 td.record-column {
   width: 15%;
 }
+
+.record-description {
+  border-bottom: solid 1px black;
+}
+
+.main-background {
+  padding-top: 5px;
+}
+
+article.record-list {
+  padding-top: 30px;
+}
+
+section.record-list {
+  padding-top: 30px;
+}
+

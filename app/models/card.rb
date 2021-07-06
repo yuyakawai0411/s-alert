@@ -9,7 +9,7 @@ class Card < ApplicationRecord
   has_many :comments
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :company_form
+  belongs_to :s_company_form
 
   #バリデーション
   validates :s_company_form_id, numericality: { other_than: 0 }

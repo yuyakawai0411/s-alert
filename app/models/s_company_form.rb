@@ -1,4 +1,4 @@
-class CompanyForm < ActiveHash::Base
+class SCompanyForm < ActiveHash::Base
   self.data = [
     { id: 0,  form: '---' },
     { id: 1,  form: '株式会社' },
@@ -9,5 +9,5 @@ class CompanyForm < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :users
+  has_many :cards
 end

@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_045451) do
     t.string "s_last_name_kana", null: false
     t.string "s_first_name_kana", null: false
     t.string "s_company", null: false
-    t.string "s_company_form_id", null: false
+    t.integer "s_company_form_id", null: false
     t.string "s_department", null: false
     t.string "s_phone_number", null: false
     t.date "s_birth_day", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_045451) do
   create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "notice_date"
     t.string "description"
+    t.string "topic"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -82,9 +83,9 @@ ActiveRecord::Schema.define(version: 2021_07_02_045451) do
 
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date", null: false
-    t.integer "time_id", null: false
+    t.integer "phone_time_id", null: false
     t.integer "expression_id", null: false
-    t.integer "call_id", null: false
+    t.integer "phone_call_id", null: false
     t.bigint "card_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

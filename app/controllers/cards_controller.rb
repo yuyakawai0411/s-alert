@@ -27,10 +27,10 @@ class CardsController < ApplicationController
 
   def show
     today = Date.today
-    records = @card.records.where(call_id: 1)
+    records = @card.records.where(phone_call_id: 1)
     
     # 着信時間グラフ及び最頻値の表示
-    @phone_time = records.group(:time_id).count
+    @phone_time = records.group(:phone_time_id).count
     @phone_time_mode = @phone_time.max_by(2){|x,v| (v - 0).abs}
     if @phone_time.length < 2
       @phone_time = { 7=>0, 18 => 0 }

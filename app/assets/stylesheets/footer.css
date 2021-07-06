@@ -1,5 +1,8 @@
 footer {
   background-image: url("footer.jpg");
+  width: 100vw;
   color: white;
-  height: 68px;
+  height: 50px;
+  bottom: 0; 
+  margin-top: 5px;
 }

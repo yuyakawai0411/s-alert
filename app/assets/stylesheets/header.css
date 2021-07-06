@@ -1,6 +1,7 @@
 header.background-image {
   color: white;
   background-image: url("header.jpg");
+  width: 100vw;
 }
 
 
@@ -27,7 +28,7 @@ header.background-image {
 }
 #pull-down {
   position: absolute;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.7);
 }
 a.pull-down-list {
   color: white;

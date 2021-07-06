@@ -1,148 +1,169 @@
 <%= render "shared/header"%>
+<div class="main-background"> 
+  <div class="container">
+    <div class="main row">
+      <div class="side-menu col-2">
+        <%= render "shared/side-menu" %>
+      </div>
+        <div class="user-profile col-10">
+          <%# プロフィール詳細 %>
+          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さんのプロフィール"%></h1>
 
-<div class="container">
-  <div class="main row">
-    <div class="side-menu col-2">
-      <%= render "shared/side-menu" %>
-    </div>
-      <div class="user-profile col-10">
-        <%# プロフィール詳細 %>
-        <h1 class="profile-tile"><%= "#{@card.s_first_name}さんのプロフィール"%></h1>
-
-        <div class="profile d-flex">
-          <ul>
-          <div class="card-list d-flex justify-content-between">
-            <div class="card-right">
-            <%# 氏名 %>
-              <li class="card-name">氏名
-                <ul class="name-list">
-                  <li class="name"><%= "#{@card.s_first_name} #{@card.s_last_name}" %></li>
-                  <li class="kana"><%= "#{@card.s_first_name_kana} #{@card.s_last_name_kana}" %></li>
+          <div class="profile d-flex">
+            <ul>
+            <div class="card-list d-flex justify-content-between">
+              <div class="card-right">
+              <%# 氏名 %>
+                <li class="card-name">
+                  <ul class="name-list">
+                    <li class="name"><%= "#{@card.s_last_name} #{@card.s_first_name}" %></li>
+                    <li class="kana"><%= "#{@card.s_last_name_kana} #{@card.s_first_name_kana}" %></li>
+                  </ul>
+                </li>
+            
+              <%# 会社・部署 %>
+              <li class="card-company">
+                <ul class="company-list">
+                  <li class="company-name"><%= "#{@card.s_company} #{@card.s_company_form.form}"%></li>
+                  <li class="department"><%= @card.s_department %></li>
                 </ul>
               </li>
-          
-            <%# 会社・部署 %>
-            <li class="card-company">会社/部署
-              <ul class="company-list">
-                <li class="company-name"><%= "#{@card.s_company}#{@card.s_company_form_id}"%></li>
-                <li class="department"><%= @card.s_department %></li>
-              </ul>
-            </li>
-            
-            <%# 電話番号 %>
-            <li class="card-phone">
-              <%= @card.s_phone_number%>
-            </li>
               
+              <%# 電話番号 %>
+              <li class="card-phone">
+                <%= @card.s_phone_number%>
+              </li>
+                
+              </div>
+
+              <div class="card-left">
+              <%# 人物画像 %>
+              <li calss="card-image">
+                <% if @card.image.attached? %>
+                  <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
+                <% else %>
+                  <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
+                <% end %>
+              </li>
+              </div>
+
+            </div>
+            </ul>
+
+            <div class="bio-resim-baddate">
+              <p class="name">不安定日</p>
+              <p><%= @bad_date[1][0] %></p>
+              <p><%= @bad_date[0][0] %></p>
             </div>
 
-            <div class="card-left">
-            <%# 人物画像 %>
-            <li calss="card-image">
-              <% if @card.image.attached? %>
-                <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
-              <% else %>
-                <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
+            <div class="phone-time-mode">
+              <p class="name">通話時間最頻値</p>
+              <p><%= @phone_time_mode[0][0] %></p>
+              <p><%= @phone_time_mode[1][0] %></p>
+            </div>      
+          </div>
+  
+
+          <section class="s-bio-risum record-list">
+            <h2><%= "感情の起伏"%></h2>
+            <div class="d-flex justify-content-between">
+              <div class="bio-theoretical">
+                <h4 class="graph-title">バイオリズム理論値</h4>
+                <%= line_chart @bio_reism, width: "400px", height: "200px" %>
+              </div>
+              <div class="my-measured">
+                <h4 class="graph-title">主観実測値</h4>
+                <%= line_chart @expression, width: "400px", height: "200px" %>
+              </div>
+            </div>
+            <ul class="graph-detail">
+              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。1に近いほど機嫌がよく、0に近いときは不安定になります。</li>
+              <li>主観実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。</li>
+            </ul>
+          </section>
+
+          <section class="s-phone-most record-list">
+            <h2><%= "通話頻度"%></h2>
+            <div class="d-flex justify-content-between">
+              <div class="phone-time">
+                <h4 class="graph-title">通話時間最頻値</h4>
+                <%= column_chart @phone_time, width: "400px", height: "200px" %>
+              </div>
+              <div class="phone-date">
+                <h4 class="graph-title">通話日付最頻値</h4>
+                <%= column_chart @phone_date, width: "400px", height: "200px" %>
+              </div>
+            </div>
+            <ul class="graph-detail">
+              <li>通話時間最頻値は、通話履歴をもとに、通話頻度が多い時間を表示しています。</li>
+              <li>通話日付最頻値は、通話履歴をもとに、通話頻度が多い日時を表示しています。</li>
+            </ul>
+          </section>
+
+          <section class="record-list">
+            <h2><%= "会話のネタ"%></h2>
+              <div class="interest row">
+                <div class="top-list col-5">
+                  <h4>趣味ランキング</h4>
+                  <ol>
+                    <% if @card.s_hobby_top.nil? %>
+                      <li>1.登録されていません</li>
+                    <% else %>
+                      <li><%= "1.#{@card.s_hobby_top}" %></li>
+                    <% end %>
+                    <% if @card.s_hobby_medium.nil? %>
+                      <li>2.登録されていません</li>
+                    <% else %>
+                      <li><%= "2.#{@card.s_hobby_medium}" %></li>
+                    <% end %>
+                    <% if @card.s_hobby_row.nil? %>
+                      <li>3.登録されていません</li>
+                    <% else %>
+                      <li><%= "3.#{@card.s_hobby_row}" %></li>
+                    <% end %>
+                  </ol>
+                  <% if user_signed_in? %>
+                    <%= form_with(model: [@card, @comment], local: true) do |f| %>
+                    <div class="comment-form d-flex align-items-center">
+                      <div><%= f.text_area :text, placeholder: "コメントする", rows: "2" %></div>
+                      <div><%= f.submit "送信" %></div>
+                    </div>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="comment-list col-7">
+                  <h4>コメント一覧</h4>
+                  <% @comments.each do |comment| %>
+                    <table>
+                      <tr>
+                        <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
+                        <td><%= comment.text %></td>
+                        <td><%= comment.created_at %></td>
+                      </tr>
+                    </table>
+                  <% end %>
+                </div>
+              </div>
+          </section>
+
+          <div>
+            <%# ユーザー別表示分岐 %>
+            <% if user_signed_in? %>
+              <% if @card.user_id == current_user.id %>
+                <div class="card-ditail-edit">
+                  <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %>
+                  <%= link_to "削除", card_path(@card.id), method: :delete, class: "btn btn-primary" %>
+                </div>
               <% end %>
-            </li>
-            </div>
-
-          </div>
-          </ul>
-
-          <div class="bio-resim-baddate">
-            バイオリズム不調日
-            <p><%= @bad_date[1][0] %></p>
-            <p><%= @bad_date[0][0] %></p>
-          </div>
-
-          <div class="phone-time-mode">
-            電話最頻値
-            <p><%= @phone_time_mode[0][0] %></p>
-            <p><%= @phone_time_mode[1][0] %></p>
-          </div>      
-        </div>
- 
-
-        <section class="s-bio-risum">
-          <h2><%= "#{@card.s_first_name}さんのバイオリズム"%></h2>
-          <div class="d-flex justify-content-between">
-            <%= line_chart @bio_reism, width: "400px", height: "200px" %>
-            <%= line_chart @expression, width: "400px", height: "200px" %>
-          </div>
-        </section>
-
-        <section class="s-phone-most">
-          <h2><%= "#{@card.s_first_name}さんの着信履歴"%></h2>
-          <div class="d-flex justify-content-between">
-            <%= column_chart @phone_time, width: "400px", height: "200px" %>
-            <%= column_chart @phone_date, width: "400px", height: "200px" %>
-          </div>
-        </section>
-
-        <section>
-          <h2><%= "#{@card.s_first_name}さんの趣味"%></h2>
-            <div class="interest row">
-              <div class="top-list col-5">
-                <h4>趣味ランキング</h4>
-                <ol>
-                  <% if @card.s_hobby_top.nil? %>
-                    <li>1.登録されていません</li>
-                  <% else %>
-                    <li><%= "1.#{@card.s_hobby_top}" %></li>
-                  <% end %>
-                  <% if @card.s_hobby_medium.nil? %>
-                    <li>2.登録されていません</li>
-                  <% else %>
-                    <li><%= "2.#{@card.s_hobby_medium}" %></li>
-                  <% end %>
-                  <% if @card.s_hobby_row.nil? %>
-                    <li>3.登録されていません</li>
-                  <% else %>
-                    <li><%= "3.#{@card.s_hobby_row}" %></li>
-                  <% end %>
-                </ol>
-                <% if user_signed_in? %>
-                  <%= form_with(model: [@card, @comment], local: true) do |f| %>
-                  <div class="comment-form d-flex align-items-center">
-                    <div><%= f.text_area :text, placeholder: "コメントする", rows: "2" %></div>
-                    <div><%= f.submit "送信" %></div>
-                  </div>
-                  <% end %>
-                <% end %>
-              </div>
-              <div class="comment-list col-7">
-                <h4>コメント一覧</h4>
-                <% @comments.each do |comment| %>
-                  <table>
-                    <tr>
-                      <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
-                      <td><%= comment.text %></td>
-                      <td><%= comment.created_at %></td>
-                    </tr>
-                  </table>
-                <% end %>
-              </div>
-            </div>
-        </section>
-
-        <div>
-          <%# ユーザー別表示分岐 %>
-          <% if user_signed_in? %>
-            <% if @card.user_id == current_user.id %>
-              <div class="card-ditail-edit">
-                <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %>
-                <%= link_to "削除", card_path(@card.id), method: :delete, class: "btn btn-primary" %>
-              </div>
             <% end %>
-          <% end %>
-          <%# 着信履歴登録 %>
-          <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %>
-          <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
+            <%# 着信履歴登録 %>
+            <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %>
+            <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
+
+          </div>
 
         </div>
-
-      </div>
+    </div>
   </div>
 </div>
-<%= render "shared/footer" %>
+  <%= render "shared/footer" %>

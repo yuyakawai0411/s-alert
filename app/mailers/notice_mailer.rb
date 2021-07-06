@@ -1,9 +1,10 @@
 class NoticeMailer < ApplicationMailer
   default from: "yasuo.hoklo.kappa@gmail.com"
 
-  def send_mail(email,notice_date,description,user_name)
+  def send_mail(email,notice_date,description,topic,user_name)
     puts 'email sending...'
     @description = description
+    @topic = topic
     @user = user_name
     mail(
       to:       email,
@@ -19,8 +20,9 @@ class NoticeMailer < ApplicationMailer
         email = notice.user.email
         notice_date = notice.notice_date
         description = notice.description
+        topic = notice.topic
         user_name = notice.user.last_name
-        NoticeMailer.send_mail(email,notice_date,description,user_name).deliver_now
+        NoticeMailer.send_mail(email,notice_date,description,topic,user_name).deliver_now
       end
     end
   end

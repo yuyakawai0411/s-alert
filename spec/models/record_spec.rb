@@ -23,7 +23,7 @@ RSpec.describe Record, type: :model do
       end
 
       it 'phnoe_time_idが空では登録できない' do
-        @record.time_id = 0
+        @record.phone_time_id = 0
         @record.valid?
         expect(@record.errors.full_messages).to include "時間は0以外の値にしてください"
       end
@@ -34,8 +34,8 @@ RSpec.describe Record, type: :model do
         expect(@record.errors.full_messages).to include "感情は0以外の値にしてください"
       end
 
-      it 'call_idが空では登録できない' do
-        @record.call_id = 0
+      it 'phoen_call_idが空では登録できない' do
+        @record.phone_call_id = 0
         @record.valid?
         expect(@record.errors.full_messages).to include "着信有無は0以外の値にしてください"
       end

@@ -1,16 +1,15 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :set_card, only: [:index, :create, :destroy]
   before_action :move_to_root, only: [:create, :destroy]
   before_action :side_menu, only: [:index]
 
   def index
-    @card = Card.find(params[:card_id])
     @record = Record.new()
     @records = Record.order(date: :DESC)
   end
 
   def create
-    @card = Card.find(params[:card_id])
     @record = Record.new(record_params)
     @record.save
     redirect_to action: "index" 
@@ -26,7 +25,11 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record).permit(:date, :time_id, :expression_id, :call_id).merge(card_id: params[:card_id])
+    params.require(:record).permit(:date, :phone_time_id, :expression_id, :phone_call_id).merge(card_id: params[:card_id])
+  end
+
+  def set_card
+    @card = Card.find(params[:card_id])
   end
 
   def move_to_root
