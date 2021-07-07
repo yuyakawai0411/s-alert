@@ -10,7 +10,7 @@
       <div class="search col-5">
           <% if user_signed_in? %>
             <%= form_with(url: search_cards_path, local: true, method: :get, class: "search-form") do |form| %>
-              <%= form.text_field :keyword, placeholder: "カードを検索", class: "btn-search" %>
+              <%= form.text_field :keyword, placeholder: "名刺を検索", class: "btn-search" %>
               <%= form.submit "検索",id: "search-button" %>
             <% end %>
           <% end %>
