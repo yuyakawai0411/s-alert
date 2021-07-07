@@ -34,7 +34,7 @@ class Card < ApplicationRecord
 
   def self.search(search)
     if search != ""
-      Card.where("s_last_name LIKE(?) OR s_first_name LIKE(?) OR s_company LIKE(?) OR s_department LIKE(?)","%#{search}%","%#{search}%","%#{search}%","%#{search}%")
+      Card.where("s_last_name LIKE(?) OR s_first_name LIKE(?) OR s_company LIKE(?) OR s_department LIKE(?) OR s_last_name_kana LIKE(?) OR s_first_name_kana LIKE(?)" ,"%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%")
     else
       Card.order('created_at DESC')
     end

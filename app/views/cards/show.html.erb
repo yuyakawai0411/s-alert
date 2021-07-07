@@ -69,16 +69,16 @@
             <div class="d-flex justify-content-between">
               <div class="bio-theoretical">
                 <h4 class="graph-title">バイオリズム理論値</h4>
-                <%= line_chart @bio_reism, width: "400px", height: "200px" %>
+                <%= line_chart @bio_reism, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day %>
               </div>
               <div class="my-measured">
                 <h4 class="graph-title">主観実測値</h4>
-                <%= line_chart @expression, width: "400px", height: "200px" %>
+                <%= line_chart @expression, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today %>
               </div>
             </div>
             <ul class="graph-detail">
               <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。1に近いほど機嫌がよく、0に近いときは不安定になります。</li>
-              <li>主観実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。</li>
+              <li>主観実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。数値が高いほど機嫌がよくなります。</li>
             </ul>
           </section>
 
@@ -87,16 +87,16 @@
             <div class="d-flex justify-content-between">
               <div class="phone-time">
                 <h4 class="graph-title">通話時間最頻値</h4>
-                <%= column_chart @phone_time, width: "400px", height: "200px" %>
+                <%= column_chart @phone_time, width: "430px", height: "220px", xtitle: "時間", ytitle: "回数" %>
               </div>
               <div class="phone-date">
-                <h4 class="graph-title">通話日付最頻値</h4>
-                <%= column_chart @phone_date, width: "400px", height: "200px" %>
+                <h4 class="graph-title">通話曜日最頻値</h4>
+                <%= column_chart @phone_weeks, width: "430px", height: "220px", xtitle: "曜日", ytitle: "回数" %>
               </div>
             </div>
             <ul class="graph-detail">
-              <li>通話時間最頻値は、通話履歴をもとに、通話頻度が多い時間を表示しています。</li>
-              <li>通話日付最頻値は、通話履歴をもとに、通話頻度が多い日時を表示しています。</li>
+              <li>通話時間最頻値は、通話履歴をもとに、過去に通話があった時間を表示しています。</li>
+              <li>通話曜日最頻値は、通話履歴をもとに、過去に通話があった曜日を表示しています。</li>
             </ul>
           </section>
 

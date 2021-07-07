@@ -1,12 +1,6 @@
 class PhoneTime < ActiveHash::Base
   self.data = [
     { id: 0,  time: '---' },
-    { id: 1,  time: '1:00' },
-    { id: 2,  time: '2:00' },
-    { id: 3,  time: '3:00' },
-    { id: 4,  time: '4:00' },
-    { id: 5,  time: '5:00' },
-    { id: 6,  time: '6:00' },
     { id: 7,  time: '7:00' },
     { id: 8,  time: '8:00' },
     { id: 9,  time: '9:00' },
@@ -23,8 +17,6 @@ class PhoneTime < ActiveHash::Base
     { id: 20,  time: '20:00' },
     { id: 21,  time: '21:00' },
     { id: 22,  time: '22:00' },
-    { id: 23,  time: '23:00' },
-    { id: 24,  time: '24:00' },
   ]
 
   include ActiveHash::Associations

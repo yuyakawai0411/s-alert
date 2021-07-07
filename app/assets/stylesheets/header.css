@@ -31,3 +31,7 @@ a.pull-down-list {
 span:hover {
   opacity: 0.7;
 }
+
+.btn-search {
+  width: 220px;
+}

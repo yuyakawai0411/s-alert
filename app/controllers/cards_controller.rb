@@ -27,32 +27,55 @@ class CardsController < ApplicationController
 
   def show
     today = Date.today
+    @today = Date.today
+    @prev15_day = today.prev_day(15)
+    @next15_day = today.next_day(15)
+
+
     records = @card.records.where(phone_call_id: 1)
     
     # 着信時間グラフ及び最頻値の表示
     @phone_time = records.group(:phone_time_id).count
+    @phone_time = @phone_time.map{|k,v| [k.to_s + ":00" ,v]}.to_h
     @phone_time_mode = @phone_time.max_by(2){|x,v| (v - 0).abs}
-    if @phone_time.length < 2
-      @phone_time = { 7=>0, 18 => 0 }
-      @phone_time_mode = [["データが足りません",0],["データが足りません",0]]
-    end
+      if @phone_time.length < 2
+        @phone_time = { "7:00"=>0, "21:00" => 0 }
+        @phone_time_mode = [["データが足りません",0],["データが足りません",0]]
+      end
     # 着信日グラフの表示
-    @phone_date = records.where(
+    # @phone_date = records.where(
+    #   date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
+    #   today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
+    #   today.prev_day(4),today.prev_day(3),today.prev_day(2),today.prev_day(1),today.prev_day(0),
+    #   today.next_day(1),today.next_day(2),today.next_day(3),today.next_day(4),today.next_day(5),
+    #   today.next_day(6),today.next_day(7),today.next_day(8),today.next_day(9),today.next_day(10),today.next_day(11),
+    #   today.next_day(12),today.next_day(13),today.next_day(14),today.next_day(15)]
+    # ).group(:date).count
+    #   if @phone_date.length < 2
+    #     @phone_date = { today=>0, today.next_day(7)=> 0 }
+    #   end
+    #感情グラフの表示
+    @expression = records.where(
       date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
       today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
-      today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
-      today.prev_day(0),today.next_day(1),today.next_day(2),today.next_day(3),today.next_day(4),today.next_day(5),
-      today.next_day(6),today.next_day(7),today.next_day(8),today.next_day(9),today.next_day(10),today.next_day(11),
-      today.next_day(12),today.next_day(13),today.next_day(14),today.next_day(15)]
-    ).group(:date).count
-    if @phone_date.length < 2
-      @phone_date = { today=>0, today.next_day(7)=> 0 }
-    end
-    #感情グラフの表示
-    @expression = records.group(:date).sum(:expression_id)
-    if @expression.length < 2
-      @expression = { today=>0, today.next_day(7)=> 0 }
-    end
+      today.prev_day(4),today.prev_day(3),today.prev_day(2),today.prev_day(1),today.prev_day(0)]).group(:date).sum(:expression_id)
+      if @expression.length < 2
+        @expression = { today.prev_day(15)=>0, today=> 0 }
+      end
+
+    # 着信曜日グラフの表示
+    weeks = []
+    weeks_japanese = ["日", "月", "火", "水", "木", "金", "土"] 
+    phone_weeks = records.pluck(:date)
+      phone_weeks.each do |record|
+        week = record.wday
+        weeks << week
+      end
+      @phone_weeks = weeks.group_by{|x| x}.map{ |x,y| [x, y.count] }.sort.to_h
+      @phone_weeks = @phone_weeks.map{|k,v| [weeks_japanese[k],v]}.to_h
+      if @phone_weeks.length < 2
+        @phone_weeks = { "月"=>0, "日" => 0 }
+      end
   end
 
   def edit
