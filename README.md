@@ -1,7 +1,9 @@
-# S-alert
+# :necktie: S-alert
 
-# アプリケーション概要
-**デキるビジネスマン**
+# :page_facing_up: アプリケーション概要
+### **デキるビジネスマン**
+
+
 それは、いかなる時でも冷静に、相手の感情に応じて、適切な会話・アイスブレイクができる人だと思います。このアプリは、そんなデキるビジネスマンになるためのものです。
 相手の情報を名刺として登録することで、以下4つの機能が使えるようになります。
 - 感情を予測   
@@ -17,7 +19,7 @@
 ### メールで通知
 日付を選択し、予定内容と会話のネタを登録すると、指定した日時にメールでリマインドしてくれます。これにより、必要な時に予定内容と会話のネタを確認することができます。
 
-# デモ
+# :globe_with_meridians: デモ
 ## URL
 https://s-alert.herokuapp.com/
 ## テスト用アカウント
@@ -28,7 +30,7 @@ https://s-alert.herokuapp.com/
  - email:test@gmail.com 
  - PS:5732test
 
-# 目指した課題解決
+# :thought_balloon: 目指した課題解決
 このアプリはビジネスマンが上司や顧客と会話するときに抱える3つの課題を解決します。
 - 会話のネタが思いつかない 
 小ネタを挟んで場をなごませたいものの、いい会話のネタが思いつかない
@@ -37,7 +39,7 @@ https://s-alert.herokuapp.com/
 - 突発的な確認電話を予測したい
 スムーズに会話・回答できるよう、電話が来る前に事前準備したい
 
-# 利用方法
+# :computer:利用方法
 ## 名刺登録
 1. 名刺の投稿
 1. 名刺を編集/削除
@@ -64,12 +66,19 @@ https://s-alert.herokuapp.com/
 ## 名刺検索
 1. 名刺の検索
 
-# 機能一覧
+# :package: 機能一覧
+## ユーザー
 
-# 実装した機能についての画像
+| 機能                | 目的                                          | 詳細                                          |
+| ------------------ | --------------------------------------------- | -------------------------------------------------- |
+| ユーザー管理機能      | ユーザー登録した人がサービスを利用できるようにするため | ユーザー新規登録、ログインができる                       |
+| ユーザー詳細         | ユーザーの詳細を閲覧できるようにするため             | ユーザーのプロフィール、投稿一覧、お気に入り一覧が確認できる |
 
 
-# 実装予定の機能
+# :video_game: 実装した機能についての画像
+
+
+# :wrench: 実装予定の機能
 - [ ] EC２にデプロイ
 - [ ] Dockerの導入
 - [ ] CircleCI/CDの導入
@@ -78,7 +87,7 @@ https://s-alert.herokuapp.com/
 - [ ] スクレイピング機能を用いて、登録された会話のネタに関するニュースを自動収集
 
 
-# テーブル設計
+# :floppy_disk: テーブル設計
 
 ## users テーブル
 
@@ -99,6 +108,7 @@ https://s-alert.herokuapp.com/
 - has_many :cards
 - has_many :favorites
 - has_many :notices
+- has_many :comments
 
 
 ## cards テーブル
@@ -114,7 +124,9 @@ https://s-alert.herokuapp.com/
 | s_department      | string     | null: false                    |
 | s_phone_number    | string     | null: false                    |
 | s_birth_day       | date       | null: false                    |
-| s_hobby           | string     |                                |
+| s_hobby_top       | string     |                                |
+| s_hobby_medium    | string     |                                |
+| s_hobby_row       | string     |                                |
 | user              | references | null: false, foreign_key: true |
 
 ### Association
@@ -122,6 +134,7 @@ https://s-alert.herokuapp.com/
 - belongs_to :user
 - has_many :records
 - has_many :favorite
+- has_many :comments
 
 
 ## records テーブル
@@ -158,29 +171,59 @@ https://s-alert.herokuapp.com/
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | notice_date   | date       | null: false                    |
+| description   | string     | null: false                    |
+| topic         | string     |                                |
 | user          | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 
-# ローカルでの動作方法
+
+## comments テーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| text          | string     | null: false                    |
+| card          | references | null: false, foreign_key:true  |
+| user          | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user 
+- belongs_to :card
+
+# :paperclip: ローカルでの動作方法
 
 ## ダウンロードとインストールの手順
 1. このリポジトリのクローンを作成してください
+
+
 `$ git clone https://github.com/yuyakawai0411/s-alert.git`
 1. リポジトリに移動してください
+
+
 `$ cd s-alert`
 1. 依存関係をインストールしてください
+
+
 `$ bundle install`
 `$ yarn install`
 1. データベースを作成してください
+
+
 `$ rails db:create`
 1. データベースを実行してください
+
+
 `$ rails db:migrate`
 1. seedファイルを実行してください
+
+
 `$ rails db:seed`
 1. アプリケーションを実行してください
+
+
 `$ rails s`
 
 ## 開発環境
