@@ -21,6 +21,7 @@ class CardsController < ApplicationController
     if @card.save
       redirect_to root_path
     else
+      side_menu
       render :new
     end
   end
@@ -42,18 +43,7 @@ class CardsController < ApplicationController
         @phone_time = { "7:00"=>0, "21:00" => 0 }
         @phone_time_mode = [["データが足りません",0],["データが足りません",0]]
       end
-    # 着信日グラフの表示
-    # @phone_date = records.where(
-    #   date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
-    #   today.prev_day(10),today.prev_day(9),today.prev_day(8),today.prev_day(7),today.prev_day(6),today.prev_day(5),
-    #   today.prev_day(4),today.prev_day(3),today.prev_day(2),today.prev_day(1),today.prev_day(0),
-    #   today.next_day(1),today.next_day(2),today.next_day(3),today.next_day(4),today.next_day(5),
-    #   today.next_day(6),today.next_day(7),today.next_day(8),today.next_day(9),today.next_day(10),today.next_day(11),
-    #   today.next_day(12),today.next_day(13),today.next_day(14),today.next_day(15)]
-    # ).group(:date).count
-    #   if @phone_date.length < 2
-    #     @phone_date = { today=>0, today.next_day(7)=> 0 }
-    #   end
+
     #感情グラフの表示
     @expression = records.where(
       date: [today.prev_day(15),today.prev_day(14),today.prev_day(13),today.prev_day(12),today.prev_day(11),
@@ -87,6 +77,7 @@ class CardsController < ApplicationController
     if @card.update(card_params)  #card_paramsの中身が保存されるため、空白除去が効かない
       redirect_to card_path(@card.id)
     else
+      side_menu
       render :edit
     end
   end

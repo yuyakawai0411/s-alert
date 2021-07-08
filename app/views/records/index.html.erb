@@ -13,7 +13,7 @@
           <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴登録"%></h1>
           <%# 入力フォーム %>
           <%= form_with model: [@card, @record], local: true do |f| %> 
-            
+            <%= render 'shared/error_messages', model: f.object %>
             <table>
               <tr class="record-date d-flex align-items-start">
                 <td class="date-tag tag">日付</td>

@@ -11,8 +11,13 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.new(record_params)
-    @record.save
-    redirect_to action: "index" 
+    if @record.save
+      redirect_to action: "index" 
+    else
+      side_menu
+      @records = Record.order(date: :DESC)
+      render :index
+    end
   end
 
 
