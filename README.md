@@ -17,7 +17,7 @@
 ### 会話のネタを共有
 メッセージ機能を用いて、その人にあった会話のネタを共有できます。 
 ### メールで通知
-日付を選択し、予定内容と会話のネタを登録すると、指定した日時にメールでリマインドしてくれます。これにより、必要な時に予定内容と会話のネタを確認することができます。
+日付、予定内容、会話のネタを登録すると、指定した日付の朝9:00にメールでリマインドしてくれます。これにより、必要な時に予定内容と会話のネタを確認することができます。
 
 # :globe_with_meridians: デモ
 ## URL
@@ -37,44 +37,31 @@ https://s-alert.herokuapp.com/
 - スムーズに会話・回答できるよう、突発的な確認電話を予測したい
 
 # :computer:利用方法
-1. ユーザーの新規登録/ログイン
+1. **ユーザーの新規登録/ログイン**
   - 新規登録/ログインは、ヘッダーのLOGINをクリックすると選択できます。(*テストユーザーを使用する方はログインを選択してください)
   - ユーザーの詳細情報は、「トップページ→MENU→ユーザー→詳細をクリック」で確認できます。
-[![Image from Gyazo](https://i.gyazo.com/920ed82f4f69196ef6f50c408163c530.gif)](https://gyazo.com/920ed82f4f69196ef6f50c408163c530)
-[![Image from Gyazo](https://i.gyazo.com/fe466e9aaa17d8891f648ac491f7f15a.gif)](https://gyazo.com/fe466e9aaa17d8891f648ac491f7f15a)
 
-2. 名刺の新規投稿/編集/削除
+2. **名刺の新規投稿/編集/削除**
   - 名刺の新規投稿は、「トップページ→MENU→名刺→新規投稿をクリック」からできます。
   - 名刺の編集/削除は、「トップページ→MENU→名刺→編集→編集する名刺をクリック」からできます。(*自信が投稿した名刺のみ編集可能です)
   - 名刺の検索は、ヘッダーの検索窓に名前、会社名、部署名を入力するとできます。
-[![Image from Gyazo](https://i.gyazo.com/ede3ab4f6a03d77fc26ad18e8ed5447c.gif)](https://gyazo.com/ede3ab4f6a03d77fc26ad18e8ed5447c)
-[![Image from Gyazo](https://i.gyazo.com/cb7d14d6ddc9bfee5c0973b18e80d981.gif)](https://gyazo.com/cb7d14d6ddc9bfee5c0973b18e80d981)
 
-3. 感情予測の確認/投稿/削除
+3. **感情予測の確認/投稿/削除**
   - 感情予測の確認は、「トップページ→名刺をクリック→詳細ページに移動→感情の起伏」で確認できます。
   - 感情が特に不安定な日を、詳細ページの不安定日に表示しています。
   - 感情の投稿/削除を手動で登録する場合は、「通話履歴→作成&編集→追加する名刺をクリック」からできます。(*通話履歴がなく、感情のみを投稿する場合は「着信有無」の選択を「なし」にしてください)
-[![Image from Gyazo](https://i.gyazo.com/859b4896e028f9c532a1e411c7bae274.gif)](https://gyazo.com/859b4896e028f9c532a1e411c7bae274)
-[![Image from Gyazo](https://i.gyazo.com/4350feec4efe1737d97d328fb46cd7f6.gif)](https://gyazo.com/4350feec4efe1737d97d328fb46cd7f6)
 
-
-4. 連絡タイミング予測の確認/投稿/削除
+4. **連絡タイミング予測の確認/投稿/削除**
   - 連絡タイミング予想の確認は、「トップページ→名刺をクリック→詳細ページに移動→通話頻度」で確認できます。
   - 連絡が特に多かった時間を、詳細ページの通話時間頻度に表示しています。
   - 通話履歴の投稿/削除は、「通話履歴→作成&編集→投稿する名刺をクリック」からできます。
-[![Image from Gyazo](https://i.gyazo.com/d4beda5f4e367860d525470f74579682.gif)](https://gyazo.com/d4beda5f4e367860d525470f74579682)
-[![Image from Gyazo](https://i.gyazo.com/4350feec4efe1737d97d328fb46cd7f6.gif)](https://gyazo.com/4350feec4efe1737d97d328fb46cd7f6)
 
-
-5. 会話ネタの投稿
+5. **会話ネタの投稿**
   - 会話ネタの投稿は、「トップページ→名刺をクリック→詳細ページに移動→会話のネタ→コメント欄にコメントする」からできます。(*投稿は30日を経過すると自動だ削除されます)
   - 趣味ランキングTop3は、コメント一覧の情報をもとに「トップページ→MENU→名刺→編集→編集する名刺をクリック」から編集してください。
-[![Image from Gyazo](https://i.gyazo.com/0d7e96852daeda8506c19d7fec5657c3.gif)](https://gyazo.com/0d7e96852daeda8506c19d7fec5657c3)
 
-
-6. メール通知の登録/削除
+6. **メール通知の登録/削除**
   - メール通知の登録/削除は、「トップページ→MENU→ユーザー→メール通知→詳細ページに移動」からできます。
-[![Image from Gyazo](https://i.gyazo.com/74a4e53b64db653d25afd91ba64a355b.gif)](https://gyazo.com/74a4e53b64db653d25afd91ba64a355b)
 
 # :package: 機能一覧
 ## ユーザー
@@ -114,13 +101,32 @@ https://s-alert.herokuapp.com/
 
 ## メール通知
 
-| 機能         | 目的                                  | 詳細                                                       |
-| ----------- | ------------------------------------- | --------------------------------------------------------- |
-| メール通知機能 | ユーザーが設定した日付にメールで通知するため | 名刺毎にコメントの新規投稿ができる(30日経過すると自動で削除されます) |
+| 機能         | 目的                                  | 詳細                                             |
+| ----------- | ------------------------------------- | ----------------------------------------------- |
+| メール通知機能 | ユーザーが設定した日付にメールで通知するため | 日付を設定するとその日の朝9:00にメールで通知を受け取れる |
 
 
 # :video_game: 実装した機能についての画像
-
+## ユーザーの新規登録/ログイン
+[![Image from Gyazo](https://i.gyazo.com/2c16c1d882cbb5afa70827f28d06f300.gif)](https://gyazo.com/2c16c1d882cbb5afa70827f28d06f300)
+## 名刺の新規投稿/編集
+[![Image from Gyazo](https://i.gyazo.com/766ec814f149409bcbc20e0503144cc6.gif)](https://gyazo.com/766ec814f149409bcbc20e0503144cc6)
+## 感情予測と連絡タイミング予測のグラフ
+### 感情予想グラフ                                                                                                                         
+[![Image from Gyazo](https://i.gyazo.com/4656e089ca8e6de461da9459a53a8499.png)](https://gyazo.com/4656e089ca8e6de461da9459a53a8499) 
+### 連絡タイミング予想グラフ
+[![Image from Gyazo](https://i.gyazo.com/689a61d68f0cc0889d61d1023398e6cf.png)](https://gyazo.com/689a61d68f0cc0889d61d1023398e6cf)                
+## 感情及び通話履歴の投稿/削除
+[![Image from Gyazo](https://i.gyazo.com/e6c37ffe159ccb724e194211c8348218.gif)](https://gyazo.com/e6c37ffe159ccb724e194211c8348218)
+## 会話ネタの投稿
+[![Image from Gyazo](https://i.gyazo.com/8ebdc71eccffffab27e0e6a1ff425983.gif)](https://gyazo.com/8ebdc71eccffffab27e0e6a1ff425983)
+## メール通知の登録/削除
+[![Image from Gyazo](https://i.gyazo.com/c6ed44a3adad7b19b2975b319b127786.gif)](https://gyazo.com/c6ed44a3adad7b19b2975b319b127786)
+[![Image from Gyazo](https://i.gyazo.com/68875a2477d2537322f48a28d809db65.gif)](https://gyazo.com/68875a2477d2537322f48a28d809db65)
+## メールの文面
+[![Image from Gyazo](https://i.gyazo.com/9ed859205a708a6f87301477837ae02e.png)](https://gyazo.com/9ed859205a708a6f87301477837ae02e)
+## お気に入り登録
+[![Image from Gyazo](https://i.gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe.gif)](https://gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe)
 
 # :wrench: 実装予定の機能
 - [ ] EC２にデプロイ
