@@ -141,6 +141,17 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include "部署名を入力してください"
       end
 
+      it 'phone_numberが空では登録できない' do
+        @user.phone_number = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "電話番号を入力してください"
+      end
+
+      it 'birth_dayが空では登録できない' do
+        @user.birth_day = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include "誕生日を入力してください"
+      end
     end
   end
 
