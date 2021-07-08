@@ -17,6 +17,22 @@ RSpec.describe Card, type: :model do
        @card.image = nil
        expect(@card).to be_valid
       end
+
+      it 's_hobby_topがなくても登録できる' do 
+        @card.s_hobby_top = ""
+        expect(@card).to be_valid
+       end
+
+       it 's_hobby_mediumがなくても登録できる' do 
+        @card.s_hobby_medium = ""
+        expect(@card).to be_valid
+       end
+
+       it 's_hobby_rowがなくても登録できる' do 
+        @card.s_hobby_row = ""
+        expect(@card).to be_valid
+       end
+
     end
 
     context 'カード登録できないとき' do
@@ -90,24 +106,6 @@ RSpec.describe Card, type: :model do
         @card.s_phone_number = ''
         @card.valid?
         expect(@card.errors.full_messages).to include "携帯電話番号を入力してください"
-      end
-
-      it 's_phone_numberが12桁以上だと登録できない' do
-        @card.s_phone_number = '111111111111'
-        @card.valid?
-        expect(@card.errors.full_messages).to include "携帯電話番号は有効な番号ではありません"
-      end
-
-      it 's_phone_numberが9桁以下だと登録できない' do
-        @card.s_phone_number = '111111111'
-        @card.valid?
-        expect(@card.errors.full_messages).to include "携帯電話番号は有効な番号ではありません"
-      end
-
-      it 's_phone_numberに半角数字以外が含まれていると登録できない' do
-        @card.s_phone_number = 'a111111111'
-        @card.valid?
-        expect(@card.errors.full_messages).to include "携帯電話番号は有効な番号ではありません"
       end
 
       it 's_birth_dayが空だと登録できない' do

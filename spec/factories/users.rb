@@ -11,5 +11,6 @@ FactoryBot.define do
     company               { Faker::Company.name }
     company_form_id       { Faker::Number.between(from: 1, to: 5) }
     department            { Faker::Company.profession }
+    
   end
 end

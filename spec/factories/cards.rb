@@ -10,6 +10,9 @@ FactoryBot.define do
     s_department            { Faker::Company.profession }
     s_phone_number          { Faker::Number.between(from: 0o000000000, to: 99_999_999_999) }
     s_birth_day             { Faker::Date.between(from: '1930-01-01', to: '2016-12-31') }
+    s_hobby_top             { "ゴルフ" }
+    s_hobby_medium          { "水泳" }
+    s_hobby_row             { "漫画鑑賞" }
     association :user
 
 
