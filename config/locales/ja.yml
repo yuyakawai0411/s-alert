@@ -31,3 +31,5 @@ ja:
       notice:
         notice_date: 日付
         description: 内容
+      comment:
+        text: テキスト
