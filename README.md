@@ -122,7 +122,6 @@ https://s-alert.herokuapp.com/
 [![Image from Gyazo](https://i.gyazo.com/8ebdc71eccffffab27e0e6a1ff425983.gif)](https://gyazo.com/8ebdc71eccffffab27e0e6a1ff425983)
 ## メール通知の登録/削除
 [![Image from Gyazo](https://i.gyazo.com/c6ed44a3adad7b19b2975b319b127786.gif)](https://gyazo.com/c6ed44a3adad7b19b2975b319b127786)
-[![Image from Gyazo](https://i.gyazo.com/68875a2477d2537322f48a28d809db65.gif)](https://gyazo.com/68875a2477d2537322f48a28d809db65)
 ## メールの文面
 [![Image from Gyazo](https://i.gyazo.com/9ed859205a708a6f87301477837ae02e.png)](https://gyazo.com/9ed859205a708a6f87301477837ae02e)
 ## お気に入り登録
