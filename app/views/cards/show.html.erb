@@ -1,5 +1,5 @@
 <%= render "shared/header"%>
-<div class="main-background"> 
+<div class="main-background mb-5"> 
   <div class="container">
     <div class="main row">
       <div class="side-menu col-2">
@@ -138,7 +138,7 @@
                       <tr>
                         <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
                         <td><%= comment.text %></td>
-                        <td><%= comment.created_at %></td>
+                        <%# <td><%= comment.created_at %></td> 
                       </tr>
                     </table>
                   <% end %>
@@ -146,21 +146,18 @@
               </div>
           </section>
 
-          <div>
-            <%# ユーザー別表示分岐 %>
+          <%# <div>
             <% if user_signed_in? %>
-              <% if @card.user_id == current_user.id %>
-                <div class="card-ditail-edit">
-                  <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %>
-                  <%= link_to "削除", card_path(@card.id), method: :delete, class: "btn btn-primary" %>
-                </div>
-              <% end %>
-            <% end %>
-            <%# 着信履歴登録 %>
-            <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %>
-            <%# <%= link_to "着信履歴編集", edit_card_record_path(@card.id), class: "btn btn-primary" %>
-
-          </div>
+              <%# <% if @card.user_id == current_user.id %>
+                <%# <div class="card-ditail-edit"> %>
+                  <%# <%= link_to "編集", edit_card_path(@card.id), class: "btn btn-primary" %> 
+                  <%# <%= link_to "削除", card_path(@card.id), method: :delete, class: "btn btn-primary" %> 
+                <%# </div> %>
+              <%# <% end %> 
+            <%# <% end %> 
+    
+            <%# <%= link_to "着信履歴追加", card_records_path(@card.id), class: "btn btn-primary" %> 
+          <%# </div> %>
 
         </div>
     </div>
