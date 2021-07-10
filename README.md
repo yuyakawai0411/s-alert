@@ -25,7 +25,7 @@ https://s-alert.herokuapp.com/
 ## テスト用アカウント
 - BASIC 認証
   - ID:yuya
-  - PS:5732 
+  - PS:573246 
 - テストユーザー
   - email:test@gmail.com 
   - PS:5732test
