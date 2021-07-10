@@ -9,6 +9,8 @@ ja:
         company: 会社名
         company_form_id: 会社形態
         department: 部署名
+        phone_number: 電話番号
+        birth_day: 誕生日
       card:
         s_last_name: テキスト
         s_first_name: 画像
@@ -26,3 +28,8 @@ ja:
         phone_time_id: 時間
         expression_id: 感情
         phone_call_id: 着信有無
+      notice:
+        notice_date: 日付
+        description: 内容
+      comment:
+        text: テキスト

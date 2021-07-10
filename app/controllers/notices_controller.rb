@@ -10,8 +10,13 @@ end
 
 def create
   @notice = Notice.new(notice_params)
-  @notice.save
-  redirect_to action: "index"
+  if @notice.save
+    redirect_to action: "index"
+  else
+    side_menu
+    @notices = @user.notices.order('notice_date ASC')
+    render :index
+  end
 end
 
 def destroy
