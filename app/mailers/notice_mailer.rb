@@ -1,5 +1,5 @@
 class NoticeMailer < ApplicationMailer
-  default from: "yasuo.hoklo.kappa@gmail.com"
+  default from: ENV["EMAIL_ADDRESS"]
 
   def send_mail(email,notice_date,description,topic,user_name)
     puts 'email sending...'
@@ -8,8 +8,8 @@ class NoticeMailer < ApplicationMailer
     @user = user_name
     mail(
       to:       email,
-      cc:       'yasuo.hoklo.kappa@gmail.com'
-      from:     's_alert@example.com'
+      cc:       'yasuo.hoklo.kappa@gmail.com',
+      from:     ENV["EMAIL_ADDRESS"],
       subject:  "#{notice_date}(本日)の予定"
     ) 
   end
