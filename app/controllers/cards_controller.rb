@@ -143,7 +143,7 @@ class CardsController < ApplicationController
   def set_comments
     Comment.where("created_at < ?" , (Date.today-30)).delete_all
     @comment = Comment.new
-    @comments = @card.comments.includes(:user)
+    @comments = @card.comments.order(created_at: "DESC").includes(:user)
   end
 
 end
