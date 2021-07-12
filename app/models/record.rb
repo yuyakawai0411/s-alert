@@ -11,7 +11,7 @@ class Record < ApplicationRecord
   #バリデーション
   validates :date,  presence: true
 
-  with_options numericality: { other_than: 0 } do
+  with_options numericality: { other_than: 0,  message: 'を入力してください' } do
     validates :phone_time_id
     validates :expression_id
     validates :phone_call_id

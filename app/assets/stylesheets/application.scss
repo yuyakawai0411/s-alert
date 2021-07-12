@@ -26,6 +26,18 @@ ul {
   padding-left: 0;
 }
 
+#card-pull-down {
+  list-style: none;
+  margin-left: 16px;
+  padding-left: 0;
+}
+
+#record-pull-down {
+  list-style: none;
+  margin-left: 16px;
+  padding-left: 0;
+}
+
 header.background-image {
   color: white;
   background-image: image-url("header.jpg");
@@ -41,5 +53,16 @@ footer {
   margin-top: 5px;
 }
 
+.name_field {
+  width: 130px;
+  margin-right: 40px;
+}
 
+.company_field {
+  width: 150px;
+  margin-right: 20px;
+}
 
+// #search-button {
+//   background-image: image-url("search.jpg");
+// }

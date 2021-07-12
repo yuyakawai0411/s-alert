@@ -15,8 +15,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :company_form_id, numericality: { other_than: 0 }
-  
+  validates :company_form_id, numericality: { other_than: 0,  message: 'を入力してください' } 
+
   with_options presence: true do
     validates :company
     validates :department

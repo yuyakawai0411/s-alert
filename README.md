@@ -128,15 +128,15 @@ https://s-alert.herokuapp.com/
 [![Image from Gyazo](https://i.gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe.gif)](https://gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe)
 
 # :wrench: 実装予定の機能
-- [ ] EC２にデプロイ
+- [x] EC２にデプロイ
 - [ ] Dockerの導入
 - [ ] CircleCI/CDの導入
 - [ ] CSVの通話履歴をアプリにアップロードできる
-- [ ] コメント機能にいいね機能をもたせ、いいねの数に応じたランキングを表示
+- [x] 会話ネタの投稿を非同期で更新
+- [x] バリデーションエラーをポップアップで表示
+- [ ] 会話ネタの投稿機能にいいね機能をもたせ、いいねの数に応じたランキングを表示
 - [ ] スクレイピング機能を用いて、登録された会話のネタに関するニュースを自動収集
 - [ ] 感情予測のグラフを2軸に変更
-- [ ] バリデーションエラーをポップアップで表示
-- [ ] 会話ネタの投稿を非同期で更新
 
 
 # :floppy_disk: テーブル設計
@@ -293,4 +293,5 @@ https://s-alert.herokuapp.com/
 - Ruby On Rails 6.0.4
 - rbenv 1.1.2
 - bundler 2.1.4
-- macOS Big Sur 11.4
+- whenever 1.0.0
+- cron macOS Big Sur 11.4
