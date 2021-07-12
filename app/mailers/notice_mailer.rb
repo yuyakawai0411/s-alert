@@ -9,7 +9,7 @@ class NoticeMailer < ApplicationMailer
     mail(
       to:       email,
       cc:       'yasuo.hoklo.kappa@gmail.com'
-      from:     's_alert@example.com',
+      from:     's_alert@example.com'
       subject:  "#{notice_date}(本日)の予定"
     ) 
   end
