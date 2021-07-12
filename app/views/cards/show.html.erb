@@ -123,9 +123,9 @@
                     <% end %>
                   </ol>
                   <% if user_signed_in? %>
-                    <%= form_with(model: [@card, @comment], local: true) do |f| %>
+                    <%= form_with(model: [@card, @comment]) do |f| %>
                     <div class="comment-form d-flex align-items-center">
-                      <div><%= f.text_area :text, placeholder: "コメントする", rows: "2" %></div>
+                      <div><%= f.text_field :text, placeholder: "コメントする", rows: "2" %></div>
                       <div><%= f.submit "送信" %></div>
                     </div>
                     <% end %>
@@ -133,15 +133,17 @@
                 </div>
                 <div class="comment-list col-7">
                   <h4>コメント一覧</h4>
-                  <% @comments.each do |comment| %>
-                    <table>
-                      <tr>
-                        <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
-                        <td><%= comment.text %></td>
-                        <%# <td><%= comment.created_at %></td> 
-                      </tr>
-                    </table>
-                  <% end %>
+                  <div id='messages'>
+                    <% @comments.each do |comment| %>
+                      <table>
+                        <tr>
+                          <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
+                          <td><%= comment.text %></td>
+                          <%# <td><%= comment.created_at %></td> 
+                        </tr>
+                      </table>
+                    <% end %>
+                  </div>
                 </div>
               </div>
           </section>

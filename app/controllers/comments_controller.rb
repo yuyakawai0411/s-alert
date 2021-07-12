@@ -1,7 +1,11 @@
 class CommentsController < ApplicationController
   def create
-    comment = Comment.create(comment_params)
-    redirect_to card_path(comment.card.id)
+    @comment = Comment.create(comment_params)
+    @user = User.find(current_user.id)
+    if @comment.save
+      ActionCable.server.broadcast 'message_channel', content: @comment ,comment_user: @user.first_name
+    end
+    # redirect_to card_path(comment.card.id)
   end
 
   private
