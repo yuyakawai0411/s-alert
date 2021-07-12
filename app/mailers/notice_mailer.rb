@@ -8,7 +8,8 @@ class NoticeMailer < ApplicationMailer
     @user = user_name
     mail(
       to:       email,
-      from:     'yasuo.hoklo.kappa@gmail.com',
+      cc:       'yasuo.hoklo.kappa@gmail.com'
+      from:     's_alert@example.com',
       subject:  "#{notice_date}(本日)の予定"
     ) 
   end
