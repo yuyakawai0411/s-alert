@@ -30,24 +30,24 @@
               <td class="name-filed text-filed">
                 <div class="name-kanji d-flex">
                   <div class="last-name-kanji">
-                    <%= f.text_area :s_last_name, class:"items-text", id:"item-name", placeholder:"例) 田中" %>
+                    <%= f.text_field :s_last_name, class:"items-text", id:"item-name", placeholder:"例) 田中" ,class: 'name_field'%>
                     <div>姓</div>
                   </div>
               
                   <div class="first_name-kanji">
-                    <%= f.text_area :s_first_name, class:"items-text", id:"item-info", placeholder:"例) 万次郎"  %>
+                    <%= f.text_field :s_first_name, class:"items-text", id:"item-info", placeholder:"例) 万次郎" ,class: 'name_field' %>
                     <div>名</div>
                   </div>
                 </div>
 
                 <div class="name-kana d-flex">
                   <div class="last_name_kana">
-                    <%= f.text_area :s_last_name_kana, class:"items-text", id:"item-info", placeholder:"例) タナカ"  %>
+                    <%= f.text_field :s_last_name_kana, class:"items-text", id:"item-info", placeholder:"例) タナカ",class: 'name_field'  %>
                     <div>セイ</div>
                   </div>
 
                   <div class="first_name_kana">
-                    <%= f.text_area :s_first_name_kana, class:"items-text", id:"item-info", placeholder:"例) マンジロウ"  %>
+                    <%= f.text_field :s_first_name_kana, class:"items-text", id:"item-info", placeholder:"例) マンジロウ",class: 'name_field'  %>
                     <div>メイ</div>
                   </div>
                 </div>
@@ -61,7 +61,7 @@
               <td class="company-filed text-filed">
                 <div class="company-name-only d-flex">
                   <div class="company-name text-filrd">         
-                    <%= f.text_area :s_company, class:"items-text", id:"item-info", placeholder:"例) TM株式会社"  %>
+                    <%= f.text_field :s_company, class:"items-text", id:"item-info", placeholder:"例) TM株式会社",class: 'company_field'  %>
                     <div>社名</div>
                   </div>
                   <div class="comapny_form text-filed">
@@ -70,7 +70,7 @@
                   </div>
                 </div>
                   <div class="company-department text-filed">
-                    <%= f.text_area :s_department, class:"items-text", id:"item-info", placeholder:"例) 営業所"  %>
+                    <%= f.text_field :s_department, class:"items-text", id:"item-info", placeholder:"例) 営業所",class: 'company_field'  %>
                     <div>部署</div>
                   </div>
 
@@ -82,7 +82,7 @@
               <td class="phone_number-tag tag">電話番号</td>
               <td class="indispensable"><span class="indispensable-tag">必須</span></td>
               <td class="text-filed text-filed">
-                <%= f.text_area :s_phone_number, class:"items-text", id:"item-info", placeholder:"例) 060-1256-3434"  %>
+                <%= f.text_field :s_phone_number, class:"items-text", id:"item-info", placeholder:"例) 060-1256-3434"  %>
               </td>
             </tr>
 
@@ -106,7 +106,7 @@
 
               <%# 趣味 %>
               <tr class="card-hobby d-flex align-items-start">
-                <td class="hobby-tag tag">趣味</div>
+                <td class="hobby-tag tag">会話ネタTOP3</div>
                 <td class="indispensable"></td>
                 <td class="hobby-filed text-filed">
                   <div class="d-flex">

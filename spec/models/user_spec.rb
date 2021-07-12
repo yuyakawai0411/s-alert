@@ -132,7 +132,7 @@ RSpec.describe User, type: :model do
       it '会社形態が未選択では出品できない' do
         @user.company_form_id = 0
         @user.valid?
-        expect(@user.errors.full_messages).to include '会社形態は0以外の値にしてください'
+        expect(@user.errors.full_messages).to include '会社形態を入力してください'
       end
       
       it 'departmentが空では登録できない' do

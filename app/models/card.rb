@@ -12,8 +12,8 @@ class Card < ApplicationRecord
   belongs_to :s_company_form
 
   #バリデーション
-  validates :s_company_form_id, numericality: { other_than: 0 }
-  
+  validates :s_company_form_id, numericality: { other_than: 0 , message: 'を入力してください'}
+
   with_options presence: true do
     validates :s_company
     validates :s_department

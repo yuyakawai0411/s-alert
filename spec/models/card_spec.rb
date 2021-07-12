@@ -93,7 +93,7 @@ RSpec.describe Card, type: :model do
       it '会社形態が未選択では登録できない' do
         @card.s_company_form_id = 0
         @card.valid?
-        expect(@card.errors.full_messages).to include '会社形態は0以外の値にしてください'
+        expect(@card.errors.full_messages).to include '会社形態を入力してください'
       end
       
       it 'departmentが空では登録できない' do
