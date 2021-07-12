@@ -112,4 +112,22 @@ Rails.application.configure do
   ActionCable.server.config.disable_request_forgery_protection = true
   config.action_cable.url = "ws://54.150.194.112/cable" 
   config.action_cable.allowed_request_origins = ['http://54.150.194.112']
+
+    # Action mailer gmail 
+    mail = ENV['EMAIL_ADDRESS']
+    pass = ENV['EMAIL_PASSWORD']
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                  587,
+    domain:               'gmail.com',
+    user_name:            mail,
+    password:             pass,
+    authentication:       'plain',
+    enable_starttls_auto:  true
+    }
+
+
 end
