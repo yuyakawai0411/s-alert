@@ -21,7 +21,7 @@
 
 # :globe_with_meridians: デモ
 ## URL
-https://s-alert.herokuapp.com/
+http://54.150.194.112/
 ## テスト用アカウント
 - BASIC 認証
   - ID:yuya
