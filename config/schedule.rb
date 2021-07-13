@@ -11,7 +11,7 @@ require File.expand_path(File.dirname(__FILE__) + "/environment.rb")
 #env :PATH, ENV['PATH']
 #rails_env = ENV['RAILS_ENV'] || :development
 # ログの出力先
-set :output, "#{Rails.root}log/cron.log"
+set :output, "#{Rails.root}/log/cron.log"
 # ジョブの実行環境
 #set :environment, rails_env
 set :environment, :production
