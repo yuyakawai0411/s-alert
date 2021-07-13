@@ -15,7 +15,7 @@ set :output, 'log/cron.log'
 # ジョブの実行環境
 #set :environment, rails_env
 set :environment, :production
-job_type :runner ,"export PATH=\"$HOME/.rbenv/bin:$PATH\"; eval \"$(rbenv init -)\"; cd :path && bundle exec rails runner :task :output" 
+job_type :runner ,"export PATH=\"$HOME/.rbenv/bin:$PATH\"; eval \"$(rbenv init -)\"; cd :path && RAILS_ENV=:environment bundle exec rails runner :task :output" 
 #ログのメール通知
 env 'MAILTO', 'yuya.scuba0411@gmail.com'
 #ジョブ
