@@ -51,7 +51,15 @@
               <%= f.submit "作成", class:"btn btn-dark " %>
             </div>
           <% end %>
+
+          <%# CSV入力フォーム %>
+          <%= form_tag import_card_records_path(@card.id), multipart: true do %>
+            <%= file_field_tag :file %>
+            <%= submit_tag "インポート" %>
+          <% end %>
+          
         </article>
+
         <article class="record-list">
           <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴一覧"%></h1>
           <%# 着信履歴一覧表示 %>

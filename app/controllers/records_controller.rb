@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
-  before_action :set_card, only: [:index, :create, :destroy]
   before_action :move_to_root, only: [:create, :destroy]
+  before_action :set_card, only: [:index, :create, :destroy, :import]
+  before_action :move_to_root, only: [:create, :destroy, :import]
   before_action :side_menu, only: [:index]
 
   def index
@@ -26,6 +26,18 @@ class RecordsController < ApplicationController
     @record.destroy
     redirect_to action: "index"
   end
+
+  def import
+    list = []
+    card_id = @card.id
+    Record.import(params[:file], list, card_id)
+    if Record.create(list)
+      redirect_to action: "index"
+    else
+      render :index
+    end
+  end
+
 
   private
 
