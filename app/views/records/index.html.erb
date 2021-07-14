@@ -34,14 +34,6 @@
                     </td>
                   </tr>
 
-                  <tr class="record-expression d-flex align-items-start">
-                    <td class="expression-tag tag">感情</td>
-                    <td class="indispensable"><span class="indispensable-tag">必須</span></td>
-                    <td class="expression-filed text-filed">
-                      <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
-                    </td>
-                  </tr>
-
                   <tr class="record-call d-flex align-items-start">
                     <td class="call-tag tag">着信有無</td>
                     <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -49,6 +41,15 @@
                       <%= f.collection_select(:phone_call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>
                     </td>
                   </tr>
+
+                  <tr class="record-expression d-flex align-items-start">
+                    <td class="expression-tag tag">感情</td>
+                    <td class="indispensable"></td>
+                    <td class="expression-filed text-filed">
+                      <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
+                    </td>
+                  </tr>
+
                 </table>
                 <div class="sell-btn-contents">
                   <%= f.submit "作成", class:"btn btn-dark " %>
@@ -64,7 +65,15 @@
                   <%= submit_tag "作成", class:"btn btn-dark csv-btn" %>
                 </div>
               <% end %>
+               <h4 class="csv-title">CSV注意事項</h4>
+                <ul id="csv-description">
+                  <li class="graph-detail">CSVの項目名は、date,phone_time_id,expression_idのみにしてください (dateが日付、phone_time_idが時間、expression_idが感情を表しています)</li>
+                  <li class="graph-detail">dateの値は、「YYYY-MM-DD」のフォーマットで記入してください</li>
+                  <li class="graph-detail">phone_time_idの値は、「7〜22」の整数でご記入ください (分は記入しないでください)</li>
+                  <li class="graph-detail">expression_idの値は、「-3〜3」の整数でご記入ください (-3がめっちゃ悪い、3がめっちゃ良いです。感情を記入しない場合は0を記入してください)</li>
+                </ul>
             </div>
+
           </div>
         </article>
 

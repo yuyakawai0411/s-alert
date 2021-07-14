@@ -18,3 +18,17 @@ h1.share-cards-title {
   font-size: small;
   padding-top: 10px;
 }
+
+.csv-title {
+  margin-top: 15px;
+}
+
+.csv-btn {
+  margin-top: 15px;
+}
+
+#csv-description {
+  list-style-type: disc;
+  margin-left: 15px;
+  padding-left: 0;
+}
