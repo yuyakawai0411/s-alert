@@ -11,47 +11,63 @@
     <div class="record col-10">
         <article class="record-add">
           <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴登録"%></h1>
-          <%# 入力フォーム %>
-          <%= form_with model: [@card, @record], local: true do |f| %> 
-            <%= render 'shared/error_messages', model: f.object %>
-            <table>
-              <tr class="record-date d-flex align-items-start">
-                <td class="date-tag tag">日付</td>
-                <td class="indispensable"><span class="indispensable-tag">必須</span></td>
-                <td class="date-filed text-filed">
-                  <%= f.date_field :date %> 
-                </td>
-              </tr>
+          <div class="d-flex justify-start">
+            <%# 入力フォーム %>
+            <div class="input-form">
+              <h2>手動で登録</h2>
+              <%= form_with model: [@card, @record], local: true do |f| %> 
+                <%= render 'shared/error_messages', model: f.object %>
+                <table>
+                  <tr class="record-date d-flex align-items-start">
+                    <td class="date-tag tag">日付</td>
+                    <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+                    <td class="date-filed text-filed">
+                      <%= f.date_field :date %> 
+                    </td>
+                  </tr>
 
-              <tr class="record-time d-flex align-items-start">
-                <td class="time-tag tag">時間</td>
-                <td class="indispensable"><span class="indispensable-tag">必須</span></td>
-                <td class="time-filed text-filed">
-                  <%= f.collection_select(:phone_time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"item-category"})%>  
-                </td>
-              </tr>
+                  <tr class="record-time d-flex align-items-start">
+                    <td class="time-tag tag">時間</td>
+                    <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+                    <td class="time-filed text-filed">
+                      <%= f.collection_select(:phone_time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"item-category"})%>  
+                    </td>
+                  </tr>
 
-              <tr class="record-expression d-flex align-items-start">
-                <td class="expression-tag tag">感情</td>
-                <td class="indispensable"><span class="indispensable-tag">必須</span></td>
-                <td class="expression-filed text-filed">
-                  <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
-                </td>
-              </tr>
+                  <tr class="record-expression d-flex align-items-start">
+                    <td class="expression-tag tag">感情</td>
+                    <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+                    <td class="expression-filed text-filed">
+                      <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
+                    </td>
+                  </tr>
 
-              <tr class="record-call d-flex align-items-start">
-                <td class="call-tag tag">着信有無</td>
-                <td class="indispensable"><span class="indispensable-tag">必須</span></td>
-                <td class="call-filed text-filed">
-                  <%= f.collection_select(:phone_call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>
-                </td>
-              </tr>
-            <table>
-            <div class="sell-btn-contents">
-              <%= f.submit "作成", class:"btn btn-dark " %>
+                  <tr class="record-call d-flex align-items-start">
+                    <td class="call-tag tag">着信有無</td>
+                    <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+                    <td class="call-filed text-filed">
+                      <%= f.collection_select(:phone_call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>
+                    </td>
+                  </tr>
+                </table>
+                <div class="sell-btn-contents">
+                  <%= f.submit "作成", class:"btn btn-dark " %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+          
+            <div class="csv-form">
+              <h2>CSVでインポート</h2>
+              <%= form_tag import_card_records_path(@card.id), multipart: true do %>
+                <%= file_field_tag :file %>
+                <div class="sellbtn-contents">
+                  <%= submit_tag "作成", class:"btn btn-dark csv-btn" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
         </article>
+
         <article class="record-list">
           <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴一覧"%></h1>
           <%# 着信履歴一覧表示 %>

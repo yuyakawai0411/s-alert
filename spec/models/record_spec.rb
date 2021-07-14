@@ -13,6 +13,10 @@ RSpec.describe Record, type: :model do
        expect(@record).to be_valid
       end
 
+      it 'expressionが0でも登録できる' do
+        @record.expression_id = 0
+        expect(@record).to be_valid
+       end
     end
 
     context 'レコード登録できないとき' do
@@ -23,17 +27,41 @@ RSpec.describe Record, type: :model do
       end
 
       it 'phnoe_time_idが空では登録できない' do
-        @record.phone_time_id = 0
+        @record.phone_time_id = ""
         @record.valid?
-        expect(@record.errors.full_messages).to include "時間を入力してください"
+        expect(@record.errors.full_messages).to include "時間は指定の範囲内で選択してください"
       end
+
+      it 'phnoe_time_idが6時以下では登録できない' do
+        @record.phone_time_id = 6
+        @record.valid?
+        expect(@record.errors.full_messages).to include "時間は指定の範囲内で選択してください"
+      end
+
+      it 'phnoe_time_idが23時以上では登録できない' do
+        @record.phone_time_id = 23
+        @record.valid?
+        expect(@record.errors.full_messages).to include "時間は指定の範囲内で選択してください"
+      end
+
 
       it 'expression_idが空では登録できない' do
-        @record.expression_id = 0
+        @record.expression_id = ""
         @record.valid?
-        expect(@record.errors.full_messages).to include "感情を入力してください"
+        expect(@record.errors.full_messages).to include "感情は指定の範囲内で選択してください"
       end
 
+      it 'expression_idが-4以下では登録できない' do
+        @record.expression_id = -4
+        @record.valid?
+        expect(@record.errors.full_messages).to include "感情は指定の範囲内で選択してください"
+      end
+
+      it 'expression_idが4以上では登録できない' do
+        @record.expression_id = 4
+        @record.valid?
+        expect(@record.errors.full_messages).to include "感情は指定の範囲内で選択してください"
+      end
       it 'phoen_call_idが空では登録できない' do
         @record.phone_call_id = 0
         @record.valid?
