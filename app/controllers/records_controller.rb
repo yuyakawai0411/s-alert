@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  before_action :move_to_root, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:create, :destroy, :import]
   before_action :set_card, only: [:index, :create, :destroy, :import]
   before_action :move_to_root, only: [:create, :destroy, :import]
   before_action :side_menu, only: [:index]
