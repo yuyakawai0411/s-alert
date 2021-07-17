@@ -10,7 +10,6 @@ class Card < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :s_company_form
 
-  
   validates :s_company_form_id, numericality: { other_than: 0 , message: 'を入力してください'}
 
   with_options presence: true do
@@ -30,7 +29,7 @@ class Card < ApplicationRecord
     validates :s_first_name_kana
   end
 
-
+  # 名刺検索機能
   def self.search(search)
     if search != ""
       Card.where("s_last_name LIKE(?) OR s_first_name LIKE(?) OR s_company LIKE(?) OR s_department LIKE(?) OR s_last_name_kana LIKE(?) OR s_first_name_kana LIKE(?)" ,"%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%","%#{search}%")
@@ -39,6 +38,7 @@ class Card < ApplicationRecord
     end
   end
 
+  # 現在ログインしているユーザーがお気に入りしている名刺を確認
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
