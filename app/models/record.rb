@@ -19,10 +19,7 @@ class Record < ApplicationRecord
   validates :expression_id, numericality: { greater_than_or_equal_to: -3, less_than_or_equal_to:3, message: 'は指定の範囲内で選択してください' }
 
   private
-
   def self.import(file,list,card_id)
-    # path = File.join Rails.root, "db/csv/phone_record.csv"
-    # list = []
     CSV.foreach(file.path, headers: true) do |row|
       list << {
         date: row[0],
@@ -32,7 +29,5 @@ class Record < ApplicationRecord
         card_id: card_id
       }
     end
-
   end
-
 end

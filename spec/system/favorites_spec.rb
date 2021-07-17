@@ -26,7 +26,6 @@ RSpec.describe "お気に入り登録", type: :system do
       expect(page).to have_content(@user.company)
       expect(page).to have_content(@user.department)
       # ユーザー詳細ページにお気に入りした名刺がある
-      binding.pry
       expect(page).to have_selector ".favorites", text: @card.s_last_name
       expect(page).to have_selector ".favorites", text: @card.s_first_name
       expect(page).to have_selector ".favorites", text: @card.s_last_name_kana

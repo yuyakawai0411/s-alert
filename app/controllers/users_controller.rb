@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show]
   before_action :side_menu, only: [:show]
-  before_action :bio_risum_data, only: [:show]
+  before_action :set_biorhythm, only: [:show]
 
   def show
     @user = User.find(params[:id])
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def bio_risum_data
+  def set_biorhythm
     pi = Math::PI
     birth_day = @user.birth_day
     today = Date.today  
