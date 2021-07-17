@@ -75,7 +75,7 @@ class CardsController < ApplicationController
   def update
     remove_card_blank
     if @card.update(card_params)  #card_paramsの中身が保存されるため、空白除去が効かない
-      redirect_to card_path(@card.id)
+      redirect_to root_path
     else
       side_menu
       render :edit

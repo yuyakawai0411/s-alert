@@ -8,14 +8,14 @@
       <li ><%= link_to "新規作成", new_card_path, class: "aside-menu-detail" %></li>
       
       <div class="card-edit", id="card-edit">
-      <li id="card-edit-menu", class="aside-menu-detail">編集</li>
-        <% if user_signed_in? || @user_cards != nil %>
-          <ul class="hidden", id="card-pull-down">
-            <% @user_cards.each do |user_card| %>
-              <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}", edit_card_path(user_card.id) %></li>
-            <% end %>
-          </ul>
-        <% end %>
+        <li id="card-edit-menu", class="aside-menu-detail">編集</li>
+          <% if user_signed_in? || @user_cards != nil %>
+            <ul class="hidden", id="card-pull-down">
+              <% @user_cards.each do |user_card| %>
+                <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}", edit_card_path(user_card.id) %></li>
+              <% end %>
+            </ul>
+          <% end %>
       </div>
     </ul>
   </div>
@@ -24,14 +24,17 @@
   <div class="record_create">
     <h3 class="aside-menu">通話履歴</h3>
     <ul class="record-edit">
-      <li id="record-edit-menu", class="aside-menu-detail">作成&編集</li>
-        <% if user_signed_in? || @user_cards != nil %>
-          <ul class="hidden", id="record-pull-down">
-            <% @user_cards.each do |user_card| %>
-              <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id), class: "aside-menu-detail" %></li>
-            <% end %>
-          </ul>
-        <% end %>
+
+      <div id="record-edit">
+        <li id="record-edit-menu", class="aside-menu-detail">作成&編集</li>
+          <% if user_signed_in? || @user_cards != nil %>
+            <ul class="hidden", id="record-pull-down">
+              <% @user_cards.each do |user_card| %>
+                <li class="pull-down-list"><%= link_to "#{user_card.s_last_name} #{user_card.s_first_name}",card_records_path(user_card.id), class: "aside-menu-detail" %></li>
+              <% end %>
+            </ul>
+          <% end %>
+      </div>
     </ul>
   </div>
 

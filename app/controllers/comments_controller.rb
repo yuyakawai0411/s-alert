@@ -5,12 +5,10 @@ class CommentsController < ApplicationController
     if @comment.save
       ActionCable.server.broadcast 'message_channel', content: @comment ,comment_user: @user.first_name
     end
-    # redirect_to card_path(comment.card.id)
   end
 
   private
   def comment_params
     params.require(:comment).permit(:text).merge(user_id: current_user.id, card_id: params[:card_id])
   end
-
 end
