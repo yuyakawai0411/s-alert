@@ -52,8 +52,8 @@
 
             <div class="bio-resim-baddate">
               <p class="name">不安定日</p>
-              <p><%= @bad_date[1][0] %></p>
-              <p><%= @bad_date[0][0] %></p>
+              <p><%= @unstable[1][0] %></p>
+              <p><%= @unstable[0][0] %></p>
             </div>
 
             <div class="phone-time-mode">
@@ -69,7 +69,7 @@
             <div class="d-flex justify-content-between">
               <div class="bio-theoretical">
                 <h4 class="graph-title">バイオリズム理論値</h4>
-                <%= line_chart @bio_reism, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day %>
+                <%= line_chart @biorhythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day %>
               </div>
               <div class="my-measured">
                 <h4 class="graph-title">主観実測値</h4>
