@@ -1,19 +1,21 @@
 <%= render "shared/header"%>
+
 <div class="main-background mb-5"> 
   <div class="container">
     <div class="main row">
+    <%# サイドメニュー %>
       <div class="side-menu col-2">
         <%= render "shared/side-menu" %>
       </div>
         <div class="user-profile col-10">
-          <%# プロフィール詳細 %>
+          <%# 名刺プロフィール %>
           <h1 class="share-cards-title"><%= "#{@card.s_last_name}さんのプロフィール"%></h1>
 
           <div class="profile d-flex">
             <ul>
             <div class="card-list d-flex justify-content-between">
               <div class="card-right">
-              <%# 氏名 %>
+              <%# 名刺プロフィール_氏名 %>
                 <li class="card-name">
                   <ul class="name-list">
                     <li class="name"><%= "#{@card.s_last_name} #{@card.s_first_name}" %></li>
@@ -21,7 +23,7 @@
                   </ul>
                 </li>
             
-              <%# 会社・部署 %>
+              <%# 名刺プロフィール_会社・部署 %>
               <li class="card-company">
                 <ul class="company-list">
                   <li class="company-name"><%= "#{@card.s_company} #{@card.s_company_form.form}"%></li>
@@ -29,7 +31,7 @@
                 </ul>
               </li>
               
-              <%# 電話番号 %>
+              <%# 名刺プロフィール_電話番号 %>
               <li class="card-phone">
                 <%= @card.s_phone_number%>
               </li>
@@ -37,7 +39,7 @@
               </div>
 
               <div class="card-left">
-              <%# 人物画像 %>
+              <%# 名刺プロフィール_写真 %>
               <li calss="card-image">
                 <% if @card.image.attached? %>
                   <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
@@ -49,93 +51,86 @@
 
             </div>
             </ul>
-
+            <%# 名刺プロフィール_不安定日 %>
             <div class="bio-resim-baddate">
               <p class="name">不安定日</p>
               <p><%= @unstable[1][0] %></p>
               <p><%= @unstable[0][0] %></p>
             </div>
-
+            <%# 名刺プロフィール_着信最頻値 %>
             <div class="phone-time-mode">
-              <p class="name">通話時間最頻値</p>
+              <p class="name">着信時間最頻値</p>
               <p><%= @phone_time_mode[0][0] %></p>
               <p><%= @phone_time_mode[1][0] %></p>
             </div>      
           </div>
   
-
+          <%# バイオリズムグラフ %>
           <section class="s-bio-risum record-list">
             <h2><%= "感情の起伏"%></h2>
             <div class="d-flex justify-content-between">
               <div class="bio-theoretical">
                 <h4 class="graph-title">バイオリズム理論値</h4>
-                <%= line_chart @biorhythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day %>
+                <%= line_chart @biorhythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day, min: -1, max: 1 %>
               </div>
               <div class="my-measured">
-                <h4 class="graph-title">主観実測値</h4>
-                <%= line_chart @expression, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today %>
+                <h4 class="graph-title">バイオリズム実測値</h4>
+                <%= line_chart @expression, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today, min: -1, max: 1 %>
               </div>
             </div>
             <ul class="graph-detail">
-              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。1に近いほど機嫌がよく、0に近いときは不安定になります。</li>
-              <li>主観実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。数値が高いほど機嫌がよくなります。</li>
+              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。1に近い=エネルギーがあり調子が良い、-1に近い=エネルギーがなく調子が悪い、
+                  0に近い=エネルギーがあり調子が良くない(感情が不安定(キレやすい))とされています。</li>
+              <li>バイオリズム実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。数値が高いほど機嫌がよくなります。</li>
             </ul>
           </section>
-
+          
+          <%# 着信頻度グラフ %>
           <section class="s-phone-most record-list">
-            <h2><%= "通話頻度"%></h2>
+            <h2><%= "着信頻度"%></h2>
             <div class="d-flex justify-content-between">
               <div class="phone-time">
-                <h4 class="graph-title">通話時間最頻値</h4>
+                <h4 class="graph-title">着信時間最頻値</h4>
                 <%= column_chart @phone_time, width: "430px", height: "220px", xtitle: "時間", ytitle: "回数" %>
               </div>
               <div class="phone-date">
-                <h4 class="graph-title">通話曜日最頻値</h4>
+                <h4 class="graph-title">着信曜日最頻値</h4>
                 <%= column_chart @phone_weeks, width: "430px", height: "220px", xtitle: "曜日", ytitle: "回数" %>
               </div>
             </div>
             <ul class="graph-detail">
-              <li>通話時間最頻値は、通話履歴をもとに、過去に通話があった時間を表示しています。</li>
-              <li>通話曜日最頻値は、通話履歴をもとに、過去に通話があった曜日を表示しています。</li>
+              <li>着信時間最頻値は、着信履歴をもとに、過去に着信があった時間を表示しています。</li>
+              <li>着信曜日最頻値は、着信履歴をもとに、過去に着信があった曜日を表示しています。</li>
             </ul>
           </section>
 
+          <%# 会話ネタコメント機能 %>
           <section class="record-list">
             <h2><%= "会話のネタ"%></h2>
               <div class="interest row">
                 <div class="top-list col-5">
-                  <h4>会話ネタTOP3</h4>
+                  <h4 class="mb-3">会話ネタTOP3</h4>
                   <ol>
                     <% if @card.s_hobby_top.nil? %>
-                      <li>1.登録されていません</li>
+                      <li><h5>1.登録されていません</h5></li>
                     <% else %>
-                      <li><%= "1.#{@card.s_hobby_top}" %></li>
+                      <li><h5><%= "1.#{@card.s_hobby_top}" %></h5></li>
                     <% end %>
                     <% if @card.s_hobby_medium.nil? %>
-                      <li>2.登録されていません</li>
+                      <li><h5>2.登録されていません</h5></li>
                     <% else %>
-                      <li><%= "2.#{@card.s_hobby_medium}" %></li>
+                      <li><h5><%= "2.#{@card.s_hobby_medium}" %></h5></li>
                     <% end %>
                     <% if @card.s_hobby_row.nil? %>
-                      <li>3.登録されていません</li>
+                      <li><h5>3.登録されていません</h5></li>
                     <% else %>
-                      <li><%= "3.#{@card.s_hobby_row}" %></li>
+                      <li><h5><%= "3.#{@card.s_hobby_row}" %></h5></li>
                     <% end %>
                   </ol>
-                  <% if user_signed_in? %>
-                    <%= form_with(model: [@card, @comment]) do |f| %>
-                      <div class="comment-form d-flex align-items-center">
-                        <div><%= f.text_field :text, placeholder: "コメントする", rows: "2" %></div>
-                        <div><%= f.submit "送信",id: "comment-submit" %></div>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <p class="comment-form-notsiged">コメントの投稿には新規登録/ログインが必要です。</p>
-                  <% end %>
                 </div>
-                <div class="comment-list col-7">
+                <div class="comment-form col-7">
                   <h4>コメント一覧</h4>
-                  <div id='messages'>
+                  <div id='messages' class="comment-list">
                     <% @comments.each do |comment| %>
                       <table>
                         <tr>
@@ -143,6 +138,18 @@
                           <td><%= comment.text %></td>
                         </tr>
                       </table>
+                    <% end %>
+                  </div>
+                  <div class="comment-form mt-2">
+                    <% if user_signed_in? %>
+                      <%= form_with(model: [@card, @comment]) do |f| %>
+                        <div class="comment-form d-flex align-items-center", class='comment-text-area'>
+                          <div><%= f.text_field :text, placeholder: "会話ネタをコメントする", rows: "2", class: 'comment-text-area' %></div>
+                          <div><%= f.submit "送信",id: "comment-submit" %></div>
+                        </div>
+                      <% end %>
+                    <% else %>
+                      <p class="comment-form-notsiged">コメントの投稿には新規登録/ログインが必要です。</p>
                     <% end %>
                   </div>
                 </div>

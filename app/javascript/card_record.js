@@ -12,7 +12,7 @@ window.addEventListener('load', function(){
         pullDownParentsCard.setAttribute("style", "display:block;")
       }
     });
-    // 通話履歴の作成&編集をクリックした時に、投稿済みの名刺を一覧で表示
+    // 着信履歴の作成&編集をクリックした時に、投稿済みの名刺を一覧で表示
     pullDownButtonRecord.addEventListener('click', function(){
       if (pullDownParentsRecord.getAttribute("style") == "display:block;") {
         pullDownParentsRecord.removeAttribute("style", "display:block;")

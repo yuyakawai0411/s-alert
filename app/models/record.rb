@@ -13,7 +13,7 @@ class Record < ApplicationRecord
   validates :expression_id, numericality: { greater_than_or_equal_to: -3, less_than_or_equal_to:3, message: 'は指定の範囲内で選択してください' }
 
   private
-  # 通話履歴をCSVでインポート
+  # 着信履歴をCSVでインポート
   def self.import(file,list,card_id)
     CSV.foreach(file.path, headers: true) do |row|
       list << {

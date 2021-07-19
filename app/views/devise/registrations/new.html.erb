@@ -6,13 +6,15 @@
       <%# サイドメニュー %>
       <div class="side-menu col-2">
       </div>
-    
+
+      <%# 新規登録フォーム %>
       <div class="card-registration col-10">
         <h1 class="share-cards-title">ユーザー新規登録</h1>
 
         <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
         <table>
+          <%# 新規登録フォーム_名前 %>
           <tr class="user-name d-flex align-items-start">
             <td class="name-tag tag">名前</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -43,6 +45,7 @@
             </td>
           </tr>
 
+          <%# 新規登録フォーム_メールアドレス %>
           <tr class="user-email d-flex align-items-start">
             <td class="email-tag tag">メールアド<br>レス</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -51,6 +54,7 @@
             </td>
           </tr>
 
+          <%# 新規登録フォーム_パスワード %>
           <tr class="user-password d-flex align-items-start">
             <td class="password-tag tag">パスワード</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -68,6 +72,7 @@
             </td>
           </tr>
 
+          <%# 新規登録フォーム_会社情報 %>
           <tr class="user-company d-flex align-items-start">
             <td class="company-tag tag">会社</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -90,6 +95,7 @@
             </td>
           </tr>
 
+          <%# 新規登録フォーム_電話番号 %>
           <tr class="card-phone_number d-flex align-items-start">
             <td class="phone_number-tag tag">電話番号</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -98,6 +104,7 @@
             </td>
           </tr>
 
+          <%# 新規登録フォーム_生年月日 %>
           <tr class="card-birthday d-flex align-items-start">
             <td class='birthday-tag tag'><label class="birthday-day">生年月日</label></td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -114,7 +121,8 @@
             </td>
           </tr>
         </table>
-    
+
+          <%# 登録ボタン %>
           <div class="sell-btn-contents">
             <%= f.submit "登録",class:"btn btn-dark btn-lg"  %>
           </div>

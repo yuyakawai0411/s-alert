@@ -1,5 +1,5 @@
 .comment-list{ 
-  height:200px;
+  height:150px;
   overflow-x: hidden;
   overflow-y: visible;
 }
@@ -17,4 +17,8 @@ h4.graph-title {
 
 .comment-form-notsiged {
   font-size: small;
+}
+
+.comment-text-area {
+  width: 250px;
 }

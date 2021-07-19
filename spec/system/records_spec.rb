@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "連絡タイミング登録", type: :system do
+RSpec.describe "着信タイミング登録", type: :system do
   before do
     @user = FactoryBot.create(:user)
     @card = FactoryBot.create(:card)
     @record = FactoryBot.build(:record)
   end
 
-  context '通話履歴の登録ができるとき' do 
-    it '自分の名刺には通話履歴の登録ができる' do
+  context '着信履歴の登録ができるとき' do 
+    it '自分の名刺には着信履歴の登録ができる' do
       # ログイン
       basic_pass root_path
       sign_in(@card.user)
@@ -26,7 +26,7 @@ RSpec.describe "連絡タイミング登録", type: :system do
       expect{
       find_by_id('record-submit').click
       }.to change { Record.count }.by(1)
-      # 登録した通話履歴があるか確認
+      # 登録した着信履歴があるか確認
       expect(current_path).to eq(card_records_path(@card))
       expect(page).to have_content @record.date
       expect(page).to have_content @record.phone_time.time
@@ -55,7 +55,7 @@ RSpec.describe "連絡タイミング登録", type: :system do
   end
 end
 
-RSpec.describe "通話履歴削除", type: :system do
+RSpec.describe "着信履歴削除", type: :system do
   before do
     @card = FactoryBot.create(:card)
     @record = FactoryBot.build(:record)
@@ -78,15 +78,15 @@ RSpec.describe "通話履歴削除", type: :system do
       expect{
       find_by_id('record-submit').click
       }.to change { Record.count }.by(1)
-      # 登録した通話履歴があるか確認
+      # 登録した着信履歴があるか確認
       expect(current_path).to eq(card_records_path(@card))
       expect(page).to have_selector '.record-list-date', text: "#{@record.date}"
       expect(page).to have_selector '.record-list-time', text: "#{@record.phone_time.time}"
       expect(page).to have_selector '.record-list-call', text: "#{@record.phone_call.status}"
       expect(page).to have_selector '.record-list-expression', text: "#{@record.expression.status}"
-      # 通話履歴の削除をクリック
+      # 着信履歴の削除をクリック
       first(".record-delete").click
-      # 登録した通話履歴が消えている
+      # 登録した着信履歴が消えている
       expect(current_path).to eq(card_records_path(@card))
       expect(page).to have_no_selector '.record-list-date', text: "#{@record.date}"
       expect(page).to have_no_selector '.record-list-time', text: "#{@record.phone_time_id}:00"
@@ -100,7 +100,7 @@ RSpec.describe "CSVインポート", type: :system do
     @card = FactoryBot.create(:card)
   end
 
-    it 'csvをインポートして通話履歴を登録できる' do
+    it 'csvをインポートして着信履歴を登録できる' do
       # トップページに移動する
       sign_in(@card.user)
       # トップページに投稿した名刺への作成&編集へのリンクがある

@@ -8,6 +8,7 @@
       </div>
     
       <div class="card-registration col-10">
+      <%# ログインフォーム %>
         <h1 class="share-cards-title">ユーザーログイン</h1>
 
           <%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
@@ -17,6 +18,7 @@
             </div>
 
           <table>
+            <%# ログインフォーム_メールアドレス %>
             <tr class="user-email d-flex align-items-start">
               <td class="email-tag tag">メールアドレス</td>
               <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -24,7 +26,7 @@
                 <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
               </td>
             </tr>
-
+            <%# ログインフォーム_パスワード %>
             <tr class="user-password d-flex align-items-start">
               <td class="password-tag tag">パスワード</td>
               <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -41,6 +43,7 @@
               </div>
             <% end %>
 
+            <%# ログインボタン %>
             <div class="sell-btn-contents">
               <%= f.submit "ログイン",class:"btn btn-dark btn-lg" %>
               

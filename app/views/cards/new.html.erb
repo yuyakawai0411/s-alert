@@ -3,20 +3,19 @@
 <div class="main-background"> 
   <div class="container">
     <div class="main row">
-
       <%# サイドメニュー %>
       <div class="side-menu col-2">
         <%= render "shared/side-menu" %>
       </div>
     
       <div class="card-registration col-10">
-          <%# タイトル %> 
+          <%# 名刺編集タイトル %>
           <h1 class="share-cards-title">新規名刺作成</h1>
-            <%# 登録者情報記入欄 %>
+            <%# 名刺編集フォーム %>
             <%= form_with model:@card, local: true do |f| %>
               <%= render 'shared/error_messages', model: f.object %>
             <table>
-              <%# 登録者_写真 %>
+              <%# 名刺編集フォーム_写真 %>
               <tr class="card-image d-flex align-items-start">
                 <td class="image-tag tag">写真</td>
                 <td class="indispensable"></td>
@@ -24,7 +23,7 @@
                 <td id="image-list"></td>
               </tr>
 
-              <%# 登録者_名前 %>
+              <%# 名刺編集フォーム_名前 %>
               <tr class="card-name d-flex align-items-start">
                 <td class="name-tag tag">名前</td>
                 <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -55,7 +54,7 @@
                 </td>
               </tr>
 
-              <%# 登録者_会社 %>
+              <%# 名刺編集フォーム_会社 %>
               <tr class="card-company d-flex align-items-start">
                 <td class="company-tag tag">会社</td>
                 <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -78,7 +77,7 @@
                 </td>   
               </tr>
 
-              <%# 登録者_電話  %>
+              <%# 名刺編集フォーム_電話番号  %>
               <tr class="card-phone_number d-flex align-items-start">
                 <td class="phone_number-tag tag">電話番号</td>
                 <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -87,7 +86,7 @@
                 </td>
               </tr>
 
-                <%# 登録者_誕生日 %>
+                <%# 名刺編集フォーム_生年月日 %>
                 <tr class="card-birthday d-flex align-items-start">
                   <td class='birthday-tag tag'><label class="birthday-day">生年月日</label></td>
                   <td class="indispensable"><span class="indispensable-tag">必須</span></td>
@@ -105,7 +104,7 @@
                   </td>
                 </tr>
 
-                <%# 趣味 %>
+                <%# 名刺編集フォーム_会話ネタ %>
                 <tr class="card-hobby d-flex align-items-start">
                   <td class="hobby-tag tag">会話ネタTOP3</td>
                   <td class="indispensable"></td>
@@ -128,7 +127,7 @@
                 </tr>
             </table>
 
-                <%# 登録ボタン %>
+                <%# 作成ボタン %>
                 <div class="sell-btn-contents">
                   <%= f.submit "作成" ,id:'card-new-create', class:"btn btn-dark btn-lg" %>
                 </div>

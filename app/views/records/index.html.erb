@@ -10,9 +10,10 @@
     
     <div class="record col-10">
         <article class="record-add">
-          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴登録"%></h1>
+        <%# 着信履歴登録フォーム %>
+          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん着信履歴登録"%></h1>
           <div class="d-flex">
-            <%# 入力フォーム %>
+            <%# 着信履歴登録フォーム_手動 %>
             <div class="input-form">
               <h2>手動で登録</h2>
               <%= form_with model: [@card, @record], local: true do |f| %> 
@@ -56,7 +57,8 @@
                 </div>
               <% end %>
             </div>
-          
+
+            <%# 着信履歴登録フォーム_CSV %>
             <div class="csv-form">
               <h2>CSVでインポート</h2>
               <%= form_tag import_card_records_path(@card.id), multipart: true do %>
@@ -78,7 +80,7 @@
         </article>
 
         <article class="record-list">
-          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴一覧"%></h1>
+          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん着信履歴一覧"%></h1>
           <%# 着信履歴一覧表示 %>
           <table>
             <tr class="record-description">

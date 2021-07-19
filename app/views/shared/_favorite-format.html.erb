@@ -5,21 +5,21 @@
   <div class="card-list d-flex justify-content-between">
 
     <div class="card-right">
-      <%# 氏名 %>
+      <%# お気に入り名刺_氏名 %>
       <li class="card-name">
         <ul class="name-list">
           <li class="name"><%= "#{favorite.s_last_name} #{favorite.s_first_name}" %></li>
           <li class="kana"><%= "#{favorite.s_last_name_kana} #{favorite.s_first_name_kana}" %></li>
         </ul>
       </li>
-      <%# 会社・部署 %>
+      <%# お気に入り名刺_会社・部署 %>
       <li class="card-company">
         <ul class="company-list">
           <li class="company-name"><%= "#{favorite.s_company}#{favorite.s_company_form.form}" %></li>
           <li class="department"><%= favorite.s_department %></li>
         </ul>
       </li>
-      <%# 電話番号 %>
+      <%# お気に入り名刺_電話番号 %>
       <li class="card-phone">
         <%= favorite.s_phone_number%>
       </li>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="card-left">
-      <%# 人物画像 %>
+      <%# お気に入り名刺_写真 %>
       <li calss="card-image">
         <% if favorite.image.attached? %>
           <%= image_tag favorite.image.variant(resize: '100x100'), class: "card-ditail-image" %>
@@ -36,7 +36,7 @@
         <% end %>
       </li>
 
-      <%# お気に入り %>
+      <%# お気に入り_ステータス %>
       <li class="card-favorites">
         <%=link_to "お気に入り解除", card_favorites_path(favorite.id), method: :delete %>
       </li>

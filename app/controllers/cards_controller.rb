@@ -55,8 +55,21 @@ class CardsController < ApplicationController
       date: [@today.prev_day(15),@today.prev_day(14),@today.prev_day(13),@today.prev_day(12),@today.prev_day(11),
       @today.prev_day(10),@today.prev_day(9),@today.prev_day(8),@today.prev_day(7),@today.prev_day(6),@today.prev_day(5),
       @today.prev_day(4),@today.prev_day(3),@today.prev_day(2),@today.prev_day(1),@today.prev_day(0)]).group(:date).sum(:expression_id)
+    # バイオリズム理論値と縦軸の最大値、最小値を合わせる(縦軸の最小-1、最大1のグラフにする)
     if @expression.length < 2
       @expression = { @today.prev_day(15)=>0, @today=> 0 }
+    else
+      # 全てのvalueを絶対値にする
+      expression_abs = @expression.map{ |x,y| [x, y.abs] }.to_h
+      # 最大値を算出する
+      expression_max = expression_abs.max{ |a,b| a[1] <=> b[1] }[1]
+      # 0で割るケースは感情が全て0で登録された時のみのため、0を代入
+      if expression_max == 0
+        @expression = { @today.prev_day(15)=>0, @today=> 0 }
+      else
+        # 最大値でわる
+        @expression = @expression.map{ |x,y| [x, (y.to_f / expression_max)] }.to_h
+      end
     end
 
     # 過去の着信履歴から着信が多かった時間をグラフで表示

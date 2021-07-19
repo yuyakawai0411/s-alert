@@ -11,7 +11,7 @@
     <div class="record col-10">
         <article class="record-add">
           <h1 class="share-cards-title"><%= "#{@user.last_name}さん通知登録"%></h1>
-          <%# 入力フォーム %>
+          <%# メール通知登録フォーム %>
           <%= form_with model: [@user, @notice], local: true do |f| %> 
             <%= render 'shared/error_messages', model: f.object %>
             <table>
@@ -45,7 +45,7 @@
 
         <article class="record-list">
           <h1 class="share-cards-title"><%= "#{@user.last_name}さん通知一覧"%></h1>
-          <%# 着信履歴一覧表示 %>
+          <%# メール通知登録一覧表示 %>
           <table>
             <tr class="record-description">
                 <td class="record-list-date record-column">日付</td>

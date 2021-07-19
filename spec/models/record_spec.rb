@@ -6,9 +6,9 @@ RSpec.describe Record, type: :model do
     @record = FactoryBot.build(:record)
   end
 
-  describe '通話履歴登録' do
+  describe '着信履歴登録' do
 
-    context '通話履歴登録できるとき' do
+    context '着信履歴登録できるとき' do
       it '必須情報が全て存在すると登録できる' do
        expect(@record).to be_valid
       end
@@ -19,7 +19,7 @@ RSpec.describe Record, type: :model do
        end
     end
 
-    context '通話履歴登録できないとき' do
+    context '着信履歴登録できないとき' do
       it '日付が空では登録できない' do
         @record.date = ''
         @record.valid?

@@ -1,20 +1,22 @@
 <%= render "shared/header"%>
+
 <div class="main-background">
   <div class="container">
     <div class="main row">
+    <%# サイドメニュー %>
       <div class="side-menu col-2">
         <%= render "shared/side-menu" %>
       </div>
 
       <div class="user-profile col-10">
-        <%# プロフィール詳細 %>
+        <%# ユーザープロフィール %>
         <h1 class="share-cards-title"><%= "#{@user.last_name}さんのプロフィール"%></h1>
         
         <div class="profile d-flex">
           <ul>
           <div class="card-list d-flex justify-content-between">
             <div class="card-right">
-              <%# 氏名 %>
+              <%# ユーザープロフィール_氏名 %>
               <li class="card-name">
                 <ul class="name-list">
                   <li class="name"><%= "#{@user.last_name} #{@user.first_name}" %></li>
@@ -22,7 +24,7 @@
                 </ul>
               </li>
           
-              <%# 会社・部署 %>
+              <%# ユーザープロフィール_会社・部署 %>
               <li class="card-company">
                 <ul class="company-list">
                   <li class="company-name"><%= "#{@user.company} #{@user.company_form.form}" %></li>
@@ -30,7 +32,7 @@
                 </ul>
               </li>
           
-              <%# 電話番号 %>
+              <%# ユーザープロフィール_電話番号 %>
               <li class="card-phone">
                 <%= @user.phone_number%>
               </li>
@@ -38,7 +40,7 @@
             </div>
 
             <div class="card-left">
-                <%# 人物画像 %>
+                <%# ユーザープロフィール_写真 %>
                 <li calss="card-image">
                   <%= image_tag "boss.png", size: '100x100', class: "card-ditail-image" %>
                 </li>
@@ -47,6 +49,7 @@
           </div>
         </ul>
 
+          <%# ユーザープロフィール_不安定日 %>
           <div class="bio-resim-baddate">
             <p class="name">不安定日</p>
             <p><%= @unstable[1][0] %></p>
@@ -54,7 +57,7 @@
           </div>
 
         </div>
-        <%# 投稿カード一覧 %>
+        <%# ユーザー投稿済み名刺一覧 %>
         <section class="user-cards record-list">
           <div class="cards">
             <h2 class="page-heading"><%= "投稿名刺一覧"%></h2>
@@ -62,7 +65,7 @@
           </div>
         </section>
 
-        <%# お気に入り一覧 %>
+        <%# ユーザーお気に入り一覧 %>
         <section class="user-favorites record-list">
           <div class="favorites">
             <h2 class="page-heading"><%= "お気に入り"%></h2>
