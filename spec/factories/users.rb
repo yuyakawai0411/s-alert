@@ -12,6 +12,6 @@ FactoryBot.define do
     company_form_id       { Faker::Number.between(from: 1, to: 5) }
     department            { Faker::Company.profession }
     phone_number          { '090-1234-5678' }
-    birth_day             { '1931-12-31' }
+    birth_day             { '1980-12-31' }
   end
 end

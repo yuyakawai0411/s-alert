@@ -10,9 +10,10 @@
     
     <div class="record col-10">
         <article class="record-add">
-          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴登録"%></h1>
+        <%# 着信履歴登録フォーム %>
+          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん着信履歴登録"%></h1>
           <div class="d-flex">
-            <%# 入力フォーム %>
+            <%# 着信履歴登録フォーム_手動 %>
             <div class="input-form">
               <h2>手動で登録</h2>
               <%= form_with model: [@card, @record], local: true do |f| %> 
@@ -30,7 +31,7 @@
                     <td class="time-tag tag">時間</td>
                     <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                     <td class="time-filed text-filed">
-                      <%= f.collection_select(:phone_time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"item-category"})%>  
+                      <%= f.collection_select(:phone_time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"record-phone-time"})%>  
                     </td>
                   </tr>
 
@@ -38,7 +39,7 @@
                     <td class="call-tag tag">着信有無</td>
                     <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                     <td class="call-filed text-filed">
-                      <%= f.collection_select(:phone_call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>
+                      <%= f.collection_select(:phone_call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"record-phone-call"})%>
                     </td>
                   </tr>
 
@@ -46,23 +47,24 @@
                     <td class="expression-tag tag">感情</td>
                     <td class="indispensable"></td>
                     <td class="expression-filed text-filed">
-                      <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"item-category"})%>  
+                      <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"record-expression"})%>  
                     </td>
                   </tr>
 
                 </table>
                 <div class="sell-btn-contents">
-                  <%= f.submit "作成", class:"btn btn-dark " %>
+                  <%= f.submit "作成", class:"btn btn-dark", id:"record-submit" %>
                 </div>
               <% end %>
             </div>
-          
+
+            <%# 着信履歴登録フォーム_CSV %>
             <div class="csv-form">
               <h2>CSVでインポート</h2>
               <%= form_tag import_card_records_path(@card.id), multipart: true do %>
                 <%= file_field_tag :file %>
                 <div class="sellbtn-contents">
-                  <%= submit_tag "作成", class:"btn btn-dark csv-btn" %>
+                  <%= submit_tag "作成", class:"btn btn-dark csv-btn", id:"csv-submit" %>
                 </div>
               <% end %>
                <h4 class="csv-title">CSV注意事項</h4>
@@ -78,23 +80,23 @@
         </article>
 
         <article class="record-list">
-          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん通話履歴一覧"%></h1>
+          <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん着信履歴一覧"%></h1>
           <%# 着信履歴一覧表示 %>
           <table>
             <tr class="record-description">
               <td class="record-list-date record-column">日付</td>
               <td class="record-list-time record-column">時間</td>
-              <td class="record-list-expression record-column">感情</td>
               <td class="record-list-call record-column">着信有無</td>
+              <td class="record-list-expression record-column">感情</td>
               <td class="record-list-delete record-column">削除</td>
             </tr>
             <% @records.each do |record| %>
               <tr>
                 <td class="record-list-date record-column"><%= record.date %></td>
                 <td class="record-list-time record-column"><%= record.phone_time.time %></td> 
-                <td class="record-list-expression record-column"><%= record.expression.status %></td>
                 <td class="record-list-call record-column"><%= record.phone_call.status %></td>
-                <td class="record-list-delete record-column"><%= link_to "削除", card_record_path(@card.id, record.id), method: :delete %></td>
+                <td class="record-list-expression record-column"><%= record.expression.status %></td>
+                <td class="record-list-delete record-column"><%= link_to "削除", card_record_path(@card.id, record.id), method: :delete, class: "record-delete" %></td>
               </tr>
             <% end %>
           </table>

@@ -1,3 +1,4 @@
+ <%# ヘッダー %>
  <%= render "shared/header"%>
 
 <div class="main-background"> 
@@ -7,7 +8,7 @@
       <div class="side-menu col-2">
         <%= render "shared/side-menu" %>
       </div>
-      <%# カード一覧表示 %>
+      <%# 共有名刺一覧表示 %>
       <div class="share-cards col-10">
         <h1 class="share-cards-title">共有名刺一覧</h1>
         <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
@@ -15,4 +16,5 @@
     </div>
   </div>
 </div>
+  <%# フッター %>
   <%= render "shared/footer" %>

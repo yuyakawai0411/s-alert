@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 2021_07_02_045451) do
   end
 
   create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "notice_date"
-    t.string "description"
+    t.date "notice_date", null: false
+    t.string "description", null: false
     t.string "topic"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false

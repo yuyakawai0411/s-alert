@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   
-  #アソシエーション
   has_many :cards
   has_many :favorites
   has_many :fav_cards, through: :favorites, source: :card
@@ -10,8 +9,6 @@ class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form
 
-  
-  #バリデーション
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

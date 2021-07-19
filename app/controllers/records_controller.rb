@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy, :import]
   before_action :set_card, only: [:index, :create, :destroy, :import]
   before_action :move_to_root, only: [:create, :destroy, :import]
-  before_action :side_menu, only: [:index]
+  before_action :side_menu, only: [:index, :create, :import]
 
   def index
     @record = Record.new()
@@ -11,11 +11,10 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.new(record_params)
+    @records = Record.order(date: :DESC)
     if @record.save
       redirect_to action: "index" 
     else
-      side_menu
-      @records = Record.order(date: :DESC)
       render :index
     end
   end
@@ -30,14 +29,17 @@ class RecordsController < ApplicationController
   def import
     list = []
     card_id = @card.id
-    Record.import(params[:file], list, card_id)
-    if Record.create(list)
-      redirect_to action: "index"
+    if params[:file].blank? || (File.extname(params[:file].original_filename) != ".csv")
+       redirect_to action: "index", alert: 'csvファイルを添付してください'
     else
-      render :index
+      Record.import(params[:file], list, card_id)
+      if Record.create(list)
+        redirect_to action: "index"
+      else
+        render :index
+      end
     end
   end
-
 
   private
 
@@ -61,5 +63,5 @@ class RecordsController < ApplicationController
       @user_cards = @user.cards
     end
   end
-  
+
 end

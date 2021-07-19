@@ -1,6 +1,6 @@
 class NoticesController < ApplicationController
 before_action :authenticate_user!, only: [:create, :destroy]
-before_action :side_menu, only: [:index]
+before_action :side_menu, only: [:index, :create]
 before_action :past_date, only: [:index]
 
 def index
@@ -10,11 +10,10 @@ end
 
 def create
   @notice = Notice.new(notice_params)
+  @notices = @user.notices.order('notice_date ASC')
   if @notice.save
     redirect_to action: "index"
   else
-    side_menu
-    @notices = @user.notices.order('notice_date ASC')
     render :index
   end
 end

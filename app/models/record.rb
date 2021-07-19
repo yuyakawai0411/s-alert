@@ -1,6 +1,5 @@
 class Record < ApplicationRecord
 
-  #アソシエーション
   belongs_to :card
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -8,21 +7,14 @@ class Record < ApplicationRecord
   belongs_to :expression
   belongs_to :phone_call
 
-  #バリデーション
   validates :date,  presence: true
-
-  with_options numericality: { other_than: 0,  message: 'を入力してください' } do
-    validates :phone_call_id
-  end
-
+  validates :phone_call_id, numericality: { other_than: 0,  message: 'を入力してください' }
   validates :phone_time_id, numericality: { greater_than_or_equal_to: 7, less_than_or_equal_to:22, message: 'は指定の範囲内で選択してください' }
   validates :expression_id, numericality: { greater_than_or_equal_to: -3, less_than_or_equal_to:3, message: 'は指定の範囲内で選択してください' }
 
   private
-
+  # 着信履歴をCSVでインポート
   def self.import(file,list,card_id)
-    # path = File.join Rails.root, "db/csv/phone_record.csv"
-    # list = []
     CSV.foreach(file.path, headers: true) do |row|
       list << {
         date: row[0],
@@ -32,7 +24,5 @@ class Record < ApplicationRecord
         card_id: card_id
       }
     end
-
   end
-
 end
