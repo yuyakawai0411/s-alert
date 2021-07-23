@@ -20,15 +20,12 @@
       <nav class="col-3 d-flex justify-content-between" >
         <div class="about">ABOUT
         </div>
-
-        <div class="contact">CONTACT
-        </div>
         
         <div class="user", id="user" >
           <% if user_signed_in? %>
               <div class="pull-down-list"><%= link_to "LOGOUT", destroy_user_session_path, class: "pull-down-list", method: :delete %></li>
             <% else %>
-            <div id="user-menu"><span class="log_in">LOGIN</span>
+            <div id="user-menu"><span class="log_in">ログイン</span>
               <ul class="hidden", id="pull-down"> 
                 <li class="pull-down-list"><%= link_to "新規登録", new_user_registration_path, class: "pull-down-list" %></li>
                 <li class="pull-down-list"><%= link_to "ログイン", new_user_session_path, class: "pull-down-list"  %></li>

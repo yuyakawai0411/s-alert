@@ -25,6 +25,7 @@ http://54.150.194.112/
 ## 本番環境
 - EC2
 - Nginx
+- Unicorn
 - MariaDB
 - S3
 - Capistrano
