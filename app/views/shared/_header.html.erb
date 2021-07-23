@@ -23,7 +23,7 @@
         
         <div class="user", id="user" >
           <% if user_signed_in? %>
-              <div class="pull-down-list"><%= link_to "LOGOUT", destroy_user_session_path, class: "pull-down-list", method: :delete %></li>
+              <div class="pull-down-list"><%= link_to "ログアウト", destroy_user_session_path, class: "pull-down-list", method: :delete %></li>
             <% else %>
             <div id="user-menu"><span class="log_in">ログイン</span>
               <ul class="hidden", id="pull-down"> 
