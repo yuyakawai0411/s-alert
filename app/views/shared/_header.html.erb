@@ -18,9 +18,9 @@
 
       <%# ログイン機能 %>
       <nav class="col-3 d-flex justify-content-between" >
-        <div class="about">ABOUT
-        </div>
         
+        <%= link_to "テストログイン", cards_test_sign_in_path, class: "test-login", class:"log_in", method: :post %>
+
         <div class="user", id="user" >
           <% if user_signed_in? %>
               <div class="pull-down-list"><%= link_to "ログアウト", destroy_user_session_path, class: "pull-down-list", method: :delete %></li>
