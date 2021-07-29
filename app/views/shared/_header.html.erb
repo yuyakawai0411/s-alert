@@ -19,7 +19,7 @@
       <%# ログイン機能 %>
       <nav class="col-3 d-flex justify-content-between" >
         
-        <%= link_to "テストログイン", cards_test_sign_in_path, class: "test-login", class:"log_in", method: :post %>
+        <%= link_to "テストログイン", cards_test_sign_in_path, class: "test-login log_in", method: :post %>
 
         <div class="user", id="user" >
           <% if user_signed_in? %>

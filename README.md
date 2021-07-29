@@ -22,13 +22,6 @@
 # :globe_with_meridians: デモ
 ## URL
 http://54.150.194.112/
-## 本番環境
-- EC2
-- Nginx
-- Unicorn
-- MariaDB
-- S3
-- Capistrano
 ## テスト用アカウント
 - BASIC 認証
   - ID:yuya
@@ -36,6 +29,24 @@ http://54.150.194.112/
 - テストユーザー
   - email:test@gmail.com 
   - PS:5732test
+## 使用技術
+### インフラ
+- EC2
+- MySQL
+- Nginx(webサーバ)
+- Unicorn(apサーバ)
+- S3(パケット)
+- Capistrano(自動デプロイ)
+### バックエンド
+- Ruby
+- Rails
+### フロントエンド
+- HTML
+- CSS
+- Javascript
+### テストツール
+- Rspec(単体テスト)
+- Capybara(結合テスト)
   
 
 # :thought_balloon: 目指した課題解決
@@ -133,7 +144,7 @@ http://54.150.194.112/
 [![Image from Gyazo](https://i.gyazo.com/8a4660ba0320335b799407e8ce5f7c57.gif)](https://gyazo.com/8a4660ba0320335b799407e8ce5f7c57)
 ## 会話ネタの投稿(Channel使用)
 [![Image from Gyazo](https://i.gyazo.com/f27bb234bc838e42eb80012bb4439950.gif)](https://gyazo.com/f27bb234bc838e42eb80012bb4439950)
-## メール通知の登録/削除(Cron使用)
+## メール通知の登録/削除(Cron+ActiveMailer使用)
 [![Image from Gyazo](https://i.gyazo.com/c6ed44a3adad7b19b2975b319b127786.gif)](https://gyazo.com/c6ed44a3adad7b19b2975b319b127786)
 ## メールの文面
 [![Image from Gyazo](https://i.gyazo.com/9ed859205a708a6f87301477837ae02e.png)](https://gyazo.com/9ed859205a708a6f87301477837ae02e)
@@ -142,14 +153,18 @@ http://54.150.194.112/
 
 # :wrench: 実装予定の機能
 - [x] EC２にデプロイ
-- [ ] Dockerの導入
+- [X] Dockerの導入
 - [ ] CircleCI/CDの導入
 - [x] CSVで着信履歴をアップロード
 - [x] 会話ネタの投稿を非同期にする
-- [x] 名刺登録、メール通知登録、着信履歴登録時のバリデーションエラーを表示
 - [ ] CSV着信履歴のアップロードが失敗した時に、バリデーションエラーを表示する
-- [ ] グループ内のみで名刺共有と同時編集できるように、グールプ機能を追加
-- [ ] 着信時間、着信曜日の相関がわかるグラフを追加
+- [ ] 着信履歴を一括で複数追加できるようにする
+- [ ] 名刺・着信履歴をグループで同時編集できるようにする
+- [ ] 着信時間、着信曜日の相関関係をグラフで表示
+
+# :tractor: インフラ構成図
+
+[![Image from Gyazo](https://i.gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee.png)](https://gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee)
 
 
 # :floppy_disk: テーブル設計
@@ -172,6 +187,7 @@ http://54.150.194.112/
 | company_form_id    | integer | null: false               |
 | department         | string  | null: false               |
 | birth_day          | date    | null: false               |
+| user_id            | integer | null: false               |
 
 ### Association
 
@@ -263,6 +279,7 @@ http://54.150.194.112/
 - belongs_to :user 
 - belongs_to :card
 
+
 # :paperclip: ローカルでの動作方法
 
 ## ダウンロードとインストールの手順
@@ -270,31 +287,45 @@ http://54.150.194.112/
 
 
 `$ git clone https://github.com/yuyakawai0411/s-alert.git`
+
+
 2. リポジトリに移動してください
 
 
 `$ cd s-alert`
+
+
 3. 依存関係をインストールしてください
 
 
 `$ bundle install`
 `$ yarn install`
+
+
 4. データベースを作成してください
 
 
 `$ rails db:create`
+
+
 5. データベースを実行してください
 
 
 `$ rails db:migrate`
+
+
 6. seedファイルを実行してください
 
 
 `$ rails db:seed`
+
+
 7. アプリケーションを実行してください
 
 
 `$ rails s`
+
+
 8. crontabに定期処理を反映してください(メール通知を使う場合)
 
 
