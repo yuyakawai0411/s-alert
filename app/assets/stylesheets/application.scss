@@ -15,6 +15,12 @@
  */
 
  @import "bootstrap"; 
+ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+ @import '@fortawesome/fontawesome-free/scss/fontawesome';
+ @import '@fortawesome/fontawesome-free/scss/solid';
+ @import '@fortawesome/fontawesome-free/scss/regular';
+ @import '@fortawesome/fontawesome-free/scss/brands';
+ @import '@fortawesome/fontawesome-free/scss/v4-shims';
 
  a {
   text-decoration:none; 
@@ -61,4 +67,30 @@ footer {
 .company_field {
   width: 150px;
   margin-right: 20px;
+}
+
+.pagination>li>a {
+  color: white;
+  background: gray;
+}
+
+.pagination>.page-selecting>a {    
+  color: white; 
+  background:black;     
+}
+
+.pagination>li>a:hover {        
+    color: black;
+}
+
+.pagination>.page-selecting>a:hover {        
+  color: white;
+}
+
+ul.pagination {
+  margin: auto;
+}
+
+.user-info-edit>a {
+  color: black;
 }

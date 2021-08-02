@@ -1,18 +1,49 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show]
-  before_action :side_menu, only: [:show]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_info, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_root, only: [:edit, :update, :destroy]
+  before_action :side_menu, only: [:show, :edit]
   before_action :set_biorhythm, only: [:show]
 
   def show
-    @user = User.find(params[:id])
-    @cards = @user.cards
-    @favorites = @user.fav_cards
+    @cards = @user.cards.page(params[:page]).per(3)
+    @favorites = @user.fav_cards.page(params[:page]).per(3)
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update(user_params)  
+      sign_in(@user, bypass: true)
+      redirect_to user_path(@user.id)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to root_path
   end
 
   private
+  def user_params
+    params.require(:user).permit(:email, :password, :last_name, :first_name, :last_name_kana, :first_name_kana, :company, :company_form_id, :department, :phone_number, :birth_day)
+  end
+
+  def set_user_info
+    @user = User.find(params[:id])
+  end
+
+  def move_to_root
+    unless @user.id == current_user.id
+      redirect_to root_path
+    end
+  end
+
   def side_menu
     if user_signed_in?
-      @user = User.find(current_user.id)
       @user_cards = @user.cards
     end
   end

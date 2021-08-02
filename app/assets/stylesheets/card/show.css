@@ -22,3 +22,37 @@ h4.graph-title {
 .comment-text-area {
   width: 250px;
 }
+
+tr.graph-colum {
+  border: solid 1px;
+  padding-right: 15px;
+  padding-left: 10px; 
+}
+
+td.graph-colum-value {
+  font-size: 12px;
+  border: solid 1px;
+  padding-right: 10px;
+  padding-left: 10px; 
+}
+
+th.graph-colum-title {
+  font-size: 12px;
+  border: solid 1px;
+  padding-right: 10px;
+  padding-left: 10px; 
+  font-weight: bolder;
+}
+
+span.bad-date {
+  font-weight: bold;
+  color: red;
+}
+
+td.comment-colum-user {
+  width:420px;
+}
+
+td.comment-colum-delete {
+  width :15px
+}

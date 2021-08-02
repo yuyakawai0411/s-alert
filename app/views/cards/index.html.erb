@@ -12,6 +12,7 @@
         <div class="share-cards col-10">
           <h1 class="share-cards-title">共有名刺一覧</h1>
           <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+          <%= paginate @cards %>
         </div>
       </div>
     </div>

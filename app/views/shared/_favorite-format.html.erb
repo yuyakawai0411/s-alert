@@ -38,7 +38,9 @@
 
       <%# お気に入り_ステータス %>
       <li class="card-favorites">
-        <%=link_to "お気に入り解除", card_favorites_path(favorite.id), method: :delete %>
+        <%=link_to card_favorites_path(favorite.id), method: :delete do %>
+          <i class="fas fa-star"></i>
+        <% end %>
       </li>
     </div>
   </div>  

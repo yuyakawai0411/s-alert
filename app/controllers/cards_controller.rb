@@ -8,7 +8,8 @@ class CardsController < ApplicationController
   before_action :set_biorhythm, only: [:show]
 
   def index
-    @cards = Card.order('created_at DESC')
+    # @cards = Card.order('created_at DESC')
+    @cards = Card.page(params[:page]).per(3)
   end
 
   def new
@@ -110,6 +111,7 @@ class CardsController < ApplicationController
     @card[:s_first_name] = @card[:s_first_name].gsub(/[[:space:]]/, '')
     @card[:s_last_name_kana] = @card[:s_last_name_kana].gsub(/[[:space:]]/, '')
     @card[:s_first_name_kana] = @card[:s_first_name_kana].gsub(/[[:space:]]/, '')
+    @card[:s_phone_number] = @card[:s_phone_number].gsub(/-/,'')
   end
 
   def move_to_root

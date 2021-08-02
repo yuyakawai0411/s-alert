@@ -41,9 +41,32 @@
         <li class="card-favorites">
           <% if user_signed_in? && (card.user_id != current_user.id) %>
             <% if card.favorited_by?(current_user) %>
-              <%=link_to "お気に入り解除", card_favorites_path(card.id), method: :delete %>
+              <%=link_to card_favorites_path(card.id), method: :delete do %>
+                <i class="fas fa-star"></i>
+              <% end %>
             <% else %>
-              <%=link_to "お気に入り登録", card_favorites_path(card.id), method: :post %>
+              <%=link_to card_favorites_path(card.id), method: :post do %>
+                <i class="far fa-star"></i>
+              <% end %>
+            <% end %>
+          <% end %>
+        </li>
+        <%# 名刺編集&削除 %>
+        <li class="pop-up-edit">
+          <% if user_signed_in? %>
+            <% if card.user_id == current_user.id %>
+              <%=link_to edit_card_path(card.id) do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to card_records_path(card.id) do %>
+                <i class="fas fa-phone-square-alt"></i>
+              <% end %>
+              <%= link_to  biorhythm_card_records_path(card.id) do%>
+                <i class="fas fa-heartbeat"></i>
+              <% end %>
+              <%=link_to card_path(card.id), method: :delete do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
             <% end %>
           <% end %>
         </li>

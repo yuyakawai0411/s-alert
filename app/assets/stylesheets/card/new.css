@@ -1,22 +1,29 @@
-tr {
+tr.input-form {
   margin-bottom: 50px;
 }
 td.tag {
   width: 100px;
 }
 td.indispensable{
-  width: 100px;
+  width: 70px;
 }
 
 td.text-filed{
   width: 300px;
 }
 
+td.birthday-filed {
+  width: 500px;
+}
+
 .sell-btn-contents {
   margin-left: 200px;
 } 
 
-
+.birthday_attention {
+  font-size: small;
+  margin-left: 5px; 
+}
 
 span.indispensable-tag {
   background-color: red;

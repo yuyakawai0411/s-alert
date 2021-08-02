@@ -16,7 +16,7 @@
               <%= render 'shared/error_messages', model: f.object %>
             <table>
               <%# 名刺編集フォーム_写真 %>
-              <tr class="card-image d-flex align-items-start">
+              <tr class="card-image d-flex align-items-start input-form">
                 <td class="image-tag tag">写真</td>
                 <td class="indispensable"></td>
                 <td class="image-filed text-filed"><%= f.file_field :image, id:"card_image" %></td>
@@ -24,11 +24,11 @@
               </tr>
 
               <%# 名刺編集フォーム_名前 %>
-              <tr class="card-name d-flex align-items-start">
+              <tr class="card-name d-flex align-items-start input-form">
                 <td class="name-tag tag">名前</td>
                 <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                 <td class="name-filed text-filed">
-                  <div class="name-kanji d-flex">
+                  <div class="mb-2 name-kanji d-flex">
                     <div class="last-name-kanji">
                       <%= f.text_field :s_last_name, class:"items-text", id:"item-name", placeholder:"例) 田中" ,class: 'name_field'%>
                       <div>姓</div>
@@ -55,11 +55,11 @@
               </tr>
 
               <%# 名刺編集フォーム_会社 %>
-              <tr class="card-company d-flex align-items-start">
+              <tr class="card-company d-flex align-items-start input-form">
                 <td class="company-tag tag">会社</td>
                 <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                 <td class="company-filed text-filed">
-                  <div class="company-name-only d-flex">
+                  <div class="mb-2 company-name-only d-flex">
                     <div class="company-name text-filrd">         
                       <%= f.text_field :s_company, class:"items-text", id:"item-info", placeholder:"例) TM株式会社" ,class: 'company_field' %>
                       <div>社名</div>
@@ -78,20 +78,20 @@
               </tr>
 
               <%# 名刺編集フォーム_電話番号  %>
-              <tr class="card-phone_number d-flex align-items-start">
+              <tr class="card-phone_number d-flex align-items-start input-form">
                 <td class="phone_number-tag tag">電話番号</td>
-                <td class="indispensable"><span class="indispensable-tag">必須</span></td>
-                <td class="text-filed text-filed">
+                <td class="indispensable"></td>
+                <td class="text-filed">
                   <%= f.text_field :s_phone_number, class:"items-text", id:"item-info", placeholder:"例) 060-1256-3434"  %>
                 </td>
               </tr>
 
                 <%# 名刺編集フォーム_生年月日 %>
-                <tr class="card-birthday d-flex align-items-start">
+                <tr class="card-birthday d-flex align-items-start input-form">
                   <td class='birthday-tag tag'><label class="birthday-day">生年月日</label></td>
-                  <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+                  <td class="indispensable"></td>
 
-                  <td class='birthday-filed text-filed d-flex align-items-start'>
+                  <td class='birthday-filed d-flex align-items-start'>
                     <%= raw sprintf(
                             f.date_select(
                               :s_birth_day,
@@ -101,27 +101,28 @@
                               end_year: (Time.now.year - 5),
                               date_separator: '%s'),
                             "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+                    <p class="birthday_attention">*誕生日を登録いただくと、<br>感情グラフが作成されます</p>
                   </td>
                 </tr>
 
                 <%# 名刺編集フォーム_会話ネタ %>
-                <tr class="card-hobby d-flex align-items-start">
-                  <td class="hobby-tag tag">会話ネタTOP3</td>
+                <tr class="card-hobby d-flex align-items-start input-form">
+                  <td class="hobby-tag tag">会話ネタ候補</td>
                   <td class="indispensable"></td>
                   <td class="hobby-filed text-filed">
-                    <div class="d-flex">
+                    <div class="mb-2 d-flex">
                       <div class="company-department text-filed">
                         <%= f.text_area :s_hobby_top ,class:"sell-btn" %>
-                        <div>第一位</div>
+                        <div>第一候補</div>
                       </div>
                       <div class="company-department text-filed">
                         <%= f.text_area :s_hobby_medium ,class:"sell-btn" %>
-                        <div>第二位</div>
+                        <div>第二候補</div>
                       </div>
                     </div>
                       <div class="company-department text-filed">
                         <%= f.text_area :s_hobby_row ,class:"sell-btn" %>
-                        <div>第三位</div>
+                        <div>第三候補</div>
                       </div>
                   </td>
                 </tr>

@@ -7,11 +7,12 @@ Rails.application.routes.draw do
     end
     resources :records, only: [:index, :create, :destroy] do
       collection { post :import}
+      collection { get :biorhythm}
     end
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
-  resources :users, only:[:show] do
+  resources :users, only:[:show, :edit, :update, :destroy] do
     resources :notices, only: [:index, :create, :destroy]
   end
 end

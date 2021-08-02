@@ -1,8 +1,8 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy, :import]
-  before_action :set_card, only: [:index, :create, :destroy, :import]
+  before_action :set_card, only: [:index, :create, :destroy, :import, :biorhythm]
   before_action :move_to_root, only: [:create, :destroy, :import]
-  before_action :side_menu, only: [:index, :create, :import]
+  before_action :side_menu, only: [:index, :create, :import, :biorhythm]
 
   def index
     @record = Record.new()
@@ -39,6 +39,11 @@ class RecordsController < ApplicationController
         render :index
       end
     end
+  end
+
+  def biorhythm
+    @record = Record.new()
+    @records = Record.order(date: :DESC)
   end
 
   private

@@ -6,10 +6,28 @@ section.record-list {
   padding-top: 30px;
 }
 
-td.record-column {
-  width: 15%;
+table.record-colum {
+  table-layout: fixed;
+  width: 600px;
 }
 
-.record-description {
+table.record-colum>td {
+  overflow-wrap : break-word
+}
+
+tr.record-colum-title {
+  width: 600px;
   border-bottom: solid 1px black;
+}
+
+td.record-column-value {
+  width: 150px;
+}
+
+
+.record-notice-list{ 
+  width: 600px;
+  height:450px;
+  overflow-x: hidden;
+  overflow-y: visible;
 }

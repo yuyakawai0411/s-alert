@@ -36,3 +36,9 @@ span:hover {
   width: 220px;
 }
 
+
+.user, .about {
+  padding: 2px;
+  border-style: inset;
+  background-color: gray;
+}

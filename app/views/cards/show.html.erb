@@ -13,43 +13,43 @@
 
           <div class="profile d-flex">
             <ul>
-            <div class="card-list d-flex justify-content-between">
-              <div class="card-right">
-              <%# 名刺プロフィール_氏名 %>
-                <li class="card-name">
-                  <ul class="name-list">
-                    <li class="name"><%= "#{@card.s_last_name} #{@card.s_first_name}" %></li>
-                    <li class="kana"><%= "#{@card.s_last_name_kana} #{@card.s_first_name_kana}" %></li>
-                  </ul>
-                </li>
-            
-              <%# 名刺プロフィール_会社・部署 %>
-              <li class="card-company">
-                <ul class="company-list">
-                  <li class="company-name"><%= "#{@card.s_company} #{@card.s_company_form.form}"%></li>
-                  <li class="department"><%= @card.s_department %></li>
-                </ul>
-              </li>
-              
-              <%# 名刺プロフィール_電話番号 %>
-              <li class="card-phone">
-                <%= @card.s_phone_number%>
-              </li>
+              <div class="card-list d-flex justify-content-between">
+
+                <%# 名刺プロフィール_写真 %>
+                <div class="card-left">
+                  <li calss="card-image">
+                    <% if @card.image.attached? %>
+                      <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
+                    <% else %>
+                      <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
+                    <% end %>
+                  </li>
+                </div>
+
+                <%# 名刺プロフィール_氏名 %>
+                <div class="card-right">
+                    <li class="card-name">
+                      <ul class="name-list">
+                        <li class="name"><%= "#{@card.s_last_name} #{@card.s_first_name}" %></li>
+                        <li class="kana"><%= "#{@card.s_last_name_kana} #{@card.s_first_name_kana}" %></li>
+                      </ul>
+                    </li>
+                
+                  <%# 名刺プロフィール_会社・部署 %>
+                  <li class="card-company">
+                    <ul class="company-list">
+                      <li class="company-name"><%= "#{@card.s_company} #{@card.s_company_form.form}"%></li>
+                      <li class="department"><%= @card.s_department %></li>
+                    </ul>
+                  </li>
+                  
+                  <%# 名刺プロフィール_電話番号 %>
+                  <li class="card-phone">
+                    <%= @card.s_phone_number%>
+                  </li>
+                </div>
                 
               </div>
-
-              <div class="card-left">
-              <%# 名刺プロフィール_写真 %>
-              <li calss="card-image">
-                <% if @card.image.attached? %>
-                  <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
-                <% else %>
-                  <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
-                <% end %>
-              </li>
-              </div>
-
-            </div>
             </ul>
             <%# 名刺プロフィール_不安定日 %>
             <div class="bio-resim-baddate">
@@ -78,11 +78,31 @@
                 <%= line_chart @expression, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today, min: -1, max: 1 %>
               </div>
             </div>
-            <ul class="graph-detail">
-              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。1に近い=エネルギーがあり調子が良い、-1に近い=エネルギーがなく調子が悪い、
-                  0に近い=エネルギーがあり調子が良くない(感情が不安定(キレやすい))とされています。</li>
-              <li>バイオリズム実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。数値が高いほど機嫌がよくなります。</li>
-            </ul>
+    
+              <ul class="graph-detail">
+                <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。</li>
+                <li>バイオリズム実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。数値が高いほど機嫌がよくなります。</li>
+              </ul>
+              <h5 class="mt-3">バイオリズムグラフの見方</h5>
+              <table>
+                <tr class="graph-colum">
+                  <th class="graph-colum-title">感情値</th>
+                  <th class="graph-colum-title">状態</th>
+                </tr>
+                <tr class="graph-colum">
+                  <td class="graph-colum-value">1</td>
+                  <td class="graph-colum-value">エネルギーがあり、調子が良い</td>
+                </tr>
+                <tr class="graph-colum">
+                  <td class="graph-colum-value">-1</td>
+                  <td class="graph-colum-value">エネルギーがなく、調子が悪い</td>
+                </tr>
+                 <tr class="graph-colum">
+                  <td class="graph-colum-value">0</td>
+                  <td class="graph-colum-value">エネルギーがあり、調子がよくない=<span class="bad-date">不安定</span>(キレやすい)</td>
+                </tr>
+              </table>
+           
           </section>
           
           <%# 着信頻度グラフ %>
@@ -109,33 +129,40 @@
             <h2><%= "会話のネタ"%></h2>
               <div class="interest row">
                 <div class="top-list col-5">
-                  <h4 class="mb-3">会話ネタTOP3</h4>
+                  <h4 class="mb-3">会話ネタ候補</h4>
                   <ol>
                     <% if @card.s_hobby_top.nil? %>
-                      <li><h5>1.登録されていません</h5></li>
+                      <li><h5>・登録されていません</h5></li>
                     <% else %>
-                      <li><h5><%= "1.#{@card.s_hobby_top}" %></h5></li>
+                      <li><h5><%= "・#{@card.s_hobby_top}" %></h5></li>
                     <% end %>
                     <% if @card.s_hobby_medium.nil? %>
-                      <li><h5>2.登録されていません</h5></li>
+                      <li><h5>・登録されていません</h5></li>
                     <% else %>
-                      <li><h5><%= "2.#{@card.s_hobby_medium}" %></h5></li>
+                      <li><h5><%= "・#{@card.s_hobby_medium}" %></h5></li>
                     <% end %>
                     <% if @card.s_hobby_row.nil? %>
-                      <li><h5>3.登録されていません</h5></li>
+                      <li><h5>・登録されていません</h5></li>
                     <% else %>
-                      <li><h5><%= "3.#{@card.s_hobby_row}" %></h5></li>
+                      <li><h5><%= "・#{@card.s_hobby_row}" %></h5></li>
                     <% end %>
                   </ol>
                 </div>
                 <div class="comment-form col-7">
                   <h4>コメント一覧</h4>
-                  <div id='messages' class="comment-list">
+                  <div class="comment-list">
                     <% @comments.each do |comment| %>
-                      <table>
+                      <table id='messages'>
                         <tr>
-                          <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
-                          <td><%= comment.text %></td>
+                          <td class="comment-colum-user"><strong><%= link_to comment.user.first_name, "/users/#{comment.user.id}" %>：</strong><%= comment.text %></td>
+                          <% if user_signed_in? %>
+                            <% if current_user.id == comment.user_id %>
+                              <td class="comment-colum-delete"><%= link_to card_comment_path(@card,comment), class: "text-right", method: :delete do %>
+                                <i class="fas fa-trash-alt"></i>
+                              <% end %>
+                              </td>
+                            <% end %>
+                          <% end %>
                         </tr>
                       </table>
                     <% end %>

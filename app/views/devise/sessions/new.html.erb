@@ -12,14 +12,10 @@
         <h1 class="share-cards-title">ユーザーログイン</h1>
 
           <%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
-            <div class='login-flash-message'>
-              <%= flash[:notice] %>
-              <%= flash[:alert] %>
-            </div>
 
           <table>
             <%# ログインフォーム_メールアドレス %>
-            <tr class="user-email d-flex align-items-start">
+            <tr class="user-email d-flex align-items-start input-form">
               <td class="email-tag tag">メールアドレス</td>
               <td class="indispensable"><span class="indispensable-tag">必須</span></td>
               <td class="email-filed text-filed">
@@ -27,7 +23,7 @@
               </td>
             </tr>
             <%# ログインフォーム_パスワード %>
-            <tr class="user-password d-flex align-items-start">
+            <tr class="user-password d-flex align-items-start input-form">
               <td class="password-tag tag">パスワード</td>
               <td class="indispensable"><span class="indispensable-tag">必須</span></td>
               <td class="password-filed text-filed">
