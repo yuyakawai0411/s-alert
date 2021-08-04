@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
   resources :users, only:[:show, :edit, :update, :destroy] do
+    member { get :post_cards }
+    member { get :favorite_cards }
     resources :notices, only: [:index, :create, :destroy]
   end
 end

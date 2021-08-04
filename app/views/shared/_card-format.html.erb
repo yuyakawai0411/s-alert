@@ -52,21 +52,21 @@
           <% end %>
         </li>
         <%# 名刺編集&削除 %>
-        <li class="pop-up-edit">
+        <li class="pop-up-edit d-flex">
           <% if user_signed_in? %>
-            <% if card.user_id == current_user.id %>
-              <%=link_to edit_card_path(card.id) do %>
-                <i class="fas fa-edit"></i>
-              <% end %>
-              <%= link_to card_records_path(card.id) do %>
-                <i class="fas fa-phone-square-alt"></i>
-              <% end %>
-              <%= link_to  biorhythm_card_records_path(card.id) do%>
-                <i class="fas fa-heartbeat"></i>
-              <% end %>
-              <%=link_to card_path(card.id), method: :delete do %>
-                <i class="fas fa-trash-alt"></i>
-              <% end %>
+            <% if card.user_id == current_user.id %>      
+                <%=link_to edit_card_path(card.id), class:"card-edit-icon" do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+                <%= link_to card_records_path(card.id), class:"phone-record-icon" do %>
+                  <i class="fas fa-phone-square-alt"></i>
+                <% end %>
+                <%= link_to  biorhythm_card_records_path(card.id), class:"biorhythm-record-icon" do%>
+                  <i class="fas fa-heartbeat"></i>
+                <% end %>
+                <%=link_to card_path(card.id), method: :delete, class:"card-delete-icon" do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
             <% end %>
           <% end %>
         </li>

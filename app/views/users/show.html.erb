@@ -14,7 +14,7 @@
         
         <div class="profile d-flex">
           <ul>
-          <div class="card-list d-flex justify-content-between">
+          <div class="card-info d-flex justify-content-between">
 
             <%# ユーザープロフィール_写真 %>
             <div class="card-left">
@@ -73,7 +73,7 @@
           <div class="cards">
             <h2 class="page-heading"><%= "投稿名刺一覧"%></h2>
             <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
-            <%= paginate @cards %>
+            <%= link_to "もっと見る", post_cards_user_path(@user.id) %>
           </div>
         </section>
 
@@ -82,7 +82,7 @@
           <div class="favorites">
             <h2 class="page-heading"><%= "お気に入り"%></h2>
             <%= render partial: "shared/favorite-format" , locals: { favorites: @favorites }%>
-            <%= paginate @favorites %>
+            <%= link_to "もっと見る", favorite_cards_user_path(@user.id) %>
           </div>
         </section>
       </div>
