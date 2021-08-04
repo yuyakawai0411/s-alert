@@ -31,24 +31,6 @@ http://54.150.194.112/
   - email:test@gmail.com 
   - PS:5732test
 
-## 使用技術
-### インフラ
-- EC2
-- MySQL
-- Nginx(webサーバ)
-- Unicorn(apサーバ)
-- S3(パケット)
-- Capistrano(自動デプロイ)
-### バックエンド
-- Ruby
-- Rails
-### フロントエンド
-- HTML
-- CSS
-- Javascript
-### テストツール
-- Rspec(単体テスト)
-- Capybara(結合テスト)
 
 # :thought_balloon: 目指した課題解決
 このアプリはビジネスマンが上司や顧客と会話するときに抱える3つの課題を解決します。
@@ -279,6 +261,25 @@ http://54.150.194.112/
 - belongs_to :user 
 - belongs_to :card
 
+# :mortar_board:使用技術
+### インフラ
+- EC2
+- MySQL
+- Nginx(webサーバ)
+- Unicorn(apサーバ)
+- S3(パケット)
+- Capistrano(自動デプロイ)
+### バックエンド
+- Ruby
+- Rails
+### フロントエンド
+- HTML
+- CSS
+- Javascript
+### テストツール
+- Rspec(単体テスト)
+- Capybara(結合テスト)
+
 # :paperclip: ローカルでの動作方法
 
 ## ダウンロードとインストールの手順
@@ -286,6 +287,8 @@ http://54.150.194.112/
 
 
 `$ git clone https://github.com/yuyakawai0411/s-alert.git`
+
+
 2. リポジトリに移動してください
 
 
