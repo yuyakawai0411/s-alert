@@ -22,13 +22,7 @@
 # :globe_with_meridians: デモ
 ## URL
 http://54.150.194.112/
-## 本番環境
-- EC2
-- Nginx
-- Unicorn
-- MariaDB
-- S3
-- Capistrano
+
 ## テスト用アカウント
 - BASIC 認証
   - ID:yuya
@@ -36,7 +30,25 @@ http://54.150.194.112/
 - テストユーザー
   - email:test@gmail.com 
   - PS:5732test
-  
+
+## 使用技術
+### インフラ
+- EC2
+- MySQL
+- Nginx(webサーバ)
+- Unicorn(apサーバ)
+- S3(パケット)
+- Capistrano(自動デプロイ)
+### バックエンド
+- Ruby
+- Rails
+### フロントエンド
+- HTML
+- CSS
+- Javascript
+### テストツール
+- Rspec(単体テスト)
+- Capybara(結合テスト)
 
 # :thought_balloon: 目指した課題解決
 このアプリはビジネスマンが上司や顧客と会話するときに抱える3つの課題を解決します。
@@ -148,9 +160,13 @@ http://54.150.194.112/
 - [x] 会話ネタの投稿を非同期にする
 - [x] 名刺登録、メール通知登録、着信履歴登録時のバリデーションエラーを表示
 - [ ] CSV着信履歴のアップロードが失敗した時に、バリデーションエラーを表示する
-- [ ] グループ内のみで名刺共有と同時編集できるように、グールプ機能を追加
-- [ ] 着信時間、着信曜日の相関がわかるグラフを追加
+- [ ] 着信履歴を一括で複数追加できるようにする
+- [ ] 名刺・着信履歴をグループで同時編集できるようにする
+- [ ] 着信時間、着信曜日の相関関係をグラフで表示
 
+# :tractor: インフラ構成図
+
+[![Image from Gyazo](https://i.gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee.png)](https://gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee)
 
 # :floppy_disk: テーブル設計
 
@@ -274,27 +290,39 @@ http://54.150.194.112/
 
 
 `$ cd s-alert`
+
+
 3. 依存関係をインストールしてください
 
 
 `$ bundle install`
 `$ yarn install`
+
+
 4. データベースを作成してください
 
 
 `$ rails db:create`
+
+
 5. データベースを実行してください
 
 
 `$ rails db:migrate`
+
+
 6. seedファイルを実行してください
 
 
 `$ rails db:seed`
+
+
 7. アプリケーションを実行してください
 
 
 `$ rails s`
+
+
 8. crontabに定期処理を反映してください(メール通知を使う場合)
 
 
