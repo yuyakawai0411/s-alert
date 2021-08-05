@@ -14,4 +14,3 @@ RUN gem install bundler
 RUN bundle install
 
 COPY . /myproject
-
