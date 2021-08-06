@@ -29,14 +29,14 @@ services:
       - .env
     depends_on:
       - db
-#   nginx:
-#     build: ./nginx
-#     ports:
-#       - 80:80
-#     volumes: 
-#       - sock-data:/myproject/tmp/sockets
-#     restart: always
-#     depends_on: 
-#       - web
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes: 
+      - sock-data:/myproject/tmp/sockets
+    restart: always
+    depends_on: 
+      - web
 volumes: 
   sock-data:
