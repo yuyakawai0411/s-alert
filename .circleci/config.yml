@@ -36,6 +36,12 @@ jobs:
       - run:
           name: test
           command: bundle exec rake test
+      - run:
+          name: Rspec Models
+          command: bundle exec rspec spec/models
+      - run:
+          name: Rspec system
+          command: bundle exec rspec spec/system
 
 workflows:
   version: 2
