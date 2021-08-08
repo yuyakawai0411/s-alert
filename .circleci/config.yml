@@ -1,0 +1,47 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.2
+
+jobs:
+  build:
+    docker: #CI環境にdocker-imageをコピー
+      - image: circleci/ruby:2.6.5
+    working_directory: ~/s-alert
+    steps:
+      - checkout: #working_directory直下にGithubのリポジトリをコピー
+          path: ~/s-alert
+      - ruby/install-deps #bundle install
+  test:
+    docker:
+      - image: circleci/ruby:2.6.5
+      - image: circleci/mysql:5.5
+        environment:
+          MYSQL_ROOT_PASSWORD: password 
+          MYSQL_DATABASE: s_alert_test
+          MYSQL_USER: root
+    environment: #CI閑居で使う環境変数の定義
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DATABASE_HOST: "127.0.0.1" #自分のパソコン
+      RAILS_ENV: test
+    working_directory: ~/s-alert
+    steps:
+      - checkout:
+          path: ~/s-alert
+      - ruby/install-deps
+      - run: #コマンドを実行する
+          name: Database setup
+          command: bundle exec rails db:migrate #実行するコマンドの内容
+      - run:
+          name: test
+          command: bundle exec rake test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires: #buildが終了するまでテストを開始させない
+            - build
