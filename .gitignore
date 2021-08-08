@@ -31,4 +31,4 @@
 yarn-debug.log*
 .yarn-integrity
 .Ds_Store
-db/mysql_data/
+/db/mysql_data

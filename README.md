@@ -22,6 +22,7 @@
 # :globe_with_meridians: デモ
 ## URL
 http://54.150.194.112/
+
 ## テスト用アカウント
 - BASIC 認証
   - ID:yuya
@@ -29,25 +30,6 @@ http://54.150.194.112/
 - テストユーザー
   - email:test@gmail.com 
   - PS:5732test
-## 使用技術
-### インフラ
-- EC2
-- MySQL
-- Nginx(webサーバ)
-- Unicorn(apサーバ)
-- S3(パケット)
-- Capistrano(自動デプロイ)
-### バックエンド
-- Ruby
-- Rails
-### フロントエンド
-- HTML
-- CSS
-- Javascript
-### テストツール
-- Rspec(単体テスト)
-- Capybara(結合テスト)
-  
 
 # :thought_balloon: 目指した課題解決
 このアプリはビジネスマンが上司や顧客と会話するときに抱える3つの課題を解決します。
@@ -153,19 +135,24 @@ http://54.150.194.112/
 
 # :wrench: 実装予定の機能
 - [x] EC２にデプロイ
-- [X] Dockerの導入
-- [ ] CircleCI/CDの導入
+- [x] Dockerの導入
+- [x] CircleCI/CDの導入
 - [x] CSVで着信履歴をアップロード
 - [x] 会話ネタの投稿を非同期にする
 - [ ] CSV着信履歴のアップロードが失敗した時に、バリデーションエラーを表示する
 - [ ] 着信履歴を一括で複数追加できるようにする
 - [ ] 名刺・着信履歴をグループで同時編集できるようにする
 - [ ] 着信時間、着信曜日の相関関係をグラフで表示
+- [ ] Nginxの単体テスト
 
 # :tractor: インフラ構成図
 
 [![Image from Gyazo](https://i.gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee.png)](https://gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee)
 
+
+# :tractor: インフラ構成図
+
+[![Image from Gyazo](https://i.gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee.png)](https://gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee)
 
 # :floppy_disk: テーブル設計
 
@@ -279,6 +266,24 @@ http://54.150.194.112/
 - belongs_to :user 
 - belongs_to :card
 
+# :mortar_board:使用技術
+### インフラ
+- EC2
+- MySQL
+- Nginx(webサーバ)
+- Unicorn(apサーバ)
+- S3(パケット)
+- Capistrano(自動デプロイ)
+### バックエンド
+- Ruby
+- Rails
+### フロントエンド
+- HTML
+- CSS
+- Javascript
+### テストツール
+- Rspec(単体テスト)
+- Capybara(結合テスト)
 
 # :paperclip: ローカルでの動作方法
 
