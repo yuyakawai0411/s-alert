@@ -2,19 +2,23 @@ version: 2.1
 
 orbs:
   ruby: circleci/ruby@1.1.2
-
+  node: circleci/node@2
 jobs:
   build:
     docker: #CI環境にdocker-imageをコピー
-      - image: circleci/ruby:2.6.5
+      - image: circleci/ruby:2.6.5-node
     working_directory: ~/s-alert
     steps:
       - checkout: #working_directory直下にGithubのリポジトリをコピー
           path: ~/s-alert
       - ruby/install-deps #bundle install
+      - node/install-packages:
+          app-dir: ~/s-alert
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
   test:
     docker:
-      - image: circleci/ruby:2.6.5
+      - image: circleci/ruby:2.6.5-node
       - image: circleci/mysql:5.5
         environment:
           MYSQL_ROOT_PASSWORD: password 
@@ -30,6 +34,10 @@ jobs:
       - checkout:
           path: ~/s-alert
       - ruby/install-deps
+      - node/install-packages:
+          app-dir: ~/s-alert
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
       - run: #コマンドを実行する
           name: Database setup
           command: bundle exec rails db:migrate #実行するコマンドの内容
