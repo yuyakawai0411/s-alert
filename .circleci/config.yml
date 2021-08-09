@@ -42,9 +42,6 @@ jobs:
           name: Database setup
           command: bundle exec rails db:migrate #実行するコマンドの内容
       - run:
-          name: test
-          command: bundle exec rake test
-      - run:
           name: Rspec Models
           command: bundle exec rspec spec/models
       - run:
