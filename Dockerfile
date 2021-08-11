@@ -14,3 +14,8 @@ RUN gem install bundler
 RUN bundle install
 
 COPY . /myproject
+
+#本番環境で行う動作
+# COPY start.sh /start.sh
+# RUN chmod 744 /start.sh
+# CMD ["sh","/start.sh"]
