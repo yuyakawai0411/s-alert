@@ -147,12 +147,8 @@ http://54.150.194.112/
 
 # :tractor: インフラ構成図
 
-[![Image from Gyazo](https://i.gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee.png)](https://gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee)
+[![Image from Gyazo](https://i.gyazo.com/a621f6281bbe65e19cab67eaf32ab487.png)](https://gyazo.com/a621f6281bbe65e19cab67eaf32ab487)
 
-
-# :tractor: インフラ構成図
-
-[![Image from Gyazo](https://i.gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee.png)](https://gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee)
 
 # :floppy_disk: テーブル設計
 
@@ -271,8 +267,10 @@ http://54.150.194.112/
 - EC2
 - MySQL
 - Nginx(webサーバ)
-- Unicorn(apサーバ)
+- Unicorn(appサーバ)
 - S3(パケット)
+- docker(コンテナ環境)
+- Cercleci(自動テスト)
 - Capistrano(自動デプロイ)
 ### バックエンド
 - Ruby
@@ -331,10 +329,6 @@ http://54.150.194.112/
 `$ rails s`
 
 
-8. crontabに定期処理を反映してください(メール通知を使う場合)
-
-
-`$ whenever --update-crontab`
 
 
 ## 開発環境

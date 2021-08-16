@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mysql:8.0
+    image: mysql:8.0 #ymlにimage:が書かれていて、そのイメージ名がローカルにない場合は、リモートからpullしてくる
     cap_add: 
       - SYS_NICE
     command: --default-authentication-plugin=mysql_native_password

@@ -5,6 +5,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && apt-get update -qq \
   && apt-get install -y nodejs yarn
 
+# cronのインストール
+# RUN apt-get install -y cron
+
 WORKDIR /myproject
 
 COPY Gemfile /myproject/Gemfile
@@ -14,6 +17,10 @@ RUN gem install bundler
 RUN bundle install
 
 COPY . /myproject
+
+# cronの実行
+# RUN bundle exec whenever --update-crontab 
+# CMD ["cron", "-f"] 
 
 #本番環境で行う動作
 # COPY start.sh /start.sh
