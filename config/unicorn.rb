@@ -1,7 +1,7 @@
 worker_processes 1
 
 #ワークディレクトリを指定
-$app_dir = "/myproject" 
+$app_dir = "/app" 
 working_directory $app_dir
 
 #pidファイルでプロセス番号を管理
