@@ -51,8 +51,9 @@ test:
 #
 production:
   <<: *default
-  database: database
-  username: admin
+  database: s_alert_production
+  username: root
+  # database: database
+  # username: admin
   password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  # socket: /var/lib/mysql/mysql.sock
+  host: <%= ENV['RDS_HOSTNAME'] || '127.0.0.1' %>
