@@ -11,22 +11,20 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: s_alert_production
-      MYSQL_ROOT_PASSWORD: ${RDS_PASSWORD}
+      MYSQL_DATABASE: s_alert_development
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: root
-    env_file: 
-      - .env
   web:
     build: .
     # command: /bin/sh -c "rm -f tmp/pids/server.pid && rm -f tmp/pids/unicorn.pid && rm -f tmp/sockets/unicorn.sock && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    # command: /bin/sh -c "rm -f tmp/pids/server.pid && rm -f tmp/pids/unicorn.pid && rm -f tmp/sockets/unicorn.sock && bundle exec unicorn_rails -c /app/config/unicorn.rb -E development -p 3000"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && rm -f tmp/pids/unicorn.pid && rm -f tmp/sockets/unicorn.sock && bundle exec unicorn_rails -c /app/config/unicorn.rb -E development -p 3000"
     volumes:
       - .:/app
       # - sock-data:/app/tmp/sockets
     ports:
       - "3000:3000"
     environment:
-      RAILS_ENV: production
+      RAILS_ENV: development
     env_file: 
       - .env
     depends_on:

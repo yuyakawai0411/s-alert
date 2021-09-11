@@ -1,6 +1,6 @@
 FROM ruby:2.6.5
 
-ENV RAILS_ENV="production"
+ENV RAILS_ENV="development"
 
 #nodejsのインストール
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
@@ -25,10 +25,11 @@ RUN bundle install
 
 COPY . /app
 
+HEALTHCHECK --interval=30s --timeout=5s --start-period=240s --retries=5 CMD curl -f http://localhost:3000/ || exit 1
+
 # cronの実行
 # RUN bundle exec whenever --update-crontab 
 # CMD ["cron", "-f"] 
-
 
 #本番環境で行う動作
 COPY start.sh /start.sh
