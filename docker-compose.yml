@@ -20,7 +20,7 @@ services:
     command: /bin/sh -c "rm -f tmp/pids/server.pid && rm -f tmp/pids/unicorn.pid && rm -f tmp/sockets/unicorn.sock && bundle exec unicorn_rails -c /app/config/unicorn.rb -E development -p 3000"
     volumes:
       - .:/app
-      # - sock-data:/app/tmp/sockets
+      - sock-data:/app/tmp/sockets
     ports:
       - "3000:3000"
     environment:
@@ -29,14 +29,14 @@ services:
       - .env
     depends_on:
       - db
-#   nginx:
-#     build: ./nginx
-#     ports:
-#       - 80:80
-#     volumes: 
-#       - sock-data:/app/tmp/sockets
-#     restart: always
-#     depends_on: 
-#       - web
-# volumes: 
-#   sock-data:
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes: 
+      - sock-data:/app/tmp/sockets
+    restart: always
+    depends_on: 
+      - web
+volumes: 
+  sock-data:

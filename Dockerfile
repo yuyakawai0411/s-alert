@@ -26,7 +26,7 @@ RUN bundle install
 COPY . /app
 
 # ヘルスチェック
-# HEALTHCHECK --interval=30s --timeout=5s --start-period=240s --retries=5 CMD curl -f http://localhost:3000/ || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=240s --retries=5 CMD curl -f http://localhost:3000/ || exit 1
 
 # cronの実行
 # RUN bundle exec whenever --update-crontab 
