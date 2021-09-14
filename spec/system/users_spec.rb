@@ -11,7 +11,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
       basic_pass root_path
       visit root_path
       # トップページにサインアップページへ遷移するボタンがあることを確認する
-      expect(page).to have_content('LOGIN')
+      expect(page).to have_content('ログイン')
       # 新規登録ページへ移動する
       visit new_user_registration_path
       # ユーザー情報を入力する
@@ -36,8 +36,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
       # トップページへ遷移したことを確認する
       expect(current_path).to eq(root_path)
       # カーソルを合わせるとログアウトボタンが表示されることを確認する
-      expect(page).to have_content('LOGOUT')
-      expect(page).to have_no_content('LOGIN')
+      expect(page).to have_content('ログアウト')
     end
   end
 
@@ -46,7 +45,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
       # トップページに移動する
       visit root_path
       # トップページにサインアップページへ遷移するボタンがあることを確認する
-      expect(page).to have_content('LOGIN')
+      expect(page).to have_content('ログイン')
       # 新規登録ページへ移動する
       visit new_user_registration_path
       # ユーザー情報を入力する
@@ -73,8 +72,8 @@ RSpec.describe "ユーザー新規登録", type: :system do
       # ルートパスに移動する
       visit root_path
       # ログインボタンがあることを確認
-      expect(page).to have_content('LOGIN')
-      expect(page).to have_no_content('LOGOUT')
+      expect(page).to have_content('ログイン')
+      expect(page).to have_no_content('ログアウト')
     end
   end
 end
@@ -88,7 +87,7 @@ RSpec.describe 'ユーザーログイン', type: :system do
       # トップページに移動する
       visit root_path
       # トップページにログインページへ遷移するボタンがあることを確認する
-      expect(page).to have_content('LOGIN')
+      expect(page).to have_content('ログイン')
       # ログインページへ遷移する
       visit new_user_session_path
       # 正しいユーザー情報を入力する
@@ -99,8 +98,7 @@ RSpec.describe 'ユーザーログイン', type: :system do
       # トップページへ遷移することを確認する
       expect(current_path).to eq(root_path)
       # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
-      expect(page).to have_content('LOGOUT')
-      expect(page).to have_no_content('LOGIN')
+      expect(page).to have_content('ログアウト')
     end
   end
   context 'ログインができないとき' do
@@ -108,7 +106,7 @@ RSpec.describe 'ユーザーログイン', type: :system do
       # トップページに移動する
       visit root_path
       # トップページにログインページへ遷移するボタンがあることを確認する
-      expect(page).to have_content('LOGIN')
+      expect(page).to have_content('ログイン')
       # ログインページへ遷移する
       visit new_user_session_path
       # ユーザー情報を入力する
@@ -121,8 +119,8 @@ RSpec.describe 'ユーザーログイン', type: :system do
       # ルートに戻る      
       visit root_path
       # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
-      expect(page).to have_no_content('LOGOUT')
-      expect(page).to have_content('LOGIN')
+      expect(page).to have_no_content('ログアウト')
+      expect(page).to have_content('ログイン')
     end
   end
 end

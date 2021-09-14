@@ -7,6 +7,15 @@ class CardsController < ApplicationController
   before_action :graph_range, only: [:show]
   before_action :set_biorhythm, only: [:show]
 
+  # テストユーザーログイン
+  def test_sign_in
+    user = User.find_or_create_by!(email: 'test@gmail.com') do |user|
+      user.password = test5732
+    end
+    sign_in user
+    redirect_to root_path
+  end
+
   def index
     @cards = Card.order('created_at DESC')
   end
@@ -158,5 +167,6 @@ class CardsController < ApplicationController
     # バイオリズムグラフの中から不安定日(0に近い値)を2つ算出
     @unstable = @biorhythm_graph.min_by(2){|x,v| (v - 0).abs}
   end
+
 
 end

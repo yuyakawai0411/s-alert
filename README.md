@@ -31,7 +31,6 @@ http://54.150.194.112/
   - email:test@gmail.com 
   - PS:5732test
 
-
 # :thought_balloon: 目指した課題解決
 このアプリはビジネスマンが上司や顧客と会話するときに抱える3つの課題を解決します。
 - 場をなごませたいものの、会話のネタが思いつかない 
@@ -40,7 +39,7 @@ http://54.150.194.112/
 
 # :computer:利用方法
 1. **ユーザーの新規登録/ログイン**
-  - 新規登録/ログインは、ヘッダーのLOGINをクリックすると選択できます。(*テストユーザーを使用する方はログインを選択してください)
+  - 新規登録/ログインは、ヘッダーのログインをクリックすると選択できます。(*テストユーザーを使用する方はログインを選択してください)
   - ユーザーの詳細情報は、「トップページ→MENU→ユーザー→詳細をクリック」で確認できます。
 
 2. **名刺の新規投稿/編集/削除**
@@ -127,7 +126,7 @@ http://54.150.194.112/
 [![Image from Gyazo](https://i.gyazo.com/8a4660ba0320335b799407e8ce5f7c57.gif)](https://gyazo.com/8a4660ba0320335b799407e8ce5f7c57)
 ## 会話ネタの投稿(Channel使用)
 [![Image from Gyazo](https://i.gyazo.com/f27bb234bc838e42eb80012bb4439950.gif)](https://gyazo.com/f27bb234bc838e42eb80012bb4439950)
-## メール通知の登録/削除(Cron使用)
+## メール通知の登録/削除(Cron+ActiveMailer使用)
 [![Image from Gyazo](https://i.gyazo.com/c6ed44a3adad7b19b2975b319b127786.gif)](https://gyazo.com/c6ed44a3adad7b19b2975b319b127786)
 ## メールの文面
 [![Image from Gyazo](https://i.gyazo.com/9ed859205a708a6f87301477837ae02e.png)](https://gyazo.com/9ed859205a708a6f87301477837ae02e)
@@ -140,7 +139,6 @@ http://54.150.194.112/
 - [x] CircleCI/CDの導入
 - [x] CSVで着信履歴をアップロード
 - [x] 会話ネタの投稿を非同期にする
-- [x] 名刺登録、メール通知登録、着信履歴登録時のバリデーションエラーを表示
 - [ ] CSV着信履歴のアップロードが失敗した時に、バリデーションエラーを表示する
 - [ ] 着信履歴を一括で複数追加できるようにする
 - [ ] 名刺・着信履歴をグループで同時編集できるようにする
@@ -149,7 +147,8 @@ http://54.150.194.112/
 
 # :tractor: インフラ構成図
 
-[![Image from Gyazo](https://i.gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee.png)](https://gyazo.com/348d1ec0e9d5e944f1a6e4bd61c420ee)
+[![Image from Gyazo](https://i.gyazo.com/a621f6281bbe65e19cab67eaf32ab487.png)](https://gyazo.com/a621f6281bbe65e19cab67eaf32ab487)
+
 
 # :floppy_disk: テーブル設計
 
@@ -171,6 +170,7 @@ http://54.150.194.112/
 | company_form_id    | integer | null: false               |
 | department         | string  | null: false               |
 | birth_day          | date    | null: false               |
+| user_id            | integer | null: false               |
 
 ### Association
 
@@ -267,8 +267,10 @@ http://54.150.194.112/
 - EC2
 - MySQL
 - Nginx(webサーバ)
-- Unicorn(apサーバ)
+- Unicorn(appサーバ)
 - S3(パケット)
+- docker(コンテナ環境)
+- Cercleci(自動テスト)
 - Capistrano(自動デプロイ)
 ### バックエンド
 - Ruby
@@ -327,10 +329,6 @@ http://54.150.194.112/
 `$ rails s`
 
 
-8. crontabに定期処理を反映してください(メール通知を使う場合)
-
-
-`$ whenever --update-crontab`
 
 
 ## 開発環境

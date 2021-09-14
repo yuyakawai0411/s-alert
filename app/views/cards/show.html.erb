@@ -109,22 +109,22 @@
             <h2><%= "会話のネタ"%></h2>
               <div class="interest row">
                 <div class="top-list col-5">
-                  <h4 class="mb-3">会話ネタTOP3</h4>
+                  <h4 class="mb-3">会話ネタ候補</h4>
                   <ol>
                     <% if @card.s_hobby_top.nil? %>
-                      <li><h5>1.登録されていません</h5></li>
+                      <li><h5>・登録されていません</h5></li>
                     <% else %>
-                      <li><h5><%= "1.#{@card.s_hobby_top}" %></h5></li>
+                      <li><h5><%= "・#{@card.s_hobby_top}" %></h5></li>
                     <% end %>
                     <% if @card.s_hobby_medium.nil? %>
-                      <li><h5>2.登録されていません</h5></li>
+                      <li><h5>・登録されていません</h5></li>
                     <% else %>
-                      <li><h5><%= "2.#{@card.s_hobby_medium}" %></h5></li>
+                      <li><h5><%= "・#{@card.s_hobby_medium}" %></h5></li>
                     <% end %>
                     <% if @card.s_hobby_row.nil? %>
-                      <li><h5>3.登録されていません</h5></li>
+                      <li><h5>・登録されていません</h5></li>
                     <% else %>
-                      <li><h5><%= "3.#{@card.s_hobby_row}" %></h5></li>
+                      <li><h5><%= "・#{@card.s_hobby_row}" %></h5></li>
                     <% end %>
                   </ol>
                 </div>

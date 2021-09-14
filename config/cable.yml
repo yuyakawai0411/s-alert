@@ -6,5 +6,6 @@ test:
 
 production:
   adapter: async
+  # adapterがredisの場合は以下の記述が必要
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
   channel_prefix: s_alert_production

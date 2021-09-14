@@ -60,7 +60,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Action mailer gmail 
+  # Action mailer gmailer
   mail = ENV['EMAIL_ADDRESS']
   pass = ENV['EMAIL_PASSWORD']
   config.action_mailer.perform_deliveries = true
@@ -75,5 +75,12 @@ Rails.application.configure do
   authentication:       'plain',
   enable_starttls_auto:  true
   }
+
+  # Action cable
+  ActionCable.server.config.disable_request_forgery_protection = true
+  config.action_cable.url = "ws://localhost/cable" 
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
+  # config.action_cable.disable_request_forgery_protection = true
+
 
 end

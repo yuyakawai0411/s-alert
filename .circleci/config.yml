@@ -1,0 +1,83 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.2
+  node: circleci/node@2
+  aws-ecr: circleci/aws-ecr@7.1.0
+  aws-ecs: circleci/aws-ecs@0.0.8
+
+jobs:
+  build:
+    docker: #CI環境にdocker-imageをコピー
+      - image: circleci/ruby:2.6.5-node-browsers
+    working_directory: ~/s-alert
+    steps:
+      - checkout: #working_directory直下にGithubのリポジトリをコピー
+          path: ~/s-alert
+      - ruby/install-deps #bundle install
+      - node/install-packages:
+          app-dir: ~/s-alert
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+  test:
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+      - image: circleci/mysql:5.5
+        environment:
+          MYSQL_ROOT_PASSWORD: password 
+          MYSQL_DATABASE: s_alert_test
+          MYSQL_USER: root
+    environment: #CI閑居で使う環境変数の定義
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DATABASE_HOST: "127.0.0.1" #自分のパソコン
+      RAILS_ENV: test
+    working_directory: ~/s-alert
+    steps:
+      - checkout:
+          path: ~/s-alert
+      - ruby/install-deps
+      - node/install-packages:
+          app-dir: ~/s-alert
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+      - run: #コマンドを実行する
+          name: Database setup
+          command: bundle exec rails db:migrate #実行するコマンドの内容
+      - run:
+          name: Rspec Models
+          command: bundle exec rspec spec/models
+      # - run:
+      #     name: Rspec system
+      #     command: bundle exec rspec spec/system
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires: #buildが終了するまでテストを開始させない
+            - build
+      - aws-ecr/build-and-push-image:
+          requires:
+            - test #テストが成功した時だけデプロイ作業を行う
+          region: AWS_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: 's_alert_web'
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only:
+                - master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'ECS_sample-task'
+          cluster-name: 'ECS-sample-cluster'
+          service-name: 'ECS-sample-service'
+          container-image-name-updates: 'container=s_alert_web,tag=${CIRCLE_SHA1}'
+          filters:
+            branches:
+              only:
+                - master

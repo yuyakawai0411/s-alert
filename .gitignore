@@ -22,6 +22,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/.env
 
 /public/packs
 /public/packs-test
@@ -29,6 +30,5 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-
-/.env
+.Ds_Store
 /db/mysql_data
