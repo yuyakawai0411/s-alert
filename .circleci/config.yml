@@ -3,6 +3,9 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.1.2
   node: circleci/node@2
+  aws-ecr: circleci/aws-ecr@7.1.0
+  aws-ecs: circleci/aws-ecs@0.0.8
+
 jobs:
   build:
     docker: #CI環境にdocker-imageをコピー
@@ -56,3 +59,25 @@ workflows:
       - test:
           requires: #buildが終了するまでテストを開始させない
             - build
+      - aws-ecr/build-and-push-image:
+          requires:
+            - test #テストが成功した時だけデプロイ作業を行う
+          region: AWS_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: 's_alert_web'
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only:
+                - master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'ECS_sample-task'
+          cluster-name: 'ECS-sample-cluster'
+          service-name: 'ECS-sample-service'
+          container-image-name-updates: 'container=s_alert_web,tag=${CIRCLE_SHA1}'
+          filters:
+            branches:
+              only:
+                - master
