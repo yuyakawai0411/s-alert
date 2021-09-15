@@ -30,7 +30,7 @@ jobs:
     environment: #CI閑居で使う環境変数の定義
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
-      APP_DATABASE_HOST: "127.0.0.1" #自分のパソコン
+      APP_DATABASE_HOST: "127.0.0.1" 
       RAILS_ENV: test
     working_directory: ~/s-alert
     steps:
@@ -41,7 +41,7 @@ jobs:
           app-dir: ~/s-alert
           pkg-manager: yarn
           cache-key: "yarn.lock"
-      - run: #コマンドを実行する
+      - run: 
           name: Database setup
           command: bundle exec rails db:migrate #実行するコマンドの内容
       - run:
@@ -57,7 +57,7 @@ workflows:
     jobs:
       - build
       - test:
-          requires: #buildが終了するまでテストを開始させない
+          requires: 
             - build
       - aws-ecr/build-and-push-image:
           name: build-and-push-image-web
