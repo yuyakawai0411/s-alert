@@ -59,6 +59,7 @@ workflows:
       - test:
           requires: #buildが終了するまでテストを開始させない
             - build
+      #webコンテナ
       - aws-ecr/build-and-push-image:
           requires:
             - test #テストが成功した時だけデプロイ作業を行う
@@ -77,6 +78,30 @@ workflows:
           cluster-name: 'ECS-sample-cluster'
           service-name: 'ECS-sample-service'
           container-image-name-updates: 'container=s_alert_web,tag=${CIRCLE_SHA1}'
+          filters:
+            branches:
+              only:
+                - master
+      #nginxコンテナ
+      - aws-ecr/build-and-push-image:
+          requires:
+            - test #テストが成功した時だけデプロイ作業を行う
+          region: AWS_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          path: ./nginx
+          repo: 's_alert_nginx'
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only:
+                - master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'ECS_sample-task'
+          cluster-name: 'ECS-sample-cluster'
+          service-name: 'ECS-sample-service'
+          container-image-name-updates: 'container=s_alert_nginx,tag=${CIRCLE_SHA1}'
           filters:
             branches:
               only:
