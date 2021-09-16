@@ -21,12 +21,9 @@
 
 # :globe_with_meridians: デモ
 ## URL
-http://54.150.194.112/
+https://yuya5732.com
 
 ## テスト用アカウント
-- BASIC 認証
-  - ID:yuya
-  - PS:573246 
 - テストユーザー
   - email:test@gmail.com 
   - PS:5732test
@@ -143,11 +140,10 @@ http://54.150.194.112/
 - [ ] 着信履歴を一括で複数追加できるようにする
 - [ ] 名刺・着信履歴をグループで同時編集できるようにする
 - [ ] 着信時間、着信曜日の相関関係をグラフで表示
-- [ ] Nginxの単体テスト
 
 # :tractor: インフラ構成図
 
-[![Image from Gyazo](https://i.gyazo.com/a621f6281bbe65e19cab67eaf32ab487.png)](https://gyazo.com/a621f6281bbe65e19cab67eaf32ab487)
+[![Image from Gyazo](https://i.gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9.png)](https://gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9)
 
 
 # :floppy_disk: テーブル設計
@@ -264,14 +260,12 @@ http://54.150.194.112/
 
 # :mortar_board:使用技術
 ### インフラ
-- EC2
 - MySQL
 - Nginx(webサーバ)
 - Unicorn(appサーバ)
-- S3(パケット)
-- docker(コンテナ環境)
-- Cercleci(自動テスト)
-- Capistrano(自動デプロイ)
+- docker(コンテナ)
+- CircleCi(CI/CD))
+
 ### バックエンド
 - Ruby
 - Rails
