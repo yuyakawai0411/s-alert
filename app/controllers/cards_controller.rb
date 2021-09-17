@@ -76,7 +76,7 @@ class CardsController < ApplicationController
       if expression_max == 0
         @expression = { @today.prev_day(15)=>0, @today=> 0 }
       else
-        # 最大値でわる
+      # 最大値でわる
         @expression = @expression.map{ |x,y| [x, (y.to_f / expression_max)] }.to_h
       end
     end
