@@ -1,6 +1,8 @@
 FROM ruby:2.6.5
 
 ENV RAILS_ENV="production"
+ENV RAILS_SERVE_STATIC_FILES="true"
+ENV DISABLE_DATABASE_ENVIRONMENT_CHECK="1" 
 
 #nodejsのインストール
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \

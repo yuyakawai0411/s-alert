@@ -61,8 +61,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Action mailer gmailer
-  mail = ENV['EMAIL_ADDRESS']
-  pass = ENV['EMAIL_PASSWORD']
+  mail = Rails.application.credentials.email[:EMAIL_ADDRESS]
+  pass = Rails.application.credentials.email[:EMAIL_PASSWORD]
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true

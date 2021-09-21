@@ -51,9 +51,9 @@ test:
 production:
   <<: *default
   # database: s_alert_production
-  # username: yuya
+  # username: root
   # password: password
   database: database
   username: admin
-  password: <%= ENV['RDS_PASSWORD'] %>
+  password: <%= Rails.application.credentials.database[:RDS_PASSWORD] %>
   host: <%= ENV['RDS_HOSTNAME'] || ENV['MYSQL_HOST'] %>
