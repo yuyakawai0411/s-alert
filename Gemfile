@@ -81,3 +81,4 @@ gem "aws-sdk-s3", require: false
 gem 'dotenv-rails'
 gem 'roo'
 gem 'unicorn'
+gem 'kaminari'
