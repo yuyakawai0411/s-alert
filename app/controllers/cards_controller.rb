@@ -54,11 +54,10 @@ class CardsController < ApplicationController
 
   def show
     records = @card.records
-    arrive_call = records.where(phone_call_id: 1)
     theoretical_biortythm_graph
     actual_biortythm_graph records
-    arrive_call_time_graph arrive_call
-    arrive_call_week_graph arrive_call
+    arrive_call_time_graph records
+    arrive_call_week_graph records
   end
 
 
@@ -145,8 +144,8 @@ class CardsController < ApplicationController
     end
   end
 
-  def arrive_call_time_graph(arrive_call)
-    @phone_time = arrive_call.group(:phone_time_id).count
+  def arrive_call_time_graph(records)
+    @phone_time = records.where(phone_call_id: 1).group(:phone_time_id).count
     @phone_time = @phone_time.map{|k,v| [k.to_s + ":00" ,v]}.sort.to_h
     @phone_time_mode = @phone_time.max_by(2){|x,v| (v - 0).abs}
     if @phone_time.length < 2
@@ -155,10 +154,10 @@ class CardsController < ApplicationController
     end
   end
 
-  def arrive_call_week_graph(arrive_call)
+  def arrive_call_week_graph(records)
     weeks = []
     weeks_japanese = ["日", "月", "火", "水", "木", "金", "土"] 
-    phone_weeks = arrive_call.pluck(:date)
+    phone_weeks = records.where(phone_call_id: 1).pluck(:date)
     phone_weeks.each do |record|
       week = record.wday
       weeks << week

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_biorhythm, only: [:show]
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes([cards: {image_attachment: :blob}, fav_cards: {image_attachment: :blob}]).find(params[:id])
     @cards = @user.cards
     @favorites = @user.fav_cards
   end
