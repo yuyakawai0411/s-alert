@@ -15,8 +15,9 @@ RSpec.describe "会話ネタのコメント", type: :system do
     # コメントを入力する
     fill_in 'comment_text', with: @comment.text
     # コメントを投稿すると、Commentモデルのカウントが1上がる
-    expect{
+    expect{ 
       find_by_id('comment-submit').click
+      visit current_path
     }.to change { Comment.count }.by(1)
     # 投稿したコメントが表示されている
     expect(page).to have_content @comment.text
