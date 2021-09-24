@@ -9,7 +9,7 @@ RSpec.describe "新規名刺作成", type: :system do
   
   context '新規名刺作成ができるとき'do
     it 'ログインしたユーザーは新規作成できる' do
-      basic_pass root_path
+      # basic_pass root_path
       # ログインする
       sign_in(@user)
       # 新規作成のリンクがあることを確認する

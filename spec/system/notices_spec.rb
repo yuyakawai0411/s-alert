@@ -9,7 +9,7 @@ RSpec.describe "Notices", type: :system do
 
   context 'メール通知が設定できるとき' do
     it 'ログインユーザーはメール通知が設定できる' do
-      basic_pass root_path
+      # basic_pass root_path
       # ログインする
       sign_in(@user)
       # メール通知へのリンクがある

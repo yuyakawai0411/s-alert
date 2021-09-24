@@ -8,7 +8,7 @@ RSpec.describe "お気に入り登録", type: :system do
 
   context 'お気に入り登録できる' do
     it 'ログインユーザーはお気に入り登録と解除ができる' do
-      basic_pass root_path
+      # basic_pass root_path
       # ログインする
       sign_in(@user)
       # お気に入り登録リンクをクリック

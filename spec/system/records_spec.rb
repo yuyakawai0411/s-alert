@@ -10,7 +10,7 @@ RSpec.describe "着信タイミング登録", type: :system do
   context '着信履歴の登録ができるとき' do 
     it '自分の名刺には着信履歴の登録ができる' do
       # ログイン
-      basic_pass root_path
+      # basic_pass root_path
       sign_in(@card.user)
       # トップページに投稿した名刺への作成&編集へのリンクがある
       expect(

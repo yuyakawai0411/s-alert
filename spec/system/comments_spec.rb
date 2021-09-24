@@ -7,7 +7,7 @@ RSpec.describe "会話ネタのコメント", type: :system do
   end
   
   it 'ログインユーザーは名刺詳細ページでコメント投稿できる' do
-    basic_pass root_path
+    # basic_pass root_path
     # ログインする
     sign_in(@card.user)
     # 名刺詳細ページに遷移する

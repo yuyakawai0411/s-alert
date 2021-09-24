@@ -40,7 +40,7 @@
         <%# 名刺情報_お気に入り %>
         <li class="card-favorites">
           <% if user_signed_in? && (card.user_id != current_user.id) %>
-            <% if card.favorited_by?(current_user) %>
+            <% if card.users.ids.include?(current_user.id) %>
               <%=link_to "お気に入り解除", card_favorites_path(card.id), method: :delete %>
             <% else %>
               <%=link_to "お気に入り登録", card_favorites_path(card.id), method: :post %>

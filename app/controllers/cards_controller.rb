@@ -2,7 +2,6 @@ class CardsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_card, only: [:show, :edit, :update, :destroy]
   before_action :move_to_root, only: [:edit, :update, :destroy]
-  before_action :side_menu, only: [:index, :new, :edit, :show, :search, :create, :update]
   before_action :set_comments, only: [:show]
 
   def test_sign_in
@@ -14,7 +13,7 @@ class CardsController < ApplicationController
   end
 
   def index
-    @cards = Card.with_attached_image.order('created_at DESC')
+    @cards = Card.includes([:users, image_attachment: :blob]).order('created_at DESC')
   end
 
   def new
@@ -83,13 +82,6 @@ class CardsController < ApplicationController
 
   def set_card
     @card = Card.find(params[:id])
-  end
-
-  def side_menu
-    if user_signed_in?
-      @user = User.find(current_user.id)
-      @user_cards = @user.cards
-    end
   end
 
   def set_comments
