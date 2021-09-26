@@ -7,7 +7,16 @@ class CardsController < ApplicationController
 
   def test_sign_in
     test_user = User.find_or_create_by!(email: 'test@gmail.com') do |user|
-      user.password = test5732
+      user.password = 'test5732'
+      user.last_name = '北条'
+      user.first_name = '拓哉'
+      user.last_name_kana = 'ホウジョウ'
+      user.first_name_kana = 'タクヤ'
+      user.company = '山畑沸工場'
+      user.company_form_id = '1'
+      user.department = '営業部'
+      user.birth_day = '1987-10-22'
+      user.phone_number = '07065432145'
     end
     sign_in test_user
     redirect_to root_path
