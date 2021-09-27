@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Cards", type: :request do
-
   before do
     @user = FactoryBot.create(:user)
     @card = FactoryBot.create(:card)

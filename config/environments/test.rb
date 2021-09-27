@@ -46,4 +46,9 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+
+  ActionCable.server.config.disable_request_forgery_protection = true
+  config.action_cable.url = "ws://www.example.com/cable" 
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
+
 end
