@@ -3,43 +3,51 @@ require 'rails_helper'
 RSpec.describe "Records", type: :request do
   before do
     @user = FactoryBot.create(:user)
-    @card = FactoryBot.build(:card)
+    @card = FactoryBot.create(:card)
   end
 
-  describe 'GET #index' do
+  describe 'GET /cards/:card.id/records #index' do
     context '未登録ユーザーがアクセスした時' do
       it 'トップページにリダイレクトされる' do
-      
+        get "/cards/#{@card.id}/records"
+        expect(response).to redirect_to new_user_session_path
       end
     end
     context '登録ユーザーがアクセスした時' do
       it 'HTTPステータスコード200が返される' do
-      
-      end
-      
-      it '着信登録ページにリダイレクトされる' do
-      
+        get new_user_session_path 
+        post user_session_path, params: { user: { email: @card.user.email, password: @card.user.password } }
+        expect(response.status).to redirect_to root_path
+        get "/cards/#{@card.id}/records"
+        expect(response.status).to eq 200
       end
     end
   end
 
-  describe 'POST #create' do
+  describe 'POST /cards/:card.id/records #create' do
     context '着信登録ができない' do
       it '着信登録ページにリダイレクトされる' do
-      
+        get new_user_session_path 
+        post user_session_path, params: { user: { email: @card.user.email, password: @card.user.password } }
+        expect(response.status).to redirect_to root_path
+        expect{
+        post "/cards/#{@card.id}/records", params: { record: FactoryBot.attributes_for(:record, date:'') }
+        }.to change { Record.count }.by(0)
+        expect(response.body).to include('日付を入力してください')
       end
     end
 
     context '着信登録ができる' do
       it '着信情報がインスタンスに格納される' do
+        get new_user_session_path 
+        post user_session_path, params: { user: { email: @card.user.email, password: @card.user.password } }
+        expect(response.status).to redirect_to root_path
+        expect{
+        post "/cards/#{@card.id}/records", params: { record: FactoryBot.attributes_for(:record) }
+        }.to change { Record.count }.by(1)
+        expect(response).to redirect_to "/cards/#{@card.id}/records"
       end
 
-      it 'HTTP200ステータスコードが返される' do
-      end
-
-      it '着信登録ページにリダイレクトされる' do
-      
-      end
     end
   end
 

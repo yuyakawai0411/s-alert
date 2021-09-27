@@ -1,5 +1,5 @@
 class NoticesController < ApplicationController
-before_action :authenticate_user!, only: [:create, :destroy]
+before_action :authenticate_user!, only: [:index, :create, :destroy]
 before_action :side_menu, only: [:index, :create]
 
 def index
