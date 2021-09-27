@@ -45,13 +45,16 @@ jobs:
           cache-key: "yarn.lock"
       - run: 
           name: Database setup
-          command: bundle exec rails db:migrate #実行するコマンドの内容
+          command: bundle exec rails db:migrate 
       - run:
           name: Rspec Models
           command: bundle exec rspec spec/models
       - run:
           name: Rspec Controller
           command: bundle exec rspec spec/requests
+      - run:
+          name: Rspec Mailer
+          command: bundle exec rspec spec/mailers/notice_spec.rb
       - run:
           name: Rspec system
           command: bundle exec rspec spec/system
