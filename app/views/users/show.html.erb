@@ -15,6 +15,14 @@
         <div class="profile d-flex">
           <ul>
           <div class="card-list d-flex justify-content-between">
+          
+            <div class="card-left">
+              <%# ユーザープロフィール_写真 %>
+                <li calss="card-image">
+                  <%= image_tag "boss.png", size: '100x100', class: "card-ditail-image" %>
+                </li>
+            </div>
+
             <div class="card-right">
               <%# ユーザープロフィール_氏名 %>
               <li class="card-name">
@@ -38,14 +46,6 @@
               </li>
               
             </div>
-
-            <div class="card-left">
-                <%# ユーザープロフィール_写真 %>
-                <li calss="card-image">
-                  <%= image_tag "boss.png", size: '100x100', class: "card-ditail-image" %>
-                </li>
-            </div>
-
           </div>
         </ul>
 

@@ -14,6 +14,16 @@
           <div class="profile d-flex">
             <ul>
             <div class="card-list d-flex justify-content-between">
+              <div class="card-left">
+                <%# 名刺プロフィール_写真 %>
+                <li calss="card-image">
+                  <% if @card.image.attached? %>
+                    <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
+                  <% else %>
+                    <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
+                  <% end %>
+                </li>
+              </div>
               <div class="card-right">
               <%# 名刺プロフィール_氏名 %>
                 <li class="card-name">
@@ -37,18 +47,6 @@
               </li>
                 
               </div>
-
-              <div class="card-left">
-              <%# 名刺プロフィール_写真 %>
-              <li calss="card-image">
-                <% if @card.image.attached? %>
-                  <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
-                <% else %>
-                  <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
-                <% end %>
-              </li>
-              </div>
-
             </div>
             </ul>
             <%# 名刺プロフィール_不安定日 %>
@@ -79,10 +77,28 @@
               </div>
             </div>
             <ul class="graph-detail">
-              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。1に近い=エネルギーがあり調子が良い、-1に近い=エネルギーがなく調子が悪い、
-                  0に近い=エネルギーがあり調子が良くない(感情が不安定(キレやすい))とされています。</li>
-              <li>バイオリズム実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。数値が高いほど機嫌がよくなります。</li>
+              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。</li>
+              <li>バイオリズム実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。</li>
             </ul>
+            <h5 class="mt-3">バイオリズムグラフの見方</h5>
+              <table>
+                <tr class="graph-colum">
+                  <th class="graph-colum-title">感情値</th>
+                  <th class="graph-colum-title">状態</th>
+                </tr>
+                <tr class="graph-colum">
+                  <td class="graph-colum-value">1</td>
+                  <td class="graph-colum-value">エネルギーがあり、調子が良い</td>
+                </tr>
+                <tr class="graph-colum">
+                  <td class="graph-colum-value">-1</td>
+                  <td class="graph-colum-value">エネルギーがなく、調子が悪い</td>
+                </tr>
+                 <tr class="graph-colum">
+                  <td class="graph-colum-value">0</td>
+                  <td class="graph-colum-value">エネルギーがあり、調子がよくない=<span class="bad-date">不安定</span>(キレやすい)</td>
+                </tr>
+              </table>
           </section>
           
           <%# 着信頻度グラフ %>

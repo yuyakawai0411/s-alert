@@ -82,24 +82,26 @@
         <article class="record-list">
           <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん着信履歴一覧"%></h1>
           <%# 着信履歴一覧表示 %>
-          <table>
-            <tr class="record-description">
-              <td class="record-list-date record-column">日付</td>
-              <td class="record-list-time record-column">時間</td>
-              <td class="record-list-call record-column">着信有無</td>
-              <td class="record-list-expression record-column">感情</td>
-              <td class="record-list-delete record-column">削除</td>
+          <table class="record-colum">
+            <tr class="record-description record-colum-title">
+              <td class="record-list-date record-column-value">日付</td>
+              <td class="record-list-time record-column-value">時間</td>
+              <td class="record-list-expression record-column-value">感情</td>
+              <td class="record-list-delete record-column-value">削除</td>
             </tr>
+          </table>
+          <div class="record-notice-list">
+           <table class="record-colum">
             <% @records.each do |record| %>
               <tr>
-                <td class="record-list-date record-column"><%= record.date %></td>
-                <td class="record-list-time record-column"><%= record.phone_time.time %></td> 
-                <td class="record-list-call record-column"><%= record.phone_call.status %></td>
-                <td class="record-list-expression record-column"><%= record.expression.status %></td>
-                <td class="record-list-delete record-column"><%= link_to "削除", card_record_path(@card.id, record.id), method: :delete, class: "record-delete" %></td>
+                <td class="record-list-date record-column-value"><%= record.date %></td>
+                <td class="record-list-time record-column-value"><%= record.phone_time.time %></td> 
+                <td class="record-list-expression record-column-value"><%= record.expression.status %></td>
+                <td class="record-list-delete record-column-value"><%= link_to "削除", card_record_path(@card.id, record.id), method: :delete, class: "record-delete" %></td>
               </tr>
             <% end %>
-          </table>
+           </table>
+          </div>
         </article>
       </div>
     </div>
