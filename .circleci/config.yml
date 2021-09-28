@@ -53,7 +53,10 @@ jobs:
           name: Rspec Controller
           command: bundle exec rspec spec/requests
       - run:
-          name: Rspec Mailer
+          name: Rspec ActionMailer
+          command: bundle exec rspec spec/mailers/notice_spec.rb
+      - run:
+          name: Rspec ActionCable
           command: bundle exec rspec spec/mailers/notice_spec.rb
       - run:
           name: Rspec system

@@ -4,6 +4,7 @@ RSpec.describe "Records", type: :request do
   before do
     @user = FactoryBot.create(:user)
     @card = FactoryBot.create(:card)
+    @record = FactoryBot.create(:record)
   end
 
   describe 'GET /cards/:card.id/records #index' do
@@ -51,17 +52,17 @@ RSpec.describe "Records", type: :request do
     end
   end
 
-  describe 'POST #destroy' do
+  describe 'POST /cards/:card_id/records/:id #destroy' do
     context '着信情報が削除できる' do
       
       it 'インスタンスの名刺情報が空になる' do
-      end
-
-      it 'HTTP200ステータスコードが返される' do
-      end
-
-      it 'トップページから移動しない' do
-      
+        get new_user_session_path 
+        post user_session_path, params: { user: { email: @record.card.user.email, password: @record.card.user.password } }
+        expect(response.status).to redirect_to root_path
+        expect{
+        delete "/cards/#{@record.card.id}/records/#{@record.id}", params: { id: @record.id, card_id: @record.card.id }
+        }.to change { Record.count }.by(-1)
+        expect(response).to redirect_to "/cards/#{@record.card.id}/records"
       end
     end
   end
