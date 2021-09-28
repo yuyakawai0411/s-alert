@@ -68,8 +68,8 @@ RSpec.describe "Records", type: :request do
   end
 
   describe 'POST /cards/:card_id/records/import #import' do
-    context '着信情報が登録できない' do
-      it '着信登録ページから移動しない' do
+    context '着信情報をcsvで登録できる' do
+      it '3つレコードが保存される' do
         get new_user_session_path 
         post user_session_path, params: { user: { email: @card.user.email, password: @card.user.password } }
         expect(response.status).to redirect_to root_path
