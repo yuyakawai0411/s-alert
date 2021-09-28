@@ -34,6 +34,7 @@ class RecordsController < ApplicationController
     else
       Record.import(params[:file], list, card_id)
       if Record.create(list)
+        binding.pry
         redirect_to action: "index"
       else
         render :index

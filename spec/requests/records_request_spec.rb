@@ -67,20 +67,16 @@ RSpec.describe "Records", type: :request do
     end
   end
 
-  describe 'POST #import' do
+  describe 'POST /cards/:card_id/records/import #import' do
     context '着信情報が登録できない' do
       it '着信登録ページから移動しない' do
-      
-      end
-    end
-  
-    context '着信情報が登録できる' do
-      it 'HTTP200ステータスコードが返される' do
-        
-      end
-
-      it '着信登録ページにリダイレクトされる' do
-      
+        get new_user_session_path 
+        post user_session_path, params: { user: { email: @card.user.email, password: @card.user.password } }
+        expect(response.status).to redirect_to root_path
+        expect{
+        post "/cards/#{@card.id}/records/import", params: { file: fixture_file_upload('/phone_record.csv', 'text/csv') }   
+        }.to change(Record, :count).by(3) #CSVファイルに3レコード存在するため
+        expect(response).to redirect_to "/cards/#{@card.id}/records" 
       end
     end
   end
