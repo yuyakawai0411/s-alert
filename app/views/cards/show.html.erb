@@ -123,8 +123,8 @@
           <%# 会話ネタコメント機能 %>
           <section class="record-list">
             <h2><%= "会話のネタ"%></h2>
-              <div class="interest row">
-                <div class="top-list col-5">
+              <div class="d-flex justify-content-between">
+                <div class="top-list">
                   <h4 class="mb-3">会話ネタ候補</h4>
                   <ol>
                     <% if @card.s_hobby_top.nil? %>
@@ -144,14 +144,18 @@
                     <% end %>
                   </ol>
                 </div>
-                <div class="comment-form col-7">
+                <div class="comment-form">
                   <h4>コメント一覧</h4>
                   <div id='messages' class="comment-list">
                     <% @comments.each do |comment| %>
                       <table>
                         <tr>
-                          <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
-                          <td><%= comment.text %></td>
+                          <td class="comment-colum-user"><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong><%= comment.text %></td>
+                          <% if user_signed_in? %>
+                            <% if current_user.id == comment.user_id %>
+                              <td class="comment-colum-delete"><%= link_to "削除", card_comment_path(@card,comment), class: "text-right", method: :delete %></td>
+                            <% end %>
+                          <% end %>
                         </tr>
                       </table>
                     <% end %>

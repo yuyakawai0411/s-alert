@@ -5,7 +5,7 @@ FactoryBot.define do
     s_first_name            { Gimei.unique.name.first.kanji }
     s_last_name_kana        { Gimei.unique.name.last.katakana }
     s_first_name_kana       { Gimei.unique.name.first.katakana }
-    s_company               { Faker::Company.unique.name }
+    s_company               { Faker::Company.unique.industry }
     s_company_form_id       { Faker::Number.between(from: 1, to: 5) }
     s_department            { Faker::Company.unique.profession }
     s_phone_number          { Faker::Number.between(from: 0o000000000, to: 99_999_999_999) }

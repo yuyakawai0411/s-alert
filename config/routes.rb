@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :records, only: [:index, :create, :destroy] do
       collection { post :import}
     end
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
   resources :users, only:[:show] do

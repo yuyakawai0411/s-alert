@@ -82,7 +82,6 @@ RSpec.describe "着信履歴削除", type: :system do
       expect(current_path).to eq(card_records_path(@card))
       expect(page).to have_selector '.record-list-date', text: "#{@record.date}"
       expect(page).to have_selector '.record-list-time', text: "#{@record.phone_time.time}"
-      expect(page).to have_selector '.record-list-call', text: "#{@record.phone_call.status}"
       expect(page).to have_selector '.record-list-expression', text: "#{@record.expression.status}"
       # 着信履歴の削除をクリック
       first(".record-delete").click
@@ -90,7 +89,6 @@ RSpec.describe "着信履歴削除", type: :system do
       expect(current_path).to eq(card_records_path(@card))
       expect(page).to have_no_selector '.record-list-date', text: "#{@record.date}"
       expect(page).to have_no_selector '.record-list-time', text: "#{@record.phone_time_id}:00"
-      expect(page).to have_no_selector '.record-list-call', text: "#{@record.phone_call.status}"
       expect(page).to have_no_selector '.record-list-expression', text: "#{@record.expression.status}"
     end
 end
@@ -119,17 +117,14 @@ RSpec.describe "CSVインポート", type: :system do
       expect(current_path).to eq(card_records_path(@card))
       expect(page).to have_selector '.record-list-date', text: "2021-07-18"
       expect(page).to have_selector '.record-list-time', text: "11:00"
-      expect(page).to have_selector '.record-list-call', text: 'あり'
       expect(page).to have_selector '.record-list-expression', text: '---'
      
       expect(page).to have_selector '.record-list-date', text: "2021-07-28"
       expect(page).to have_selector '.record-list-time', text: "10:00"
-      expect(page).to have_selector '.record-list-call', text: 'あり'
       expect(page).to have_selector '.record-list-expression', text: '---'
 
       expect(page).to have_selector '.record-list-date', text: "2021-08-21"
       expect(page).to have_selector '.record-list-time', text: "13:00"
-      expect(page).to have_selector '.record-list-call', text: 'あり'
       expect(page).to have_selector '.record-list-expression', text: '---'
     end
 end

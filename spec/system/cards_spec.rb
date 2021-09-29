@@ -193,7 +193,7 @@ end
 
 RSpec.describe '名刺検索', type: :system do
   before do
-    @card1 = FactoryBot.create(:card, s_company_form_id: 1 )
+    @card1 = FactoryBot.create(:card, s_company_form_id: 1)
     @card2 = FactoryBot.create(:card, s_company_form_id: 3)
   end
 
