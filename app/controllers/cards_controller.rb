@@ -23,7 +23,7 @@ class CardsController < ApplicationController
   end
 
   def index
-    @cards = Card.includes([:users, image_attachment: :blob]).order('created_at DESC')
+    @cards = Card.includes([:users, image_attachment: :blob]).page(params[:page]).per(9)
   end
 
   def new

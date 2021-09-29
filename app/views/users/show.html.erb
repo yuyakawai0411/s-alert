@@ -71,6 +71,7 @@
           <div class="cards">
             <h2 class="page-heading"><%= "投稿名刺一覧"%></h2>
             <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+             <%= link_to "もっと見る", post_cards_user_path(@user.id) %>
           </div>
         </section>
 
@@ -79,6 +80,7 @@
           <div class="favorites">
             <h2 class="page-heading"><%= "お気に入り"%></h2>
             <%= render partial: "shared/favorite-format" , locals: { favorites: @favorites }%>
+            <%= link_to "もっと見る", favorite_cards_user_path(@user.id) %>
           </div>
         </section>
       </div>

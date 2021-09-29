@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :destroy]
-  before_action :set_user_info, only: [:show, :edit, :update, :destroy]
-  before_action :side_menu, only: [:show, :edit, :destroy]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :post_cards, :favorite_cards]
+  before_action :set_user_info, only: [:show, :edit, :update, :destroy, :post_cards, :favorite_cards]
+  before_action :side_menu, only: [:show, :edit, :destroy, :post_cards, :favorite_cards]
   before_action :set_biorhythm, only: [:show]
 
   def show
     @user = User.includes([cards: {image_attachment: :blob}, fav_cards: {image_attachment: :blob}]).find(params[:id])
-    @cards = @user.cards
-    @favorites = @user.fav_cards
+    @cards = @user.cards.last(3)
+    @favorites = @user.fav_cards.last(3)
   end
 
   def edit
@@ -26,6 +26,14 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to root_path
+  end
+
+  def post_cards
+    @cards = @user.cards.page(params[:page]).per(9)
+  end 
+  
+  def favorite_cards
+    @favorites = @user.fav_cards.page(params[:page]).per(9)
   end
 
   private

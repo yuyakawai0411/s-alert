@@ -141,5 +141,44 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe 'GET /users/:id/post_cards #post_cards' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:card) { FactoryBot.create(:card, user: user) }
+    context 'ログインユーザーでアクセス' do
+      it '名刺投稿一覧が表示される' do
+        get new_user_session_path 
+        post user_session_path, params: { user: { email: @user.email, password: @user.password } }
+        expect(response.status).to redirect_to root_path
+        get post_cards_user_path @user
+        expect(response.status).to eq 200
+      end
+    end
+    context '未ログインユーザーでアクセス' do
+      it 'リダイレクトされる' do
+        get post_cards_user_path @user
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 
+  describe 'GET /users/:id/favorite_cards #favorite_cards' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:card) { FactoryBot.create(:card, user: user ) }
+    let(:favorite) { FactoryBot.create(:favorite, user: user, card: card) }
+    context 'ログインユーザーでアクセス' do
+      it '名刺一覧が表示される' do
+        get new_user_session_path 
+        post user_session_path, params: { user: { email: @user.email, password: @user.password } }
+        expect(response.status).to redirect_to root_path
+        get favorite_cards_user_path @user
+        expect(response.status).to eq 200
+      end
+    end
+    context '未ログインユーザーでアクセス' do
+      it 'リダイレクトされる' do
+        get favorite_cards_user_path @user
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end
