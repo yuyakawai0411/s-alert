@@ -141,7 +141,7 @@ RSpec.describe "Cards", type: :request do
         card_edit = FactoryBot.attributes_for(:card, s_last_name:'')
         get new_user_session_path 
         post user_session_path, params: { user: { email: @card.user.email, password: @card.user.password } }
-        expect(response.status).to redirect_to root_path
+        expect(response).to redirect_to root_path
         expect{
           put card_path @card.id, params: { card: card_edit }
         }.not_to change(Card.find(@card.id), :s_last_name)
@@ -150,7 +150,7 @@ RSpec.describe "Cards", type: :request do
     end
   end
 
-  describe 'POST #destroy' do
+  describe 'DELETE #destroy' do
     context '名刺削除できる' do
       it '名刺が削除され、トップページにリダイレクトされる' do
         get new_user_session_path 

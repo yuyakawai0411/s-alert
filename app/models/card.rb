@@ -3,7 +3,7 @@ class Card < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   has_many :records, dependent: :destroy
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :users, through: :favorites
   has_many :comments, dependent: :destroy
 

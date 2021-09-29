@@ -1,10 +1,10 @@
 class User < ApplicationRecord
   
-  has_many :cards
-  has_many :favorites
+  has_many :cards, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :fav_cards, through: :favorites, source: :card
-  has_many :notices
-  has_many :comments
+  has_many :notices, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :company_form

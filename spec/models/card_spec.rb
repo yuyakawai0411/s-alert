@@ -115,4 +115,18 @@ RSpec.describe Card, type: :model do
       end
     end
   end
+
+  describe '名刺を削除する' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:other_user) { FactoryBot.create(:user) }
+    let(:card) { FactoryBot.create(:card, user: user) }
+    it 'Records、Fvarites、Commentsテーブルの情報が付随して削除される' do
+      2.times { FactoryBot.create(:record, card: card) }
+      1.times { FactoryBot.create(:favorite, card: card, user: other_user) }
+      2.times { FactoryBot.create(:comment, card: card) }
+      expect{ card.destroy 
+      }.to change(card.records, :count).by(-2).and change(card.favorites, :count).by(-1).and change(card.comments, :count).by(-2)
+    end
+  end
+  
 end
