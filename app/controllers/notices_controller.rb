@@ -1,16 +1,15 @@
 class NoticesController < ApplicationController
-before_action :authenticate_user!, only: [:index, :create, :destroy]
+before_action :authenticate_user!
+before_action :notices_info
+before_action :remove_past_date_notice, only: [:index]
 before_action :side_menu, only: [:index, :create]
 
 def index
-  past_date_delete
   @notice = Notice.new()
-  @notices = @user.notices.order('notice_date ASC')
 end
 
 def create
   @notice = Notice.new(notice_params)
-  @notices = @user.notices.order('notice_date ASC')
   if @notice.save
     redirect_to action: "index"
   else
@@ -29,6 +28,10 @@ def notice_params
   params.require(:notice).permit(:notice_date, :description, :topic).merge(user_id: current_user.id)
 end
 
+def notices_info
+  @notices = current_user.notices.order('notice_date ASC')
+end
+
 def side_menu
   if user_signed_in?
     @user = User.find(current_user.id)
@@ -36,7 +39,7 @@ def side_menu
   end
 end
 
-def past_date_delete
+def remove_past_date_notice
   Notice.where("notice_date < ?" , Date.today).delete_all
 end
 

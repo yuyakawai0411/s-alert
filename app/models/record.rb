@@ -14,7 +14,7 @@ class Record < ApplicationRecord
 
   private
   # 着信履歴をCSVでインポート
-  def self.import(file,list,card_id)
+  def self.import(file, list, card_id)
     CSV.foreach(file.path, headers: true) do |row|
       list << {
         date: row[0],

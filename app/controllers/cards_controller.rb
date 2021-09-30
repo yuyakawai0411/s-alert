@@ -1,26 +1,9 @@
 class CardsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_root, only: [:edit, :update, :destroy]
+  before_action :card_info, only: [:show, :edit, :update, :destroy]
+  before_action :unauthorized_user, only: [:edit, :update, :destroy]
+  before_action :card_comments_info, only: [:show]
   before_action :side_menu, only: [:index, :new, :edit, :show, :search, :create, :update]
-  before_action :set_comments, only: [:show]
-
-  def test_sign_in
-    test_user = User.find_or_create_by!(email: 'test@gmail.com') do |user|
-      user.password = 'test5732'
-      user.last_name = '北条'
-      user.first_name = '拓哉'
-      user.last_name_kana = 'ホウジョウ'
-      user.first_name_kana = 'タクヤ'
-      user.company = '山畑沸工場'
-      user.company_form_id = '1'
-      user.department = '営業部'
-      user.birth_day = '1987-10-22'
-      user.phone_number = '07065432145'
-    end
-    sign_in test_user
-    redirect_to root_path
-  end
 
   def index
     @cards = Card.includes([:users, image_attachment: :blob]).page(params[:page]).per(9)
@@ -84,14 +67,19 @@ class CardsController < ApplicationController
     @card[:s_first_name_kana] = @card[:s_first_name_kana].gsub(/[[:space:]]/, '')
   end
 
-  def move_to_root
+  def unauthorized_user
     unless @card.user.id == current_user.id
       redirect_to root_path
     end
   end
 
-  def set_card
+  def card_info
     @card = Card.find(params[:id])
+  end
+  
+  def card_comments_info
+    @comment = Comment.new
+    @comments = @card.comments.order(created_at: "DESC").includes(:user)
   end
 
   def side_menu
@@ -101,11 +89,6 @@ class CardsController < ApplicationController
     end
   end
 
-  def set_comments
-    Comment.where("created_at < ?" , (Date.today-30)).delete_all
-    @comment = Comment.new
-    @comments = @card.comments.order(created_at: "DESC").includes(:user)
-  end
 
   def theoretical_biortythm_graph
     # グラフの横軸を指定

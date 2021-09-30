@@ -57,7 +57,7 @@ jobs:
           command: bundle exec rspec spec/mailers/notice_spec.rb
       - run:
           name: Rspec ActionCable
-          command: bundle exec rspec spec/mailers/notice_spec.rb
+          command: bundle exec rspec spec/channels/message_channel_spec.rb
       - run:
           name: Rspec system
           command: bundle exec rspec spec/system

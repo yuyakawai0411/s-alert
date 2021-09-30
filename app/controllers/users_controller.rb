@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :post_cards, :favorite_cards]
-  before_action :set_user_info, only: [:show, :edit, :update, :destroy, :post_cards, :favorite_cards]
+  before_action :authenticate_user!, except: [:test_sign_in]
+  before_action :user_info, except: [:test_sign_in]
   before_action :side_menu, only: [:show, :edit, :destroy, :post_cards, :favorite_cards]
   before_action :set_biorhythm, only: [:show]
 
@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes([cards: {image_attachment: :blob}, fav_cards: {image_attachment: :blob}]).find(params[:id])
     @cards = @user.cards.last(3)
     @favorites = @user.fav_cards.last(3)
   end
@@ -43,19 +42,20 @@ class UsersController < ApplicationController
   end
 
   private
+  
   def user_params
     params.require(:user).permit(:email, :password, :last_name, :first_name, :last_name_kana, :first_name_kana, :company, :company_form_id, :department, :phone_number, :birth_day)
   end
   
+  def user_info
+    @user = User.includes([cards: {image_attachment: :blob}, fav_cards: {image_attachment: :blob}]).find(params[:id])
+  end
+
   def side_menu
     if user_signed_in?
       @user = User.find(current_user.id)
       @user_cards = @user.cards
     end
-  end
-
-  def set_user_info
-    @user = User.find(params[:id])
   end
 
   def set_biorhythm
