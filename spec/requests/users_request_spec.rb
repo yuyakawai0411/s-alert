@@ -7,6 +7,15 @@ RSpec.describe "Users", type: :request do
     @user2 = FactoryBot.build(:user)
   end
 
+  describe 'POST /users/test_sign_in #show' do
+    context '名刺詳細にアクセスできる' do 
+      it 'テストユーザーでサインインできる' do
+        post users_test_sign_in_path
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
   describe 'GET /users/sign_in registrations#new' do
     context '新規ユーザー登録画面' do
       it 'HTTPステータス200が返信される' do

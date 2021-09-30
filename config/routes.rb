@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  post '/cards/test_sign_in', to: 'cards#test_sign_in'
+  post '/users/test_sign_in', to: 'users#test_sign_in'
   root to: "cards#index"
   resources :cards do
     collection do

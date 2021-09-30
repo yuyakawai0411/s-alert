@@ -88,19 +88,10 @@ RSpec.describe "Cards", type: :request do
     end
   end
 
-  describe 'POST /cards/test_sign_in #show' do
-    context '名刺詳細にアクセスできる' do 
-      it 'テストユーザーでサインインできる' do
-        post cards_test_sign_in_path
-        expect(response).to redirect_to root_path
-      end
-    end
-  end
-
   describe 'POST /cards #create' do
     context '名刺登録に必要な情報を全て入力' do 
       it '名刺が登録され、トップページにリダイレクトされる' do
-        post cards_test_sign_in_path
+        post users_test_sign_in_path
         expect(response).to redirect_to root_path
         expect{
         post cards_path, params: { card: FactoryBot.attributes_for(:card) }
@@ -111,7 +102,7 @@ RSpec.describe "Cards", type: :request do
 
     context '名刺登録に必要な情報を登録しない' do
       it '名刺が登録されず、エラーメッセージが表示される' do
-        post cards_test_sign_in_path
+        post users_test_sign_in_path
         expect(response).to redirect_to root_path
         expect{
         post cards_path, params: { card: FactoryBot.attributes_for(:card, s_last_name: '') }

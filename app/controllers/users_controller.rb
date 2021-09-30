@@ -4,6 +4,12 @@ class UsersController < ApplicationController
   before_action :side_menu, only: [:show, :edit, :destroy, :post_cards, :favorite_cards]
   before_action :set_biorhythm, only: [:show]
 
+  def test_sign_in
+    test_user = User.create_test_user
+    sign_in test_user
+    redirect_to root_path
+  end
+
   def show
     @user = User.includes([cards: {image_attachment: :blob}, fav_cards: {image_attachment: :blob}]).find(params[:id])
     @cards = @user.cards.last(3)

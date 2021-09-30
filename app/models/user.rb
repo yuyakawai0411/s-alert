@@ -34,4 +34,18 @@ class User < ApplicationRecord
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
     validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
   
+  def self.create_test_user    
+    test_user = User.find_or_create_by!(email: 'test@gmail.com') do |user|
+      user.password = 'test5732'
+      user.last_name = '北条'
+      user.first_name = '拓哉'
+      user.last_name_kana = 'ホウジョウ'
+      user.first_name_kana = 'タクヤ'
+      user.company = '山畑沸工場'
+      user.company_form_id = '1'
+      user.department = '営業部'
+      user.birth_day = '1987-10-22'
+      user.phone_number = '07065432145'
+    end
+  end
 end
