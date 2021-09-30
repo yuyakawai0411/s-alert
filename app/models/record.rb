@@ -14,15 +14,28 @@ class Record < ApplicationRecord
 
   private
   # 着信履歴をCSVでインポート
-  def self.import(file, list, card_id)
-    CSV.foreach(file.path, headers: true) do |row|
+  def self.import(file, card_id)
+    list = [ ] 
+    if file.blank? || (File.extname(file.original_filename) != ".csv")
       list << {
-        date: row[0],
-        phone_time_id: row[1],
-        expression_id: row[2],
-        phone_call_id: 1,
-        card_id: card_id
+        date: '',
+        phone_time_id: '',
+        expression_id: '',
+        phone_call_id: '',
+        card_id: ''
       }
+      return list
+    else
+      CSV.foreach(file.path, headers: true) do |row|
+        list << {
+          date: row[0],
+          phone_time_id: row[1],
+          expression_id: row[2],
+          phone_call_id: 1,
+          card_id: card_id
+        }
+      end
+      return list
     end
   end
 end

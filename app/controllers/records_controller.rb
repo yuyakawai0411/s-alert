@@ -24,16 +24,11 @@ class RecordsController < ApplicationController
   end
 
   def import
-    if params[:file].blank? || (File.extname(params[:file].original_filename) != ".csv")
-      redirect_to action: "index", alert: 'csvファイルを添付してください'
+    csv_file = Record.import(params[:file], @card.id)
+    if Record.create(csv_file)
+      redirect_to action: "index"
     else
-      list = []
-      Record.import(params[:file], list, @card.id)
-      if Record.create(list)
-        redirect_to action: "index"
-      else
-        render :index
-      end
+      redirect_to action: "index", alert: 'csvファイルを添付してください'
     end
   end
 
