@@ -52,14 +52,14 @@
             <%# 名刺プロフィール_不安定日 %>
             <div class="bio-resim-baddate">
               <p class="name">不安定日</p>
-              <p><%= @unstable[1][0] %></p>
-              <p><%= @unstable[0][0] %></p>
+               <%# <p><%= @unstable[1][0] %></p>  %>
+               <%# <p><%= @unstable[0][0] %></p>  %>
             </div>
             <%# 名刺プロフィール_着信最頻値 %>
             <div class="phone-time-mode">
               <p class="name">着信時間最頻値</p>
-              <p><%= @phone_time_mode[0][0] %></p>
-              <p><%= @phone_time_mode[1][0] %></p>
+              <%# <p><%= @phone_time_mode[0][0] %></p>
+              <%# <p><%= @phone_time_mode[1][0] %></p> 
             </div>      
           </div>
   
@@ -69,11 +69,11 @@
             <div class="d-flex justify-content-between">
               <div class="bio-theoretical">
                 <h4 class="graph-title">バイオリズム理論値</h4>
-                <%= line_chart @biorhythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day, min: -1, max: 1 %>
+                <%= line_chart @theoretical_biortythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day, min: -1, max: 1 %>
               </div>
               <div class="my-measured">
                 <h4 class="graph-title">バイオリズム実測値</h4>
-                <%= line_chart @expression, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today, min: -1, max: 1 %>
+                <%= line_chart @actual_biortythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today, min: -1, max: 1 %>
               </div>
             </div>
             <ul class="graph-detail">
@@ -107,11 +107,11 @@
             <div class="d-flex justify-content-between">
               <div class="phone-time">
                 <h4 class="graph-title">着信時間最頻値</h4>
-                <%= column_chart @phone_time, width: "430px", height: "220px", xtitle: "時間", ytitle: "回数" %>
+                <%= column_chart @arrive_call_time_graph, width: "430px", height: "220px", xtitle: "時間", ytitle: "回数" %>
               </div>
               <div class="phone-date">
                 <h4 class="graph-title">着信曜日最頻値</h4>
-                <%= column_chart @phone_weeks, width: "430px", height: "220px", xtitle: "曜日", ytitle: "回数" %>
+                <%= column_chart @arrive_call_week_graph, width: "430px", height: "220px", xtitle: "曜日", ytitle: "回数" %>
               </div>
             </div>
             <ul class="graph-detail">

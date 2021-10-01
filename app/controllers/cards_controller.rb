@@ -45,11 +45,10 @@ class CardsController < ApplicationController
   end
 
   def show
-    records = @card.records
-    theoretical_biortythm_graph
-    actual_biortythm_graph records
-    arrive_call_time_graph records
-    arrive_call_week_graph records
+    @theoretical_biortythm_graph = DrawBiortythmGraph.theoretical_biortythm(@card.s_birth_day, -15, 0)
+    @actual_biortythm_graph = DrawBiortythmGraph.actual_biortythm(@card.records, -15, 0)
+    @arrive_call_time_graph = DrawCallGraph.arrive_call_time(@card.records)
+    @arrive_call_week_graph = DrawCallGraph.arrive_call_week(@card.records)
   end
 
 
@@ -86,78 +85,6 @@ class CardsController < ApplicationController
     if user_signed_in?
       @user = User.find(current_user.id)
       @user_cards = @user.cards
-    end
-  end
-
-
-  def theoretical_biortythm_graph
-    # グラフの横軸を指定
-    @today = Date.today
-    @prev15_day = @today.prev_day(15)
-    @next15_day = @today.next_day(15)
-    # 登録された誕生日を元に、現在から前後2週間のバイオリズムグラフを作成
-    pi = Math::PI
-    birth_day = @card.s_birth_day
-    delta = @today - birth_day
-    @biorhythm_graph = {}
-    i = -15
-    30.times do 
-      key = @today.next_day(i)
-      value = Math.sin(2 * pi * (delta + i) / 28)
-      @biorhythm_graph.store( "#{key}", value )
-      i = i + 1
-    end
-    # バイオリズムグラフの中から不安定日(0に近い値)を2つ算出
-    @unstable = @biorhythm_graph.min_by(2){|x,v| (v - 0).abs}
-  end
-
-  def actual_biortythm_graph(records)
-    # 手動で登録した感情を現在から過去2週間のグラフで表示
-    @today = Date.today
-    @expression = records.where(
-      date: [@today.prev_day(15),@today.prev_day(14),@today.prev_day(13),@today.prev_day(12),@today.prev_day(11),
-      @today.prev_day(10),@today.prev_day(9),@today.prev_day(8),@today.prev_day(7),@today.prev_day(6),@today.prev_day(5),
-      @today.prev_day(4),@today.prev_day(3),@today.prev_day(2),@today.prev_day(1),@today.prev_day(0)]).group(:date).sum(:expression_id)
-    # バイオリズム理論値と縦軸の最大値、最小値を合わせる(縦軸の最小-1、最大1のグラフにする)
-    if @expression.length < 2
-      @expression = { @today.prev_day(15)=>0, @today=> 0 }
-    else
-      # 全てのvalueを絶対値にする
-      expression_abs = @expression.map{ |x,y| [x, y.abs] }.to_h
-      # 最大値を算出する
-      expression_max = expression_abs.max{ |a,b| a[1] <=> b[1] }[1]
-      # 0で割るケースは感情が全て0で登録された時のみのため、0を代入
-      if expression_max == 0
-        @expression = { @today.prev_day(15)=>0, @today=> 0 }
-      else
-      # 最大値でわる
-        @expression = @expression.map{ |x,y| [x, (y.to_f / expression_max)] }.to_h
-      end
-    end
-  end
-
-  def arrive_call_time_graph(records)
-    @phone_time = records.where(phone_call_id: 1).group(:phone_time_id).count
-    @phone_time = @phone_time.map{|k,v| [k.to_s + ":00" ,v]}.sort.to_h
-    @phone_time_mode = @phone_time.max_by(2){|x,v| (v - 0).abs}
-    if @phone_time.length < 2
-      @phone_time = { "7:00"=>0, "21:00" => 0 }
-      @phone_time_mode = [["データが足りません",0],["データが足りません",0]]
-    end
-  end
-
-  def arrive_call_week_graph(records)
-    weeks = []
-    weeks_japanese = ["日", "月", "火", "水", "木", "金", "土"] 
-    phone_weeks = records.where(phone_call_id: 1).pluck(:date)
-    phone_weeks.each do |record|
-      week = record.wday
-      weeks << week
-    end
-    @phone_weeks = weeks.group_by{|x| x}.map{ |x,y| [x, y.count] }.sort.to_h
-    @phone_weeks = @phone_weeks.map{|k,v| [weeks_japanese[k],v]}.to_h
-    if @phone_weeks.length < 2
-      @phone_weeks = { "月"=>0, "日" => 0 }
     end
   end
 
