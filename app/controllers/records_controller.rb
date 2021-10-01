@@ -2,7 +2,6 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :records_info
   before_action :unauthorized_user
-  before_action :side_menu, only: [:index, :create, :import]
 
   def index
     @record = Record.new()
@@ -46,13 +45,6 @@ class RecordsController < ApplicationController
   def unauthorized_user
     unless @card.user.id == current_user.id
       redirect_to root_path
-    end
-  end
-
-  def side_menu
-    if user_signed_in?
-      @user = User.find(current_user.id)
-      @user_cards = @user.cards
     end
   end
 

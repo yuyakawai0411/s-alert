@@ -3,7 +3,6 @@ class CardsController < ApplicationController
   before_action :card_info, only: [:show, :edit, :update, :destroy]
   before_action :unauthorized_user, only: [:edit, :update, :destroy]
   before_action :card_comments_info, only: [:show]
-  before_action :side_menu, only: [:index, :new, :edit, :show, :search, :create, :update]
 
   def index
     @cards = Card.includes([:users, image_attachment: :blob]).page(params[:page]).per(9)
@@ -79,13 +78,6 @@ class CardsController < ApplicationController
   def card_comments_info
     @comment = Comment.new
     @comments = @card.comments.order(created_at: "DESC").includes(:user)
-  end
-
-  def side_menu
-    if user_signed_in?
-      @user = User.find(current_user.id)
-      @user_cards = @user.cards
-    end
   end
 
   def calculate_min_max

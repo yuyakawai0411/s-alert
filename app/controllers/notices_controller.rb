@@ -2,7 +2,6 @@ class NoticesController < ApplicationController
 before_action :authenticate_user!
 before_action :notices_info
 before_action :remove_past_date_notice, only: [:index]
-before_action :side_menu, only: [:index, :create]
 
 def index
   @notice = Notice.new()
@@ -30,13 +29,6 @@ end
 
 def notices_info
   @notices = current_user.notices.order('notice_date ASC')
-end
-
-def side_menu
-  if user_signed_in?
-    @user = User.find(current_user.id)
-    @user_cards = @user.cards
-  end
 end
 
 def remove_past_date_notice

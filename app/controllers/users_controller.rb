@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:test_sign_in]
   before_action :user_info, except: [:test_sign_in]
-  before_action :side_menu, only: [:show, :edit, :destroy, :post_cards, :favorite_cards]
   before_action :set_biorhythm, only: [:show]
 
   def test_sign_in
@@ -49,13 +48,6 @@ class UsersController < ApplicationController
   
   def user_info
     @user = User.includes([cards: {image_attachment: :blob}, fav_cards: {image_attachment: :blob}]).find(params[:id])
-  end
-
-  def side_menu
-    if user_signed_in?
-      @user = User.find(current_user.id)
-      @user_cards = @user.cards
-    end
   end
 
   def set_biorhythm

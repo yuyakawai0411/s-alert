@@ -13,21 +13,21 @@
 
           <div class="profile d-flex">
             <ul>
-            <div class="card-list d-flex justify-content-between">
-              <div class="card-left">
+            <div class="card-info d-flex justify-content-between">
+              <div class="card-info-left">
                 <%# 名刺プロフィール_写真 %>
                 <li calss="card-image">
                   <% if @card.image.attached? %>
-                    <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
+                    <%= image_tag @card.image.variant(resize: '100x100') %>
                   <% else %>
-                    <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
+                    <%= image_tag "boss.png",size:"100x100" %>
                   <% end %>
                 </li>
               </div>
-              <div class="card-right">
+              <div class="card-info-right">
               <%# 名刺プロフィール_氏名 %>
                 <li class="card-name">
-                  <ul class="name-list">
+                  <ul>
                     <li class="name"><%= "#{@card.s_last_name} #{@card.s_first_name}" %></li>
                     <li class="kana"><%= "#{@card.s_last_name_kana} #{@card.s_first_name_kana}" %></li>
                   </ul>

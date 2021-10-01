@@ -14,12 +14,12 @@
         
         <div class="profile d-flex">
           <ul>
-          <div class="card-list d-flex justify-content-between">
+          <div class="card-info d-flex justify-content-between">
           
-            <div class="card-left">
+            <div class="card-info-left">
               <%# ユーザープロフィール_写真 %>
                 <li calss="card-image">
-                  <%= image_tag "boss.png", size: '100x100', class: "card-ditail-image" %>
+                  <%= image_tag "boss.png", size: '100x100' %>
                 </li>
               <%# ユーザープロフィール_編集_削除 %>
                 <div class="user-info-edit">
@@ -32,10 +32,10 @@
                 </div>
             </div>
 
-            <div class="card-right">
+            <div class="card-info-right">
               <%# ユーザープロフィール_氏名 %>
               <li class="card-name">
-                <ul class="name-list">
+                <ul>
                   <li class="name"><%= "#{@user.last_name} #{@user.first_name}" %></li>
                   <li class="kana"><%= "#{@user.last_name_kana} #{@user.first_name_kana}" %></li>
                 </ul>
