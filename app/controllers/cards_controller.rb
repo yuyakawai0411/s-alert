@@ -49,8 +49,8 @@ class CardsController < ApplicationController
     @actual_biortythm_graph = DrawBiortythmGraph.actual_biortythm(@card.records, -15, 0)
     @arrive_call_time_graph = DrawCallGraph.arrive_call_time(@card.records)
     @arrive_call_week_graph = DrawCallGraph.arrive_call_week(@card.records)
+    calculate_min_max
   end
-
 
   private
   
@@ -88,4 +88,8 @@ class CardsController < ApplicationController
     end
   end
 
+  def calculate_min_max
+    @unstable_day = CalculateMinMax.calculate_min(@theoretical_biortythm_graph)
+    @call_time_mode_day = CalculateMinMax.calculate_max(@arrive_call_time_graph)
+  end
 end

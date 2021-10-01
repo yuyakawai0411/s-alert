@@ -15,8 +15,6 @@ class DrawBiortythmGraph < ApplicationRecord
       biorhythm_graph.store( "#{key}", value )
       i = i + 1
     end
-    # バイオリズムグラフの中から不安定日(0に近い値)を2つ算出
-    unstable = biorhythm_graph.min_by(2){|x,v| (v - 0).abs}
     return biorhythm_graph
   end
 
@@ -26,20 +24,20 @@ class DrawBiortythmGraph < ApplicationRecord
     # 手動で登録した感情を現在から過去2週間のグラフで表示
     expression = records.where(
       date: minimum_day..maximum_day).group(:date).sum(:expression_id)
-      if expression.length < 2
+      if expression.length < 3
         expression = { minimum_day=>0, maximum_day=> 0 }
       else
-      # バイオリズム理論値と縦軸の最大値、最小値を合わせる(縦軸の最小-1、最大1のグラフにする)
-      expression_abs = expression.map{ |x,y| [x, y.abs] }.to_h
-      expression_max = expression_abs.max{ |a,b| a[1] <=> b[1] }[1]
-      # 0で割るケースは感情が全て0で登録された時のみのため、0を代入
-      if expression_max == 0
-        expression = { minimum_day=>0, maximum_day=> 0 }
-      else
-        expression = expression.map{ |x,y| [x, (y.to_f / expression_max)] }.to_h
-      end
+        # バイオリズム理論値と縦軸の最大値、最小値を合わせる(縦軸の最小-1、最大1のグラフにする)
+        expression_abs = expression.map{ |x,y| [x, y.abs] }.to_h
+        expression_max = expression_abs.max{ |a,b| a[1] <=> b[1] }[1]
+        # 0で割るケースは感情が全て0で登録された時のみのため、0を代入
+        if expression_max == 0
+          expression = { minimum_day=>0, maximum_day=> 0 }
+        else
+          expression = expression.map{ |x,y| [x, (y.to_f / expression_max)] }.to_h
+        end
     end
     return expression
   end
-  
+
 end
