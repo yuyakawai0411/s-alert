@@ -1,12 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-
-  before do
-    @user = FactoryBot.build(:user)
-  end
-
+RSpec.describe User, type: :model do  
   describe 'ユーザー新規登録' do
+    before do
+      @user = FactoryBot.build(:user)
+    end
 
     context '新規登録できるとき' do
       it '必須情報が全て存在すれば登録できる' do

@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Notice, type: :model do
-  
-  before do
-    @notice = FactoryBot.build(:notice)
-  end
-  
   describe 'メール通知登録' do
+    before do
+      @notice = FactoryBot.build(:notice)
+    end
 
     context 'メール通知が登録できるとき' do
       it '必須情報が全てが存在すると登録できる' do

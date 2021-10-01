@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Record, type: :model do
-  
-  before do
-    @record = FactoryBot.build(:record)
-  end
-
   describe '着信履歴登録' do
+    before do
+      @record = FactoryBot.build(:record)
+    end
 
     context '着信履歴登録できるとき' do
       it '必須情報が全て存在すると登録できる' do
@@ -43,7 +41,6 @@ RSpec.describe Record, type: :model do
         @record.valid?
         expect(@record.errors.full_messages).to include "時間は指定の範囲内で選択してください"
       end
-
 
       it '感情が空では登録できない' do
         @record.expression_id = ""

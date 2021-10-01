@@ -1,13 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Card, type: :model do
-  
-  before do
-    @card = FactoryBot.build(:card)
-  end
-
+RSpec.describe Card, type: :model do  
   describe '名刺登録' do
-
+    before do
+      @card = FactoryBot.build(:card)
+    end
+    
     context '名刺登録できるとき' do
       it '必須事項が全て存在すれば登録できる' do
        expect(@card).to be_valid

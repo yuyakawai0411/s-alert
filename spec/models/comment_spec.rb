@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "Comment", type: :model do
-  before do
-    @comment = FactoryBot.build(:comment)
-  end
-  
+RSpec.describe "Comment", type: :model do  
   describe '会話ネタ投稿' do
+    before do
+      @comment = FactoryBot.build(:comment)
+    end
 
     context '会話ネタが投稿できるとき' do
       it 'テキストが存在すると登録できる' do
