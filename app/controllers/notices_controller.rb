@@ -28,7 +28,8 @@ def notice_params
 end
 
 def notices_info
-  @notices = current_user.notices.order('notice_date ASC')
+  @user = current_user
+  @notices = @user.notices.order('notice_date ASC')
 end
 
 def remove_past_date_notice

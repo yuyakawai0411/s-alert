@@ -123,7 +123,7 @@ RSpec.describe '名刺編集', type: :system do
       select "#{@card3.s_birth_day.mday}", from: "card[s_birth_day(3i)]"
       # 編集してもCardモデルのカウントは変わらない
       expect{
-        find('input[name="commit"][id="card-new-edit"]').click
+        find('input[name="commit"][id="card-new-create"]').click
       }.to change { Card.count }.by(0)
       # トップページに遷移する
       expect(current_path).to eq(root_path)
