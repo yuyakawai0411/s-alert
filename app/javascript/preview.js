@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
   if ( document.getElementById('card_image')){
-    const ImageList = document.getElementById('image-list');
+    const ImageList = document.getElementById('image-preview');
     // 画像をプレビューで表示
     const createImageHTML = (blob) => {
       const imageElement = document.createElement('div');
