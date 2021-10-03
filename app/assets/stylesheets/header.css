@@ -1,12 +1,7 @@
 
-
-#header-title {
+.header-title {
   color: white;
 }
-
-/* #search-button {
-  background-image: url("search.png");
-} */
 
 .header {
   height: 120px;
@@ -16,7 +11,11 @@
   display: none;
 }
 
-#user-menu {
+.header-log-in {
+  cursor: pointer;
+}
+
+#log-in-menu {
   position: relative;
   width: 70px;
   height: 25px;
@@ -25,14 +24,15 @@
   position: absolute;
   background: rgba(0, 0, 0, 0.7);
 }
-a.pull-down-list {
+.pull-down-list {
   color: white;
+  cursor: pointer;
 }
 span:hover {
   opacity: 0.7;
 }
 
-.btn-search {
+.search-field {
   width: 220px;
 }
 

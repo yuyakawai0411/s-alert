@@ -206,7 +206,7 @@ RSpec.describe '名刺検索', type: :system do
     card_exist(@card2, 'yes')
     # 名刺1を検索する
     fill_in 'keyword', with: @card1.s_company
-    find_by_id('search-button').click
+    find_by_id('search-btn').click
     # 名刺1が表示されている
     card_exist(@card1, 'yes')
     # 名刺2は表示されていない
@@ -222,7 +222,7 @@ RSpec.describe '名刺検索', type: :system do
     card_exist(@card2, 'yes')
     # 空白で検索する
     fill_in 'keyword', with: ""
-    find_by_id('search-button').click
+    find_by_id('search-btn').click
     # 名刺1が表示されている
     card_exist(@card1, 'yes')
     # 名刺2が表示されている
