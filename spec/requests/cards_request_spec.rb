@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Cards", type: :request do
-  let(:user) { FactoryBot.create(:user) }
-  let(:card) { FactoryBot.create(:card) }
-
+  
   describe 'GET / #index' do 
     it 'トップページにアクセスされる' do
       get root_path
@@ -12,7 +10,8 @@ RSpec.describe "Cards", type: :request do
   end
 
   describe 'GET /cards/new #new' do
-    context '名刺投稿者がアクセスするとき' do 
+    let(:user) { FactoryBot.create(:user) }
+    context 'ログインユーザーがアクセスするとき' do 
       it '名刺作成ページにアクセスでき、HTTP200ステータスコードが返される' do
         post user_session_path, params: { user: { email: user.email, password: user.password } }
         expect(response.status).to redirect_to root_path
@@ -29,6 +28,8 @@ RSpec.describe "Cards", type: :request do
   end
 
   describe 'GET /cards/edit/:id #edit' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:card) { FactoryBot.create(:card) }
     context '名刺投稿者がアクセスするとき' do 
       before do
         post user_session_path, params: { user: { email: card.user.email, password: card.user.password } }
@@ -58,6 +59,7 @@ RSpec.describe "Cards", type: :request do
   end
   
   describe 'GET /cards/:id #show' do
+    let(:card) { FactoryBot.create(:card) }
     before do
       get card_path card.id
     end
@@ -70,6 +72,7 @@ RSpec.describe "Cards", type: :request do
   end
 
   describe 'GET /cards/search #search' do
+    let(:card) { FactoryBot.create(:card) }
     let(:card_another) { FactoryBot.create(:card) }
     context '存在する名刺を検索したとき' do
       before do 
@@ -104,6 +107,7 @@ RSpec.describe "Cards", type: :request do
   end
 
   describe 'POST /cards #create' do
+    let(:card) { FactoryBot.create(:card) }
     let(:card_post) { FactoryBot.attributes_for(:card) }
     let(:card_wothout_name) { FactoryBot.attributes_for(:card, s_last_name: '') } 
     context '名刺投稿者がアクセスしたとき' do
@@ -139,6 +143,8 @@ RSpec.describe "Cards", type: :request do
   end
 
   describe 'PUT /cards/:id #update' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:card) { FactoryBot.create(:card) }
     let(:card_post) { FactoryBot.attributes_for(:card) }
     let(:card_wothout_name) { FactoryBot.attributes_for(:card, s_last_name: '') } 
     context '名刺投稿者がアクセスしたとき' do
@@ -184,6 +190,8 @@ RSpec.describe "Cards", type: :request do
   end
 
   describe 'DELETE #destroy' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:card) { FactoryBot.create(:card) }
     context '名刺投稿者がアクセスしたとき' do
       it '名刺がデータベースから削除され、トップページにリダイレクトされる' do
         post user_session_path, params: { user: { email: card.user.email, password: card.user.password } }
