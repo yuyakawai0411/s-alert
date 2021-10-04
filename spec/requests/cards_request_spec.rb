@@ -109,34 +109,32 @@ RSpec.describe "Cards", type: :request do
   describe 'POST /cards #create' do
     let(:card) { FactoryBot.create(:card) }
     let(:card_post) { FactoryBot.attributes_for(:card) }
-    let(:card_wothout_name) { FactoryBot.attributes_for(:card, s_last_name: '') } 
+    let(:card_without_name) { FactoryBot.attributes_for(:card, s_last_name: '') } 
+    subject { post cards_path, params: { card: card_type } }
     context '名刺投稿者がアクセスしたとき' do
       before do
         post user_session_path, params: { user: { email: card.user.email, password: card.user.password } }
         expect(response.status).to redirect_to root_path
       end
       context '名刺登録に必要な情報を全て入力したとき' do 
+        let(:card_type) { card_post }
         it '名刺がデータベースに登録され、トップページにリダイレクトされる' do
-          expect{
-          post cards_path, params: { card: card_post }
-          }.to change(Card, :count).by(1)
+          expect{ subject }.to change(Card, :count).by(1)
           expect(response).to redirect_to root_path
         end
       end
       context '名刺登録に必要な情報を入力しなかったとき' do
+        let(:card_type) { card_without_name }
         it '名刺がデータベースに登録されず、エラーメッセージが表示される' do
-          expect{
-          post cards_path, params: { card: card_wothout_name }
-          }.to change(Card, :count).by(0)
+          expect{ subject }.to change(Card, :count).by(0)
           expect(response.body).to include('姓を入力してください') 
         end
       end
     end
     context '未ログインユーザーがアクセスするとき' do 
+      let(:card_type) { card_post }
       it '名刺がデータベースに登録されず、ログインページにリダイレクトされる' do
-        expect{
-          post cards_path, params: { card: card_post }
-          }.to change(Card, :count).by(0)
+        expect{ subject }.to change(Card, :count).by(0)
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -146,44 +144,41 @@ RSpec.describe "Cards", type: :request do
     let(:user) { FactoryBot.create(:user) }
     let(:card) { FactoryBot.create(:card) }
     let(:card_post) { FactoryBot.attributes_for(:card) }
-    let(:card_wothout_name) { FactoryBot.attributes_for(:card, s_last_name: '') } 
+    let(:card_without_name) { FactoryBot.attributes_for(:card, s_last_name: '') } 
+    subject { put card_path card.id, params: { card: card_type } }
     context '名刺投稿者がアクセスしたとき' do
       before do
         post user_session_path, params: { user: { email: card.user.email, password: card.user.password } }
         expect(response.status).to redirect_to root_path
       end
       context '名刺編集に必要な情報を全て入力したとき' do 
+        let(:card_type) { card_post }
         it '名刺が編集され、トップページにリダイレクトされる' do
-          expect{
-            put card_path card.id, params: { card: card_post }
-          }.to change { Card.find(card.id).s_last_name }.from(card.s_last_name).to(card_post[:s_last_name]) 
+          expect{ subject }.to change { Card.find(card.id).s_last_name }.from(card.s_last_name).to(card_post[:s_last_name]) 
           expect(response).to redirect_to root_path
         end
       end
       context '名刺編集に必要な情報を記入しないとき' do
+        let(:card_type) { card_without_name }
         it '名刺が編集されず、エラーが表示される' do
-          expect{
-            put card_path card.id, params: { card: card_wothout_name }
-          }.not_to change(Card.find(card.id), :s_last_name)
+          expect{ subject }.not_to change(Card.find(card.id), :s_last_name)
           expect(response.body).to include('姓を入力してください') 
         end
       end
     end
     context '名刺投稿者以外がアクセスするとき' do 
+      let(:card_type) { card_post }
       it '名刺が変更されず、トップページにリダイレクトされる' do
         post user_session_path, params: { user: { email: user.email, password: user.password } }
         expect(response.status).to redirect_to root_path
-        expect{
-          put card_path card.id, params: { card: card_post }
-        }.not_to change(Card.find(card.id), :s_last_name)
+        expect{ subject }.not_to change(Card.find(card.id), :s_last_name)
         expect(response).to redirect_to root_path
       end
     end
     context '未ログインユーザーがアクセスするとき' do 
+      let(:card_type) { card_post }
       it '名刺が変更されず、、ログインページにリダイレクトされる' do
-        expect{
-          put card_path card.id, params: { card: card }
-        }.not_to change(Card.find(card.id), :s_last_name)
+        expect{ subject }.not_to change(Card.find(card.id), :s_last_name)
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -192,13 +187,12 @@ RSpec.describe "Cards", type: :request do
   describe 'DELETE #destroy' do
     let(:user) { FactoryBot.create(:user) }
     let(:card) { FactoryBot.create(:card) }
+    subject { delete card_path card }
     context '名刺投稿者がアクセスしたとき' do
       it '名刺がデータベースから削除され、トップページにリダイレクトされる' do
         post user_session_path, params: { user: { email: card.user.email, password: card.user.password } }
         expect(response.status).to redirect_to root_path
-        expect{
-          delete card_path card
-        }.to change(Card, :count).by(-1)
+        expect{ subject }.to change(Card, :count).by(-1)
         expect(response).to redirect_to root_path
       end
     end
@@ -206,20 +200,15 @@ RSpec.describe "Cards", type: :request do
       it '名刺がデータベースから削除されず、トップページにリダイレクトされる' do
       post user_session_path, params: { user: { email: user.email, password: user.password } }
       expect(response.status).to redirect_to root_path
-      expect{
-        delete card_path card
-      }.to change(Card, :count).by(1)
+      expect{ subject }.to change(Card, :count).by(1)
       expect(response).to redirect_to root_path
       end
     end
     context '未ログインユーザーがアクセスするとき' do 
       it '名刺がデータベースから削除されず、ログインページにリダイレクトされる' do
-      expect{
-        delete card_path card
-      }.to change(Card, :count).by(1)
+      expect{ subject }.to change(Card, :count).by(1)
       expect(response).to redirect_to new_user_session_path
       end
     end
   end
-
 end
