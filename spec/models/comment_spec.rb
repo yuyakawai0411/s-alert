@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Comment", type: :model do  
   
   describe '会話ネタ投稿' do
-    let(:comment) { FactoryBot.build(:comment) } 
+  let(:comment) { FactoryBot.build(:comment) } 
     context '会話ネタが投稿できるとき' do
       it 'テキストが存在すると登録できる' do
        expect(comment).to be_valid

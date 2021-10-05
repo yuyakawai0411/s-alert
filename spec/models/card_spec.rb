@@ -3,30 +3,30 @@ require 'rails_helper'
 RSpec.describe Card, type: :model do  
   
   describe '名刺登録' do
-    let(:card) { FactoryBot.build(:card) } 
+  let(:card) { FactoryBot.build(:card) } 
     context '名刺登録できるとき' do
       it '必須事項が全て存在すれば登録できる' do
-       expect(card).to be_valid
+      expect(card).to be_valid
       end
       it '画像がなくても登録できる' do 
-       card.image = nil
-       expect(card).to be_valid
+      card.image = nil
+      expect(card).to be_valid
       end
       it '会話ネタ1がなくても登録できる' do 
         card.s_hobby_top = ""
         expect(card).to be_valid
-       end
-       it '会話ネタ2がなくても登録できる' do 
+      end
+      it '会話ネタ2がなくても登録できる' do 
         card.s_hobby_medium = ""
         expect(card).to be_valid
-       end
-       it '会話ネタ3がなくても登録できる' do 
+      end
+      it '会話ネタ3がなくても登録できる' do 
         card.s_hobby_row = ""
         expect(card).to be_valid
-       end
+      end
     end
     context '名刺登録できないとき' do
-      subject { card.errors.full_messages }
+    subject { card.errors.full_messages }
       it '姓が空では登録できない' do
         card.s_last_name = ''
         card.valid?
@@ -96,9 +96,9 @@ RSpec.describe Card, type: :model do
   end
 
   describe '名刺を削除する' do
-    let(:user) { FactoryBot.create(:user) }
-    let(:other_user) { FactoryBot.create(:user) }
-    let(:card) { FactoryBot.create(:card, user: user) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:other_user) { FactoryBot.create(:user) }
+  let!(:card) { FactoryBot.create(:card, user: user) }
     it 'Records、Fvarites、Commentsテーブルの情報が付随して削除される' do
       2.times { FactoryBot.create(:record, card: card) }
       1.times { FactoryBot.create(:favorite, card: card, user: other_user) }

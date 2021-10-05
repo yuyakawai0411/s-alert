@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do  
   describe 'ユーザー新規登録' do
-    let(:user) { FactoryBot.build(:user) } 
+  let(:user) { FactoryBot.build(:user) } 
     context '新規登録できるとき' do
       it '必須情報が全て存在すれば登録できる' do
         expect(user).to be_valid
       end
     end
     context '新規登録できないとき' do
-      subject { user.errors.full_messages }
+    subject { user.errors.full_messages }
       it 'メールアドレスが空では登録できない' do
         user.email = ''
         user.valid?
@@ -129,8 +129,8 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザーを削除する' do
-    let(:user) { FactoryBot.create(:user) }
-    let(:card) { FactoryBot.create(:card, user: user) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:card) { FactoryBot.create(:card, user: user) }
     it 'Cards、Records、Fvarites、Commentsテーブルの情報が付随して削除される' do
       2.times { FactoryBot.create(:record, card: card) }
       1.times { FactoryBot.create(:favorite, card: card, user: user) }

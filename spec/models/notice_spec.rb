@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Notice, type: :model do
   
   describe 'メール通知登録' do
-    let(:notice) { FactoryBot.build(:notice) } 
+  let(:notice) { FactoryBot.build(:notice) } 
     context 'メール通知が登録できるとき' do
       it '必須情報が全てが存在すると登録できる' do
        expect(notice).to be_valid
@@ -14,7 +14,7 @@ RSpec.describe Notice, type: :model do
       end
     end
     context 'メール通知が登録できないとき' do
-      subject { notice.errors.full_messages }
+    subject { notice.errors.full_messages }
       it '日時が空では登録できない' do
         notice.notice_date = ''
         notice.valid?

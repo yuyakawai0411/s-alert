@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Record, type: :model do
   
   describe '着信履歴登録' do
-    let(:record) { FactoryBot.build(:record) } 
+  let(:record) { FactoryBot.build(:record) } 
     context '着信履歴登録できるとき' do
       it '必須情報が全て存在すると登録できる' do
        expect(record).to be_valid
@@ -14,7 +14,7 @@ RSpec.describe Record, type: :model do
        end
     end
     context '着信履歴登録できないとき' do
-      subject { record.errors.full_messages }
+    subject { record.errors.full_messages }
       it '日付が空では登録できない' do
         record.date = ''
         record.valid?
