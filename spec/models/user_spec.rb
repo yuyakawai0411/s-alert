@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do  
   describe 'ユーザー新規登録' do
   let(:user) { FactoryBot.build(:user) } 
+  let(:another_user) { FactoryBot.build(:user, email: user.email) }
     context '新規登録できるとき' do
       it '必須情報が全て存在すれば登録できる' do
         expect(user).to be_valid
@@ -17,7 +18,6 @@ RSpec.describe User, type: :model do
       end
       it '重複しメールアドレスが存在する場合登録できない' do
         user.save
-        another_user = FactoryBot.build(:user, email: user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include "Eメールはすでに存在します"
       end

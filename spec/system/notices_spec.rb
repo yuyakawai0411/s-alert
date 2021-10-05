@@ -17,15 +17,11 @@ RSpec.describe "Notices", type: :system do
       # メール通知に移動
       visit user_notices_path(@user.id)
       # メール通知情報を入力
-      fill_in 'notice_notice_date', with: @notice.notice_date
-      fill_in 'notice_description', with: @notice.description
-      fill_in 'notice_topic', with: @notice.topic
+      notice_fill_in_form(@notice)
       find_by_id("notice-submit").click
       expect(current_path).to eq(user_notices_path(@user.id))
       # 設定した内容が存在する
-      expect(page).to have_content @notice.notice_date
-      expect(page).to have_content @notice.description
-      expect(page).to have_content @notice.topic
+      notice_exist_page(@notice)
     end
   end
 

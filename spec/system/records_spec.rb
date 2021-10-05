@@ -19,19 +19,13 @@ RSpec.describe "着信タイミング登録", type: :system do
       # 作成&編集ページへ移動する
       visit card_records_path(@card)
       # 必須情報を入力し、送信するとRecordのカウントが1上がる
-      fill_in "record[date]", with: @record.date
-      select "#{@record.phone_time.time}", from: "record-phone-time"
-      select "#{@record.phone_call.status}", from: "record[phone_call_id]"
-      select "#{@record.expression.status}", from: "record[expression_id]"
+      record_fill_in_form(@record)
       expect{
       find_by_id('record-submit').click
       }.to change { Record.count }.by(1)
       # 登録した着信履歴があるか確認
       expect(current_path).to eq(card_records_path(@card))
-      expect(page).to have_content @record.date
-      expect(page).to have_content @record.phone_time.time
-      expect(page).to have_content @record.phone_call.status
-      expect(page).to have_content @record.expression.status
+      record_exist_page(@record)
     end
   end
 
@@ -70,25 +64,18 @@ RSpec.describe "着信履歴削除", type: :system do
       # 作成&編集ページへ移動する
       visit card_records_path(@card)
       # 必須情報を入力し、送信するとRecordのカウントが1上がる
-      fill_in "record[date]", with: @record.date
-      select "#{@record.phone_time.time}", from: "record[phone_time_id]"
-      select "#{@record.phone_call.status}", from: "record[phone_call_id]"
-      select "#{@record.expression.status}", from: "record[expression_id]"
+      record_fill_in_form(@record)
       expect{
       find_by_id('record-submit').click
       }.to change { Record.count }.by(1)
       # 登録した着信履歴があるか確認
       expect(current_path).to eq(card_records_path(@card))
-      expect(page).to have_selector '.record-list-date', text: "#{@record.date}"
-      expect(page).to have_selector '.record-list-time', text: "#{@record.phone_time.time}"
-      expect(page).to have_selector '.record-list-expression', text: "#{@record.expression.status}"
+      record_exist_page(@record)
       # 着信履歴の削除をクリック
       first(".record-delete").click
       # 登録した着信履歴が消えている
       expect(current_path).to eq(card_records_path(@card))
-      expect(page).to have_no_selector '.record-list-date', text: "#{@record.date}"
-      expect(page).to have_no_selector '.record-list-time', text: "#{@record.phone_time_id}:00"
-      expect(page).to have_no_selector '.record-list-expression', text: "#{@record.expression.status}"
+      record_not_exist_page(@record)
     end
 end
 

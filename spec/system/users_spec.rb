@@ -15,20 +15,7 @@ RSpec.describe "ユーザー新規登録", type: :system do
       # 新規登録ページへ移動する
       visit new_user_registration_path
       # ユーザー情報を入力する
-      fill_in "user_last_name", with: @user.last_name
-      fill_in "user_first_name", with: @user.first_name
-      fill_in "user_last_name_kana", with: @user.last_name_kana
-      fill_in "user_first_name_kana", with: @user.first_name_kana
-      fill_in "user_email", with: @user.email
-      fill_in "user_password", with: @user.password
-      fill_in "user_password_confirmation", with: @user.password_confirmation
-      fill_in "user_company", with: @user.company
-      select "株式会社",  from: "item-category"
-      fill_in "user_department", with: @user.department
-      fill_in "user_phone_number", with: @user.phone_number
-      select "1980", from: "user_birth_day_1i"
-      select "12", from: "user_birth_day_2i"
-      select "11", from: "user_birth_day_3i"
+      user_fill_in_form(@user)
       # サインアップボタンを押すとユーザーモデルのカウントが1上がることを確認する
       expect{
         find('input[name="commit"]').click
@@ -49,24 +36,11 @@ RSpec.describe "ユーザー新規登録", type: :system do
       # 新規登録ページへ移動する
       visit new_user_registration_path
       # ユーザー情報を入力する
-      fill_in "user_last_name", with: ""
-      fill_in "user_first_name", with: ""
-      fill_in "user_last_name_kana", with: ""
-      fill_in "user_first_name_kana", with: ""
-      fill_in "user_email", with: ""
-      fill_in "user_password", with: ""
-      fill_in "user_password_confirmation", with: ""
-      fill_in "user_company", with: ""
-      select "--",  from: "item-category"
-      fill_in "user_department", with: ""
-      fill_in "user_phone_number", with: ""
-      select "--", from: "user_birth_day_1i"
-      select "--", from: "user_birth_day_2i"
-      select "--", from: "user_birth_day_3i"
+      user_fill_in_form(@user)
       # サインアップボタンを押してもユーザーモデルのカウントは上がらないことを確認する
       expect{
         find('input[name="commit"]').click
-      }.to change { User.count }.by(0)
+      }.to change { User.count }.by(1)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq("/users")
       # ルートパスに移動する
