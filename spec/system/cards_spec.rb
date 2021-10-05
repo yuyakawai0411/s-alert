@@ -16,7 +16,7 @@ RSpec.describe "名刺機能", type: :system do
   let(:card_post) { FactoryBot.build(:card) }
   let(:card_without_name) { FactoryBot.build(:card, s_last_name:'') }
   let(:test_image) { Rails.root.join('public/images/test_image.png') }
-    context '名刺投稿が成功する時' do
+    context '名刺投稿に必要な情報を全て入力するとき' do
       it '名刺が保存され、トップページに投稿した名刺が表示されている' do
         sign_in(user)
         # 新規作成のリンクがあることを確認する
@@ -35,7 +35,7 @@ RSpec.describe "名刺機能", type: :system do
         card_exist_page(card_post)
       end
     end
-    context '名刺投稿が失敗する時' do
+    context '名刺投稿に必要な情報を入力しないとき' do
       it '名刺が保存されず、トップページに名刺が投稿されない' do
         sign_in(user)
         # 新規作成のリンクがあることを確認する
@@ -59,7 +59,7 @@ RSpec.describe "名刺機能", type: :system do
   let(:card_post) { FactoryBot.build(:card) }
   let(:card_without_name) { FactoryBot.build(:card, s_last_name:'') }
   let(:test2_image) { Rails.root.join('public/images/test2_image.png') }
-    context '名刺編集が成功する時' do
+    context '名刺編集に必要な情報を全て入力するとき' do
       it '名刺の編集内容が反映され、トップページに編集後の名刺が存在する' do
         sign_in(card.user)
         # 編集ページへ遷移する
@@ -79,7 +79,7 @@ RSpec.describe "名刺機能", type: :system do
         card_exist_page(card_post)
       end
     end
-    context '名刺編集が失敗する時' do
+    context '名刺編集に必要な情報を入力しないとき' do
       it '名刺の編集内容が反映されず、トップページに編集前の名刺が存在する' do
         sign_in(card.user)
         # 編集ページへ遷移する
@@ -105,7 +105,7 @@ RSpec.describe "名刺機能", type: :system do
 
   describe '名刺削除 #destroy' do
   let!(:card) { FactoryBot.create(:card) }
-    context '名刺削除が成功するとき' do
+    context '名刺削除するとき' do
       it 'トップページから名刺が削除される' do
         sign_in(card.user)
         # 名刺が存在する
@@ -211,7 +211,6 @@ RSpec.describe "名刺機能", type: :system do
       end
     end
   end
-
 end
 
 
