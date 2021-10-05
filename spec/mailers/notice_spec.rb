@@ -12,8 +12,8 @@ RSpec.describe NoticeMailer, type: :mailer do
       expect(mail.from).to eq(["from@example.com"])
       expect(mail.cc).to eq(["yasuo.hoklo.kappa@gmail.com"])
       expect(mail.body.raw_source).to include("こんにちは#{user.last_name}さん")
-      expect(mail.body.raw_source).to include("#{description}")
-      expect(mail.body.raw_source).to include("#{topic}")
+      expect(mail.body.raw_source).to include("#{@description}")
+      expect(mail.body.raw_source).to include("#{@topic}")
     end
   end
 end

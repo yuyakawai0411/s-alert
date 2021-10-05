@@ -14,25 +14,25 @@ module CardExistSupport
     expect(find('select[name="card[s_birth_day(3i)]"]').value).to eq("#{card.s_birth_day.mday}")
   end
 
-  def card_exist_page(card, exist)
-    if exist == 'yes'
-      expect(page).to have_content(card.s_last_name)
-      expect(page).to have_content(card.s_first_name)
-      expect(page).to have_content(card.s_last_name_kana)
-      expect(page).to have_content(card.s_first_name_kana)
-      expect(page).to have_content(card.s_company)
-      expect(page).to have_content(card.s_company_form.form)
-      expect(page).to have_content(card.s_department)
-      expect(page).to have_content(card.s_phone_number)
-    else exist == 'no'
-      expect(page).to have_no_content(card.s_last_name)
-      expect(page).to have_no_content(card.s_first_name)
-      expect(page).to have_no_content(card.s_last_name_kana)
-      expect(page).to have_no_content(card.s_first_name_kana)
-      expect(page).to have_no_content(card.s_company)
-      expect(page).to have_no_content(card.s_company_form.form)
-      expect(page).to have_no_content(card.s_department)
-      expect(page).to have_no_content(card.s_phone_number)
-    end
+  def card_exist_page(card)
+    expect(page).to have_content(card.s_last_name)
+    expect(page).to have_content(card.s_first_name)
+    expect(page).to have_content(card.s_last_name_kana)
+    expect(page).to have_content(card.s_first_name_kana)
+    expect(page).to have_content(card.s_company)
+    expect(page).to have_content(card.s_company_form.form)
+    expect(page).to have_content(card.s_department)
+    expect(page).to have_content(card.s_phone_number)
   end
+
+  def card_not_exist_page(card)
+    expect(page).to have_no_content(card.s_last_name)
+    expect(page).to have_no_content(card.s_first_name)
+    expect(page).to have_no_content(card.s_last_name_kana)
+    expect(page).to have_no_content(card.s_first_name_kana)
+    expect(page).to have_no_content(card.s_company)
+    expect(page).to have_no_content(card.s_company_form.form)
+    expect(page).to have_no_content(card.s_department)
+    expect(page).to have_no_content(card.s_phone_number)
+   end
 end
