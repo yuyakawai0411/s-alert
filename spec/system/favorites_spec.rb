@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "お気に入り機能", type: :system do
+  
   describe 'お気に入り登録 #create' do
     context 'お気に入り登録するとき' do
     let!(:user) { FactoryBot.create(:user) }

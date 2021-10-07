@@ -15,10 +15,8 @@ FactoryBot.define do
     s_hobby_row             { "漫画鑑賞" }
     association :user
 
-
     after(:build) do |card|
       card.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
     end
-
   end
 end
