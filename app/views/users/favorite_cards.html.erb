@@ -11,7 +11,9 @@
         <%# 共有名刺一覧表示 %>
         <div class="share-cards col-10">
           <h1 class="share-cards-title">お気に入り名刺一覧</h1>
-          <%= render partial: "shared/card-format" , locals: { cards: @favorites }%>
+          <div class="cards d-flex justify-content-between flex-wrap w-100">
+            <%= render partial: "shared/card-format" , collection: @favorites, as: "card" %>
+          </div>
           <%= paginate @favorites %>
         </div>
       </div>

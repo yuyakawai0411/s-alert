@@ -1,63 +1,59 @@
-<div class="cards d-flex justify-content-between flex-wrap w-100">
-  <% cards.each do |card| %>
-    <ul class="card-info"> 
-      <%= link_to card_path(card.id) do %>
-        <div class="d-flex justify-content-between">
-        
-          <div class="card-info-right">
-              <%# 名刺情報_氏名 %>
-              <li class="card-name">
-                <ul>
-                  <li class="name"><%= "#{card.s_last_name} #{card.s_first_name}" %></li>
-                  <li class="name-kana"><%= "#{card.s_last_name_kana} #{card.s_first_name_kana}" %></li>
-                </ul>
-              </li>
-              <%# 名刺情報_会社・部署 %>
-              <li class="card-company">
-                <ul>
-                  <li class="company-name"><%= "#{card.s_company} #{card.s_company_form.form}" %></li>
-                  <li class="company-department"><%= card.s_department %></li>
-                </ul>
-              </li>
-              <%# 名刺情報_電話番号 %>
-              <li class="card-phone">
-                <ul>
-                  <li class="phone-number"><%= card.s_phone_number%></li>
-                </ul>
-              </li>       
-          </div>
+<ul class="card-info"> 
+  <%= link_to card_path(card.id) do %>
+    <div class="d-flex justify-content-between">
+    
+      <div class="card-info-right">
+          <%# 名刺情報_氏名 %>
+          <li class="card-name">
+            <ul>
+              <li class="name"><%= "#{card.s_last_name} #{card.s_first_name}" %></li>
+              <li class="name-kana"><%= "#{card.s_last_name_kana} #{card.s_first_name_kana}" %></li>
+            </ul>
+          </li>
+          <%# 名刺情報_会社・部署 %>
+          <li class="card-company">
+            <ul>
+              <li class="company-name"><%= "#{card.s_company} #{card.s_company_form.form}" %></li>
+              <li class="company-department"><%= card.s_department %></li>
+            </ul>
+          </li>
+          <%# 名刺情報_電話番号 %>
+          <li class="card-phone">
+            <ul>
+              <li class="phone-number"><%= card.s_phone_number%></li>
+            </ul>
+          </li>       
+      </div>
 
-          <div class="card-info-left">
-              <%# 名刺情報_写真 %>
-              <div calss="card-image">
-                <% if card.image.attached? %>
-                  <%= image_tag card.image.variant(resize: '100x100') %>
+      <div class="card-info-left">
+          <%# 名刺情報_写真 %>
+          <div calss="card-image">
+            <% if card.image.attached? %>
+              <%= image_tag card.image.variant(resize: '100x100') %>
+            <% else %>
+              <%= image_tag "boss.png", size: '100x100' %>
+            <% end %>
+          </div>
+          <%# 名刺編集&削除 %>
+          <% if user_signed_in? %>
+            <% if card.user_id == current_user.id %>      
+              <div class="card-edit d-flex">
+                <%=link_to '編集',edit_card_path(card.id) %>
+                <%=link_to '削除',card_path(card.id), method: :delete, id: 'card-delete-link' %>
+                <%=link_to '着信',card_records_path(card.id) %>
+              </div>
+            <% else %>
+              <%# 名刺情報_お気に入り %>
+              <div calss="card-favorite">
+                <% if card.users.ids.include?(current_user.id) %>
+                  <%=link_to "お気に入り解除", card_favorites_path(card.id), method: :delete %>
                 <% else %>
-                  <%= image_tag "boss.png", size: '100x100' %>
+                  <%=link_to "お気に入り登録", card_favorites_path(card.id), method: :post %>
                 <% end %>
               </div>
-              <%# 名刺編集&削除 %>
-              <% if user_signed_in? %>
-                <% if card.user_id == current_user.id %>      
-                  <div class="card-edit d-flex">
-                    <%=link_to '編集',edit_card_path(card.id) %>
-                    <%=link_to '削除',card_path(card.id), method: :delete, id: 'card-delete-link' %>
-                    <%=link_to '着信',card_records_path(card.id) %>
-                  </div>
-                <% else %>
-                  <%# 名刺情報_お気に入り %>
-                  <div calss="card-favorite">
-                    <% if card.users.ids.include?(current_user.id) %>
-                      <%=link_to "お気に入り解除", card_favorites_path(card.id), method: :delete %>
-                    <% else %>
-                      <%=link_to "お気に入り登録", card_favorites_path(card.id), method: :post %>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% end %>
-          </div>
-       </div>
-     <% end %>
-    </ul>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
   <% end %>
-</div>
+</ul>

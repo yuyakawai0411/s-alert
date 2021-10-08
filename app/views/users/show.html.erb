@@ -70,8 +70,10 @@
         <section class="user-cards record-list">
           <div class="cards">
             <h2 class="page-heading"><%= "投稿名刺一覧"%></h2>
-            <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
-             <%= link_to "もっと見る", post_cards_user_path(@user.id), id: 'user-card-all' %>
+            <div class="cards d-flex justify-content-between flex-wrap w-100">
+              <%= render partial: "shared/card-format" , collection: @cards, as: "card" %>
+            </div>
+            <%= link_to "もっと見る", post_cards_user_path(@user.id), id: 'user-card-all' %>
           </div>
         </section>
 
@@ -79,7 +81,9 @@
         <section class="user-favorites record-list">
           <div class="favorites">
             <h2 class="page-heading"><%= "お気に入り"%></h2>
-            <%= render partial: "shared/card-format" , locals: { cards: @favorites }%>
+            <div class="cards d-flex justify-content-between flex-wrap w-100">
+              <%= render partial: "shared/card-format" , collection: @favorites, as: "card" %>
+            </div>
             <%= link_to "もっと見る", favorite_cards_user_path(@user.id), id: 'user-favorite-all' %>
           </div>
         </section>
