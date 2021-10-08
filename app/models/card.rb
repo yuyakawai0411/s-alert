@@ -38,9 +38,4 @@ class Card < ApplicationRecord
     end
   end
 
-  # 現在ログインしているユーザーがお気に入りしている名刺を確認
-  def favorited_by?(user)
-    favorites.where(user_id: user.id).exists?
-  end
-
 end
