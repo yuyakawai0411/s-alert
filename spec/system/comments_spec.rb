@@ -52,6 +52,7 @@ RSpec.describe "コメント機能 #create", type: :system do
         # コメントを投稿すると、Commentモデルのカウントが1上がる
         expect{ 
           find_link('削除').click
+          visit current_path
         }.to change { Comment.count }.by(-1)
         # 投稿したコメントが表示されている
         expect(page).to have_no_content comment.text

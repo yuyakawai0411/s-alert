@@ -62,10 +62,10 @@ RSpec.describe "ユーザー管理機能", type: :system do
         # ログインページへ遷移する
         visit new_user_session_path
         # 正しいユーザー情報を入力する
-        fill_in "user_email", with: user.email
-        fill_in "user_password", with: user.password
+        find("[data-testid='email']").set(user.email)
+        find("[data-testid='password']").set(user.password)
         # ログインボタンを押す
-        find('input[name="commit"]').click
+        find("[data-testid='submit']").click
         # トップページへ遷移することを確認する
         expect(current_path).to eq(root_path)
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
