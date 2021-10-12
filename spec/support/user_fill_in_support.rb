@@ -15,17 +15,17 @@ module UserFillInSupport
   end
 
   def user_fill_in_form(user)
-    fill_in "user_last_name", with: user.last_name
-    fill_in "user_first_name", with: user.first_name
-    fill_in "user_last_name_kana", with: user.last_name_kana
-    fill_in "user_first_name_kana", with: user.first_name_kana
-    fill_in "user_email", with: user.email
-    fill_in "user_password", with: user.password
-    fill_in "user_password_confirmation", with: user.password_confirmation
-    fill_in "user_company", with: user.company
-    select "株式会社",  from: "item-category"
-    fill_in "user_department", with: user.department
-    fill_in "user_phone_number", with: user.phone_number
+    find("[data-testid='last_name']").set(user.last_name)
+    find("[data-testid='first_name']").set(user.first_name)
+    find("[data-testid='last_name_kana']").set(user.last_name_kana)
+    find("[data-testid='first_name_kana']").set(user.first_name_kana)
+    find("[data-testid='email']").set(user.email)
+    find("[data-testid='password']").set(user.password)
+    find("[data-testid='password_confirmation']").set(user.password_confirmation)
+    find("[data-testid='company']").set(user.company)
+    find("[data-testid='company-form']").select("株式会社")
+    find("[data-testid='department']").set(user.department)
+    find("[data-testid='phone_number']").set(user.phone_number)
     select "1980", from: "user_birth_day_1i"
     select "12", from: "user_birth_day_2i"
     select "11", from: "user_birth_day_3i"

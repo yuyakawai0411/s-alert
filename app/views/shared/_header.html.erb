@@ -20,14 +20,14 @@
       <nav class="col-3 d-flex justify-content-between" >
         <% if user_signed_in? %>
           <div class="header-log-in">ログイン中</div>
-          <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "pull-down-list" %></div>
+          <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "pull-down-list", "data-testid": 'log_out' %></div>
         <% else %>
-          <div><%= link_to "テストログイン", users_test_sign_in_path, class: "header-log-in", method: :post %></div>
+          <div><%= link_to "テストログイン", users_test_sign_in_path, class: "header-log-in", method: :post, "data-testid": 'test_log_in' %></div>
           <div id="log-in-menu"><span class="header-log-in">ログイン</span>
             <ul class="hidden", id="pull-down"> 
               <li><%= link_to "新規登録", new_user_registration_path, class: "pull-down-list" %></li>
               <li><%= link_to "ログイン", new_user_session_path, class: "pull-down-list" %></li>
-             </ul>
+            </ul>
           </div>
         <% end %>
       </nav>

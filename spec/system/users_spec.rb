@@ -16,7 +16,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         user_fill_in_form(user)
         # サインアップボタンを押すとユーザーモデルのカウントが1上がることを確認する
         expect{
-          find('input[name="commit"]').click
+          find("[data-testid='submit']").click
         }.to change { User.count }.by(1)
         # トップページへ遷移したことを確認する
         expect(current_path).to eq(root_path)
@@ -37,7 +37,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         user_fill_in_form(user)
         # サインアップボタンを押してもユーザーモデルのカウントは上がらないことを確認する
         expect{
-          find('input[name="commit"]').click
+          find("[data-testid='submit']").click
         }.to change { User.count }.by(0)
         # 新規登録ページへ戻されることを確認する
         expect(current_path).to eq('/users')
@@ -81,10 +81,10 @@ RSpec.describe "ユーザー管理機能", type: :system do
         # ログインページへ遷移する
         visit new_user_session_path
         # ユーザー情報を入力する
-        fill_in "user_email", with: user_another.email
-        fill_in "user_password", with: user_another.password
+        find("[data-testid='email']").set(user_another.email)
+        find("[data-testid='password']").set(user_another.password)
         # ログインボタンを押す
-        find('input[name="commit"]').click
+        find("[data-testid='submit']").click
         # ログインページへ戻されることを確認する
         expect(current_path).to eq(new_user_session_path)
         # ルートに戻る      
@@ -106,7 +106,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
       # トップページに移動する
       expect(page).to have_content('ログアウト')
       # ログアウトボタンをクリックする
-      click_link('ログアウト')
+      find("[data-testid='log_out']").click
       # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
       expect(page).to have_no_content('ログアウト')
       expect(page).to have_content('ログイン')
@@ -122,7 +122,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         expect(page).to have_content('テストログイン')
         # テストログインボタンをクリックする
         expect{
-          click_link('テストログイン')
+          find("[data-testid='test_log_in']").click
         }.to change { User.count }.by(1)
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
         expect(page).to have_content('ログアウト')
@@ -133,11 +133,11 @@ RSpec.describe "ユーザー管理機能", type: :system do
         # トップページに移動する
         visit root_path
         # テストユーザーを作成する
-        click_link('テストログイン')
+        find("[data-testid='test_log_in']").click
         # ログアウトボタンをクリックする
-        click_link('ログアウト')
+        find("[data-testid='log_out']").click
         expect{
-          click_link('テストログイン')
+          find("[data-testid='test_log_in']").click
         }.to change { User.count }.by(0)
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
         expect(page).to have_content('ログアウト')
@@ -171,7 +171,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         sign_in(user)
         # ユーザー詳細ページに移動する
         visit "/users/#{user.id}"
-        find_by_id('user-card-all').click
+        find("[data-testid='user-card-all']").click
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
         expect(current_path).to eq(post_cards_user_path(user))
         card_exist_page(card)
@@ -183,7 +183,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         sign_in(user)
         # ユーザー詳細ページに移動する
         visit "/users/#{user.id}"
-        find_by_id('user-favorite-all').click
+        find("[data-testid='user-favorite-all']").click
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
         expect(current_path).to eq(favorite_cards_user_path(user))
         card_exist_page(card_another)
@@ -206,7 +206,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         user_fill_in_form(user_post)
         # 編集してもCardモデルのカウントは変わらない
         expect{
-          find_by_id('user-form-btn').click
+          find("[data-testid='submit']").click
         }.to change { User.count }.by(0)
         # 変更されたユーザー情報が存在する
         user_exist_page(user_post)
@@ -223,7 +223,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         user_fill_in_form(user_without_name)
         # 編集してもCardモデルのカウントは変わらない
         expect{
-          find_by_id('user-form-btn').click
+          find("[data-testid='submit']").click
         }.to change { User.count }.by(0)
       end
     end
