@@ -240,7 +240,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
       visit "/users/#{user.id}"
       # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
       expect{
-      click_link('削除')
+        find("[data-testid='delete']").click
       }.to change { User.count }.by(-1)
       # トップページに戻る
       expect(current_path).to eq(root_path)
