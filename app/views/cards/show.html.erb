@@ -153,7 +153,7 @@
                           <td class="comment-colum-user"><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong><%= comment.text %></td>
                           <% if user_signed_in? %>
                             <% if current_user.id == comment.user_id %>
-                              <td class="comment-colum-delete"><%= link_to "削除", card_comment_path(@card,comment), class: "text-right", method: :delete %></td>
+                              <td class="comment-colum-delete"><%= link_to "削除", card_comment_path(@card,comment), class: "text-right", method: :delete, "data-testid": 'comment-delete' %></td>
                             <% end %>
                           <% end %>
                         </tr>
@@ -164,8 +164,8 @@
                     <% if user_signed_in? %>
                       <%= form_with(model: [@card, @comment]) do |f| %>
                         <div class="comment-form d-flex align-items-center", class='comment-text-area'>
-                          <div><%= f.text_field :text, placeholder: "会話ネタをコメントする", rows: "2", class: 'comment-text-area' %></div>
-                          <div><%= f.submit "送信",id: "comment-submit" %></div>
+                          <div><%= f.text_field :text, placeholder: "会話ネタをコメントする", rows: "1", class: 'comment-text-area', "data-testid": 'comment-text' %></div>
+                          <div><%= f.submit "送信", "data-testid": 'comment-submit' %></div>
                         </div>
                       <% end %>
                     <% else %>

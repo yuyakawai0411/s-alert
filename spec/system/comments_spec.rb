@@ -11,10 +11,10 @@ RSpec.describe "コメント機能 #create", type: :system do
         # 名刺詳細ページに遷移する
         visit card_path(card)
         # コメントを入力する
-        fill_in 'comment_text', with: comment.text
+        find("[data-testid='comment-text']").set(comment.text)
         # コメントを投稿すると、Commentモデルのカウントが1上がる
         expect{ 
-          find_by_id('comment-submit').click
+          find("[data-testid='comment-submit']").click
           visit current_path
         }.to change { Comment.count }.by(1)
         # 投稿したコメントが表示されている
@@ -28,10 +28,10 @@ RSpec.describe "コメント機能 #create", type: :system do
         # 名刺詳細ページに遷移する
         visit card_path(card)
         # コメントを入力する
-        fill_in 'comment_text', with: ''
+        find("[data-testid='comment-text']").set('')
         # コメントを投稿すると、Commentモデルのカウントが上がらない
         expect{ 
-          find_by_id('comment-submit').click
+          find("[data-testid='comment-submit']").click
           visit current_path
         }.to change { Comment.count }.by(0)
       end
@@ -51,7 +51,7 @@ RSpec.describe "コメント機能 #create", type: :system do
         # コメントを入力する
         # コメントを投稿すると、Commentモデルのカウントが1上がる
         expect{ 
-          find_link('削除').click
+          find("[data-testid='comment-delete']").click
           visit current_path
         }.to change { Comment.count }.by(-1)
         # 投稿したコメントが表示されている
