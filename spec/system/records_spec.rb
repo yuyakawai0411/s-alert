@@ -28,7 +28,7 @@ RSpec.describe "着信履歴機能", type: :system do
         # 必須情報を入力し、送信するとRecordのカウントが1上がる
         record_fill_in_form(record)
         expect{
-        find_by_id('record-submit').click
+          find("[data-testid='record-submit']").click
         }.to change { Record.count }.by(1)
         # 登録した着信履歴があるか確認
         expect(current_path).to eq(card_records_path(card))
@@ -45,7 +45,7 @@ RSpec.describe "着信履歴機能", type: :system do
         # 必須情報を入力し、送信するとRecordのカウントが1上がる
         record_fill_in_form(record)
         expect{
-        find_by_id('record-submit').click
+          find("[data-testid='record-submit']").click
         }.to change { Record.count }.by(0)
         # 登録した着信履歴があるか確認
         expect(current_path).to eq(card_records_path(card))
@@ -63,9 +63,9 @@ RSpec.describe "着信履歴機能", type: :system do
       visit card_records_path(card)
       # 登録した着信履歴があるか確認
       record_exist_page(record)
-      # 削除リンクをクリックするとRecordのカウントが1上がる
+      # 削除リンクをクリックするとRecordのカウントが-1
       expect{
-        first(".record-delete").click
+        find("[data-testid='record-delete']").click
       }.to change { Record.count }.by(-1)
       expect(current_path).to eq(card_records_path(card))
       # 登録した着信履歴が消えている
@@ -83,7 +83,7 @@ RSpec.describe "着信履歴機能", type: :system do
       # CSVのファイルをアップロード
       csv_path = Rails.root.join('db/csv/phone_record.csv')
       attach_file("file", csv_path)
-      find('#csv-submit').click
+      find("[data-testid='csv-submit']").click
       expect(current_path).to eq(card_records_path(card))
       # アップロードした情報があるか確認
       expect(current_path).to eq(card_records_path(card))

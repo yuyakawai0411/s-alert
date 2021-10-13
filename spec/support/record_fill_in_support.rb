@@ -1,9 +1,9 @@
 module RecordFillInSupport
   def record_fill_in_form(record)
-    fill_in "record[date]", with: record.date
-    select "#{record.phone_time.time}", from: "record-phone-time"
-    select "#{record.phone_call.status}", from: "record[phone_call_id]"
-    select "#{record.expression.status}", from: "record[expression_id]"
+    find("[data-testid='record-date']").set(record.date)
+    find("[data-testid='record-phone-time']").select(record.phone_time.time)
+    find("[data-testid='record-phone-call']").select(record.phone_call.status)
+    find("[data-testid='record-expression']").select(record.expression.status)
   end
 
 end
