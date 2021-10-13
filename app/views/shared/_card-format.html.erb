@@ -39,7 +39,7 @@
             <% if card.user_id == current_user.id %>      
               <div class="card-edit d-flex">
                 <%=link_to '編集',edit_card_path(card.id), "data-testid": 'card-edit-link' %>
-                <%=link_to '削除',card_path(card.id), method: :delete, "data-testid": 'card-delete-link' %>
+                <%=link_to '削除',card_path(card.id), method: :delete, "data-testid": 'card-delete' %>
                 <%=link_to '着信',card_records_path(card.id), "data-testid": 'record-edit-link' %>
               </div>
             <% else %>

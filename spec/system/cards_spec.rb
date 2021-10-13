@@ -27,7 +27,7 @@ RSpec.describe "名刺機能", type: :system do
         card_fill_in_form(card_post, test_image)
         # 送信ボタンを押すと、Cardモデルのカウントが1上がる
         expect{
-          find('input[name="commit"][id="card-new-create"]').click
+          find("[data-testid='card-submit']").click
           }.to change { Card.count }.by(1)
         # トップページに移動する
         expect(current_path).to eq(root_path)
@@ -46,7 +46,7 @@ RSpec.describe "名刺機能", type: :system do
         card_fill_in_form(card_without_name, test_image)
         # 送信ボタンを押しても、Cardモデルのカウントが上がらない
         expect{
-          find('input[name="commit"][id="card-new-create"]').click
+          find("[data-testid='card-submit']").click
           }.to change { Card.count }.by(0)
         # トップページに移動しない
         expect(current_path).to eq("/cards")
@@ -70,7 +70,7 @@ RSpec.describe "名刺機能", type: :system do
         card_fill_in_form(card_post, test2_image)
         # 編集してもCardモデルのカウントは変わらない
         expect{
-          find('input[name="commit"][id="card-new-create"]').click
+          find("[data-testid='card-submit']").click
         }.to change { Card.count }.by(0)
         # トップページに遷移する
         expect(current_path).to eq(root_path)
@@ -90,7 +90,7 @@ RSpec.describe "名刺機能", type: :system do
         card_fill_in_form(card_without_name, test2_image)
         # 編集してもCardモデルのカウントは変わらない
         expect{
-          find('input[name="commit"][id="card-new-create"]').click
+          find("[data-testid='card-submit']").click
         }.to change { Card.count }.by(0)
         # トップページに移動しない
         expect(current_path).to eq("/cards/#{card.id}")
@@ -112,7 +112,7 @@ RSpec.describe "名刺機能", type: :system do
         card_exist_page(card)
         # 削除ボタンを押すとCardモデルのカウントが-1される
         expect{
-          find_link('削除').click
+          find("[data-testid='card-delete']").click
         }.to change { Card.count }.by(-1)
         # トップページに遷移する
         expect(current_path).to eq(root_path)
@@ -168,8 +168,8 @@ RSpec.describe "名刺機能", type: :system do
         # 名刺2が存在する
         card_exist_page(card2)
         # 名刺1を検索する
-        fill_in 'keyword', with: card1.s_company
-        find_by_id('search-btn').click
+        find("[data-testid='keyword']").set(card1.s_company)
+        find("[data-testid='search-btn']").click
         # 名刺1が表示されている
         card_exist_page(card1)
         # 名刺2は表示されていない
@@ -185,8 +185,8 @@ RSpec.describe "名刺機能", type: :system do
         # 名刺2が存在する
         card_exist_page(card2)
         # 名刺1を検索する
-        fill_in 'keyword', with: '@'
-        find_by_id('search-btn').click
+        find("[data-testid='keyword']").set('@')
+        find("[data-testid='search-btn']").click
         # 名刺1が表示されている
         card_not_exist_page(card1)
         # 名刺2は表示されていない
@@ -202,8 +202,8 @@ RSpec.describe "名刺機能", type: :system do
         # 名刺2が存在する
         card_exist_page(card2)
         # 空白で検索する
-        fill_in 'keyword', with: ""
-        find_by_id('search-btn').click
+        find("[data-testid='keyword']").set('')
+        find("[data-testid='search-btn']").click
         # 名刺1が表示されている
         card_exist_page(card1)
         # 名刺2が表示されている

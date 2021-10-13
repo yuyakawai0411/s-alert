@@ -17,24 +17,24 @@
       <td class="text-filed">
         <div class="name-kanji d-flex">
           <div class="last-name-kanji">
-            <%= f.text_field :s_last_name, class:"items-text name_field", placeholder:"例) 田中" %>
+            <%= f.text_field :s_last_name, class:"items-text name_field", placeholder:"例) 田中", "data-testid": 's_last_name' %>
             <div>姓</div>
           </div>
       
           <div class="first_name-kanji">
-            <%= f.text_field :s_first_name, class:"items-text name_field", placeholder:"例) 万次郎" %>
+            <%= f.text_field :s_first_name, class:"items-text name_field", placeholder:"例) 万次郎", "data-testid": 's_first_name' %>
             <div>名</div>
           </div>
         </div>
 
         <div class="name-kana d-flex">
           <div class="last_name_kana">
-            <%= f.text_field :s_last_name_kana, class:"items-text name_field", placeholder:"例) タナカ" %>
+            <%= f.text_field :s_last_name_kana, class:"items-text name_field", placeholder:"例) タナカ", "data-testid": 's_last_name_kana' %>
             <div>セイ</div>
           </div>
 
           <div class="first_name_kana">
-            <%= f.text_field :s_first_name_kana, class:"items-text name_field", placeholder:"例) マンジロウ" %>
+            <%= f.text_field :s_first_name_kana, class:"items-text name_field", placeholder:"例) マンジロウ", "data-testid": 's_first_name_kana' %>
             <div>メイ</div>
           </div>
         </div>
@@ -48,16 +48,16 @@
       <td class="company-filed text-filed">
         <div class="company-name-only d-flex">
           <div class="company-name text-filrd">         
-            <%= f.text_field :s_company, class:"items-text company_field",  placeholder:"例) TM株式会社" %>
+            <%= f.text_field :s_company, class:"items-text company_field",  placeholder:"例) TM株式会社", "data-testid": 's_company' %>
             <div>社名</div>
           </div>
           <div class="comapny_form text-filed">
-            <%= f.collection_select(:s_company_form_id, SCompanyForm.all, :id, :form, {}, {class:"select-box", id:"item-category"})%>  
+            <%= f.collection_select(:s_company_form_id, SCompanyForm.all, :id, :form, {}, {class:"select-box", id:"item-category", "data-testid": 's_company_form'})%>  
             <div>形態</div>
           </div>
         </div>
           <div class="company-department text-filed">
-            <%= f.text_field :s_department, class:"items-text company_field", placeholder:"例) 営業所" %>
+            <%= f.text_field :s_department, class:"items-text company_field", placeholder:"例) 営業所", "data-testid": 's_department' %>
             <div>部署</div>
           </div>
 
@@ -69,7 +69,7 @@
       <td class="phone_number-tag tag">電話番号</td>
       <td class="indispensable"><span class="indispensable-tag">必須</span></td>
       <td class="text-filed">
-        <%= f.text_field :s_phone_number, class:"items-text", placeholder:"例) 060-1256-3434"  %>
+        <%= f.text_field :s_phone_number, class:"items-text", placeholder:"例) 060-1256-3434", "data-testid": 's_phone_number' %>
       </td>
     </tr>
 
@@ -116,7 +116,7 @@
 
     <%# 送信ボタン %>
     <div class="sell-btn-contents">
-      <%= f.submit "送信" ,id:'card-new-create', class:"btn btn-dark btn-lg" %>
+      <%= f.submit "送信" ,id:'card-new-create', class:"btn btn-dark btn-lg", "data-testid": 'card-submit' %>
     </div>
 
 <% end %>
