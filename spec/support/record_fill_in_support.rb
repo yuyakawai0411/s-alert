@@ -5,5 +5,4 @@ module RecordFillInSupport
     find("[data-testid='record-phone-call']").select(record.phone_call.status)
     find("[data-testid='record-expression']").select(record.expression.status)
   end
-
 end

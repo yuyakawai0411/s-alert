@@ -1,7 +1,7 @@
 module NoticeFillInSupport
   def notice_fill_in_form(notice)
-    fill_in 'notice_notice_date', with: notice.notice_date
-    fill_in 'notice_description', with: notice.description
-    fill_in 'notice_topic', with: notice.topic
+    find("[data-testid='notice-date']").set(notice.notice_date)
+    find("[data-testid='notice-description']").set(notice.description)
+    find("[data-testid='notice-topic']").set(notice.topic)
   end
 end

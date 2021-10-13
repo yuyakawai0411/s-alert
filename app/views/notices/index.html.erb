@@ -21,26 +21,26 @@
                       <td class="date-tag tag">日付</td>
                       <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                       <td class="date-filed text-filed">
-                        <%= f.date_field :notice_date %> 
+                        <%= f.date_field :notice_date, "data-testid": 'notice-date'%> 
                       </td>
                     </tr>
                     <tr class="notice-description d-flex align-items-start">
                       <td class="date-tag tag">内容</td>
                       <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                       <td class="date-filed text-filed">
-                        <%= f.text_area :description, placeholder:"例)売り上げ予測を報告" %> 
+                        <%= f.text_area :description, placeholder:"例)売り上げ予測を報告", "data-testid": 'notice-description' %> 
                       </td>
                     </tr>
                     <tr class="notice-description d-flex align-items-start">
                       <td class="date-tag tag">会話ネタ</td>
                       <td class="indispensable"></td>
                       <td class="date-filed text-filed">
-                        <%= f.text_area :topic, placeholder:"例)オリンピック開催" %> 
+                        <%= f.text_area :topic, placeholder:"例)オリンピック開催", "data-testid": 'notice-topic' %> 
                       </td>
                     </tr>
                   </table>
                   <div class="sell-btn-contents">
-                    <%= f.submit "作成", class:"btn btn-dark", id:"notice-submit" %>
+                    <%= f.submit "作成", class:"btn btn-dark", "data-testid": 'notice-submit' %>
                   </div>
                 <% end %>
               </div>
@@ -72,7 +72,7 @@
                     <td class="record-list-date mail-column-value"><%= notice.notice_date %></td>
                     <td class="record-list-date mail-column-value"><%= notice.description %></td>
                     <td class="record-list-date mail-column-value"><%= notice.topic %></td>
-                    <td class="record-list-delete mail-column-value"><%= link_to "削除", user_notice_path(@user.id, notice.id), method: :delete %></td>
+                    <td class="record-list-delete mail-column-value"><%= link_to "削除", user_notice_path(@user.id, notice.id), method: :delete, "data-testid": 'notice-delete' %></td>
                   </tr>
                 <% end %>
               </table>

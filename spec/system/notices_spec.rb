@@ -29,7 +29,7 @@ RSpec.describe "メール通知機能 #index", type: :system do
         # メール通知情報を入力
         notice_fill_in_form(notice)
         expect{
-        find_by_id("notice-submit").click
+          find("[data-testid='notice-submit']").click
         }.to change { Notice.count }.by(1)
         expect(current_path).to eq(user_notices_path(user.id))
         # 設定した内容が存在する
@@ -48,7 +48,7 @@ RSpec.describe "メール通知機能 #index", type: :system do
         # メール通知情報を入力
         notice_fill_in_form(notice)
         expect{
-        find_by_id("notice-submit").click
+          find("[data-testid='notice-submit']").click
         }.to change { Notice.count }.by(0)
         expect(current_path).to eq(user_notices_path(user.id))
       end
@@ -69,7 +69,7 @@ RSpec.describe "メール通知機能 #index", type: :system do
         # 登録した通知情報が存在する
         notice_exist_page(notice)
         expect{
-          find_link('削除').click
+          find("[data-testid='notice-delete']").click
         }.to change { Notice.count }.by(-1)
         expect(current_path).to eq(user_notices_path(user.id))
         # 設定した内容が存在する

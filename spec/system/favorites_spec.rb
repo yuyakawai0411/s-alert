@@ -19,7 +19,7 @@ RSpec.describe "お気に入り機能", type: :system do
         # トップページに移動する
         visit root_path
         # お気に入り登録リンクをクリック
-        find_link('お気に入り登録').click
+        find("[data-testid='favorite-registration']").click
         # ユーザー詳細ページにお気に入りした名刺がある
         visit user_path(user)
         card_exist_page(card)
@@ -43,7 +43,7 @@ RSpec.describe "お気に入り機能", type: :system do
         # お気に入りした名刺が存在する
         card_exist_page(card)
         # お気に入り解除リンクをクリック
-        find_link('お気に入り解除').click
+        find("[data-testid='favorite-cancel']").click
         # ユーザー詳細ページにお気に入りした名刺が存在しない
         visit user_path(user)
         card_not_exist_page(card)
