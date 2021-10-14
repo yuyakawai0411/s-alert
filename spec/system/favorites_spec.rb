@@ -15,14 +15,14 @@ RSpec.describe "お気に入り機能", type: :system do
         visit user_path(user)
         expect(current_path).to eq(user_path(user.id))
         # お気に入りの名刺が存在しない
-        card_not_exist_page(card)
+        card_favorite_not_exist_page(card)
         # トップページに移動する
         visit root_path
         # お気に入り登録リンクをクリック
         find("[data-testid='favorite-registration']").click
         # ユーザー詳細ページにお気に入りした名刺がある
         visit user_path(user)
-        card_exist_page(card)
+        card_favorite_exist_page(card)
       end
     end
   end
@@ -41,12 +41,12 @@ RSpec.describe "お気に入り機能", type: :system do
         visit user_path(user)
         expect(current_path).to eq(user_path(user.id))
         # お気に入りした名刺が存在する
-        card_exist_page(card)
+        card_favorite_exist_page(card)
         # お気に入り解除リンクをクリック
         find("[data-testid='favorite-cancel']").click
         # ユーザー詳細ページにお気に入りした名刺が存在しない
         visit user_path(user)
-        card_not_exist_page(card)
+        card_favorite_not_exist_page(card)
       end
     end
   end

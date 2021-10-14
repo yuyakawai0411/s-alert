@@ -65,7 +65,7 @@
                 <td class="record-list-date mail-column-value">削除</td>
             </tr>
           </table>
-            <div class="mail-notice-list">
+            <div class="mail-notice-list", data-testid='notice-list'>
               <table class="mail-colum">
                 <% @notices.each do |notice| %>
                   <tr>
@@ -76,6 +76,7 @@
                   </tr>
                 <% end %>
               </table>
+            </div>
         </article>
       </div>
     </div>

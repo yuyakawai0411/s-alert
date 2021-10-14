@@ -1,12 +1,13 @@
 module RecordExistSupport
   def record_exist_page(record)
-    expect(page).to have_selector '.record-list-date', text: "#{record.date}"
-    expect(page).to have_selector '.record-list-time', text: "#{record.phone_time.time}"
-    expect(page).to have_selector '.record-list-expression', text: "#{record.expression.status}"
+    expect(find("[data-testid='record-list']")).to have_content(record.date)
+    expect(find("[data-testid='record-list']")).to have_content(record.phone_time.time)
+    expect(find("[data-testid='record-list']")).to have_content(record.expression.status)
   end
+
   def record_not_exist_page(record)
-    expect(page).to have_no_selector '.record-list-date', text: "#{record.date}"
-    expect(page).to have_no_selector '.record-list-time', text: "#{record.phone_time_id}:00"
-    expect(page).to have_no_selector '.record-list-expression', text: "#{record.expression.status}"
+    expect(find("[data-testid='record-list']")).to have_no_content(record.date)
+    expect(find("[data-testid='record-list']")).to have_no_content(record.phone_time.time)
+    expect(find("[data-testid='record-list']")).to have_no_content(record.expression.status)
   end
 end

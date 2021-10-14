@@ -159,8 +159,8 @@ RSpec.describe "ユーザー管理機能", type: :system do
         # ユーザー詳細ページに移動する
         visit "/users/#{user.id}"
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
-        card_exist_page(card_another)
-        card_exist_page(card)
+        card_favorite_exist_page(card_another)
+        card_post_exist_page(card)
       end
     end
     context 'ユーザー詳細ページの「もっとみる」にアクセスする時' do
@@ -174,7 +174,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         find("[data-testid='user-card-all']").click
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
         expect(current_path).to eq(post_cards_user_path(user))
-        card_exist_page(card)
+        card_post_exist_page(card)
       end
       it 'ユーザーがお気に入りした名刺が表示される' do
         # トップページに移動する
@@ -186,7 +186,7 @@ RSpec.describe "ユーザー管理機能", type: :system do
         find("[data-testid='user-favorite-all']").click
         # サインアップページへ遷移するボタンやログインページへ遷移するボタンが表示されていないことを確認する
         expect(current_path).to eq(favorite_cards_user_path(user))
-        card_exist_page(card_another)
+        card_favorite_exist_page(card_another)
       end
     end
   end
