@@ -12,11 +12,7 @@ RSpec.describe "コメント機能 #create", type: :system do
         visit card_path(card)
         # コメントを入力する
         find("[data-testid='comment-text']").set(comment.text)
-        # コメントを投稿すると、Commentモデルのカウントが1上がる
-        expect{ 
-          find("[data-testid='comment-submit']").click
-          visit current_path
-        }.to change { Comment.count }.by(1)
+        find("[data-testid='comment-submit']").click
         # 投稿したコメントが表示されている
         expect(page).to have_content comment.text
       end
@@ -48,12 +44,8 @@ RSpec.describe "コメント機能 #create", type: :system do
         sign_in(user)
         # 名刺詳細ページに遷移する
         visit card_path(card)
-        # コメントを入力する
-        # コメントを投稿すると、Commentモデルのカウントが1上がる
-        expect{ 
-          find("[data-testid='comment-delete']").click
-          visit current_path
-        }.to change { Comment.count }.by(-1)
+        # コメントを削除する
+        find("[data-testid='comment-delete']").click
         # 投稿したコメントが表示されている
         expect(page).to have_no_content comment.text
       end
