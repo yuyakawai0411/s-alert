@@ -13,6 +13,7 @@ RSpec.describe "コメント機能 #create", type: :system do
         # コメントを入力する
         find("[data-testid='comment-text']").set(comment.text)
         find("[data-testid='comment-submit']").click
+        visit current_path
         # 投稿したコメントが表示されている
         expect(page).to have_content comment.text
       end
@@ -39,13 +40,14 @@ RSpec.describe "コメント機能 #create", type: :system do
   let!(:card) { FactoryBot.create(:card) }
   let!(:comment) { FactoryBot.create(:comment, user_id: user.id, card_id: card.id ) }
     context 'コメント削除が成功する時' do
-      it 'コメントが投稿でき、名刺詳細ページで表示される' do
+      it 'コメントが削除され、名刺詳細ページで表示されない' do
         # ログインする
         sign_in(user)
         # 名刺詳細ページに遷移する
         visit card_path(card)
         # コメントを削除する
         find("[data-testid='comment-delete']").click
+        visit current_path
         # 投稿したコメントが表示されている
         expect(page).to have_no_content comment.text
       end
