@@ -3,7 +3,7 @@ class Card < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   has_many :records, dependent: :destroy
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :users, through: :favorites
   has_many :comments, dependent: :destroy
 
@@ -36,11 +36,6 @@ class Card < ApplicationRecord
     else
       Card.order('created_at DESC')
     end
-  end
-
-  # 現在ログインしているユーザーがお気に入りしている名刺を確認
-  def favorited_by?(user)
-    favorites.where(user_id: user.id).exists?
   end
 
 end

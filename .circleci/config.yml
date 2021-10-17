@@ -27,6 +27,8 @@ jobs:
           MYSQL_ROOT_PASSWORD: password 
           MYSQL_DATABASE: s_alert_test
           MYSQL_USER: root
+      - image: selenium/standalone-chrome-debug:latest
+        name: chrome
     environment: #CI閑居で使う環境変数の定義
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
@@ -43,13 +45,22 @@ jobs:
           cache-key: "yarn.lock"
       - run: 
           name: Database setup
-          command: bundle exec rails db:migrate #実行するコマンドの内容
+          command: bundle exec rails db:migrate 
       - run:
           name: Rspec Models
           command: bundle exec rspec spec/models
-      # - run:
-      #     name: Rspec system
-      #     command: bundle exec rspec spec/system
+      - run:
+          name: Rspec Controller
+          command: bundle exec rspec spec/requests
+      - run:
+          name: Rspec ActionMailer
+          command: bundle exec rspec spec/mailers/notice_spec.rb
+      - run:
+          name: Rspec ActionCable
+          command: bundle exec rspec spec/channels/message_channel_spec.rb
+      - run:
+          name: Rspec system
+          command: bundle exec rspec spec/system
 
 workflows:
   version: 2

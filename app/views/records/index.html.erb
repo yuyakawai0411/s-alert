@@ -23,7 +23,7 @@
                     <td class="date-tag tag">日付</td>
                     <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                     <td class="date-filed text-filed">
-                      <%= f.date_field :date %> 
+                      <%= f.date_field :date, "data-testid": 'record-date'%> 
                     </td>
                   </tr>
 
@@ -31,7 +31,7 @@
                     <td class="time-tag tag">時間</td>
                     <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                     <td class="time-filed text-filed">
-                      <%= f.collection_select(:phone_time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"record-phone-time"})%>  
+                      <%= f.collection_select(:phone_time_id, PhoneTime.all, :id, :time, {}, {class:"select-box", id:"record-phone-time", "data-testid": 'record-phone-time'})%>  
                     </td>
                   </tr>
 
@@ -39,7 +39,7 @@
                     <td class="call-tag tag">着信有無</td>
                     <td class="indispensable"><span class="indispensable-tag">必須</span></td>
                     <td class="call-filed text-filed">
-                      <%= f.collection_select(:phone_call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"record-phone-call"})%>
+                      <%= f.collection_select(:phone_call_id, PhoneCall.all, :id, :status, {}, {class:"select-box", id:"record-phone-call", "data-testid": 'record-phone-call'})%>
                     </td>
                   </tr>
 
@@ -47,13 +47,13 @@
                     <td class="expression-tag tag">感情</td>
                     <td class="indispensable"></td>
                     <td class="expression-filed text-filed">
-                      <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"record-expression"})%>  
+                      <%= f.collection_select(:expression_id, Expression.all, :id, :status, {}, {class:"select-box", id:"record-expression", "data-testid": 'record-expression'})%>  
                     </td>
                   </tr>
 
                 </table>
                 <div class="sell-btn-contents">
-                  <%= f.submit "作成", class:"btn btn-dark", id:"record-submit" %>
+                  <%= f.submit "作成", class:"btn btn-dark", "data-testid": 'record-submit' %>
                 </div>
               <% end %>
             </div>
@@ -64,7 +64,7 @@
               <%= form_tag import_card_records_path(@card.id), multipart: true do %>
                 <%= file_field_tag :file %>
                 <div class="sellbtn-contents">
-                  <%= submit_tag "作成", class:"btn btn-dark csv-btn", id:"csv-submit" %>
+                  <%= submit_tag "作成", class:"btn btn-dark csv-btn", "data-testid": 'csv-submit' %>
                 </div>
               <% end %>
                <h4 class="csv-title">CSV注意事項</h4>
@@ -82,24 +82,26 @@
         <article class="record-list">
           <h1 class="share-cards-title"><%= "#{@card.s_last_name}さん着信履歴一覧"%></h1>
           <%# 着信履歴一覧表示 %>
-          <table>
-            <tr class="record-description">
-              <td class="record-list-date record-column">日付</td>
-              <td class="record-list-time record-column">時間</td>
-              <td class="record-list-call record-column">着信有無</td>
-              <td class="record-list-expression record-column">感情</td>
-              <td class="record-list-delete record-column">削除</td>
+          <table class="record-colum">
+            <tr class="record-description record-colum-title">
+              <td class="record-list-date record-column-value">日付</td>
+              <td class="record-list-time record-column-value">時間</td>
+              <td class="record-list-expression record-column-value">感情</td>
+              <td class="record-list-delete record-column-value">削除</td>
             </tr>
+          </table>
+          <div class="record-notice-list", data-testid='record-list'>
+           <table class="record-colum">
             <% @records.each do |record| %>
               <tr>
-                <td class="record-list-date record-column"><%= record.date %></td>
-                <td class="record-list-time record-column"><%= record.phone_time.time %></td> 
-                <td class="record-list-call record-column"><%= record.phone_call.status %></td>
-                <td class="record-list-expression record-column"><%= record.expression.status %></td>
-                <td class="record-list-delete record-column"><%= link_to "削除", card_record_path(@card.id, record.id), method: :delete, class: "record-delete" %></td>
+                <td class="record-list-date record-column-value"><%= record.date %></td>
+                <td class="record-list-time record-column-value"><%= record.phone_time.time %></td> 
+                <td class="record-list-expression record-column-value"><%= record.expression.status %></td>
+                <td class="record-list-delete record-column-value"><%= link_to "削除", card_record_path(@card.id, record.id), method: :delete, class: "record-delete", "data-testid": 'record-delete' %></td>
               </tr>
             <% end %>
-          </table>
+           </table>
+          </div>
         </article>
       </div>
     </div>

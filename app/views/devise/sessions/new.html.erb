@@ -23,7 +23,7 @@
               <td class="email-tag tag">メールアドレス</td>
               <td class="indispensable"><span class="indispensable-tag">必須</span></td>
               <td class="email-filed text-filed">
-                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", "data-testid": 'email' %>
               </td>
             </tr>
             <%# ログインフォーム_パスワード %>
@@ -31,7 +31,7 @@
               <td class="password-tag tag">パスワード</td>
               <td class="indispensable"><span class="indispensable-tag">必須</span></td>
               <td class="password-filed text-filed">
-                <%= f.password_field :password, autocomplete: "current-password" %>
+                <%= f.password_field :password, autocomplete: "current-password", "data-testid": 'password' %>
               </td>
             </tr>
           </table>
@@ -45,7 +45,7 @@
 
             <%# ログインボタン %>
             <div class="sell-btn-contents">
-              <%= f.submit "ログイン",class:"btn btn-dark btn-lg" %>
+              <%= f.submit "ログイン",class: "btn btn-dark btn-lg", "data-testid": 'submit'  %>
               
             </div>
           <% end %>

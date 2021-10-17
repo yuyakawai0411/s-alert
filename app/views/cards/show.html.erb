@@ -13,11 +13,21 @@
 
           <div class="profile d-flex">
             <ul>
-            <div class="card-list d-flex justify-content-between">
-              <div class="card-right">
+            <div class="card-info d-flex justify-content-between", data-testid="card-info">
+              <div class="card-info-left">
+                <%# 名刺プロフィール_写真 %>
+                <li calss="card-image">
+                  <% if @card.image.attached? %>
+                    <%= image_tag @card.image.variant(resize: '100x100') %>
+                  <% else %>
+                    <%= image_tag "boss.png",size:"100x100" %>
+                  <% end %>
+                </li>
+              </div>
+              <div class="card-info-right">
               <%# 名刺プロフィール_氏名 %>
                 <li class="card-name">
-                  <ul class="name-list">
+                  <ul>
                     <li class="name"><%= "#{@card.s_last_name} #{@card.s_first_name}" %></li>
                     <li class="kana"><%= "#{@card.s_last_name_kana} #{@card.s_first_name_kana}" %></li>
                   </ul>
@@ -37,31 +47,19 @@
               </li>
                 
               </div>
-
-              <div class="card-left">
-              <%# 名刺プロフィール_写真 %>
-              <li calss="card-image">
-                <% if @card.image.attached? %>
-                  <%= image_tag @card.image.variant(resize: '100x100'), class: "card-ditail-image" %>
-                <% else %>
-                  <%= image_tag "boss.png",size:"100x100", class: "card-ditail-image" %>
-                <% end %>
-              </li>
-              </div>
-
             </div>
             </ul>
             <%# 名刺プロフィール_不安定日 %>
             <div class="bio-resim-baddate">
               <p class="name">不安定日</p>
-              <p><%= @unstable[1][0] %></p>
-              <p><%= @unstable[0][0] %></p>
+               <p><%= @unstable_day[1][0] %></p>  
+               <p><%= @unstable_day[0][0] %></p>  
             </div>
             <%# 名刺プロフィール_着信最頻値 %>
             <div class="phone-time-mode">
               <p class="name">着信時間最頻値</p>
-              <p><%= @phone_time_mode[0][0] %></p>
-              <p><%= @phone_time_mode[1][0] %></p>
+              <p><%= @call_time_mode_day[0][0] %></p>
+              <p><%= @call_time_mode_day[1][0] %></p> 
             </div>      
           </div>
   
@@ -71,18 +69,36 @@
             <div class="d-flex justify-content-between">
               <div class="bio-theoretical">
                 <h4 class="graph-title">バイオリズム理論値</h4>
-                <%= line_chart @biorhythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day, min: -1, max: 1 %>
+                <%= line_chart @theoretical_biortythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @next15_day, min: -1, max: 1 %>
               </div>
               <div class="my-measured">
                 <h4 class="graph-title">バイオリズム実測値</h4>
-                <%= line_chart @expression, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today, min: -1, max: 1 %>
+                <%= line_chart @actual_biortythm_graph, width: "430px", height: "220px", xtitle: "日付", ytitle: "感情", xmin: @prev15_day, xmax: @today, min: -1, max: 1 %>
               </div>
             </div>
             <ul class="graph-detail">
-              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。1に近い=エネルギーがあり調子が良い、-1に近い=エネルギーがなく調子が悪い、
-                  0に近い=エネルギーがあり調子が良くない(感情が不安定(キレやすい))とされています。</li>
-              <li>バイオリズム実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。数値が高いほど機嫌がよくなります。</li>
+              <li>バイオリズム理論値は、誕生日をもとに、現在の日付から前後2週間の感情の起伏を表示しています。</li>
+              <li>バイオリズム実測値は、手動で記録した感情データをもとに、現在から2週間前の感情の起伏を表示しています。</li>
             </ul>
+            <h5 class="mt-3">バイオリズムグラフの見方</h5>
+              <table>
+                <tr class="graph-colum">
+                  <th class="graph-colum-title">感情値</th>
+                  <th class="graph-colum-title">状態</th>
+                </tr>
+                <tr class="graph-colum">
+                  <td class="graph-colum-value">1</td>
+                  <td class="graph-colum-value">エネルギーがあり、調子が良い</td>
+                </tr>
+                <tr class="graph-colum">
+                  <td class="graph-colum-value">-1</td>
+                  <td class="graph-colum-value">エネルギーがなく、調子が悪い</td>
+                </tr>
+                 <tr class="graph-colum">
+                  <td class="graph-colum-value">0</td>
+                  <td class="graph-colum-value">エネルギーがあり、調子がよくない=<span class="bad-date">不安定</span>(キレやすい)</td>
+                </tr>
+              </table>
           </section>
           
           <%# 着信頻度グラフ %>
@@ -91,11 +107,11 @@
             <div class="d-flex justify-content-between">
               <div class="phone-time">
                 <h4 class="graph-title">着信時間最頻値</h4>
-                <%= column_chart @phone_time, width: "430px", height: "220px", xtitle: "時間", ytitle: "回数" %>
+                <%= column_chart @arrive_call_time_graph, width: "430px", height: "220px", xtitle: "時間", ytitle: "回数" %>
               </div>
               <div class="phone-date">
                 <h4 class="graph-title">着信曜日最頻値</h4>
-                <%= column_chart @phone_weeks, width: "430px", height: "220px", xtitle: "曜日", ytitle: "回数" %>
+                <%= column_chart @arrive_call_week_graph, width: "430px", height: "220px", xtitle: "曜日", ytitle: "回数" %>
               </div>
             </div>
             <ul class="graph-detail">
@@ -107,8 +123,8 @@
           <%# 会話ネタコメント機能 %>
           <section class="record-list">
             <h2><%= "会話のネタ"%></h2>
-              <div class="interest row">
-                <div class="top-list col-5">
+              <div class="d-flex justify-content-between">
+                <div class="top-list">
                   <h4 class="mb-3">会話ネタ候補</h4>
                   <ol>
                     <% if @card.s_hobby_top.nil? %>
@@ -128,14 +144,18 @@
                     <% end %>
                   </ol>
                 </div>
-                <div class="comment-form col-7">
+                <div class="comment-form">
                   <h4>コメント一覧</h4>
                   <div id='messages' class="comment-list">
                     <% @comments.each do |comment| %>
                       <table>
                         <tr>
-                          <td class=""><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong></td>
-                          <td><%= comment.text %></td>
+                          <td class="comment-colum-user"><strong><%= link_to comment.user.first_name, "/users/#{comment.user_id}" %>：</strong><%= comment.text %></td>
+                          <% if user_signed_in? %>
+                            <% if current_user.id == comment.user_id %>
+                              <td class="comment-colum-delete"><%= link_to "削除", card_comment_path(@card,comment), class: "text-right", method: :delete, "data-testid": 'comment-delete' %></td>
+                            <% end %>
+                          <% end %>
                         </tr>
                       </table>
                     <% end %>
@@ -144,8 +164,8 @@
                     <% if user_signed_in? %>
                       <%= form_with(model: [@card, @comment]) do |f| %>
                         <div class="comment-form d-flex align-items-center", class='comment-text-area'>
-                          <div><%= f.text_field :text, placeholder: "会話ネタをコメントする", rows: "2", class: 'comment-text-area' %></div>
-                          <div><%= f.submit "送信",id: "comment-submit" %></div>
+                          <div><%= f.text_field :text, placeholder: "会話ネタをコメントする", rows: "1", class: 'comment-text-area', "data-testid": 'comment-text' %></div>
+                          <div><%= f.submit "送信", "data-testid": 'comment-submit' %></div>
                         </div>
                       <% end %>
                     <% else %>

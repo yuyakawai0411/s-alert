@@ -1,0 +1,39 @@
+#mail-description {
+  list-style-type: disc;
+  margin-left: 15px;
+  padding-left: 0;
+}
+.mail-detail {
+  font-size: small;
+  padding-top: 10px;
+}
+
+table.mail-colum {
+  table-layout: fixed;
+  width: 600px;
+}
+
+.mail-detail {
+  font-size: small;
+  padding-top: 10px;
+}
+
+tr.mail-colum-title {
+  width: 600px;
+  border-bottom: solid 1px black;
+}
+
+td.mail-column-value {
+  overflow-wrap : break-word;
+  width: 150px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.mail-notice-list{ 
+  width: 600px;
+  height:250px;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+

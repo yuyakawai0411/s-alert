@@ -1,0 +1,23 @@
+<%# ヘッダー %>
+  <%= render "shared/header"%>
+
+  <div class="main-background"> 
+    <div class="container">
+      <div class="main row">
+        <%# サイドメニュー %>
+        <div class="side-menu col-2">
+          <%= render "shared/side-menu" %>
+        </div>
+        <%# 共有名刺一覧表示 %>
+        <div class="share-cards col-10">
+          <h1 class="share-cards-title">お気に入り名刺一覧</h1>
+          <div class="cards d-flex justify-content-between flex-wrap w-100", data-testid='favorite-card-info'>
+            <%= render partial: "shared/card-format" , collection: @favorites, as: "card" %>
+          </div>
+          <%= paginate @favorites %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# フッター %>
+  <%= render "shared/footer" %>

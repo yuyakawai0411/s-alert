@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe MessageChannel, type: :channel do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  describe "コメントの送信" do
+    context "コメントが送信できる" do
+      it "コメントがsubscriberに送信される" do
+        stub_connection
+        subscribe
+        expect(subscription).to be_confirmed
+      end
+    end
+  end
 end

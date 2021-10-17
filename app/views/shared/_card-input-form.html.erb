@@ -1,0 +1,122 @@
+ <%# 名刺記入フォーム %>
+<%= form_with model: card, local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+  <table>
+    <%# 名刺編集フォーム_写真 %>
+    <tr class="card-image d-flex align-items-start">
+      <td class="tag">写真</td>
+      <td class="indispensable"></td>
+      <td class="text-filed"><%= f.file_field :image, id:"card_image" %></td>
+      <td id="image-preview"></td>
+    </tr>
+
+    <%# 名刺編集フォーム_名前 %>
+    <tr class="card-name d-flex align-items-start">
+      <td class="tag">名前</td>
+      <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+      <td class="text-filed">
+        <div class="name-kanji d-flex">
+          <div class="last-name-kanji">
+            <%= f.text_field :s_last_name, class:"items-text name_field", placeholder:"例) 田中", "data-testid": 's_last_name' %>
+            <div>姓</div>
+          </div>
+      
+          <div class="first_name-kanji">
+            <%= f.text_field :s_first_name, class:"items-text name_field", placeholder:"例) 万次郎", "data-testid": 's_first_name' %>
+            <div>名</div>
+          </div>
+        </div>
+
+        <div class="name-kana d-flex">
+          <div class="last_name_kana">
+            <%= f.text_field :s_last_name_kana, class:"items-text name_field", placeholder:"例) タナカ", "data-testid": 's_last_name_kana' %>
+            <div>セイ</div>
+          </div>
+
+          <div class="first_name_kana">
+            <%= f.text_field :s_first_name_kana, class:"items-text name_field", placeholder:"例) マンジロウ", "data-testid": 's_first_name_kana' %>
+            <div>メイ</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <%# 名刺編集フォーム_会社 %>
+    <tr class="card-company d-flex align-items-start">
+      <td class="company-tag tag">会社</td>
+      <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+      <td class="company-filed text-filed">
+        <div class="company-name-only d-flex">
+          <div class="company-name text-filrd">         
+            <%= f.text_field :s_company, class:"items-text company_field",  placeholder:"例) TM株式会社", "data-testid": 's_company' %>
+            <div>社名</div>
+          </div>
+          <div class="comapny_form text-filed">
+            <%= f.collection_select(:s_company_form_id, SCompanyForm.all, :id, :form, {}, {class:"select-box", id:"item-category", "data-testid": 's_company_form'})%>  
+            <div>形態</div>
+          </div>
+        </div>
+          <div class="company-department text-filed">
+            <%= f.text_field :s_department, class:"items-text company_field", placeholder:"例) 営業所", "data-testid": 's_department' %>
+            <div>部署</div>
+          </div>
+
+      </td>   
+    </tr>
+
+    <%# 名刺編集フォーム_電話番号  %>
+    <tr class="card-phone_number d-flex align-items-start">
+      <td class="phone_number-tag tag">電話番号</td>
+      <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+      <td class="text-filed">
+        <%= f.text_field :s_phone_number, class:"items-text", placeholder:"例) 060-1256-3434", "data-testid": 's_phone_number' %>
+      </td>
+    </tr>
+
+      <%# 名刺編集フォーム_生年月日 %>
+      <tr class="card-birthday d-flex align-items-start">
+        <td class='birthday-tag tag'><label class="birthday-day">生年月日</label></td>
+        <td class="indispensable"><span class="indispensable-tag">必須</span></td>
+
+        <td class='birthday-filed text-filed d-flex align-items-start'>
+          <%= raw sprintf(
+                  f.date_select(
+                    :s_birth_day,
+                    use_month_numbers: true,
+                    prompt:'--',
+                    start_year: 1930,
+                    end_year: (Time.now.year - 5),
+                    date_separator: '%s'),
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+        </td>
+      </tr>
+
+      <%# 名刺編集フォーム_会話ネタ %>
+      <tr class="card-hobby d-flex align-items-start">
+        <td class="hobby-tag tag">会話ネタ候補</td>
+        <td class="indispensable"></td>
+        <td class="hobby-filed text-filed">
+          <div class="d-flex">
+            <div class="text-filed">
+              <%= f.text_area :s_hobby_top %>
+              <div>第一候補</div>
+            </div>
+            <div class="text-filed">
+              <%= f.text_area :s_hobby_medium %>
+              <div>第二候補</div>
+            </div>
+          </div>
+            <div class="text-filed">
+              <%= f.text_area :s_hobby_row  %>
+              <div>第三候補</div>
+            </div>
+        </td>
+      </tr>
+  </table>
+
+    <%# 送信ボタン %>
+    <div class="sell-btn-contents">
+      <%= f.submit "送信" ,id:'card-new-create', class:"btn btn-dark btn-lg", "data-testid": 'card-submit' %>
+    </div>
+
+<% end %>

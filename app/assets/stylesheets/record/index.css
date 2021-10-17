@@ -13,3 +13,28 @@ td.record-column {
 .record-description {
   border-bottom: solid 1px black;
 }
+
+td.record-column-value {
+  width: 150px;
+}
+
+tr.record-colum-title {
+  width: 600px;
+  border-bottom: solid 1px black;
+}
+
+table.record-colum {
+  table-layout: fixed;
+  width: 600px;
+}
+
+table.record-colum>td {
+  overflow-wrap : break-word
+}
+
+.record-notice-list{ 
+  width: 600px;
+  height:450px;
+  overflow-x: hidden;
+  overflow-y: visible;
+}

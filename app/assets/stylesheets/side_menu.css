@@ -1,5 +1,5 @@
 
-h3.aside-menu {
+h3.menu-title {
   background: black;
   color: white;
 }
@@ -7,6 +7,6 @@ h3.aside-menu {
 .side-menu a {
   color: black;
 }
-.aside-menu-detail:hover {
+.menu-item:hover {
   opacity: 0.7;
 }

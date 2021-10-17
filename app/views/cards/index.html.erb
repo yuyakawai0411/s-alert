@@ -3,15 +3,18 @@
 
   <div class="main-background"> 
     <div class="container">
-      <div class="main row">
+      <div class="row">
         <%# サイドメニュー %>
         <div class="side-menu col-2">
           <%= render "shared/side-menu" %>
         </div>
         <%# 共有名刺一覧表示 %>
-        <div class="share-cards col-10">
+        <div class="col-10">
           <h1 class="share-cards-title">共有名刺一覧</h1>
-          <%= render partial: "shared/card-format" , locals: { cards: @cards }%>
+          <div class="cards d-flex justify-content-between flex-wrap w-100", data-testid="card-info">
+            <%= render partial: "shared/card-format" , collection: @cards, as: "card" %>
+          </div>
+          <%= paginate @cards %>
         </div>
       </div>
     </div>

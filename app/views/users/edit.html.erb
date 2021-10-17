@@ -1,0 +1,20 @@
+<%= render "shared/header"%>
+<div class="main-background"> 
+  <div class="container">
+    <div class="main row">
+
+      <%# サイドメニュー %>
+      <div class="side-menu col-2">
+      </div>
+
+      <%# 新規登録フォーム %>
+      <div class="card-registration col-10">
+        <h1 class="share-cards-title">ユーザー情報編集</h1>
+      <%# ユーザー情報記入フォーム%> 
+        <%= render partial: "shared/user-input-form" , locals: { user: @user } %>
+      </div>
+    </div> 
+  </div> 
+</div>
+</div>
+  <%= render "shared/footer" %>

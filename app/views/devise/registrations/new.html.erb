@@ -21,24 +21,24 @@
             <td class="name-filed text-filed">
               <div class="name-kanji d-flex">
                 <div class="last-name-kanji">
-                  <%= f.text_field :last_name,  placeholder:"例) 山田" ,class: 'name_field' %>
+                  <%= f.text_field :last_name,  placeholder:"例) 山田" ,class: 'name_field', "data-testid": 'last_name' %>
                   <%= f.label :last_name %>
                 </div>
 
                 <div class="last-name-kanji">
-                  <%= f.text_field :first_name,  placeholder:"例) 陸太郎" ,class: 'name_field' %>
+                  <%= f.text_field :first_name,  placeholder:"例) 陸太郎" ,class: 'name_field', "data-testid": 'first_name' %>
                   <%= f.label :first_name %>
                 </div>    
               </div>
 
               <div class="name-kana d-flex">
                 <div class="last_name_kana">
-                  <%= f.text_field :last_name_kana,  placeholder:"例) ヤマダ" ,class: 'name_field'%>
+                  <%= f.text_field :last_name_kana,  placeholder:"例) ヤマダ" ,class: 'name_field', "data-testid": 'last_name_kana' %>
                   <%= f.label :last_name_kana %>
                 </div>
 
                 <div class="first_name_kana">      
-                  <%= f.text_field :first_name_kana,  placeholder:"例) リクタロウ" ,class: 'name_field'%>
+                  <%= f.text_field :first_name_kana,  placeholder:"例) リクタロウ" ,class: 'name_field', "data-testid": 'first_name_kana' %>
                   <%= f.label :first_name_kana %>
                 </div>
               </div>
@@ -50,7 +50,7 @@
             <td class="email-tag tag">メールアド<br>レス</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
             <td class="email-filed text-filed">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", "data-testid": 'email' %>
             </td>
           </tr>
 
@@ -59,7 +59,7 @@
             <td class="password-tag tag">パスワード</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
             <td class="password-filed text-filed">
-              <%= f.password_field :password, autocomplete: "new-password" %>
+              <%= f.password_field :password, autocomplete: "new-password", "data-testid": 'password' %>
               <%= f.label '(英数混合6文字以上)' %>
             </td>
           </tr>
@@ -68,7 +68,7 @@
             <td class="password-confirm-tag tag">パスワード<br>確認用</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
             <td class="password-confirm-filed text-filed">
-              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", "data-testid": 'password_confirmation' %>
             </td>
           </tr>
 
@@ -79,17 +79,17 @@
             <td class="company-filed text-filed">
               <div class="company-name-only d-flex">
                 <div class="company-name text-filrd"> 
-                  <%= f.text_field :company, placeholder:"例) YR株式会社",class: 'company_field' %>
+                  <%= f.text_field :company, placeholder:"例) YR株式会社",class: 'company_field', "data-testid": 'company' %>
                   <%= f.label :company %>
                 </div>
                 <div class="company-filed text-filrd"> 
-                  <%= f.collection_select(:company_form_id, CompanyForm.all, :id, :form, {}, {class:"select-box", id:"item-category"})%>
+                  <%= f.collection_select(:company_form_id, CompanyForm.all, :id, :form, {}, {class:"select-box", id:"item-category", "data-testid": 'company-form'})%>
                   <%= f.label :company_form_id %>
                 </div>  
               </div>
 
               <div class="company-department text-filed">
-                <%= f.text_field :department, placeholder:"例) 営業部",class: 'company_field' %>
+                <%= f.text_field :department, placeholder:"例) 営業部",class: 'company_field', "data-testid": 'department' %>
                 <br><%= f.label :department %>
               </div>
             </td>
@@ -100,7 +100,7 @@
             <td class="phone_number-tag tag">電話番号</td>
             <td class="indispensable"><span class="indispensable-tag">必須</span></td>
             <td class="text-filed text-filed">
-              <%= f.text_field :phone_number, placeholder:"例) 090-1234-5678" %>
+              <%= f.text_field :phone_number, placeholder:"例) 090-1234-5678", "data-testid": 'phone_number' %>
             </td>
           </tr>
 
@@ -124,7 +124,7 @@
 
           <%# 登録ボタン %>
           <div class="sell-btn-contents">
-            <%= f.submit "登録",class:"btn btn-dark btn-lg"  %>
+            <%= f.submit "送信",class:"btn btn-dark btn-lg", "data-testid": 'submit'  %>
           </div>
 
         <% end %>

@@ -1,10 +1,17 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @comment = Comment.create(comment_params)
-    @user = User.find(current_user.id)
     if @comment.save
-      ActionCable.server.broadcast 'message_channel', content: @comment ,comment_user: @user.first_name
+      ActionCable.server.broadcast 'message_channel', content: @comment ,comment_user: current_user.first_name
     end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to card_path(params[:card_id])
   end
 
   private

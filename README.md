@@ -26,7 +26,7 @@ https://yuya5732.com
 ## テスト用アカウント
 - テストユーザー
   - email:test@gmail.com 
-  - PS:5732test
+  - PS:test5732
 
 # :thought_balloon: 目指した課題解決
 このアプリはビジネスマンが上司や顧客と会話するときに抱える3つの課題を解決します。

@@ -33,6 +33,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'action-cable-testing'
   gem 'faker'
   gem 'gimei'
   gem 'capistrano'
@@ -51,6 +53,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "meta_request"
   gem 'rubocop', require: false
+  gem "bullet"
 end
 
 group :test do

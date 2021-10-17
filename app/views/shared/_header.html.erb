@@ -2,39 +2,35 @@
   <div class="container">
     <div class="header row d-flex align-items-center ">
       <%# ロゴ %>
-      <div class="header-title col-4">
-        <h2><%= link_to "Super-Alert", root_path, id: "header-title" %></h2>
+      <div class="col-4">
+        <h2><%= link_to "Super-Alert", root_path, class: 'header-title' %></h2>
       </div>
 
       <%# 検索機能 %>
-      <div class="search col-5">
+      <div class="header-search col-5">
           <% if user_signed_in? %>
-            <%= form_with(url: search_cards_path, local: true, method: :get, class: "search-form") do |form| %>
-              <%= form.text_field :keyword, placeholder: "名刺を検索", class: "btn-search" %>
-              <%= form.submit "検索",id: "search-button" %>
+            <%= form_with(url: search_cards_path, local: true, method: :get) do |form| %>
+              <%= form.text_field :keyword, placeholder: "名刺を検索", class: "search-field", "data-testid": 'keyword' %>
+              <%= form.submit "検索", "data-testid": 'search-btn' %>
             <% end %>
           <% end %>
       </div>
 
       <%# ログイン機能 %>
       <nav class="col-3 d-flex justify-content-between" >
-        
-        <%= link_to "テストログイン", cards_test_sign_in_path, class: "test-login log_in", method: :post %>
-
-        <div class="user", id="user" >
-          <% if user_signed_in? %>
-              <div class="pull-down-list"><%= link_to "ログアウト", destroy_user_session_path, class: "pull-down-list", method: :delete %></li>
-            <% else %>
-            <div id="user-menu"><span class="log_in">ログイン</span>
-              <ul class="hidden", id="pull-down"> 
-                <li class="pull-down-list"><%= link_to "新規登録", new_user_registration_path, class: "pull-down-list" %></li>
-                <li class="pull-down-list"><%= link_to "ログイン", new_user_session_path, class: "pull-down-list"  %></li>
-              </ul>
-            </div>
-          <% end %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="header-log-in">ログイン中</div>
+          <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete , class: "pull-down-list", "data-testid": 'log_out' %></div>
+        <% else %>
+          <div><%= link_to "テストログイン", users_test_sign_in_path, class: "header-log-in", method: :post, "data-testid": 'test_log_in' %></div>
+          <div id="log-in-menu"><span class="header-log-in">ログイン</span>
+            <ul class="hidden", id="pull-down"> 
+              <li><%= link_to "新規登録", new_user_registration_path, class: "pull-down-list" %></li>
+              <li><%= link_to "ログイン", new_user_session_path, class: "pull-down-list" %></li>
+            </ul>
+          </div>
+        <% end %>
       </nav>
-
     </div>
   </div>
 </header>
