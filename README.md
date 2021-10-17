@@ -1,18 +1,23 @@
+<!-- omit in toc -->
 # :necktie: S-alert
 [![Image from Gyazo](https://i.gyazo.com/838a280b802f6ce5047a1c1c8d9c1392.jpg)](https://gyazo.com/838a280b802f6ce5047a1c1c8d9c1392)
 
+<a id="top"></a>
+
+<!-- omit in toc -->
 # 目次
-- [アプリケーション概要](#アプリケーション概要)
-- [デモンストレーション](#デモンストレーション)
-- [目指した問題解決](#目指した問題解決)
-- [利用方法](#利用方法)
-- [機能一覧](#機能一覧)
-- [実装機能の画像](#実装した機能の画像)
-- [インフラ構成](#インフラ構成)
-- [テーブル設計](#テーブル設計)
-- [使用技術一覧](#使用技術一覧)
-- [今後の改善点](#今後の改善点)
-- [ローカルでの動作方法](#ローカルでの動作方法)
+- [:page_facing_up: アプリケーション概要](#page_facing_up-アプリケーション概要)
+- [:globe_with_meridians: デモンストレーション](#globe_with_meridians-デモンストレーション)
+- [:thought_balloon: 目指した課題解決](#thought_balloon-目指した課題解決)
+- [:computer:利用方法](#computer利用方法)
+- [:package: 機能一覧](#package-機能一覧)
+- [:video_game: 実装機能の画像](#video_game-実装機能の画像)
+- [:tractor: インフラ構成](#tractor-インフラ構成)
+- [:floppy_disk: テーブル設計](#floppy_disk-テーブル設計)
+- [:mortar_board:使用技術一覧](#mortar_board使用技術一覧)
+- [:wrench: 今後の改善点](#wrench-今後の改善点)
+- [:paperclip: ローカルでの動作方法](#paperclip-ローカルでの動作方法)
+
 
 # :page_facing_up: アプリケーション概要
 ### **デキるビジネスマン**
@@ -31,21 +36,23 @@
 ### メールで通知
 日付、予定内容、会話のネタを登録すると、指定した日付の朝9:00にメールでリマインドしてくれます。これにより、必要な時に予定内容と会話のネタを確認することができます。
 
+[↑目次](#top)
 # :globe_with_meridians: デモンストレーション
 ## URL
 https://yuya5732.com
 
-## テスト用アカウント
-- テストユーザー
-  - email:test@gmail.com 
-  - PS:test5732
+## テストユーザー
+- email:test@gmail.com 
+- PS:test5732
 
+[↑目次](#top)
 # :thought_balloon: 目指した課題解決
 このアプリはビジネスマンが上司や顧客と会話するときに抱える3つの課題を解決します。
 - 場をなごませたいものの、会話のネタが思いつかない 
 - 相手の機嫌に振り回されてしまう
 - 急な確認電話でも即答できるようになりたい
 
+[↑目次](#top)
 # :computer:利用方法
 1. **ユーザーの新規登録/ログイン**
   - 新規登録/ログインは、ヘッダーのログインをクリックすると選択できます。(*テストユーザーを使用する方はログインを選択してください)
@@ -73,6 +80,7 @@ https://yuya5732.com
 6. **メール通知の登録/削除**
   - メール通知の登録/削除は、「トップページ→MENU→ユーザー→メール通知→詳細ページに移動」からできます。
 
+[↑目次](#top)
 # :package: 機能一覧
 ## ユーザー
 
@@ -117,7 +125,7 @@ https://yuya5732.com
 | ----------- | ------------------------------------- | ----------------------------------------------- |
 | メール通知機能 | ユーザーが設定した日付にメールで通知するため | 日付を設定するとその日の朝9:00にメールで通知を受け取れる |
 
-
+[↑目次](#top)
 # :video_game: 実装機能の画像
 ## ユーザーの新規登録/ログイン
 [![Image from Gyazo](https://i.gyazo.com/2c16c1d882cbb5afa70827f28d06f300.gif)](https://gyazo.com/2c16c1d882cbb5afa70827f28d06f300)
@@ -142,12 +150,13 @@ https://yuya5732.com
 ## お気に入り登録
 [![Image from Gyazo](https://i.gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe.gif)](https://gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe)
 
+[↑目次](#top)
 # :tractor: インフラ構成
 
 ## インフラ構成図
 [![Image from Gyazo](https://i.gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9.png)](https://gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9)
 
-
+[↑目次](#top)
 # :floppy_disk: テーブル設計
 
 ## ER図
@@ -260,6 +269,7 @@ https://yuya5732.com
 - belongs_to :user 
 - belongs_to :card
 
+[↑目次](#top)
 # :mortar_board:使用技術一覧
 ### バックエンド
 - Ruby
@@ -281,6 +291,7 @@ https://yuya5732.com
 ### その他
 - Cron
 
+[↑目次](#top)
 # :wrench: 今後の改善点
 - [x] EC２にデプロイ
 - [x] Dockerの導入
@@ -292,6 +303,7 @@ https://yuya5732.com
 - [ ] 名刺・着信履歴をグループで同時編集できるようにする
 - [ ] 着信時間、着信曜日の相関関係をグラフで表示
 
+[↑目次](#top)
 # :paperclip: ローカルでの動作方法
 
 ## ダウンロードとインストールの手順
@@ -347,3 +359,5 @@ https://yuya5732.com
 - bundler 2.1.4
 - whenever 1.0.0
 - cron macOS Big Sur 11.4
+
+[↑目次](#top)
