@@ -144,6 +144,7 @@ https://yuya5732.com
 
 # :tractor: インフラ構成
 
+## インフラ構成図
 [![Image from Gyazo](https://i.gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9.png)](https://gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9)
 
 
@@ -260,23 +261,25 @@ https://yuya5732.com
 - belongs_to :card
 
 # :mortar_board:使用技術一覧
-### インフラ
-- MySQL
-- Nginx(webサーバ)
-- Unicorn(appサーバ)
-- docker(コンテナ)
-- CircleCi(CI/CD))
-
 ### バックエンド
 - Ruby
-- Rails
+- Ruby on Rails(Action Cable/Action Mailer etc)
+- MySQL
 ### フロントエンド
 - HTML
 - CSS
 - Javascript
+### インフラ
+- AWS(ECS/RDS/S3/ECR/ALB/ACM/Route53/VPC/IAM/CloudWatch etc)
+- Docker
+- CircleCI
+- Nginx
+- Unicorn
 ### テストツール
-- Rspec(単体テスト)
-- Capybara(結合テスト)
+- Rspec
+- Capybara
+### その他
+- Cron
 
 # :wrench: 今後の改善点
 - [x] EC２にデプロイ
