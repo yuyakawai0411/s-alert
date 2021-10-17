@@ -1,9 +1,21 @@
 # :necktie: S-alert
 [![Image from Gyazo](https://i.gyazo.com/838a280b802f6ce5047a1c1c8d9c1392.jpg)](https://gyazo.com/838a280b802f6ce5047a1c1c8d9c1392)
+
+# 目次
+- [アプリケーション概要](#アプリケーション概要)
+- [デモンストレーション](#デモンストレーション)
+- [目指した問題解決](#目指した問題解決)
+- [利用方法](#利用方法)
+- [機能一覧](#機能一覧)
+- [実装機能の画像](#実装した機能の画像)
+- [インフラ構成](#インフラ構成)
+- [テーブル設計](#テーブル設計)
+- [使用技術一覧](#使用技術一覧)
+- [今後の改善点](#今後の改善点)
+- [ローカルでの動作方法](#ローカルでの動作方法)
+
 # :page_facing_up: アプリケーション概要
 ### **デキるビジネスマン**
-
-
 それは、いかなる時でも冷静に、相手の感情に応じて、適切な会話・アイスブレイクができる人だと思います。このアプリは、そんなデキるビジネスマンになるためのものです。
 相手の情報を名刺として登録することで、以下4つの機能が使えるようになります。
 - 感情を予測   
@@ -19,7 +31,7 @@
 ### メールで通知
 日付、予定内容、会話のネタを登録すると、指定した日付の朝9:00にメールでリマインドしてくれます。これにより、必要な時に予定内容と会話のネタを確認することができます。
 
-# :globe_with_meridians: デモ
+# :globe_with_meridians: デモンストレーション
 ## URL
 https://yuya5732.com
 
@@ -106,7 +118,7 @@ https://yuya5732.com
 | メール通知機能 | ユーザーが設定した日付にメールで通知するため | 日付を設定するとその日の朝9:00にメールで通知を受け取れる |
 
 
-# :video_game: 実装した機能についての画像
+# :video_game: 実装機能の画像
 ## ユーザーの新規登録/ログイン
 [![Image from Gyazo](https://i.gyazo.com/2c16c1d882cbb5afa70827f28d06f300.gif)](https://gyazo.com/2c16c1d882cbb5afa70827f28d06f300)
 ## 名刺の新規投稿/編集
@@ -125,23 +137,12 @@ https://yuya5732.com
 [![Image from Gyazo](https://i.gyazo.com/f27bb234bc838e42eb80012bb4439950.gif)](https://gyazo.com/f27bb234bc838e42eb80012bb4439950)
 ## メール通知の登録/削除(Cron+ActiveMailer使用)
 [![Image from Gyazo](https://i.gyazo.com/c6ed44a3adad7b19b2975b319b127786.gif)](https://gyazo.com/c6ed44a3adad7b19b2975b319b127786)
-## メールの文面
+### メールの文面
 [![Image from Gyazo](https://i.gyazo.com/9ed859205a708a6f87301477837ae02e.png)](https://gyazo.com/9ed859205a708a6f87301477837ae02e)
 ## お気に入り登録
 [![Image from Gyazo](https://i.gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe.gif)](https://gyazo.com/5cf5b91ab7959bb1f02d2e06a5f7b0fe)
 
-# :wrench: 実装予定の機能
-- [x] EC２にデプロイ
-- [x] Dockerの導入
-- [x] CircleCI/CDの導入
-- [x] CSVで着信履歴をアップロード
-- [x] 会話ネタの投稿を非同期にする
-- [ ] CSV着信履歴のアップロードが失敗した時に、バリデーションエラーを表示する
-- [ ] 着信履歴を一括で複数追加できるようにする
-- [ ] 名刺・着信履歴をグループで同時編集できるようにする
-- [ ] 着信時間、着信曜日の相関関係をグラフで表示
-
-# :tractor: インフラ構成図
+# :tractor: インフラ構成
 
 [![Image from Gyazo](https://i.gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9.png)](https://gyazo.com/d7ae0799b638115cf9dbc7560c04a8d9)
 
@@ -258,7 +259,7 @@ https://yuya5732.com
 - belongs_to :user 
 - belongs_to :card
 
-# :mortar_board:使用技術
+# :mortar_board:使用技術一覧
 ### インフラ
 - MySQL
 - Nginx(webサーバ)
@@ -276,6 +277,17 @@ https://yuya5732.com
 ### テストツール
 - Rspec(単体テスト)
 - Capybara(結合テスト)
+
+# :wrench: 今後の改善点
+- [x] EC２にデプロイ
+- [x] Dockerの導入
+- [x] CircleCI/CDの導入
+- [x] CSVで着信履歴をアップロード
+- [x] 会話ネタの投稿を非同期にする
+- [ ] CSV着信履歴のアップロードが失敗した時に、バリデーションエラーを表示する
+- [ ] 着信履歴を一括で複数追加できるようにする
+- [ ] 名刺・着信履歴をグループで同時編集できるようにする
+- [ ] 着信時間、着信曜日の相関関係をグラフで表示
 
 # :paperclip: ローカルでの動作方法
 
