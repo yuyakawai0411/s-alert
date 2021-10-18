@@ -130,7 +130,7 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザーを削除する' do
   let!(:user) { FactoryBot.create(:user) }
-  let!(:card) { FactoryBot.create(:card, user: user) }
+  let!(:card) { FactoryBot.create(:card, user_id: user.id) }
     it 'Cards、Records、Fvarites、Commentsテーブルの情報が付随して削除される' do
       2.times { FactoryBot.create(:record, card: card) }
       1.times { FactoryBot.create(:favorite, card: card, user: user) }
