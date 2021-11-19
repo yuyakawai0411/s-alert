@@ -315,7 +315,7 @@ https://yuya5732.com
 
 `$ cd s-alert`
 
-`$ vi master.key`
+`$ vi config/master.key` 
 
 `$ cd docker_development`
 
@@ -329,6 +329,7 @@ https://yuya5732.com
 
 `$ docker-compose exec web rails db:seed `
 
+**ローカルで動かす際にはmasterkeyを配布しますので、お気軽にお申し付けください**
 
 ## 開発環境
 - Ruby 2.6.5
