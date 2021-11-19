@@ -29,8 +29,6 @@ services:
       RAILS_ENV: development
       MYSQL_HOST: db
       TZ: Asia/Tokyo
-    env_file: 
-      - ../.env
     depends_on:
       - db
   nginx:

@@ -305,54 +305,29 @@ https://yuya5732.com
 - [ ] 着信履歴を一括で複数追加できるようにする
 - [ ] 名刺・着信履歴をグループで同時編集できるようにする
 - [ ] 着信時間、着信曜日の相関関係をグラフで表示
+- [ ] コンテナ内でcronを稼働させる
 
 [↑目次](#top)
 # :paperclip: ローカルでの動作方法
 
-## ダウンロードとインストールの手順
-1. このリポジトリのクローンを作成してください
-
-
+## ダウンロードと起動手順
 `$ git clone https://github.com/yuyakawai0411/s-alert.git`
-
-
-2. リポジトリに移動してください
-
 
 `$ cd s-alert`
 
+`$ vi master.key`
 
-3. 依存関係をインストールしてください
+`$ cd docker_development`
 
+`$ docker-compose build`
 
-`$ bundle install`
-`$ yarn install`
+`$ docker-compose up -d`
 
+`$ docker-compose exec web rails assets:precompile `
 
-4. データベースを作成してください
+`$ docker-compose exec web rails db:create db:migrate `
 
-
-`$ rails db:create`
-
-
-5. データベースを実行してください
-
-
-`$ rails db:migrate`
-
-
-6. seedファイルを実行してください
-
-
-`$ rails db:seed`
-
-
-7. アプリケーションを実行してください
-
-
-`$ rails s`
-
-
+`$ docker-compose exec web rails db:seed `
 
 
 ## 開発環境
