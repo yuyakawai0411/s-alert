@@ -47,8 +47,7 @@ RSpec.describe "コメント機能 #create", type: :system do
         visit card_path(card)
         # コメントを削除する
         find("[data-testid='comment-delete']").click
-        visit current_path
-        # 投稿したコメントが表示されている
+        # 投稿したコメントが表示されていない
         expect(page).to have_no_content comment.text
       end
     end
